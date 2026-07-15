@@ -1,0 +1,3467 @@
+\chapter{Fuzzy Frames, Fuzzy Locales, and the Fuzzy Sierpiński Classifier}
+\label{ch:fuzzy-frames-locales}
+
+In the previous chapter we constructed fuzzy predicates as enriched presheaves. For a
+small \(\mathbb V\)-category \(X\), the fuzzy presheaf category was
+\[
+    P_{\mathbb V}(X)
+    =
+    [X^{\op},\underline{\mathbb V}],
+\]
+and, after passing to the posetal specialization determined by the fuzzy truth-value
+object
+\[
+    \Lambda=(L,\leq,\meet,\join,\tensor,\multimap,\bot_L,\top_L),
+\]
+the corresponding fuzzy predicate object was
+\[
+    P_\Lambda(X)
+    =
+    [X^{\op},\Lambda].
+\]
+This chapter gives these presheaf objects their localic interpretation.
+
+There are two structures on \(P_\Lambda(X)\) which should be kept distinct. First,
+\(P_\Lambda(X)\) is a separated \(\Lambda\)-preorder, with hom-values
+\[
+    P_\Lambda(X)(\phi,\psi)
+    =
+    \bigmeet_{x\in X}(\phi(x)\multimap\psi(x)).
+\]
+Second, its induced crisp order is a frame, with joins and meets computed pointwise.
+In this chapter, when we call \(P_\Lambda(X)\) a frame, we mean this induced crisp
+frame of predicates, equipped with the pointwise \(\Lambda\)-scalar action
+\[
+    (r\tensor\phi)(x)=r\tensor\phi(x).
+\]
+The enriched hom-values remain present, but the frame order is the induced crisp
+order.
+
+The guiding idea is that fuzzy frames are obtained by localizing fuzzy presheaves. At
+the categorical level this is expressed by enriched left-exact reflective
+localizations of
+\[
+    P_{\mathbb V}(X).
+\]
+At the posetal level this becomes a scalar-compatible nucleus on
+\[
+    P_\Lambda(X).
+\]
+We prove below that these two descriptions agree in the posetal specialization:
+left-exact \(\Lambda\)-enriched reflective localizations of \(P_\Lambda(X)\)
+correspond, up to equivalence over \(P_\Lambda(X)\), to fuzzy nuclei on
+\(P_\Lambda(X)\). Fuzzy locales are then defined by formal duality.
+
+The fuzzy Sierpiński classifier is treated by its classifying universal property. This
+is an important point. In the crisp case the Sierpiński frame can be realized as the
+presheaf frame on the two-element preorder
+\[
+    U\leq 1.
+\]
+For general fuzzy truth-value bases this raw presheaf construction does not, in
+general, have the required free-open property. In particular, for non-idempotent
+tensors such as the {\L}ukasiewicz and product tensors, the presheaf frame on the
+two-point subterminal shape need not classify arbitrary fuzzy opens by
+finite-meet-preserving scalar frame homomorphisms.
+
+Accordingly, the fuzzy Sierpiński frame is defined in this chapter as the free fuzzy
+frame on one fuzzy open:
+\[
+    \Omega_\Lambda=F_{\op}^{\Lambda}(1),
+\]
+with generic fuzzy open
+\[
+    \sigma_\Lambda\in\Omega_\Lambda.
+\]
+Its dual fuzzy locale
+\[
+    \mathbb S_\Lambda
+\]
+classifies fuzzy opens by the universal property
+\[
+    \FLoc_\Lambda(\mathcal X,\mathbb S_\Lambda)
+    \cong
+    |\Opens_\Lambda(\mathcal X)|.
+\]
+Thus the Sierpiński object is not identified with a raw presheaf object unless an
+additional presentation theorem has been proved for the chosen base.
+
+At the enriched-cosmos level, the analogous construction is bicategorical. The free
+fuzzy frame on an \(S\)-indexed family of cosmos-level fuzzy opens represents a
+hom-category of models:
+\[
+    \mathbf{FFrm}_{\mathbb V}
+    \bigl(F_{\op}(S),\mathcal A\bigr)
+    \simeq
+    \operatorname{Sub}_{\mathcal A}(1_{\mathcal A})^S.
+\]
+Equivalently, if \(S_{\mathrm{disc}}\) is the discrete category on \(S\), the
+right-hand side is
+\[
+    \mathbf{Cat}
+    \bigl(
+        S_{\mathrm{disc}},
+        \operatorname{Sub}_{\mathcal A}(1_{\mathcal A})
+    \bigr).
+\]
+After passing to the posetal reflection, these hom-categories become ordinary
+hom-sets and the corresponding classification becomes a strict set-level universal
+property.
+
+All large categories and collections of subobjects are taken relative to the fixed
+universe convention of the previous chapter. If \(\mathcal A\) is an ordinary or
+enriched category with terminal object, we write
+\[
+    \operatorname{Sub}_{\mathcal A}(1_{\mathcal A})
+\]
+for the ordinary category of subobjects of \(1_{\mathcal A}\). Its objects are
+monomorphisms
+\[
+    U\hookrightarrow 1_{\mathcal A},
+\]
+and its morphisms are commuting triangles over \(1_{\mathcal A}\). When only
+isomorphism classes are needed, we write
+\[
+    \operatorname{Iso}\operatorname{Sub}_{\mathcal A}(1_{\mathcal A})
+    :=
+    \operatorname{Ob}\operatorname{Sub}_{\mathcal A}(1_{\mathcal A})/{\cong}.
+\]
+In the posetal reflection, \(\operatorname{Sub}_{A}(\top_A)\) is equivalent to the
+thin category underlying the frame \(A\), and its set of objects is simply \(|A|\).
+
+\paragraph{Finite-limit convention for this chapter.}
+We fix once and for all a class \(\mathcal F\) of finite weighted limits in
+\(\mathbb V\)-categories. The class \(\mathcal F\) contains the terminal-object and
+binary-product weights and is the finite-limit class used in all terms such as
+``left exact'', ``finite-limit preserving'', and
+\(\operatorname{Lex}_{\mathbb V}\). Thus
+\[
+    \operatorname{Lex}_{\mathbb V}(\mathcal C,\mathcal A)
+\]
+denotes the ordinary category of \(\mathbb V\)-functors
+\[
+    \mathcal C\to\mathcal A
+\]
+preserving the chosen \(\mathcal F\)-limits, with enriched natural transformations.
+
+In the posetal results below, the only finite limits used explicitly are the
+terminal element and binary meets of the underlying crisp frame. Thus left exactness
+in the posetal comparison theorem means preservation of \(\top\) and binary meets.
+
+The overall progression is:
+\[
+\begin{tikzcd}[column sep=large]
+\text{fuzzy preorders}
+    \arrow[r, "{P_\Lambda}"']
+&
+\text{fuzzy presheaves}
+    \arrow[r, "\text{localization}"']
+&
+\text{fuzzy frames}
+    \arrow[r, "\op"']
+&
+\text{fuzzy locales}
+    \arrow[r, "{\FLoc_\Lambda(-,\mathbb S_\Lambda)}"']
+&
+\text{fuzzy opens.}
+\end{tikzcd}
+\]
+
+The notation \(P_{\mathbb V}(X)\) and \(P_\Lambda(X)\) is retained from the previous
+chapter. The new notation introduced in this chapter is:
+\[
+    \FFrm_\Lambda
+\]
+for the category of fuzzy frames over \(\Lambda\),
+\[
+    \FLoc_\Lambda
+\]
+for the category of fuzzy locales over \(\Lambda\),
+\[
+    \Omega_\Lambda
+\]
+for the fuzzy Sierpiński frame,
+\[
+    \sigma_\Lambda\in\Omega_\Lambda
+\]
+for its generic fuzzy open, and
+\[
+    \mathbb S_\Lambda
+\]
+for the corresponding fuzzy Sierpiński locale.
+
+\section{Fuzzy presheaves recalled}
+\label{sec:fuzzy-presheaves-recalled}
+
+We begin by recalling the presheaf constructions from the previous chapter. The
+definition--theorem--proof development of these objects has already been given there.
+
+For a small \(\mathbb V\)-category \(X\), the fuzzy presheaf category is
+\[
+    P_{\mathbb V}(X)
+    =
+    [X^{\op},\underline{\mathbb V}].
+\]
+This is generally a locally small, possibly large \(\mathbb V\)-category. Its objects
+are fuzzy presheaves on \(X\). The Yoneda embedding is the \(\mathbb V\)-functor
+\[
+    \yon_X:X\to P_{\mathbb V}(X),
+    \qquad
+    x\longmapsto X(-,x).
+\]
+By the enriched Yoneda lemma,
+\[
+    P_{\mathbb V}(X)(\yon_Xx,\Phi)
+    \cong
+    \Phi x
+\]
+for every fuzzy presheaf \(\Phi\in P_{\mathbb V}(X)\). Equivalently, the
+variance-correct Yoneda comparison says that the composite
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+X^{\op}
+    \arrow[r, "\yon_X^{\op}"]
+    \arrow[dr, "\Phi"']
+&
+P_{\mathbb V}(X)^{\op}
+    \arrow[d, "{P_{\mathbb V}(X)(-,\Phi)}"]
+\\
+&
+\underline{\mathbb V}
+\end{tikzcd}
+\]
+is isomorphic to \(\Phi\). These are the standard enriched presheaf and Yoneda
+constructions \cite{Kelly1982BasicConcepts}.
+
+The density formula says that every fuzzy presheaf is a weighted colimit of
+representables:
+\[
+    \Phi
+    \cong
+    \Phi\star\yon_X
+    \cong
+    \int^{x\in X}\Phi x\tensor\yon_Xx.
+\]
+Thus the values of \(\Phi\) give the coefficients with which the principal presheaves
+\(\yon_Xx\) are joined to reconstruct \(\Phi\). This is the usual enriched density
+formula for the Yoneda embedding \cite{Kelly1982BasicConcepts}.
+
+After passing to the posetal specialization determined by
+\[
+    \Lambda=(L,\leq,\meet,\join,\tensor,\multimap,\bot_L,\top_L),
+\]
+a fuzzy preorder \(X\) has fuzzy predicate object
+\[
+    P_\Lambda(X)
+    =
+    [X^{\op},\Lambda].
+\]
+An element of \(P_\Lambda(X)\) is a map
+\[
+    \phi:X\to L
+\]
+satisfying
+\[
+    X(x',x)\tensor\phi(x)\leq \phi(x')
+\]
+for all \(x,x'\in X\). Joins, meets, and scalar multiplication in the induced crisp
+frame are computed pointwise:
+\[
+    \left(\bigjoin_i\phi_i\right)(x)
+    =
+    \bigjoin_i\phi_i(x),
+\]
+\[
+    \left(\bigmeet_i\phi_i\right)(x)
+    =
+    \bigmeet_i\phi_i(x),
+\]
+and
+\[
+    (r\tensor\phi)(x)
+    =
+    r\tensor\phi(x).
+\]
+This is the form in which the presheaf construction will be localized below.
+
+\section{Localizing fuzzy presheaves}
+\label{sec:localizing-fuzzy-presheaves}
+
+We now perform the localic operation. Instead of postulating an arbitrary algebraic
+notion of fuzzy frame, we obtain fuzzy frames by localizing fuzzy presheaves.
+
+At the categorical level, this means a left-exact enriched localization of
+\[
+    P_{\mathbb V}(X).
+\]
+At the posetal level, this becomes a scalar-compatible nucleus on
+\[
+    P_\Lambda(X).
+\]
+The fixed points of such a nucleus form the corresponding fuzzy frame.
+
+\subsection{Categorical form}
+\label{subsec:localizing-presheaves-categorical-form}
+
+Let \(X\) be a small \(\mathbb V\)-category. A localization of the fuzzy presheaf
+category \(P_{\mathbb V}(X)\) is given by a \(\mathbb V\)-adjunction
+\[
+    a\dashv i:
+    P_{\mathbb V}(X)\rightleftarrows \mathcal A
+\]
+with \(i\) fully faithful. The associated idempotent monad is
+\[
+    J\eqdef ia.
+\]
+We require this localization to be left exact with respect to the chosen
+\(\mathcal F\)-limits.
+
+\begin{definition}[Categorical fuzzy-frame presentation]
+\label{def:fuzzy-frame-presentation-categorical}
+A \textbf{categorical fuzzy-frame presentation} is a \(\mathbb V\)-adjunction
+\[
+    a\dashv i:
+    P_{\mathbb V}(X)\rightleftarrows \mathcal A
+\]
+between locally small, possibly large \(\mathbb V\)-categories such that:
+\begin{enumerate}
+    \item \(i\) is fully faithful as a \(\mathbb V\)-functor;
+    \item \(\mathcal A\) has the chosen finite weighted limits;
+    \item \(a\) preserves the chosen finite weighted limits.
+\end{enumerate}
+The fuzzy frame presented by this localization has category of opens \(\mathcal A\).
+\end{definition}
+
+The localization is displayed by
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+P_{\mathbb V}(X)
+    \arrow[r, shift left=1.1ex, "a"]
+&
+\mathcal A
+    \arrow[l, shift left=1.1ex, "i"]
+\arrow[phantom, from=1-1, to=1-2, "\dashv" description]
+\end{tikzcd}
+\]
+and the associated idempotent monad is
+\[
+\begin{tikzcd}[column sep=large]
+P_{\mathbb V}(X)
+    \arrow[r, "a"]
+&
+\mathcal A
+    \arrow[r, "i"]
+&
+P_{\mathbb V}(X).
+\end{tikzcd}
+\]
+Weighted limits and colimits are understood in the standard enriched sense
+\cite{Kelly1982BasicConcepts}.
+
+\begin{definition}[Local object]
+\label{def:local-object-categorical}
+Let
+\[
+    J=ia:P_{\mathbb V}(X)\to P_{\mathbb V}(X)
+\]
+be the idempotent monad associated to a categorical fuzzy-frame presentation. A fuzzy
+presheaf \(\Phi\in P_{\mathbb V}(X)\) is called \textbf{\(J\)-local} if the unit
+\[
+    \Phi\to J\Phi
+\]
+is an isomorphism.
+\end{definition}
+
+\begin{proposition}[Local objects]
+\label{prop:local-objects-categorical}
+Let
+\[
+    a\dashv i:
+    P_{\mathbb V}(X)\rightleftarrows \mathcal A
+\]
+be a categorical fuzzy-frame presentation, and let
+\[
+    J=ia.
+\]
+Then the full subcategory of \(J\)-local objects in \(P_{\mathbb V}(X)\) is equivalent
+to \(\mathcal A\).
+\end{proposition}
+
+\begin{proof}
+Since \(i\) is fully faithful, the counit
+\[
+    aiA\to A
+\]
+is an isomorphism for every \(A\in\mathcal A\). Hence
+\[
+    J(iA)=iaiA\cong iA,
+\]
+so every object in the image of \(i\) is \(J\)-local.
+
+Conversely, if \(\Phi\) is \(J\)-local, then
+\[
+    \Phi\cong J\Phi=ia\Phi,
+\]
+so \(\Phi\) is isomorphic to an object in the image of \(i\). Therefore the local
+objects are precisely the objects of \(\mathcal A\), up to equivalence.
+\end{proof}
+
+The local-object subcategory sits inside the presheaf category as
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+\mathcal A
+    \arrow[r, hook, "i"]
+    \arrow[dr, "\simeq"']
+&
+P_{\mathbb V}(X)
+\\
+&
+\Fix(J)
+    \arrow[u, hook']
+\end{tikzcd}
+\]
+where \(\Fix(J)\) denotes the full subcategory of \(J\)-local objects.
+
+\begin{proposition}[Closed colimits]
+\label{prop:closed-colimits-categorical}
+Let
+\[
+    a\dashv i:
+    P_{\mathbb V}(X)\rightleftarrows \mathcal A
+\]
+be a categorical fuzzy-frame presentation. Let \(K\) be small, let
+\[
+    W:K^{\op}\to\underline{\mathbb V}
+\]
+be a weight, and let
+\[
+    D:K\to\mathcal A
+\]
+be a diagram. Whenever the weighted colimit \(W\star iD\) exists in
+\(P_{\mathbb V}(X)\), the weighted colimit of \(D\) exists in \(\mathcal A\) and is
+computed by
+\[
+    W\star_{\mathcal A}D
+    \cong
+    a(W\star iD).
+\]
+\end{proposition}
+
+\begin{proof}
+For \(A\in\mathcal A\), the enriched adjunction and the universal property of the
+weighted colimit give
+\[
+\begin{aligned}
+\mathcal A(a(W\star iD),A)
+&\cong
+P_{\mathbb V}(X)(W\star iD,iA)
+\\
+&\cong
+[K^{\op},\underline{\mathbb V}]
+\bigl(
+W,
+P_{\mathbb V}(X)(iD-,iA)
+\bigr)
+\\
+&\cong
+[K^{\op},\underline{\mathbb V}]
+\bigl(
+W,
+\mathcal A(D-,A)
+\bigr).
+\end{aligned}
+\]
+This is the enriched universal property of the weighted colimit of \(D\) in
+\(\mathcal A\).
+\end{proof}
+
+\begin{proposition}[Finite limits created by the inclusion]
+\label{prop:finite-limits-created-categorical}
+Let
+\[
+    a\dashv i:
+    P_{\mathbb V}(X)\rightleftarrows \mathcal A
+\]
+be a categorical fuzzy-frame presentation. Let \(K\) and \(W\) belong to the chosen
+finite-limit class \(\mathcal F\), and let
+\[
+    D:K\to\mathcal A
+\]
+be a diagram. Then the corresponding finite weighted limits in \(\mathcal A\) are
+created by the inclusion
+\[
+    i:\mathcal A\to P_{\mathbb V}(X).
+\]
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    M=\{W,iD\}
+\]
+be the corresponding finite weighted limit in \(P_{\mathbb V}(X)\). Since \(a\)
+preserves the chosen finite weighted limits,
+\[
+    aM
+    \cong
+    a\{W,iD\}
+    \cong
+    \{W,aiD\}
+    \cong
+    \{W,D\}
+\]
+in \(\mathcal A\).
+
+Since \(i\) is a right adjoint, it preserves limits. Hence \(iaM\) is also a limit of
+\(iD\) in \(P_{\mathbb V}(X)\). But \(M\) is already the limit of \(iD\). The unit
+\[
+    M\to iaM
+\]
+is the unique comparison map between two limiting cones over \(iD\). Since both
+objects satisfy the same finite-limit universal property in \(P_{\mathbb V}(X)\),
+this comparison is an isomorphism. Thus \(M\) is local, and the chosen finite limits
+in \(\mathcal A\) are created by \(i\).
+\end{proof}
+
+Thus, categorically, localization has the expected frame-theoretic behavior: colimits
+are formed in the ambient presheaf category and then closed, while finite limits are
+inherited by the local objects.
+
+\subsection{Posetal reflection and fuzzy nuclei}
+\label{subsec:localizing-presheaves-posetal-reflection}
+
+We now pass to the posetal specialization. The categorical localization above becomes
+a closure operation on
+\[
+    P_\Lambda(X),
+\]
+compatible with finite meets and with the scalar action inherited from \(\Lambda\).
+The first three axioms below are the usual nucleus axioms from frame theory
+\cite{Johnstone1982}. The final axiom is the additional compatibility with fuzzy
+truth-value rescaling.
+
+\begin{definition}[Fuzzy nucleus]
+\label{def:fuzzy-nucleus}
+Let \(X\) be a fuzzy preorder. A \textbf{fuzzy nucleus} on \(P_\Lambda(X)\) is a map
+\[
+    j:P_\Lambda(X)\to P_\Lambda(X)
+\]
+such that, for all \(\phi,\psi\in P_\Lambda(X)\) and all \(r\in L\),
+\[
+    \phi\leq j(\phi),
+\]
+\[
+    j(j(\phi))=j(\phi),
+\]
+\[
+    j(\phi\meet\psi)=j(\phi)\meet j(\psi),
+\]
+and
+\[
+    j(r\tensor j(\phi))=j(r\tensor\phi).
+\]
+\end{definition}
+
+The first three equations are equivalent to the usual nucleus axioms on the frame
+\(P_\Lambda(X)\); monotonicity follows from finite-meet preservation and is recorded
+below. The final equation says that localization commutes with fuzzy truth-value
+rescaling after closure. This scalar-compatible form is close in spirit to nucleus
+constructions in quantale theory \cite{Rosenthal1990}.
+
+\begin{lemma}[Fuzzy nuclei are monotone]
+\label{lem:fuzzy-nuclei-monotone}
+Every fuzzy nucleus is monotone.
+\end{lemma}
+
+\begin{proof}
+If \(\phi\leq\psi\), then
+\[
+    \phi=\phi\meet\psi.
+\]
+Therefore
+\[
+    j(\phi)
+    =
+    j(\phi\meet\psi)
+    =
+    j(\phi)\meet j(\psi)
+    \leq
+    j(\psi).
+\]
+\end{proof}
+
+\begin{lemma}[Fuzzy nuclei preserve top]
+\label{lem:fuzzy-nuclei-preserve-top}
+Every fuzzy nucleus satisfies
+\[
+    j(\top_{P_\Lambda(X)})=\top_{P_\Lambda(X)}.
+\]
+\end{lemma}
+
+\begin{proof}
+Inflationarity gives
+\[
+    \top_{P_\Lambda(X)}\leq j(\top_{P_\Lambda(X)}).
+\]
+Since \(\top_{P_\Lambda(X)}\) is the greatest element of \(P_\Lambda(X)\), this
+forces
+\[
+    j(\top_{P_\Lambda(X)})=\top_{P_\Lambda(X)}.
+\]
+\end{proof}
+
+\begin{lemma}[Scalars as enriched tensors]
+\label{lem:scalars-as-enriched-tensors}
+Let \(P=P_\Lambda(X)\). For every \(r\in L\), the pointwise scalar operation
+\[
+    r\tensor(-):P\to P
+\]
+is the tensor of the \(\Lambda\)-category \(P\) by the scalar \(r\). Explicitly, for
+all \(\phi,\psi\in P\),
+\[
+    P(r\tensor\phi,\psi)
+    =
+    r\multimap P(\phi,\psi).
+\]
+\end{lemma}
+
+\begin{proof}
+By the scalar-closure result for fuzzy predicates from the previous chapter,
+\(r\tensor\phi\) is again an element of \(P\). By definition,
+\[
+    P(r\tensor\phi,\psi)
+    =
+    \bigmeet_{x\in X}
+    \bigl((r\tensor\phi(x))\multimap\psi(x)\bigr).
+\]
+For \(q\in L\), residuation gives
+\[
+\begin{aligned}
+q\leq P(r\tensor\phi,\psi)
+&\Longleftrightarrow
+q\tensor r\tensor\phi(x)\leq\psi(x)
+\quad\text{for all }x
+\\
+&\Longleftrightarrow
+q\tensor r\leq \phi(x)\multimap\psi(x)
+\quad\text{for all }x
+\\
+&\Longleftrightarrow
+q\tensor r\leq
+\bigmeet_{x\in X}(\phi(x)\multimap\psi(x))
+\\
+&\Longleftrightarrow
+q\tensor r\leq P(\phi,\psi)
+\\
+&\Longleftrightarrow
+q\leq r\multimap P(\phi,\psi).
+\end{aligned}
+\]
+Hence
+\[
+    P(r\tensor\phi,\psi)
+    =
+    r\multimap P(\phi,\psi).
+\]
+\end{proof}
+
+\begin{lemma}[Tensors in a reflective localization]
+\label{lem:tensors-in-reflective-localization}
+Let
+\[
+    a\dashv i:
+    P_\Lambda(X)\rightleftarrows\mathcal A
+\]
+be a \(\Lambda\)-enriched reflective localization with \(i\) fully faithful. Then
+\(\mathcal A\) is tensored over \(\Lambda\). For \(r\in L\) and \(A\in\mathcal A\),
+the tensor is computed by
+\[
+    r\tensor_{\mathcal A}A
+    \cong
+    a(r\tensor iA).
+\]
+Moreover,
+\[
+    a(r\tensor\phi)
+    \cong
+    r\tensor_{\mathcal A}a\phi
+\]
+for all \(\phi\in P_\Lambda(X)\).
+\end{lemma}
+
+\begin{proof}
+For \(B\in\mathcal A\), using the enriched adjunction and Lemma
+\ref{lem:scalars-as-enriched-tensors}, we compute
+\[
+\begin{aligned}
+\mathcal A(a(r\tensor iA),B)
+&\cong
+P_\Lambda(X)(r\tensor iA,iB)
+\\
+&\cong
+r\multimap P_\Lambda(X)(iA,iB)
+\\
+&\cong
+r\multimap \mathcal A(A,B).
+\end{aligned}
+\]
+Thus \(a(r\tensor iA)\) satisfies the universal property of
+\(r\tensor_{\mathcal A}A\).
+
+Taking \(A=a\phi\) and using the counit \(aia\phi\cong a\phi\), we have
+\[
+    r\tensor_{\mathcal A}a\phi
+    \cong
+    a(r\tensor ia\phi).
+\]
+Also, since \(a\) is an enriched left adjoint, it preserves tensors. Hence
+\[
+    a(r\tensor\phi)
+    \cong
+    r\tensor_{\mathcal A}a\phi.
+\]
+\end{proof}
+
+\begin{theorem}[Posetal comparison for localizations and fuzzy nuclei]
+\label{thm:posetal-comparison-localizations-nuclei}
+Let \(X\) be a fuzzy preorder, and write
+\[
+    P=P_\Lambda(X).
+\]
+There is a correspondence, up to equivalence of reflective localizations over \(P\),
+between:
+\begin{enumerate}[label=\textup{(\arabic*)}]
+    \item left-exact \(\Lambda\)-enriched reflective localizations
+    \[
+        a\dashv i:
+        P\rightleftarrows\mathcal A
+    \]
+    with \(i\) fully faithful, where left exactness in the posetal reflection means
+    preservation of the terminal element and binary meets in the underlying frame;
+
+    \item fuzzy nuclei
+    \[
+        j:P\to P.
+    \]
+\end{enumerate}
+Under this correspondence, a localization determines the fuzzy nucleus
+\[
+    j=ia,
+\]
+and a fuzzy nucleus \(j\) determines the reflective localization
+\[
+    q_j\dashv i_j:
+    P\rightleftarrows P_j,
+\]
+where
+\[
+    P_j=\{\phi\in P\mid j(\phi)=\phi\},
+    \qquad
+    q_j(\phi)=j(\phi),
+\]
+and \(i_j:P_j\hookrightarrow P\) is the inclusion. Moreover,
+\[
+    \mathcal A\simeq P_j
+\]
+over \(P\).
+
+In the posetal specialization, the underlying crisp order of \(P\) is a genuine
+poset. Since \(P\) is separated as a \(\Lambda\)-preorder, any ordinary isomorphism
+between objects of \(P\) is an equality. Thus, after replacing a localization by its
+equivalent full subpreorder of local objects, the idempotent monad \(ia\) may be
+regarded strictly as a closure operator on the underlying predicate frame.
+\end{theorem}
+
+\begin{proof}
+First let
+\[
+    a\dashv i:
+    P\rightleftarrows\mathcal A
+\]
+be a left-exact \(\Lambda\)-enriched reflective localization with \(i\) fully
+faithful, and define
+\[
+    j=ia.
+\]
+The unit of the adjunction gives
+\[
+    \phi\leq ia\phi=j(\phi),
+\]
+so \(j\) is inflationary. Since \(i\) is fully faithful, the counit
+\[
+    aiA\to A
+\]
+is an isomorphism for every \(A\in\mathcal A\). Hence
+\[
+    j(j(\phi))
+    =
+    iaia\phi
+    \cong
+    ia\phi
+    =
+    j(\phi).
+\]
+Since \(P\) is separated, this isomorphism may be read as the strict equality
+\[
+    j(j(\phi))=j(\phi).
+\]
+Thus \(j\) is idempotent.
+
+Because \(a\) preserves the finite meets of the underlying frame and \(i\), as a
+right adjoint, preserves them, we have
+\[
+\begin{aligned}
+j(\phi\meet\psi)
+&=
+ia(\phi\meet\psi)
+\\
+&\cong
+i(a\phi\meet a\psi)
+\\
+&\cong
+ia\phi\meet ia\psi
+\\
+&=
+j(\phi)\meet j(\psi).
+\end{aligned}
+\]
+Again using separatedness of \(P\), this comparison is a strict equality:
+\[
+    j(\phi\meet\psi)=j(\phi)\meet j(\psi).
+\]
+Similarly,
+\[
+    j(\top_P)=\top_P.
+\]
+
+It remains to prove scalar compatibility. By Lemma
+\ref{lem:tensors-in-reflective-localization},
+\[
+    a(r\tensor\phi)
+    \cong
+    r\tensor_{\mathcal A}a\phi
+    \cong
+    a(r\tensor ia\phi).
+\]
+Therefore
+\[
+\begin{aligned}
+j(r\tensor j(\phi))
+&=
+ia(r\tensor ia\phi)
+\\
+&\cong
+ia(r\tensor\phi)
+\\
+&=
+j(r\tensor\phi).
+\end{aligned}
+\]
+Using separatedness once more, this gives the strict equality
+\[
+    j(r\tensor j(\phi))=j(r\tensor\phi).
+\]
+Thus \(j\) is a fuzzy nucleus.
+
+Conversely, let \(j:P\to P\) be a fuzzy nucleus, and let
+\[
+    P_j=\{\phi\in P\mid j(\phi)=\phi\}
+\]
+be the full \(\Lambda\)-subpreorder of fixed points. Define
+\[
+    q_j:P\to P_j,
+    \qquad
+    q_j(\phi)=j(\phi),
+\]
+and let
+\[
+    i_j:P_j\hookrightarrow P
+\]
+be the inclusion.
+
+First \(q_j\) is a \(\Lambda\)-functor. Let \(r\leq P(\phi,\psi)\). Equivalently,
+\[
+    r\tensor\phi\leq\psi.
+\]
+By monotonicity of \(j\),
+\[
+    j(r\tensor\phi)\leq j(\psi).
+\]
+By inflationarity applied to \(r\tensor j(\phi)\), followed by scalar compatibility,
+\[
+    r\tensor j(\phi)
+    \leq
+    j(r\tensor j(\phi))
+    =
+    j(r\tensor\phi).
+\]
+Hence
+\[
+    r\tensor j(\phi)\leq j(\psi),
+\]
+and so
+\[
+    r\leq P(j\phi,j\psi).
+\]
+Therefore
+\[
+    P(\phi,\psi)\leq P_j(q_j\phi,q_j\psi),
+\]
+so \(q_j\) is a \(\Lambda\)-functor.
+
+We now prove that
+\[
+    q_j\dashv i_j.
+\]
+Let \(\psi\in P_j\). Since \(P_j\) is full,
+\[
+    P_j(q_j\phi,\psi)=P(j\phi,\psi).
+\]
+We prove
+\[
+    P(j\phi,\psi)=P(\phi,\psi).
+\]
+For \(r\in L\), if
+\[
+    r\leq P(j\phi,\psi),
+\]
+then
+\[
+    r\tensor j\phi\leq\psi.
+\]
+Since \(\phi\leq j\phi\), this implies
+\[
+    r\tensor\phi\leq\psi,
+\]
+so
+\[
+    r\leq P(\phi,\psi).
+\]
+Conversely, if
+\[
+    r\tensor\phi\leq\psi,
+\]
+then
+\[
+    j(r\tensor\phi)\leq j(\psi)=\psi.
+\]
+By inflationarity and scalar compatibility,
+\[
+    r\tensor j\phi
+    \leq
+    j(r\tensor j\phi)
+    =
+    j(r\tensor\phi)
+    \leq
+    \psi.
+\]
+Thus
+\[
+    r\leq P(j\phi,\psi).
+\]
+Therefore
+\[
+    P(j\phi,\psi)=P(\phi,\psi),
+\]
+and hence \(q_j\dashv i_j\) as a \(\Lambda\)-adjunction.
+
+The inclusion \(i_j\) is fully faithful by definition. The reflector \(q_j\) preserves
+terminal element and binary meets because
+\[
+    j(\top_P)=\top_P
+\]
+and
+\[
+    j(\phi\meet\psi)=j(\phi)\meet j(\psi).
+\]
+Thus
+\[
+    q_j\dashv i_j:
+    P\rightleftarrows P_j
+\]
+is a left-exact \(\Lambda\)-enriched reflective localization.
+
+Finally, starting from a localization and applying the construction above gives the
+fixed-point subcategory of the idempotent monad \(j=ia\), which is equivalent to
+\(\mathcal A\) by Proposition~\ref{prop:local-objects-categorical}. Starting from a
+fuzzy nucleus \(j\), the induced monad is exactly \(i_jq_j=j\). Hence the two
+constructions are inverse up to equivalence over \(P\).
+\end{proof}
+
+\subsection{Fixed points of fuzzy nuclei}
+\label{subsec:fixed-points-fuzzy-nuclei}
+
+\begin{lemma}[Intersections of fuzzy nuclei]
+\label{lem:intersections-fuzzy-nuclei}
+Let \((j_\alpha)_{\alpha\in I}\) be a family of fuzzy nuclei on \(P_\Lambda(X)\).
+Then the pointwise meet
+\[
+    j(\phi)\eqdef\bigmeet_{\alpha\in I}j_\alpha(\phi)
+\]
+is again a fuzzy nucleus. If \(I=\varnothing\), this is the constant-top nucleus.
+\end{lemma}
+
+\begin{proof}
+Inflationarity follows because \(\phi\leq j_\alpha(\phi)\) for every \(\alpha\).
+Since every \(j_\alpha\) is monotone, \(j\) is monotone.
+
+For idempotence, inflationarity gives
+\[
+    j(\phi)\leq j(j(\phi)).
+\]
+Conversely, since
+\[
+    j(\phi)\leq j_\alpha(\phi)
+\]
+for every \(\alpha\), monotonicity of \(j_\alpha\) gives
+\[
+    j_\alpha(j(\phi))
+    \leq
+    j_\alpha(j_\alpha(\phi))
+    =
+    j_\alpha(\phi).
+\]
+Taking the meet over \(\alpha\) yields
+\[
+    j(j(\phi))\leq j(\phi).
+\]
+Thus
+\[
+    j(j(\phi))=j(\phi).
+\]
+
+For finite meets,
+\[
+\begin{aligned}
+j(\phi\meet\psi)
+&=
+\bigmeet_\alpha j_\alpha(\phi\meet\psi)
+\\
+&=
+\bigmeet_\alpha\bigl(j_\alpha(\phi)\meet j_\alpha(\psi)\bigr)
+\\
+&=
+\left(\bigmeet_\alpha j_\alpha(\phi)\right)
+\meet
+\left(\bigmeet_\alpha j_\alpha(\psi)\right)
+\\
+&=
+j(\phi)\meet j(\psi).
+\end{aligned}
+\]
+
+Finally, for scalar compatibility, inflationarity gives
+\[
+    r\tensor\phi\leq r\tensor j(\phi),
+\]
+and hence, by monotonicity of \(j\),
+\[
+    j(r\tensor\phi)\leq j(r\tensor j(\phi)).
+\]
+For the reverse inequality, since \(j(\phi)\leq j_\alpha(\phi)\), we have
+\[
+    r\tensor j(\phi)\leq r\tensor j_\alpha(\phi).
+\]
+Thus
+\[
+    j_\alpha(r\tensor j(\phi))
+    \leq
+    j_\alpha(r\tensor j_\alpha(\phi))
+    =
+    j_\alpha(r\tensor\phi).
+\]
+Taking the meet over \(\alpha\) gives
+\[
+    j(r\tensor j(\phi))
+    \leq
+    j(r\tensor\phi).
+\]
+Therefore
+\[
+    j(r\tensor j(\phi))=j(r\tensor\phi).
+\]
+\end{proof}
+
+\begin{definition}[Fixed points of a fuzzy nucleus]
+\label{def:fixed-points-fuzzy-nucleus}
+Let \(j\) be a fuzzy nucleus on \(P_\Lambda(X)\). Define
+\[
+    P_\Lambda(X)_j
+    \eqdef
+    \{\phi\in P_\Lambda(X)\mid j(\phi)=\phi\}.
+\]
+For fixed points \(\phi_i,\phi,\psi\in P_\Lambda(X)_j\), define
+\[
+    \bigjoin\nolimits_j \phi_i
+    =
+    j\left(\bigjoin_i \phi_i\right),
+\]
+\[
+    \phi\meet_j\psi
+    =
+    \phi\meet\psi,
+\]
+and
+\[
+    r\tensor_j\phi
+    =
+    j(r\tensor\phi).
+\]
+\end{definition}
+
+\begin{proposition}[Fixed points of a fuzzy nucleus]
+\label{prop:fixed-points-fuzzy-nucleus-frame}
+Let \(j\) be a fuzzy nucleus on \(P_\Lambda(X)\). Then
+\[
+    P_\Lambda(X)_j
+\]
+is a frame. Its joins are closed joins,
+\[
+    \bigjoin\nolimits_j \phi_i
+    =
+    j\left(\bigjoin_i\phi_i\right),
+\]
+its finite meets are inherited from \(P_\Lambda(X)\), and it carries the closed scalar
+action
+\[
+    r\tensor_j\phi
+    =
+    j(r\tensor\phi).
+\]
+The closed scalar action preserves arbitrary joins in each variable.
+\end{proposition}
+
+\begin{proof}
+First, \(\top_{P_\Lambda(X)}\) is fixed by Lemma~\ref{lem:fuzzy-nuclei-preserve-top}.
+If \(\phi,\psi\) are fixed, then
+\[
+    j(\phi\meet\psi)
+    =
+    j(\phi)\meet j(\psi)
+    =
+    \phi\meet\psi,
+\]
+so finite meets are inherited from \(P_\Lambda(X)\).
+
+For a family \((\phi_i)\) of fixed points, define
+\[
+    c=j\left(\bigjoin_i\phi_i\right).
+\]
+Then \(c\) is fixed by idempotence. Since
+\[
+    \phi_i\leq \bigjoin_i\phi_i\leq j\left(\bigjoin_i\phi_i\right),
+\]
+the element \(c\) is an upper bound of the \(\phi_i\). If \(\psi\) is any fixed upper
+bound of the \(\phi_i\), then
+\[
+    \bigjoin_i\phi_i\leq\psi.
+\]
+By monotonicity,
+\[
+    j\left(\bigjoin_i\phi_i\right)\leq j(\psi)=\psi.
+\]
+Thus \(c\) is the least fixed upper bound. Hence joins in \(P_\Lambda(X)_j\) are
+closed joins. In particular, the bottom element is
+\[
+    \bot_j=j(\bot_{P_\Lambda(X)}).
+\]
+
+Frame distributivity follows from frame distributivity in \(P_\Lambda(X)\) and
+finite-meet preservation by \(j\). If \(\phi\) and all \(\psi_i\) are fixed, then
+\[
+\begin{aligned}
+\phi\meet_j\bigjoin\nolimits_j \psi_i
+&=
+\phi\meet j\left(\bigjoin_i \psi_i\right)
+\\
+&=
+j(\phi)\meet j\left(\bigjoin_i \psi_i\right)
+\\
+&=
+j\left(\phi\meet\bigjoin_i \psi_i\right)
+\\
+&=
+j\left(\bigjoin_i(\phi\meet\psi_i)\right)
+\\
+&=
+\bigjoin\nolimits_j(\phi\meet_j\psi_i).
+\end{aligned}
+\]
+
+The closed scalar action is fixed by definition:
+\[
+    r\tensor_j\phi=j(r\tensor\phi).
+\]
+The scalar unit law follows from the unit law in \(P_\Lambda(X)\) and the fact that
+\(\phi\) is fixed:
+\[
+    \top_L\tensor_j\phi
+    =
+    j(\top_L\tensor\phi)
+    =
+    j(\phi)
+    =
+    \phi.
+\]
+For associativity, use the scalar-compatibility equation:
+\[
+\begin{aligned}
+r\tensor_j(s\tensor_j\phi)
+&=
+j(r\tensor j(s\tensor\phi))
+\\
+&=
+j(r\tensor(s\tensor\phi))
+\\
+&=
+j((r\tensor s)\tensor\phi)
+\\
+&=
+(r\tensor s)\tensor_j\phi.
+\end{aligned}
+\]
+
+It remains to verify that the closed scalar action preserves arbitrary joins. In the
+frame variable,
+\[
+\begin{aligned}
+r\tensor_j\bigjoin\nolimits_j \phi_i
+&=
+j\left(r\tensor j\left(\bigjoin_i\phi_i\right)\right)
+\\
+&=
+j\left(r\tensor\bigjoin_i\phi_i\right)
+\\
+&=
+j\left(\bigjoin_i(r\tensor\phi_i)\right).
+\end{aligned}
+\]
+For any family \((\eta_i)\) in \(P_\Lambda(X)\), the closure identity
+\[
+    j\left(\bigjoin_i \eta_i\right)
+    =
+    j\left(\bigjoin_i j(\eta_i)\right)
+\]
+follows from inflationarity, monotonicity, and idempotence of \(j\). Applying this to
+\(\eta_i=r\tensor\phi_i\), we get
+\[
+\begin{aligned}
+j\left(\bigjoin_i(r\tensor\phi_i)\right)
+&=
+j\left(\bigjoin_i j(r\tensor\phi_i)\right)
+\\
+&=
+\bigjoin\nolimits_j(r\tensor_j\phi_i).
+\end{aligned}
+\]
+Therefore
+\[
+    r\tensor_j\bigjoin\nolimits_j \phi_i
+    =
+    \bigjoin\nolimits_j(r\tensor_j\phi_i).
+\]
+
+The scalar variable is similar. For a family \((r_i)\) in \(L\),
+\[
+\begin{aligned}
+\left(\bigjoin_i r_i\right)\tensor_j\phi
+&=
+j\left(\left(\bigjoin_i r_i\right)\tensor\phi\right)
+\\
+&=
+j\left(\bigjoin_i(r_i\tensor\phi)\right)
+\\
+&=
+j\left(\bigjoin_i j(r_i\tensor\phi)\right)
+\\
+&=
+\bigjoin\nolimits_j(r_i\tensor_j\phi).
+\end{aligned}
+\]
+Thus the closed scalar action preserves arbitrary joins in each variable.
+\end{proof}
+
+\begin{remark}[Bottom scalars]
+\label{rem:bottom-scalars}
+Taking the empty join in the scalar variable gives
+\[
+    \bot_L\tensor_j\phi
+    =
+    \bot_j.
+\]
+Taking the empty join in the frame variable gives
+\[
+    r\tensor_j\bot_j
+    =
+    \bot_j.
+\]
+Thus each scalar operation preserves bottom, and the bottom scalar acts as the
+constant-bottom operator. Notice that
+\[
+    \bot_j=j(\bot_{P_\Lambda(X)}),
+\]
+which need not equal the bottom element of \(P_\Lambda(X)\).
+\end{remark}
+
+\begin{lemma}[Enriched hom recovered from the scalar action]
+\label{lem:enriched-hom-recovered-from-scalar-action}
+Let
+\[
+    A=P_\Lambda(X)_j
+\]
+be the fixed-point frame of a fuzzy nucleus. For fixed points
+\(\phi,\psi\in A\), one has
+\[
+    A(\phi,\psi)
+    =
+    \bigjoin
+    \{r\in L\mid r\tensor_j\phi\leq \psi\}.
+\]
+Moreover this hom-value agrees with the hom inherited from \(P_\Lambda(X)\):
+\[
+    A(\phi,\psi)=P_\Lambda(X)(\phi,\psi).
+\]
+\end{lemma}
+
+\begin{proof}
+For \(r\in L\), using the tensor-hom formula in \(P_\Lambda(X)\), we have
+\[
+    r\leq P_\Lambda(X)(\phi,\psi)
+    \quad\Longleftrightarrow\quad
+    r\tensor\phi\leq \psi.
+\]
+Since \(\psi\) is fixed, this is equivalent to
+\[
+    j(r\tensor\phi)\leq \psi.
+\]
+But
+\[
+    j(r\tensor\phi)=r\tensor_j\phi.
+\]
+Hence
+\[
+    r\leq P_\Lambda(X)(\phi,\psi)
+    \quad\Longleftrightarrow\quad
+    r\tensor_j\phi\leq \psi.
+\]
+Taking the join over all such \(r\) gives the claim.
+\end{proof}
+
+\begin{definition}[\(\Lambda\)-fuzzy-frame presentation]
+\label{def:fuzzy-frame-presentation}
+A \textbf{\(\Lambda\)-fuzzy-frame presentation} is a pair
+\[
+    (X,j),
+\]
+where \(X\) is a fuzzy preorder and
+\[
+    j:P_\Lambda(X)\to P_\Lambda(X)
+\]
+is a fuzzy nucleus.
+
+The frame presented by \((X,j)\) is the fixed-point frame
+\[
+    P_\Lambda(X)_j.
+\]
+\end{definition}
+
+\begin{definition}[Fuzzy frame over \(\Lambda\)]
+\label{def:fuzzy-frame}
+A \textbf{fuzzy frame over \(\Lambda\)} is a frame presented by a
+\(\Lambda\)-fuzzy-frame presentation. Equivalently, a fuzzy frame is a nuclear
+quotient of a fuzzy presheaf frame:
+\[
+    P_\Lambda(X)\twoheadrightarrow P_\Lambda(X)_j.
+\]
+\end{definition}
+
+Thus the phrase \emph{nuclear quotient} is frame-theoretic. Under locale duality, the
+same structure is read as a fuzzy sublocale.
+
+\begin{definition}[\(\Lambda\)-scalar frame]
+\label{def:lambda-scalar-frame}
+A \textbf{\(\Lambda\)-scalar frame} is a frame \(A\) equipped with an action
+\[
+    L\times A\to A,
+    \qquad
+    (r,a)\longmapsto r\tensor_A a,
+\]
+such that
+\[
+    \top_L\tensor_A a=a,
+    \qquad
+    (r\tensor s)\tensor_A a=r\tensor_A(s\tensor_A a),
+\]
+and such that the operation preserves arbitrary joins in each variable:
+\[
+    r\tensor_A\bigjoin_i a_i
+    =
+    \bigjoin_i(r\tensor_A a_i),
+\]
+\[
+    \left(\bigjoin_i r_i\right)\tensor_A a
+    =
+    \bigjoin_i(r_i\tensor_A a).
+\]
+\end{definition}
+
+Every fixed-point frame \(P_\Lambda(X)_j\) is a \(\Lambda\)-scalar frame by
+Proposition~\ref{prop:fixed-points-fuzzy-nucleus-frame}.
+
+\begin{definition}[Fuzzy-frame homomorphism]
+\label{def:fuzzy-frame-homomorphism}
+Let
+\[
+    P_\Lambda(X)_j
+    \qquad\text{and}\qquad
+    P_\Lambda(Y)_k
+\]
+be fuzzy frames presented by \(\Lambda\)-fuzzy-frame presentations. A
+\textbf{fuzzy-frame homomorphism}
+\[
+    h:P_\Lambda(X)_j\to P_\Lambda(Y)_k
+\]
+is a frame homomorphism satisfying
+\[
+    h(r\tensor_j\phi)=r\tensor_k h(\phi)
+\]
+for all \(r\in L\) and all \(\phi\in P_\Lambda(X)_j\).
+\end{definition}
+
+\begin{corollary}[Fuzzy-frame homomorphisms are enriched functors]
+\label{cor:fuzzy-frame-homomorphisms-are-enriched}
+Let
+\[
+    h:A\to B
+\]
+be a fuzzy-frame homomorphism between fixed-point fuzzy frames. Then \(h\) is a
+\(\Lambda\)-functor for the enriched homs recovered from the scalar actions.
+\end{corollary}
+
+\begin{proof}
+Suppose
+\[
+    r\leq A(a,b).
+\]
+By Lemma~\ref{lem:enriched-hom-recovered-from-scalar-action}, this means
+\[
+    r\tensor_A a\leq b.
+\]
+Applying \(h\) and using scalar compatibility gives
+\[
+    r\tensor_B h(a)
+    =
+    h(r\tensor_A a)
+    \leq
+    h(b).
+\]
+Again by Lemma~\ref{lem:enriched-hom-recovered-from-scalar-action}, this implies
+\[
+    r\leq B(h(a),h(b)).
+\]
+Therefore
+\[
+    A(a,b)\leq B(h(a),h(b)),
+\]
+so \(h\) is a \(\Lambda\)-functor.
+\end{proof}
+
+\begin{definition}[The category of fuzzy frames]
+\label{def:category-fuzzy-frames}
+The category of fuzzy frames over \(\Lambda\) and fuzzy-frame homomorphisms is denoted
+\[
+    \FFrm_\Lambda.
+\]
+\end{definition}
+
+\begin{remark}[Presentations]
+\label{rem:fuzzy-frames-presentation-based}
+Strictly speaking, one may keep the presentation \((X,j)\) as part of the data, or
+identify presentations that present isomorphic fixed-point frames. In this chapter we
+write fuzzy frames as the presented frames \(P_\Lambda(X)_j\), while remembering that
+they arise from some localization of a fuzzy presheaf frame.
+
+The definition is deliberately presentation-based. Fuzzy frames are not introduced as
+arbitrary frames equipped with a scalar action; they are the fixed-point frames of
+scalar-compatible nuclei on fuzzy presheaf frames.
+\end{remark}
+
+\begin{definition}[Nuclear quotient map]
+\label{def:nuclear-quotient-map}
+Let \(j\) be a fuzzy nucleus on \(P_\Lambda(X)\). The associated \textbf{nuclear
+quotient map} is the closure map
+\[
+    q_j:
+    P_\Lambda(X)\to P_\Lambda(X)_j,
+    \qquad
+    q_j(\phi)=j(\phi).
+\]
+\end{definition}
+
+\begin{proposition}[The closure map is a quotient]
+\label{prop:closure-map-is-quotient}
+Let \(j\) be a fuzzy nucleus on \(P_\Lambda(X)\). Then
+\[
+    q_j:
+    P_\Lambda(X)\to P_\Lambda(X)_j
+\]
+is a surjective fuzzy-frame homomorphism.
+\end{proposition}
+
+\begin{proof}
+The map \(q_j\) is surjective because every fixed point \(\phi\in P_\Lambda(X)_j\)
+satisfies
+\[
+    j(\phi)=\phi.
+\]
+
+It preserves arbitrary joins because joins in \(P_\Lambda(X)_j\) are closed joins:
+\[
+    j\left(\bigjoin_i\phi_i\right)
+    =
+    \bigjoin\nolimits_j j(\phi_i).
+\]
+For the empty family this says
+\[
+    q_j(\bot_{P_\Lambda(X)})=j(\bot_{P_\Lambda(X)})=\bot_j,
+\]
+so \(q_j\) also preserves bottom. It preserves finite meets because
+\[
+    j(\phi\meet\psi)=j(\phi)\meet j(\psi),
+\]
+and it preserves top by Lemma~\ref{lem:fuzzy-nuclei-preserve-top}.
+
+It preserves scalars because
+\[
+\begin{aligned}
+q_j(r\tensor\phi)
+&=
+j(r\tensor\phi)
+\\
+&=
+j(r\tensor j(\phi))
+\\
+&=
+r\tensor_j j(\phi)
+\\
+&=
+r\tensor_j q_j(\phi).
+\end{aligned}
+\]
+Therefore \(q_j\) is a surjective fuzzy-frame homomorphism.
+\end{proof}
+
+Conversely, every scalar-compatible quotient of a fuzzy presheaf frame determines a
+fuzzy nucleus. This is the scalar-compatible version of the usual correspondence
+between nuclei and quotient frames \cite{Johnstone1982}.
+
+\begin{proposition}[Quotients determine fuzzy nuclei]
+\label{prop:quotients-determine-fuzzy-nuclei}
+Let \(B\) be a \(\Lambda\)-scalar frame, and let
+\[
+    q:P_\Lambda(X)\twoheadrightarrow B
+\]
+be a surjective frame homomorphism satisfying
+\[
+    q(r\tensor\phi)=r\tensor_B q(\phi)
+\]
+for all \(r\in L\) and \(\phi\in P_\Lambda(X)\). Since \(q\) preserves arbitrary
+joins, it has a right adjoint
+\[
+    q_\ast:B\to P_\Lambda(X)
+\]
+defined by
+\[
+    q_\ast(b)
+    =
+    \bigjoin\{\phi\in P_\Lambda(X)\mid q(\phi)\leq b\}.
+\]
+Then
+\[
+    j_q\eqdef q_\ast q
+\]
+is a fuzzy nucleus on \(P_\Lambda(X)\), and the fixed-point fuzzy frame
+\[
+    P_\Lambda(X)_{j_q}
+\]
+is isomorphic to \(B\) as a fuzzy frame.
+\end{proposition}
+
+\begin{proof}
+Since \(q\dashv q_\ast\), the composite
+\[
+    j_q=q_\ast q
+\]
+is inflationary. Since \(q\) is surjective, the counit
+\[
+    qq_\ast\leq \id_B
+\]
+is an equality. Indeed, if \(b=q(\phi)\), then \(\phi\leq q_\ast(b)\), so
+\[
+    b=q(\phi)\leq qq_\ast(b),
+\]
+while \(qq_\ast(b)\leq b\) follows from the counit inequality. Hence
+\[
+    qq_\ast=\id_B.
+\]
+Therefore
+\[
+    j_qj_q
+    =
+    q_\ast q q_\ast q
+    =
+    q_\ast q
+    =
+    j_q.
+\]
+
+Because \(q\) preserves finite meets and \(q_\ast\) preserves all meets,
+\[
+\begin{aligned}
+j_q(\phi\meet\psi)
+&=
+q_\ast q(\phi\meet\psi)
+\\
+&=
+q_\ast(q(\phi)\meet q(\psi))
+\\
+&=
+q_\ast q(\phi)\meet q_\ast q(\psi)
+\\
+&=
+j_q(\phi)\meet j_q(\psi).
+\end{aligned}
+\]
+
+For scalar compatibility, use that \(q\) preserves scalars and that
+\(qq_\ast=\id_B\):
+\[
+\begin{aligned}
+j_q(r\tensor j_q(\phi))
+&=
+q_\ast q(r\tensor q_\ast q(\phi))
+\\
+&=
+q_\ast\bigl(r\tensor_B q q_\ast q(\phi)\bigr)
+\\
+&=
+q_\ast(r\tensor_B q(\phi))
+\\
+&=
+q_\ast q(r\tensor\phi)
+\\
+&=
+j_q(r\tensor\phi).
+\end{aligned}
+\]
+Therefore \(j_q\) is a fuzzy nucleus.
+
+The restriction
+\[
+    q:P_\Lambda(X)_{j_q}\to B
+\]
+is an isomorphism of frames with inverse \(q_\ast\). First, for every \(b\in B\),
+\[
+    j_q(q_\ast b)
+    =
+    q_\ast q q_\ast b
+    =
+    q_\ast b,
+\]
+so \(q_\ast b\) is fixed. Moreover,
+\[
+    q q_\ast(b)=b,
+\]
+and for \(\phi\in P_\Lambda(X)_{j_q}\),
+\[
+    q_\ast q(\phi)=j_q(\phi)=\phi.
+\]
+
+It remains to note that this isomorphism respects the scalar actions. The restriction
+of \(q\) preserves scalars by assumption. Conversely, for \(b\in B\), write
+\(b=q(\phi)\). Then
+\[
+\begin{aligned}
+q\bigl(r\tensor_{j_q}q_\ast(b)\bigr)
+&=
+q\bigl(j_q(r\tensor q_\ast(b))\bigr)
+\\
+&=
+q(r\tensor q_\ast(b))
+\\
+&=
+r\tensor_B qq_\ast(b)
+\\
+&=
+r\tensor_B b.
+\end{aligned}
+\]
+Since \(q:P_\Lambda(X)_{j_q}\to B\) is an isomorphism, this implies
+\[
+    r\tensor_{j_q}q_\ast(b)
+    =
+    q_\ast(r\tensor_B b).
+\]
+Thus
+\[
+    P_\Lambda(X)_{j_q}\cong B
+\]
+as fuzzy frames.
+\end{proof}
+
+\subsection{Examples}
+\label{subsec:localizing-presheaves-examples}
+
+\begin{example}[The identity localization]
+\label{ex:identity-localization}
+For every fuzzy preorder \(X\), the identity map
+\[
+    \id_{P_\Lambda(X)}:
+    P_\Lambda(X)\to P_\Lambda(X)
+\]
+is a fuzzy nucleus. Hence
+\[
+    P_\Lambda(X)_{\id}
+    =
+    P_\Lambda(X).
+\]
+Thus every fuzzy presheaf frame is itself a fuzzy frame.
+
+In this case no predicates are identified or closed further. Joins, finite meets, and
+scalar multiplication are the pointwise operations inherited directly from
+\(\Lambda\). Localically, this is the ambient presheaf fuzzy locale
+\[
+    \mathcal P_\Lambda X.
+\]
+All other examples of fuzzy frames in this chapter may be read as sublocales of such
+presheaf fuzzy locales, equivalently as nuclear quotients of their frames of opens.
+\end{example}
+
+\begin{example}[The trivial localization]
+\label{ex:terminal-localization}
+For every fuzzy preorder \(X\), the constant-top map
+\[
+    j_\top(\phi)=\top_{P_\Lambda(X)}
+\]
+is a fuzzy nucleus. Inflationarity and idempotence are immediate, and
+\[
+    j_\top(\phi\meet\psi)=\top_{P_\Lambda(X)}
+    =
+    \top_{P_\Lambda(X)}\meet\top_{P_\Lambda(X)}.
+\]
+For scalar compatibility,
+\[
+    j_\top(r\tensor j_\top(\phi))
+    =
+    \top_{P_\Lambda(X)}
+    =
+    j_\top(r\tensor\phi).
+\]
+The fixed-point frame has exactly one element:
+\[
+    P_\Lambda(X)_{j_\top}\cong 1.
+\]
+This is the trivial fuzzy frame. On the locale side it corresponds to the initial, or
+empty, fuzzy sublocale of the presheaf fuzzy locale. The identity nucleus gives the
+whole sublocale, while the constant-top nucleus gives the least sublocale.
+\end{example}
+
+\begin{example}[The crisp case]
+\label{ex:crisp-localization-case}
+Let
+\[
+    \Lambda=2.
+\]
+Then fuzzy preorders are ordinary preorders and, for an ordinary preorder \(X\),
+\[
+    P_2(X)
+    =
+    [X^{\op},2]
+    \cong
+    \Down(X),
+\]
+the frame of downsets of \(X\). A fuzzy nucleus on \(P_2(X)\) is exactly an ordinary
+nucleus on the frame \(\Down(X)\), because the scalar action of \(2\) is forced:
+\[
+    \top\tensor U=U,
+    \qquad
+    \bot\tensor U=\bot.
+\]
+Thus the scalar-compatibility equation adds no extra condition beyond the ordinary
+nucleus axioms.
+
+Concretely, a nucleus
+\[
+    j:\Down(X)\to\Down(X)
+\]
+assigns to each downset \(U\subseteq X\) a closed downset \(j(U)\), satisfying
+\[
+    U\subseteq j(U),
+    \qquad
+    j(j(U))=j(U),
+    \qquad
+    j(U\cap V)=j(U)\cap j(V).
+\]
+The fixed points form the ordinary quotient frame
+\[
+    \Down(X)_j.
+\]
+Thus the crisp specialization recovers the standard description of frames as
+nuclear quotients of downset frames.
+\end{example}
+
+\begin{theorem}[Ordinary frames as localized presheaves]
+\label{thm:ordinary-frames-localized-presheaves}
+Let \(A\) be a small ordinary frame. Regard the underlying poset of \(A\) as a
+preorder. Then the map
+\[
+    q:\Down(A)\to A,
+    \qquad
+    q(U)=\bigjoin U,
+\]
+is a surjective frame homomorphism. Consequently \(A\) is isomorphic to the
+fixed-point frame of the nucleus
+\[
+    j_A=q_\ast q
+\]
+on \(\Down(A)\). Explicitly,
+\[
+    j_A(U)=\downarrow\bigjoin U.
+\]
+\end{theorem}
+
+\begin{proof}
+The map \(q\) preserves arbitrary joins because
+\[
+\begin{aligned}
+q\left(\bigcup_i U_i\right)
+&=
+\bigjoin\bigcup_i U_i
+\\
+&=
+\bigjoin_i\bigjoin U_i
+\\
+&=
+\bigjoin_i q(U_i).
+\end{aligned}
+\]
+It preserves top because
+\[
+    q(A)=\bigjoin A=\top_A.
+\]
+
+It remains to check finite meets. Since
+\[
+    U\cap V\subseteq U
+    \qquad\text{and}\qquad
+    U\cap V\subseteq V,
+\]
+we have
+\[
+    q(U\cap V)\leq q(U)\meet q(V).
+\]
+Conversely, by frame distributivity,
+\[
+\begin{aligned}
+q(U)\meet q(V)
+&=
+\left(\bigjoin U\right)\meet\left(\bigjoin V\right)
+\\
+&=
+\bigjoin_{u\in U,\;v\in V}(u\meet v).
+\end{aligned}
+\]
+Since \(U\) and \(V\) are downsets, for every \(u\in U\) and \(v\in V\), the element
+\[
+    u\meet v
+\]
+belongs to \(U\cap V\). Hence
+\[
+    q(U)\meet q(V)\leq q(U\cap V).
+\]
+Therefore
+\[
+    q(U\cap V)=q(U)\meet q(V).
+\]
+
+Finally, \(q\) is surjective because
+\[
+    q(\downarrow a)=a
+\]
+for every \(a\in A\). Therefore \(q\) is a surjective frame homomorphism. Its right
+adjoint is
+\[
+    q_\ast(a)=\downarrow a.
+\]
+Hence
+\[
+    j_A(U)
+    =
+    q_\ast q(U)
+    =
+    \downarrow\bigjoin U.
+\]
+Proposition~\ref{prop:quotients-determine-fuzzy-nuclei} gives
+\[
+    \Down(A)_{j_A}\cong A.
+\]
+\end{proof}
+
+\begin{theorem}[The crisp case recovers ordinary frames]
+\label{thm:crisp-case-recovers-ordinary-frames}
+When
+\[
+    \Lambda=2,
+\]
+the small fuzzy frames over \(2\) are exactly the small ordinary frames, up to
+isomorphism.
+\end{theorem}
+
+\begin{proof}
+Every fuzzy frame over \(2\) is, by definition, a nuclear quotient of a frame
+\[
+    \Down(X).
+\]
+By Example~\ref{ex:crisp-localization-case}, this is an ordinary nuclear quotient of
+an ordinary frame, and hence is an ordinary frame.
+
+Conversely, every small ordinary frame is a nuclear quotient of an ordinary presheaf
+frame by Theorem~\ref{thm:ordinary-frames-localized-presheaves}. Therefore every
+small ordinary frame is a fuzzy frame over \(2\).
+\end{proof}
+
+This recovers the usual pointfree frame-theoretic localization picture
+\cite{Johnstone1982}.
+
+\begin{example}[G\"odel-valued localizations]
+\label{ex:godel-valued-localizations}
+Let
+\[
+    \Lambda=[0,1]
+\]
+with G\"odel tensor
+\[
+    r\tensor s=r\meet s=\min(r,s).
+\]
+A fuzzy predicate on a fuzzy preorder \(X\) is a map
+\[
+    \phi:X\to[0,1]
+\]
+satisfying
+\[
+    X(x',x)\meet\phi(x)\leq \phi(x')
+\]
+for all \(x,x'\in X\). The scalar action is truncation by the level \(r\):
+\[
+    (r\tensor\phi)(x)=\min(r,\phi(x)).
+\]
+A G\"odel-valued fuzzy nucleus closes predicates compatibly with truncation:
+\[
+    j(r\meet j(\phi))=j(r\meet\phi).
+\]
+
+Thus if a predicate has already been closed, then truncating it at level \(r\) and
+closing again gives the same result as truncating the original predicate and closing.
+The fixed-point frame consists of the predicates satisfying the chosen closure
+condition. Joins are closed pointwise suprema, finite meets are pointwise minima, and
+the scalar action is closed truncation:
+\[
+    r\tensor_j\phi=j(r\meet\phi).
+\]
+This gives a localic form of G\"odel-valued fuzzy topology, obtained here by enriched
+presheaf localization rather than by postulating a topology of fuzzy opens directly
+\cite{HohleRodabaugh1999}.
+\end{example}
+
+\begin{example}[{\L}ukasiewicz-valued localizations]
+\label{ex:lukasiewicz-valued-localizations}
+Let
+\[
+    \Lambda=[0,1]
+\]
+with {\L}ukasiewicz tensor
+\[
+    r\tensor s=\max(0,r+s-1).
+\]
+A fuzzy predicate on \(X\) is a map
+\[
+    \phi:X\to[0,1]
+\]
+satisfying
+\[
+    X(x',x)\tensor\phi(x)\leq \phi(x').
+\]
+The scalar action is no longer truncation. It shifts truth degrees downward:
+\[
+    (r\tensor\phi)(x)=\max(0,r+\phi(x)-1).
+\]
+For \(r=1\), this is the identity; for \(r<1\), all values are lowered, and values
+below \(1-r\) are sent to \(0\).
+
+A {\L}ukasiewicz-valued fuzzy nucleus is therefore a closure operator satisfying
+\[
+    j\bigl(r\tensor j(\phi)\bigr)=j(r\tensor\phi).
+\]
+The fixed-point fuzzy frame has closed joins, inherited finite meets, and closed
+{\L}ukasiewicz scalar action. This example emphasizes that the scalar structure is not
+merely order-theoretic: the same underlying lattice \([0,1]\) produces different
+fuzzy-localic behavior depending on the chosen tensor.
+\end{example}
+
+\begin{example}[Product-valued localizations]
+\label{ex:product-valued-localizations}
+Let
+\[
+    \Lambda=[0,1]
+\]
+with product tensor
+\[
+    r\tensor s=rs.
+\]
+Then a fuzzy predicate on \(X\) is a map
+\[
+    \phi:X\to[0,1]
+\]
+satisfying
+\[
+    X(x',x)\phi(x)\leq \phi(x')
+\]
+for all \(x,x'\in X\). Scalar multiplication is ordinary multiplication:
+\[
+    (r\tensor\phi)(x)=r\phi(x).
+\]
+A product-valued fuzzy nucleus closes these predicates compatibly with product
+rescaling:
+\[
+    j(r\,j(\phi))=j(r\,\phi).
+\]
+
+In the fixed-point frame, multiplying a closed predicate by \(r\) may fail to remain
+closed, so the closed scalar action is
+\[
+    r\tensor_j\phi=j(r\phi).
+\]
+This can be interpreted as first weakening the degree of membership by the factor
+\(r\), and then imposing the local closure condition. Product-valued localizations
+therefore behave differently from G\"odel-valued localizations: G\"odel scalars cut
+truth values from above, whereas product scalars contract them proportionally.
+\end{example}
+
+\begin{example}[Lawvere-valued localizations]
+\label{ex:lawvere-valued-localizations}
+Let
+\[
+    \Lambda=
+    ([0,\infty],\leq_L,\meet_L,\join_L,+,\ominus,\infty,0),
+    \qquad
+    a\leq_L b
+    \Longleftrightarrow
+    a\geq b
+    \text{ in the usual order}.
+\]
+Thus the tensor is addition, the top element is \(0\), and the bottom element is
+\(\infty\). Joins in \(\Lambda\) are infima in the usual order, and meets in
+\(\Lambda\) are suprema in the usual order.
+
+A fuzzy preorder is a Lawvere metric space. A Lawvere-valued fuzzy predicate is a map
+\[
+    \phi:X\to[0,\infty]
+\]
+satisfying, in the usual order,
+\[
+    \phi(x')\leq d(x',x)+\phi(x).
+\]
+Thus \(\phi(x)\) is better read as a cost, distance, or potential rather than as a
+truth degree. The scalar action adds a constant:
+\[
+    (r\tensor\phi)(x)=r+\phi(x).
+\]
+Since the order is reversed, inflationarity of a nucleus
+\[
+    \phi\leq_L j(\phi)
+\]
+means
+\[
+    j(\phi)(x)\leq \phi(x)
+\]
+in the usual order. Thus a Lawvere-valued nucleus lowers costs, subject to the chosen
+closure condition.
+
+The scalar-compatibility equation becomes
+\[
+    j(r+j(\phi))=j(r+\phi),
+\]
+where the displayed equation is written in the usual arithmetic notation on
+\([0,\infty]\). The fixed-point frame consists of the closed cost predicates. Closed
+joins are closures of pointwise infima, while finite meets are pointwise suprema.
+This is the metric analogue of passing from arbitrary presheaves to local objects
+\cite{Lawvere1973MetricSpaces}.
+\end{example}
+
+\section{Fuzzy locales}
+\label{sec:fuzzy-locales}
+
+We now pass from fuzzy frames to fuzzy locales by formal duality. As in ordinary
+pointfree topology, frame homomorphisms are read contravariantly as inverse-image
+maps of locales \cite{Johnstone1982}.
+
+\subsection{Fuzzy locales as duals of fuzzy frames}
+\label{subsec:fuzzy-locales-duals}
+
+\begin{definition}[Fuzzy locale]
+\label{def:fuzzy-locale}
+The category of \textbf{fuzzy locales over \(\Lambda\)} is
+\[
+    \FLoc_\Lambda
+    \eqdef
+    \FFrm_\Lambda^{\op}.
+\]
+If \(\mathcal X\) is a fuzzy locale, its fuzzy frame of opens is denoted
+\[
+    \Opens_\Lambda(\mathcal X).
+\]
+A map of fuzzy locales
+\[
+    f:\mathcal X\to\mathcal Y
+\]
+is represented by a fuzzy-frame homomorphism in the opposite direction:
+\[
+    f^\ast:
+    \Opens_\Lambda(\mathcal Y)
+    \to
+    \Opens_\Lambda(\mathcal X).
+\]
+\end{definition}
+
+Thus the fundamental duality is
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+\mathcal X
+    \arrow[r, "f"]
+&
+\mathcal Y
+\\
+\Opens_\Lambda(\mathcal X)
+&
+\Opens_\Lambda(\mathcal Y)
+    \arrow[l, "f^\ast"']
+\end{tikzcd}
+\]
+and, categorically,
+\[
+\begin{tikzcd}[column sep=large]
+\FLoc_\Lambda
+    \arrow[r, "\Opens_\Lambda"]
+&
+\FFrm_\Lambda^{\op}.
+\end{tikzcd}
+\]
+
+\subsection{Locales presented by fuzzy presheaves}
+\label{subsec:locales-presented-by-fuzzy-presheaves}
+
+For a fuzzy preorder \(X\), the fuzzy presheaf frame \(P_\Lambda(X)\) determines a
+fuzzy locale.
+
+\begin{definition}[Presheaf fuzzy locale]
+\label{def:presheaf-fuzzy-locale}
+For a fuzzy preorder \(X\), the \textbf{presheaf fuzzy locale} associated to \(X\) is
+the fuzzy locale
+\[
+    \mathcal P_\Lambda X
+\]
+whose fuzzy frame of opens is
+\[
+    \Opens_\Lambda(\mathcal P_\Lambda X)
+    =
+    P_\Lambda(X).
+\]
+Equivalently, \(\mathcal P_\Lambda X\) is the fuzzy locale corresponding to the
+identity nucleus on \(P_\Lambda(X)\).
+\end{definition}
+
+\begin{proposition}[Functoriality of presheaf fuzzy locales]
+\label{prop:functoriality-presheaf-fuzzy-locales}
+A \(\Lambda\)-functor
+\[
+    f:X\to Y
+\]
+induces a map of fuzzy locales
+\[
+    \mathcal P_\Lambda X\to\mathcal P_\Lambda Y.
+\]
+\end{proposition}
+
+\begin{proof}
+Precomposition gives
+\[
+    f^\ast:P_\Lambda(Y)\to P_\Lambda(X),
+    \qquad
+    f^\ast(\psi)=\psi f.
+\]
+Explicitly, if \(\psi:Y\to L\) is a fuzzy predicate on \(Y\), then
+\[
+\begin{aligned}
+X(x',x)\tensor(\psi f)(x)
+&=
+X(x',x)\tensor\psi(fx)
+\\
+&\leq
+Y(fx',fx)\tensor\psi(fx)
+\\
+&\leq
+\psi(fx')
+\\
+&=
+(\psi f)(x').
+\end{aligned}
+\]
+Thus \(f^\ast(\psi)\in P_\Lambda(X)\). Since precomposition preserves pointwise
+joins, finite meets, and scalars, \(f^\ast\) is a fuzzy-frame homomorphism. Therefore
+it defines a fuzzy-locale map
+\[
+    \mathcal P_\Lambda X\to\mathcal P_\Lambda Y.
+\]
+\end{proof}
+
+The construction is covariant on fuzzy preorders:
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+X
+    \arrow[r, "f"]
+    \arrow[d, "\mathcal P_\Lambda"']
+&
+Y
+    \arrow[d, "\mathcal P_\Lambda"]
+\\
+\mathcal P_\Lambda X
+    \arrow[r]
+&
+\mathcal P_\Lambda Y
+\end{tikzcd}
+\]
+while the inverse-image map on opens is contravariant:
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+\Opens_\Lambda(\mathcal P_\Lambda X)
+&
+\Opens_\Lambda(\mathcal P_\Lambda Y)
+    \arrow[l, "f^\ast"']
+\\
+P_\Lambda(X)
+    \arrow[u, equal]
+&
+P_\Lambda(Y)
+    \arrow[l, "f^\ast"]
+    \arrow[u, equal]
+\end{tikzcd}
+\]
+
+\subsection{Localized presheaves as fuzzy sublocales}
+\label{subsec:localized-presheaves-fuzzy-sublocales}
+
+A fuzzy nucleus has two equivalent readings. Frame-theoretically, it is a quotient
+of the fuzzy presheaf frame:
+\[
+    P_\Lambda(X)\twoheadrightarrow P_\Lambda(X)_j.
+\]
+Localically, it is a sublocale of the presheaf fuzzy locale. This is the ordinary
+duality between nuclei, quotient frames, and sublocales, with the scalar compatibility
+carried along \cite{Johnstone1982}.
+
+\begin{definition}[Fuzzy sublocale presented by a nucleus]
+\label{def:fuzzy-sublocale-presented-by-nucleus}
+Let \(j\) be a fuzzy nucleus on \(P_\Lambda(X)\). The \textbf{fuzzy sublocale
+presented by \(j\)} is the fuzzy locale
+\[
+    \mathcal X_j
+\]
+whose frame of opens is
+\[
+    \Opens_\Lambda(\mathcal X_j)
+    =
+    P_\Lambda(X)_j.
+\]
+\end{definition}
+
+The quotient and sublocale readings are displayed by
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+P_\Lambda(X)
+    \arrow[r, two heads, "q_j"]
+&
+P_\Lambda(X)_j
+\\
+\mathcal P_\Lambda X
+&
+\mathcal X_j
+    \arrow[l, hook]
+\end{tikzcd}
+\]
+where the top row is in fuzzy frames and the bottom row is in fuzzy locales. The hook
+on the locale side is justified by the fact that \(q_j\) is a quotient frame
+homomorphism.
+
+\subsection{Examples}
+\label{subsec:fuzzy-locale-examples}
+
+\begin{example}[Ordinary presheaf locales]
+\label{ex:ordinary-presheaf-locales}
+Let
+\[
+    \Lambda=2.
+\]
+For an ordinary preorder \(X\),
+\[
+    \Opens_2(\mathcal P_2X)
+    =
+    P_2(X)
+    =
+    \Down(X).
+\]
+Thus \(\mathcal P_2X\) is the ordinary lower presheaf locale associated to \(X\).
+Nuclei on \(\Down(X)\) correspond to ordinary sublocales of this locale
+\cite{Johnstone1982}.
+
+If \(X\) is discrete, then \(\Down(X)\cong \mathcal P(X)\), so the corresponding
+locale is the ordinary powerset locale on the set \(X\). If \(X\) has nontrivial
+order, then the opens are downward-closed subsets, and the locale remembers the
+Alexandrov topology determined by the preorder.
+\end{example}
+
+\begin{example}[G\"odel-valued presheaf locales]
+\label{ex:godel-valued-presheaf-locales}
+For G\"odel truth values,
+\[
+    \Opens_\Lambda(\mathcal P_\Lambda X)
+    =
+    P_\Lambda(X)
+\]
+is the frame of G\"odel-valued fuzzy predicates on \(X\). A fuzzy open is therefore a
+monotone fuzzy lower set, where monotonicity is measured by the G\"odel tensor:
+\[
+    X(x',x)\meet\phi(x)\leq \phi(x').
+\]
+A fuzzy nucleus on this frame presents a G\"odel-valued fuzzy sublocale. Its opens are
+exactly the closed G\"odel predicates. Localically, the quotient
+\[
+    P_\Lambda(X)\twoheadrightarrow P_\Lambda(X)_j
+\]
+is read as the inclusion of the fuzzy sublocale
+\[
+    \mathcal X_j\hookrightarrow \mathcal P_\Lambda X.
+\]
+\end{example}
+
+\begin{example}[{\L}ukasiewicz-valued presheaf locales]
+\label{ex:lukasiewicz-valued-presheaf-locales}
+For {\L}ukasiewicz truth values,
+\[
+    \Opens_\Lambda(\mathcal P_\Lambda X)
+    =
+    P_\Lambda(X)
+\]
+is the frame of {\L}ukasiewicz-valued fuzzy predicates on \(X\). The enriched
+lower-set condition is
+\[
+    \max(0,X(x',x)+\phi(x)-1)\leq \phi(x').
+\]
+A fuzzy nucleus presents a localized fuzzy locale whose opens are the corresponding
+closed predicates. The scalar action lowers degrees by {\L}ukasiewicz multiplication
+and then recloses them:
+\[
+    r\tensor_j\phi
+    =
+    j\bigl(\max(0,r+\phi-1)\bigr),
+\]
+where the formula is interpreted pointwise.
+\end{example}
+
+\begin{example}[Product-valued presheaf locales]
+\label{ex:product-valued-presheaf-locales}
+For product truth values,
+\[
+    \Opens_\Lambda(\mathcal P_\Lambda X)
+    =
+    P_\Lambda(X)
+\]
+is the frame of product-valued fuzzy predicates satisfying
+\[
+    X(x',x)\phi(x)\leq \phi(x').
+\]
+A fuzzy nucleus gives a product-valued fuzzy sublocale whose opens are closed under
+the chosen closure operation. The scalar action multiplies fuzzy predicates by
+constants and then closes:
+\[
+    r\tensor_j\phi=j(r\phi).
+\]
+Thus scalar rescaling behaves like proportional attenuation of fuzzy membership.
+\end{example}
+
+\begin{example}[Lawvere-valued presheaf locales]
+\label{ex:lawvere-valued-presheaf-locales}
+For a Lawvere metric space \(X\), the presheaf fuzzy locale \(\mathcal P_\Lambda X\)
+has frame of opens
+\[
+    \Opens_\Lambda(\mathcal P_\Lambda X)=P_\Lambda(X),
+\]
+whose elements are maps
+\[
+    \phi:X\to[0,\infty]
+\]
+satisfying, in the usual order,
+\[
+    \phi(x')\leq d(x',x)+\phi(x).
+\]
+These are nonexpansive cost predicates. A nucleus imposes a local closure condition
+on such cost predicates. Since the order is reversed, closed joins correspond to
+closures of pointwise infima of costs, while finite meets correspond to pointwise
+suprema. This gives a metric-localic interpretation of Lawvere presheaves.
+\end{example}
+
+\section{The fuzzy Sierpiński classifier}
+\label{sec:fuzzy-sierpinski-classifier}
+
+In ordinary locale theory, the Sierpiński locale classifies opens. On the frame
+side, this says that the Sierpiński frame is freely generated by one open. In the
+present enriched setting the same principle holds, but the free object is not, in
+general, the raw presheaf category on the two-object subterminal shape. For
+non-idempotent fuzzy tensors, such as the {\L}ukasiewicz and product tensors, that
+raw two-point construction does not classify arbitrary fuzzy opens by
+finite-limit-preserving fuzzy-frame morphisms.
+
+The correct construction uses a small enriched syntactic sketch of finite fuzzy-open
+formulae and then takes the associated left-exact enriched-sketch localization of its
+fuzzy presheaf category. The resulting object is characterized by its classifying
+universal property.
+
+\subsection{Categorical fuzzy frames and fuzzy opens}
+\label{subsec:categorical-fuzzy-frames-and-fuzzy-opens}
+
+We recall the categorical form of fuzzy frames used in this chapter. A categorical
+fuzzy frame is a left-exact reflective localization
+\[
+    a\dashv i:
+    P_{\mathbb V}(X)
+    \rightleftarrows
+    \mathcal A
+\]
+of a fuzzy presheaf category, where \(X\) is a small \(\mathbb V\)-category,
+\(i\) is fully faithful, and \(a\) preserves the chosen finite
+\(\mathcal F\)-weighted limits.
+
+A morphism of categorical fuzzy frames
+\[
+    H:\mathcal A\to\mathcal B
+\]
+is a \(\mathbb V\)-functor preserving small weighted colimits and the chosen finite
+\(\mathcal F\)-weighted limits. Enriched natural transformations are the 2-cells.
+We write
+\[
+    \mathbf{FFrm}_{\mathbb V}
+\]
+for the resulting 2-category: objects are categorical fuzzy frames, 1-cells are
+small-colimit-preserving and finite-limit-preserving \(\mathbb V\)-functors, and
+2-cells are enriched natural transformations. Thus
+\[
+    \mathbf{FFrm}_{\mathbb V}(\mathcal A,\mathcal B)
+\]
+denotes the ordinary hom-category of such morphisms and enriched natural
+transformations.
+
+A cosmos-level fuzzy open of a categorical fuzzy frame \(\mathcal A\) is a subobject
+\[
+    S\hookrightarrow 1_{\mathcal A}
+\]
+of the terminal object in the underlying ordinary category of \(\mathcal A\). We
+write
+\[
+    \operatorname{Sub}_{\mathcal A}(1_{\mathcal A})
+\]
+for the ordinary category of such subobjects. Thus, if \(\mathcal A\) is enriched,
+subobjects are computed in the underlying ordinary category \(\mathcal A_0\).
+
+Equivalently, a representative object \(S\) is subterminal precisely when the
+diagonal
+\[
+    S\longrightarrow S\times S
+\]
+is an isomorphism. Since morphisms of categorical fuzzy frames preserve terminal
+objects and binary products, they send subterminal objects to subterminal objects.
+
+We shall use the following tensor calculation for categorical fuzzy frames.
+
+\begin{lemma}[Tensors in categorical fuzzy frames]
+\label{lem:categorical-fuzzy-frames-are-tensored}
+Let
+\[
+    a\dashv i:
+    P_{\mathbb V}(X)\rightleftarrows\mathcal A
+\]
+be a categorical fuzzy-frame presentation. Then \(\mathcal A\) is tensored over
+\(\mathbb V\). For \(V\in\mathbb V\) and \(A\in\mathcal A\), the tensor is computed
+by
+\[
+    V\tensor_{\mathcal A}A
+    \cong
+    a(V\tensor iA).
+\]
+\end{lemma}
+
+\begin{proof}
+For \(B\in\mathcal A\), using the enriched adjunction and the tensor--hom
+adjunction in \(P_{\mathbb V}(X)\), we compute
+\[
+\begin{aligned}
+\mathcal A(a(V\tensor iA),B)
+&\cong
+P_{\mathbb V}(X)(V\tensor iA,iB)
+\\
+&\cong
+[V,P_{\mathbb V}(X)(iA,iB)]
+\\
+&\cong
+[V,\mathcal A(A,B)].
+\end{aligned}
+\]
+Thus \(a(V\tensor iA)\) represents the tensor of \(A\) by \(V\) in
+\(\mathcal A\).
+\end{proof}
+
+\subsection{The enriched syntactic sketch of one fuzzy open}
+\label{subsec:enriched-syntactic-sketch-one-fuzzy-open}
+
+We now construct the enriched syntactic sketch whose models are subterminal objects
+together with the formal finite-limit and scalar formulae generated from them.
+
+The construction is made relative to the universe convention fixed earlier. In
+particular, the collection of scalar objects used in the sketch, the chosen class
+\(\mathcal F\) of finite weights, and the generated syntax below are small in the
+ambient universe in which enriched sketches are formed. When the fuzzy cosmos
+\(\mathbb V\) is not small in the lowest universe, this construction is understood
+in the next universe of the fixed tower, equivalently after choosing a small
+skeleton of the scalar objects used by the sketch.
+
+Let
+\[
+    \mathbb T_{\Omega}
+\]
+denote the small enriched finite-limit-and-scalar sketch freely generated by one
+subterminal object. More explicitly, \(\mathbb T_{\Omega}\) is generated as follows.
+
+First, there are two basic formal objects
+\[
+    1,
+    \qquad
+    U.
+\]
+The object \(1\) is declared terminal, and \(U\) is declared subterminal. Thus the
+sketch contains the terminal-object data for \(1\), the canonical map
+\[
+    U\longrightarrow 1,
+\]
+and the finite-limit data expressing that the diagonal comparison
+\[
+    U\longrightarrow U\times U
+\]
+is an isomorphism.
+
+Second, the sketch is closed under the chosen finite \(\mathcal F\)-weighted limit
+operations. Thus, whenever a formal finite-limit expression
+\[
+    \{\varphi,D\}
+\]
+is built from earlier formal objects, it is again a formal object of
+\(\mathbb T_{\Omega}\), together with its designated limiting cone. In particular,
+binary products of formal objects are again formal objects.
+
+Third, for every scalar object \(V\in\mathbb V\) and every formal object
+\(A\in\mathbb T_{\Omega}\), there is a formal scalar object
+\[
+    V\diamond A.
+\]
+The symbol \(V\diamond A\) is syntactic at this stage. It is not required to
+represent the tensor of \(A\) by \(V\) in the raw presheaf category, nor is it
+required to satisfy a tensor universal property inside \(\mathbb T_{\Omega}\).
+
+For each formal scalar object \(V\diamond A\), the sketch contains a generating
+enriched morphism
+\[
+    \kappa_{V,A}:
+    V\longrightarrow
+    \mathbb T_{\Omega}(A,V\diamond A).
+\]
+Equivalently, \(\kappa_{V,A}\) is a formal tensor coevaluation map. Under Yoneda,
+it determines a canonical comparison map in the presheaf category
+\[
+    \alpha_{V,A}:
+    V\tensor yA
+    \longrightarrow
+    y(V\diamond A),
+\]
+where
+\[
+    y:\mathbb T_{\Omega}\to
+    P_{\mathbb V}(\mathbb T_{\Omega})
+\]
+is the enriched Yoneda embedding.
+
+The hom-objects and equations of \(\mathbb T_{\Omega}\) are generated freely by the
+terminal-object data, the subterminality data for \(U\), the specified finite-limit
+cones, the scalar-forming operations \(V\diamond A\), and the generating maps
+\(\kappa_{V,A}\), subject only to the coherence equations for the specified
+finite-limit cones and for functoriality of the displayed generating data. No tensor
+universal property for \(V\diamond A\) is imposed inside
+\(\mathbb T_{\Omega}\). The tensor universal property is imposed only on models, by
+requiring the transposes
+\[
+    V\tensor_{\mathcal A}F(A)\longrightarrow F(V\diamond A)
+\]
+to be isomorphisms.
+
+Equivalently, \(\mathbb T_{\Omega}\) is the free small enriched
+finite-limit-and-scalar sketch generated by one subterminal object \(U\), where the
+scalar operations are formal operations whose intended interpretation is by tensors
+in the target category of models.
+
+\begin{remark}[Formal scalar objects]
+\label{rem:formal-scalar-objects}
+One should not impose
+\[
+    y(V\diamond A)\cong V\tensor yA
+\]
+inside the raw presheaf category. In general, a scalar multiple of a representable
+presheaf need not be representable.
+
+In the posetal specialization, if such an identity held representably, then for a
+scalar \(v<\top_L\) it would force
+\[
+    \mathbb T_{\Omega}(Z,V\diamond A)
+    =
+    v\tensor \mathbb T_{\Omega}(Z,A).
+\]
+Taking \(Z=V\diamond A\) would give
+\[
+    \top_L
+    \leq
+    \mathbb T_{\Omega}(V\diamond A,V\diamond A)
+    =
+    v\tensor \mathbb T_{\Omega}(V\diamond A,A)
+    \leq
+    v,
+\]
+which is impossible. Thus \(V\diamond A\) is a formal scalar formula, and the
+comparison
+\[
+    V\tensor yA\to y(V\diamond A)
+\]
+is imposed only after passing to the sketch localization, and only in the correct
+classifying variance.
+\end{remark}
+
+\subsection{Models of the Sierpiński sketch}
+\label{subsec:models-sierpinski-sketch}
+
+Let \(\mathcal A\) be a categorical fuzzy frame. By
+Lemma~\ref{lem:categorical-fuzzy-frames-are-tensored}, \(\mathcal A\) is tensored
+over \(\mathbb V\). If
+\[
+    a\dashv i:
+    P_{\mathbb V}(X)\rightleftarrows\mathcal A
+\]
+is a presentation of \(\mathcal A\), then the tensor of \(A\in\mathcal A\) by
+\(V\in\mathbb V\) is computed by
+\[
+    V\tensor_{\mathcal A}A
+    \cong
+    a(V\tensor iA).
+\]
+
+A \textbf{model of the Sierpiński sketch} in \(\mathcal A\) is a
+\(\mathbb V\)-functor
+\[
+    F:\mathbb T_{\Omega}\to\mathcal A
+\]
+which satisfies the following conditions:
+\begin{enumerate}
+    \item \(F\) sends the specified finite \(\mathcal F\)-limit cones to finite
+    limits in \(\mathcal A\);
+
+    \item \(F(U)\) is subterminal;
+
+    \item for every scalar object \(V\in\mathbb V\) and every formal object
+    \(A\in\mathbb T_{\Omega}\), the image of the generating morphism
+    \[
+        \kappa_{V,A}:
+        V\to \mathbb T_{\Omega}(A,V\diamond A)
+    \]
+    has transpose
+    \[
+        \overline{\kappa}^{F}_{V,A}:
+        V\tensor_{\mathcal A}F(A)\to F(V\diamond A),
+    \]
+    and this transpose is an isomorphism.
+\end{enumerate}
+Thus scalar formulae are interpreted as actual tensors in \(\mathcal A\), and the
+formal coevaluation maps are interpreted as the corresponding tensor
+coevaluations.
+
+\begin{remark}[Scalar formulae need not be subterminal]
+\label{rem:scalar-formulae-not-necessarily-subterminal}
+Although the generator \(U\) is required to be subterminal, the formal scalar objects
+\(V\diamond A\) are not declared subterminal. In a general categorical fuzzy frame,
+tensors of subterminal objects need not be subterminal. Thus the cosmos-level
+classifier remembers one distinguished fuzzy open
+\[
+    U\hookrightarrow 1,
+\]
+while the scalar and finite-limit formulae are formal objects generated from it. In
+the posetal reflection every object of a frame lies below the top element, so these
+formula objects become ordinary fuzzy opens.
+\end{remark}
+
+We write
+\[
+    \operatorname{Mod}_{\Omega}(\mathcal A)
+\]
+for the ordinary category of such models and enriched natural transformations.
+
+\begin{proposition}[Models are subterminal objects]
+\label{prop:models-sierpinski-sketch-subterminal}
+For every categorical fuzzy frame \(\mathcal A\), evaluation at \(U\) induces an
+equivalence of ordinary categories
+\[
+    \operatorname{Mod}_{\Omega}(\mathcal A)
+    \simeq
+    \operatorname{Sub}_{\mathcal A}(1_{\mathcal A}).
+\]
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    F:\mathbb T_{\Omega}\to\mathcal A
+\]
+be a model. Since the sketch declares \(U\) subterminal, \(F(U)\) is subterminal in
+\(\mathcal A\). The formal map \(U\to 1\) is sent to a map
+\[
+    F(U)\to F(1)\cong 1_{\mathcal A}.
+\]
+Thus evaluation at \(U\) gives a functor
+\[
+    \operatorname{Mod}_{\Omega}(\mathcal A)
+    \longrightarrow
+    \operatorname{Sub}_{\mathcal A}(1_{\mathcal A}).
+\]
+
+Conversely, let
+\[
+    S\hookrightarrow 1_{\mathcal A}
+\]
+be a subterminal object of \(\mathcal A\). By the initiality of the free enriched
+finite-limit-and-scalar sketch generated by one subterminal object, giving a model
+\[
+    F:\mathbb T_{\Omega}\to\mathcal A
+\]
+with \(F(U)=S\) is equivalent to interpreting the generator \(U\) as the chosen
+subterminal object \(S\). The values on finite-limit formulae, scalar formulae, and
+the generating maps \(\kappa_{V,A}\) are then forced up to the unique coherent
+isomorphisms determined by the relevant universal properties.
+
+Explicitly, the corresponding model \(F_S\) is defined recursively by
+\[
+    F_S(U)=S,
+    \qquad
+    F_S(1)=1_{\mathcal A},
+\]
+by interpreting the specified finite-limit formulae as the corresponding finite
+limits in \(\mathcal A\), and by interpreting scalar formulae as tensors:
+\[
+    F_S(V\diamond A)
+    =
+    V\tensor_{\mathcal A}F_S(A).
+\]
+The generating morphism
+\[
+    \kappa_{V,A}:
+    V\to \mathbb T_{\Omega}(A,V\diamond A)
+\]
+is interpreted as the tensor coevaluation
+\[
+    V\to
+    \mathcal A(F_S(A),V\tensor_{\mathcal A}F_S(A)).
+\]
+
+Similarly, a morphism of models
+\[
+    F_S\to F_T
+\]
+is determined by its component at the generator \(U\). The components at
+finite-limit formulae are forced by the universal property of the corresponding
+limits, and the components at scalar formulae are forced by tensoring with the
+scalar object. The component at \(U\) is exactly a morphism
+\[
+    S\to T
+\]
+over \(1_{\mathcal A}\). Therefore evaluation at \(U\) is fully faithful and
+essentially surjective, hence an equivalence:
+\[
+    \operatorname{Mod}_{\Omega}(\mathcal A)
+    \simeq
+    \operatorname{Sub}_{\mathcal A}(1_{\mathcal A}).
+\]
+\end{proof}
+
+\subsection{The Sierpiński localization}
+\label{subsec:sierpinski-localization}
+
+Form the fuzzy presheaf category
+\[
+    P_{\mathbb V}(\mathbb T_{\Omega})
+    =
+    [\mathbb T_{\Omega}^{\op},\underline{\mathbb V}].
+\]
+Let
+\[
+    y:\mathbb T_{\Omega}\to P_{\mathbb V}(\mathbb T_{\Omega})
+\]
+be the Yoneda embedding.
+
+We use the standard enriched finite-limit sketch localization theorem in the
+following form.
+
+\begin{proposition}[Sierpiński sketch localization]
+\label{prop:sierpinski-sketch-localization}
+There is a left-exact reflective localization
+\[
+    a_{\Omega}\dashv i_{\Omega}:
+    P_{\mathbb V}(\mathbb T_{\Omega})
+    \rightleftarrows
+    P_{\mathbb V}(\mathbb T_{\Omega})_{J_{\Omega}}
+\]
+with the following universal property. For every categorical fuzzy frame
+\(\mathcal A\), restriction along the composite
+\[
+    \mathbb T_{\Omega}
+    \xrightarrow{y}
+    P_{\mathbb V}(\mathbb T_{\Omega})
+    \xrightarrow{a_{\Omega}}
+    P_{\mathbb V}(\mathbb T_{\Omega})_{J_{\Omega}}
+\]
+induces a natural equivalence of ordinary categories
+\[
+    \mathbf{FFrm}_{\mathbb V}
+    \bigl(P_{\mathbb V}(\mathbb T_{\Omega})_{J_{\Omega}},\mathcal A\bigr)
+    \simeq
+    \operatorname{Mod}_{\Omega}(\mathcal A).
+\]
+\end{proposition}
+
+\begin{proof}
+This is the enriched finite-limit sketch localization theorem applied to the small
+sketch \(\mathbb T_{\Omega}\). The localization is generated by the sketch data: the
+specified finite-limit cones, the subterminality equation for \(U\), and the scalar
+comparison maps
+\[
+    \alpha_{V,A}:
+    V\tensor yA
+    \longrightarrow
+    y(V\diamond A).
+\]
+The universal property says exactly that small-colimit-preserving left-exact
+\(\mathbb V\)-functors out of the localized presheaf category are the same as
+models of the sketch in the target categorical fuzzy frame.
+\end{proof}
+
+The localization is generated by the enriched sketch data in the following sense:
+after reflection, the designated finite-limit cones become limiting cones, the
+subterminality equation for \(U\) holds, and the scalar comparison maps
+\[
+    \alpha_{V,A}:
+    V\tensor yA
+    \longrightarrow
+    y(V\diamond A)
+\]
+become isomorphisms in the correct classifying variance. Thus the localization is
+characterized by its universal property for small-colimit-preserving left-exact
+functors out of the localized presheaf category.
+
+It is important not to describe the \(J_{\Omega}\)-local presheaves themselves as
+presheaves satisfying the tensor equations. Orthogonality of a presheaf \(F\) to
+\[
+    V\tensor yA\to y(V\diamond A)
+\]
+would instead identify
+\[
+    F(V\diamond A)
+    \cong
+    [V,F(A)].
+\]
+The tensor equations are imposed in the correct variance by the universal property
+for cocontinuous left-exact functors out of the localization.
+
+\begin{definition}[Fuzzy Sierpiński frame]
+\label{def:fuzzy-sierpinski-frame}
+The \textbf{fuzzy Sierpiński frame} over the fuzzy cosmos \(\mathbb V\) is
+\[
+    \Omega_{\mathbb V}
+    \eqdef
+    P_{\mathbb V}(\mathbb T_{\Omega})_{J_{\Omega}}.
+\]
+Its \textbf{generic fuzzy open} is
+\[
+    \sigma_{\mathbb V}
+    \eqdef
+    a_{\Omega}(yU).
+\]
+\end{definition}
+
+By construction,
+\[
+    \Omega_{\mathbb V}
+\]
+is a left-exact reflective localization of a fuzzy presheaf category. Hence it is a
+categorical fuzzy frame in the sense of this chapter.
+
+\begin{proposition}[The generic fuzzy open is subterminal]
+\label{prop:generic-fuzzy-open-subterminal}
+The object
+\[
+    \sigma_{\mathbb V}\in\Omega_{\mathbb V}
+\]
+is subterminal.
+\end{proposition}
+
+\begin{proof}
+The localization \(a_{\Omega}\dashv i_{\Omega}\) is generated so that the image of
+the designated subterminality data for \(U\) becomes valid in
+\(\Omega_{\mathbb V}\). Since the localization also forces the specified product cone
+for \(U\times U\) to become a product cone, the object
+\[
+    a_{\Omega}y(U\times U)
+\]
+is canonically isomorphic to
+\[
+    \sigma_{\mathbb V}\times\sigma_{\mathbb V}.
+\]
+Moreover, the image of the diagonal comparison
+\[
+    U\to U\times U
+\]
+becomes an isomorphism after applying \(a_{\Omega}y\). Hence
+\[
+    \sigma_{\mathbb V}
+    \cong
+    \sigma_{\mathbb V}\times\sigma_{\mathbb V}.
+\]
+Since \(\Omega_{\mathbb V}\) has a terminal object, this says precisely that
+\(\sigma_{\mathbb V}\) is subterminal.
+\end{proof}
+
+\subsection{The classifying theorem}
+\label{subsec:sierpinski-classifying-theorem}
+
+\begin{theorem}[Fuzzy Sierpiński classification, frame form]
+\label{thm:fuzzy-sierpinski-classification-frame}
+For every categorical fuzzy frame \(\mathcal A\), evaluation at the generic fuzzy
+open induces a natural equivalence of ordinary categories
+\[
+    \mathbf{FFrm}_{\mathbb V}(\Omega_{\mathbb V},\mathcal A)
+    \simeq
+    \operatorname{Sub}_{\mathcal A}(1_{\mathcal A}).
+\]
+Under this equivalence, a fuzzy-frame morphism
+\[
+    H:\Omega_{\mathbb V}\to\mathcal A
+\]
+corresponds to the subterminal object
+\[
+    H(\sigma_{\mathbb V})\hookrightarrow 1_{\mathcal A}.
+\]
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{prop:sierpinski-sketch-localization}, restriction along
+\[
+    a_{\Omega}y:\mathbb T_{\Omega}\to\Omega_{\mathbb V}
+\]
+induces a natural equivalence
+\[
+    \mathbf{FFrm}_{\mathbb V}(\Omega_{\mathbb V},\mathcal A)
+    \simeq
+    \operatorname{Mod}_{\Omega}(\mathcal A).
+\]
+Under this equivalence, a morphism
+\[
+    H:\Omega_{\mathbb V}\to\mathcal A
+\]
+corresponds to the model
+\[
+    Ha_{\Omega}y:\mathbb T_{\Omega}\to\mathcal A.
+\]
+Its value at the generator \(U\) is
+\[
+    H(a_{\Omega}yU)
+    =
+    H(\sigma_{\mathbb V}).
+\]
+
+By Proposition~\ref{prop:models-sierpinski-sketch-subterminal}, evaluation at \(U\)
+gives an equivalence
+\[
+    \operatorname{Mod}_{\Omega}(\mathcal A)
+    \simeq
+    \operatorname{Sub}_{\mathcal A}(1_{\mathcal A}).
+\]
+Combining these equivalences gives
+\[
+    \mathbf{FFrm}_{\mathbb V}(\Omega_{\mathbb V},\mathcal A)
+    \simeq
+    \operatorname{Sub}_{\mathcal A}(1_{\mathcal A}).
+\]
+Under the composite equivalence, \(H\) is sent to
+\[
+    H(\sigma_{\mathbb V})\hookrightarrow 1_{\mathcal A}.
+\]
+Since \(H\) preserves terminal objects and binary products,
+\(H(\sigma_{\mathbb V})\) is subterminal.
+\end{proof}
+
+\begin{definition}[Characteristic morphism of a fuzzy open]
+\label{def:characteristic-morphism-fuzzy-open}
+Let \(\mathcal A\) be a categorical fuzzy frame, and let
+\[
+    S\hookrightarrow 1_{\mathcal A}
+\]
+be a fuzzy open. The \textbf{characteristic morphism} of \(S\) is the fuzzy-frame
+morphism
+\[
+    \chi_S^\ast:
+    \Omega_{\mathbb V}\to\mathcal A
+\]
+corresponding to \(S\) under the equivalence of
+Theorem~\ref{thm:fuzzy-sierpinski-classification-frame}. Equivalently,
+\[
+    \chi_S^\ast(\sigma_{\mathbb V})
+    \cong
+    S
+\]
+as subobjects of \(1_{\mathcal A}\).
+\end{definition}
+
+\subsection{The fuzzy Sierpiński locale}
+\label{subsec:fuzzy-sierpinski-locale}
+
+Define
+\[
+    \mathbf{FLoc}_{\mathbb V}
+    \eqdef
+    \mathbf{FFrm}_{\mathbb V}^{\op}.
+\]
+
+\begin{definition}[Fuzzy Sierpiński locale]
+\label{def:fuzzy-sierpinski-locale}
+The \textbf{fuzzy Sierpiński locale} over \(\mathbb V\) is the fuzzy locale
+\[
+    \mathbb S_{\mathbb V}
+\]
+whose fuzzy frame of opens is
+\[
+    \Opens_{\mathbb V}(\mathbb S_{\mathbb V})
+    =
+    \Omega_{\mathbb V}.
+\]
+\end{definition}
+
+\begin{theorem}[Fuzzy Sierpiński classification, localic form]
+\label{thm:fuzzy-sierpinski-classification-localic}
+For every categorical fuzzy locale \(\mathcal X\), there is a natural equivalence
+of ordinary categories
+\[
+    \mathbf{FLoc}_{\mathbb V}(\mathcal X,\mathbb S_{\mathbb V})
+    \simeq
+    \operatorname{Sub}_{\Opens_{\mathbb V}(\mathcal X)}
+    \bigl(1_{\Opens_{\mathbb V}(\mathcal X)}\bigr).
+\]
+Thus maps into the fuzzy Sierpiński locale classify cosmos-level fuzzy opens.
+\end{theorem}
+
+\begin{proof}
+By definition of fuzzy locales,
+\[
+\begin{aligned}
+    \mathbf{FLoc}_{\mathbb V}(\mathcal X,\mathbb S_{\mathbb V})
+    &=
+    \mathbf{FFrm}_{\mathbb V}
+    \bigl(
+        \Opens_{\mathbb V}(\mathbb S_{\mathbb V}),
+        \Opens_{\mathbb V}(\mathcal X)
+    \bigr)
+    \\
+    &=
+    \mathbf{FFrm}_{\mathbb V}
+    \bigl(
+        \Omega_{\mathbb V},
+        \Opens_{\mathbb V}(\mathcal X)
+    \bigr).
+\end{aligned}
+\]
+Applying Theorem~\ref{thm:fuzzy-sierpinski-classification-frame} to
+\[
+    \mathcal A=\Opens_{\mathbb V}(\mathcal X)
+\]
+gives
+\[
+    \mathbf{FFrm}_{\mathbb V}
+    \bigl(
+        \Omega_{\mathbb V},
+        \Opens_{\mathbb V}(\mathcal X)
+    \bigr)
+    \simeq
+    \operatorname{Sub}_{\Opens_{\mathbb V}(\mathcal X)}
+    \bigl(1_{\Opens_{\mathbb V}(\mathcal X)}\bigr).
+\]
+Therefore
+\[
+    \mathbf{FLoc}_{\mathbb V}(\mathcal X,\mathbb S_{\mathbb V})
+    \simeq
+    \operatorname{Sub}_{\Opens_{\mathbb V}(\mathcal X)}
+    \bigl(1_{\Opens_{\mathbb V}(\mathcal X)}\bigr).
+\]
+\end{proof}
+
+The characteristic map of a fuzzy open
+\[
+    S\hookrightarrow 1_{\Opens_{\mathbb V}(\mathcal X)}
+\]
+is the fuzzy-locale map
+\[
+    \chi_S:\mathcal X\to\mathbb S_{\mathbb V}
+\]
+whose inverse-image morphism
+\[
+    \chi_S^\ast:
+    \Omega_{\mathbb V}\to\Opens_{\mathbb V}(\mathcal X)
+\]
+satisfies
+\[
+    \chi_S^\ast(\sigma_{\mathbb V})\cong S.
+\]
+
+\subsection{Relation with the raw two-point presheaf}
+\label{subsec:relation-raw-two-point-presheaf}
+
+The construction above explains why the fuzzy Sierpiński frame should not be
+identified, in general, with the raw presheaf frame on the two-point subterminal
+shape.
+
+Let
+\[
+    C=(U\leq 1)
+\]
+be the ordinary two-element preorder, regarded as a \(\Lambda\)-preorder by taking
+\[
+    C(U,1)=\top_L,
+    \qquad
+    C(1,U)=\bot_L,
+\]
+and identity homs equal to \(\top_L\). In the crisp case, the presheaf frame
+\[
+    P_2(C)
+\]
+is the ordinary Sierpiński frame. For a general fuzzy truth-value base
+\[
+    \Lambda=(L,\leq,\meet,\join,\tensor,\multimap,\bot_L,\top_L),
+\]
+however, the raw presheaf frame
+\[
+    P_\Lambda(C)
+\]
+does not have the required free finite-meet behavior among scalar-generated fuzzy
+open formulae.
+
+In the posetal reflection, an element of
+\[
+    P_\Lambda(C)
+\]
+is a pair
+\[
+    (u,t)\in L\times L
+\]
+with
+\[
+    t\leq u,
+\]
+where \(u\) is the value at \(U\) and \(t\) is the value at \(1\). The representable
+corresponding to \(U\) is
+\[
+    \sigma=(\top_L,\bot_L),
+\]
+and the top predicate is
+\[
+    \top=(\top_L,\top_L).
+\]
+Every element decomposes as
+\[
+    (u,t)
+    =
+    (u\tensor\sigma)\join(t\tensor\top).
+\]
+Indeed,
+\[
+    u\tensor\sigma=(u,\bot_L),
+    \qquad
+    t\tensor\top=(t,t),
+\]
+and \(t\leq u\).
+
+Therefore any scalar-compatible frame homomorphism
+\[
+    H:P_\Lambda(C)\to A
+\]
+into a \(\Lambda\)-scalar frame \(A\), with
+\[
+    H(\sigma)=a,
+\]
+is forced to satisfy
+\[
+    H(u,t)
+    =
+    (u\tensor_A a)\join (t\tensor_A\top_A).
+\]
+In the special case \(A=\Lambda\), this becomes
+\[
+    H_a(u,t)=(u\tensor a)\join t.
+\]
+For non-idempotent tensors, this forced map need not preserve binary meets.
+
+For example, let
+\[
+    \Lambda=[0,1]
+\]
+with the {\L}ukasiewicz tensor
+\[
+    r\tensor s=\max(0,r+s-1).
+\]
+Take
+\[
+    a=\frac12,
+    \qquad
+    p=(0.8,0.1),
+    \qquad
+    q=(0.4,0.3).
+\]
+Then
+\[
+    p\meet q=(0.4,0.1).
+\]
+The forced map
+\[
+    H_a(u,t)=(u\tensor a)\join t
+\]
+satisfies
+\[
+    H_a(p)=0.3,
+    \qquad
+    H_a(q)=0.3.
+\]
+Thus
+\[
+    H_a(p)\meet H_a(q)=0.3.
+\]
+But
+\[
+    H_a(p\meet q)
+    =
+    H_a(0.4,0.1)
+    =
+    0.1.
+\]
+Hence
+\[
+    H_a(p\meet q)\neq H_a(p)\meet H_a(q).
+\]
+So \(H_a\) is not a frame homomorphism.
+
+Similarly, for the product tensor
+\[
+    r\tensor s=rs,
+\]
+take the same values
+\[
+    a=\frac12,
+    \qquad
+    p=(0.8,0.1),
+    \qquad
+    q=(0.4,0.3).
+\]
+Then
+\[
+    H_a(u,t)=\max(au,t).
+\]
+Thus
+\[
+    H_a(p)=\max(0.4,0.1)=0.4,
+    \qquad
+    H_a(q)=\max(0.2,0.3)=0.3,
+\]
+so
+\[
+    H_a(p)\meet H_a(q)=0.3.
+\]
+But
+\[
+    H_a(p\meet q)
+    =
+    H_a(0.4,0.1)
+    =
+    \max(0.2,0.1)
+    =
+    0.2.
+\]
+Hence
+\[
+    H_a(p\meet q)\neq H_a(p)\meet H_a(q).
+\]
+Therefore the raw two-point presheaf frame does not classify arbitrary fuzzy opens
+for these non-idempotent bases.
+
+The enriched syntactic site \(\mathbb T_{\Omega}\) corrects this defect by adding
+formal scalar formulae and their finite-limit combinations before freely adjoining
+presheaves and then imposing the sketch localization. Thus the fuzzy Sierpiński
+frame is
+\[
+    \Omega_{\mathbb V}
+    =
+    P_{\mathbb V}(\mathbb T_{\Omega})_{J_{\Omega}},
+\]
+not the raw presheaf object on the two-point shape.
+
+\begin{corollary}[Crisp specialization]
+\label{cor:crisp-sierpinski-specialization}
+When
+\[
+    \Lambda=2,
+\]
+the fuzzy Sierpiński frame \(\Omega_2\) is isomorphic to the ordinary three-element
+Sierpiński frame. Equivalently, it is isomorphic to the downset frame of the
+two-element preorder
+\[
+    U\leq 1.
+\]
+\end{corollary}
+
+\begin{proof}
+For \(\Lambda=2\), the scalar action is forced:
+\[
+    1\tensor a=a,
+    \qquad
+    0\tensor a=0.
+\]
+Thus scalar compatibility adds no structure beyond the ordinary finite-meet and
+join structure. The free fuzzy frame on one fuzzy open is therefore the ordinary
+free frame on one open, namely the Sierpiński frame. This is the downset frame of
+the preorder \(U\leq 1\), whose generator is the open \(\{U\}\), and which has three
+elements:
+\[
+    \varnothing,
+    \qquad
+    \{U\},
+    \qquad
+    \{U,1\}.
+\]
+\end{proof}
+
+\subsection{Posetal reflection}
+\label{subsec:sierpinski-posetal-reflection}
+
+When the fuzzy cosmos is the thin cosmos associated to
+\[
+    \Lambda=(L,\leq,\meet,\join,\tensor,\multimap,\bot_L,\top_L),
+\]
+we write
+\[
+    \Omega_\Lambda,
+    \qquad
+    \sigma_\Lambda,
+    \qquad
+    \mathbb S_\Lambda
+\]
+for the corresponding posetal reflections of
+\[
+    \Omega_{\mathbb V},
+    \qquad
+    \sigma_{\mathbb V},
+    \qquad
+    \mathbb S_{\mathbb V}.
+\]
+
+The enriched syntactic sketch has a transparent posetal shadow. In the posetal
+comparison where the only finite limits used explicitly are terminal objects and
+binary meets, its formal objects are finite fuzzy-open formulae generated by
+\[
+    \top,
+    \qquad
+    \sigma,
+    \qquad
+    r\tensor\varphi \quad (r\in L),
+    \qquad
+    \varphi\meet\psi.
+\]
+Here \(\sigma\) denotes the formal generator corresponding to \(U\). Arbitrary joins
+are not part of the finite syntactic sketch; they are freely adjoined by passing to
+the presheaf frame and then imposing the sketch localization.
+
+The fuzzy hom-value
+\[
+    \mathbb T_{\Omega}(\varphi,\psi)
+\]
+is the degree to which the sequent
+\[
+    \varphi\Rightarrow\psi
+\]
+is derivable from the finite-limit, subterminality, and scalar rules of the sketch.
+
+The posetal fuzzy Sierpiński frame is
+\[
+    \Omega_\Lambda
+    =
+    P_\Lambda(\mathbb T_{\Omega})_{J_{\Omega}},
+\]
+with generic fuzzy open
+\[
+    \sigma_\Lambda
+    =
+    a_{\Omega}(y\sigma).
+\]
+For every fuzzy frame \(A\) over \(\Lambda\), the classification theorem specializes
+to the set-level universal property
+\[
+    \FFrm_\Lambda(\Omega_\Lambda,A)
+    \cong
+    |A|.
+\]
+Here the right-hand side is the underlying set of the frame \(A\), because in the
+posetal reflection every element \(a\in A\) determines a unique subobject
+\[
+    a\hookrightarrow \top_A,
+\]
+and every subobject of \(\top_A\) arises this way. The element corresponding to a
+fuzzy-frame homomorphism
+\[
+    H:\Omega_\Lambda\to A
+\]
+is
+\[
+    H(\sigma_\Lambda)\in |A|.
+\]
+
+Dualizing, for every fuzzy locale \(\mathcal X\),
+\[
+    \FLoc_\Lambda(\mathcal X,\mathbb S_\Lambda)
+    \cong
+    |\Opens_\Lambda(\mathcal X)|.
+\]
+Thus maps into the fuzzy Sierpiński locale classify fuzzy opens exactly as in the
+ordinary localic case, but the construction of the classifier uses the enriched
+syntactic site rather than the naive two-point presheaf object.

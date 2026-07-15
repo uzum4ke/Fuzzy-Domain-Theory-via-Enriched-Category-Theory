@@ -1,0 +1,2027 @@
+\chapter{Fuzzy Distributions and the Linear Duality of a Fuzzy Cosmos}
+\label{ch:fuzzy-distributions-linear-duality}
+
+\section{Introduction}
+\label{sec:fuzzy-distributions-introduction}
+
+The purpose of this chapter is to construct a fuzzy-domain-theoretic analogue
+of the linear double-dual distribution monad.  The construction is internal to
+the symmetric monoidal closed category of fuzzy domains
+\[
+    \mathbf{FDom}_{\mathbb V}.
+\]
+Thus the relevant duality is not the raw presheaf duality
+\[
+    [X^{\op},\underline{\mathbb V}],
+\]
+nor the raw observation object
+\[
+    [X,\underline{\mathbb V}].
+\]
+Instead, the duality is the internal hom duality of fuzzy domains.
+
+The dualizing object is the self-enriched truth-value object
+\[
+    \underline{\mathbb V},
+\]
+regarded as a fuzzy domain in the universe-bounded sense used below.  For a
+fuzzy domain \(X\), its object of observations is the fuzzy Scott topology
+\[
+    \mathcal O_{\mathbb V}(X)
+    =
+    [X,\underline{\mathbb V}]_{\mathrm{ff}},
+\]
+where the internal hom is taken in
+\[
+    \mathbf{FDom}_{\mathbb V}.
+\]
+Thus the objects of
+\[
+    \mathcal O_{\mathbb V}(X)
+\]
+are precisely the truth-valued fuzzy-domain morphisms
+\[
+    X\to\underline{\mathbb V}.
+\]
+Equivalently, they are the fuzzy Scott opens of \(X\): upper fuzzy predicates
+which preserve fuzzy ideal joins.
+
+The fuzzy distribution object of \(X\) is then the internal linear dual of its
+fuzzy Scott topology:
+\[
+    \mathbb D_{\mathbb V}X
+    =
+    [\mathcal O_{\mathbb V}(X),\underline{\mathbb V}]_{\mathrm{ff}}.
+\]
+Equivalently,
+\[
+    \mathbb D_{\mathbb V}X
+    =
+    [[X,\underline{\mathbb V}]_{\mathrm{ff}},
+      \underline{\mathbb V}]_{\mathrm{ff}}.
+\]
+This is the fuzzy Scott double-dual distribution construction.
+
+The object assignment is therefore
+\[
+    X
+    \longmapsto
+    X^{\perp}
+    =
+    [X,\underline{\mathbb V}]_{\mathrm{ff}}
+    \longmapsto
+    X^{\perp\perp}
+    =
+    [[X,\underline{\mathbb V}]_{\mathrm{ff}},
+      \underline{\mathbb V}]_{\mathrm{ff}}.
+\]
+The first assignment is contravariant, and applying it twice gives the
+covariant endofunctor
+\[
+    \mathbb D_{\mathbb V}
+    =
+    (-)^{\perp\perp}.
+\]
+
+\paragraph{Standing size convention.}
+We work relative to the same tower of universes used in the preceding chapters.
+When
+\[
+    \underline{\mathbb V}
+\]
+or an internal hom
+\[
+    [X,\underline{\mathbb V}]_{\mathrm{ff}}
+\]
+is not small in the base universe, it is interpreted in the next universe of
+the fixed tower.  Formally,
+\[
+    \mathbf{FDom}_{\mathbb V}^{+}
+\]
+denotes the full category of fuzzy domains small in the next universe, with the
+same notion of finite-flat-colimit-preserving morphism.  It is used only to
+ensure that the internal homs appearing in this chapter exist as objects of the
+ambient universe.
+
+\paragraph{Standing closed structure.}
+We use the symmetric monoidal closed structure
+\[
+    A\boxtimes_{\mathrm{ff}}B
+    \dashv
+    [B,-]_{\mathrm{ff}}
+\]
+on fuzzy domains.  Thus, for fuzzy domains \(A,B,C\), there is a natural
+bijection
+\[
+    \mathbf{FDom}_{\mathbb V}
+    (A\boxtimes_{\mathrm{ff}}B,C)
+    \cong
+    \mathbf{FDom}_{\mathbb V}
+    (A,[B,C]_{\mathrm{ff}}).
+\]
+The evaluation morphism is
+\[
+    [B,C]_{\mathrm{ff}}\boxtimes_{\mathrm{ff}}B
+    \longrightarrow
+    C.
+\]
+
+\section{The truth-value object as a fuzzy domain}
+\label{sec:truth-value-object-as-fuzzy-domain}
+
+\subsection{The enriched construction}
+\label{subsec:truth-value-domain-enriched}
+
+Let
+\[
+    (\mathbb V,\tensor,I,[-,-])
+\]
+be a fuzzy cosmos.  Its self-enriched truth-value object is the
+\(\mathbb V\)-category
+\[
+    \underline{\mathbb V}
+\]
+whose objects are the objects of \(\mathbb V\), and whose hom-objects are
+\[
+    \underline{\mathbb V}(A,B)=[A,B].
+\]
+
+\begin{proposition}[The truth-value object is finite-flat cocomplete]
+\label{prop:truth-value-object-fuzzy-domain}
+The self-enriched truth-value object
+\[
+    \underline{\mathbb V}
+\]
+admits all small weighted colimits whose weights are small.  In particular, it
+admits all finite-flat weighted colimits and therefore determines a fuzzy domain
+in the universe-bounded sense.
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    W:K^{\op}\to\underline{\mathbb V}
+\]
+be a small weight, and let
+\[
+    D:K\to\underline{\mathbb V}
+\]
+be a small diagram.  Since \(\mathbb V\) is cocomplete and tensoring preserves
+small colimits in each variable, the enriched weighted colimit is computed in
+\(\mathbb V\) by the coend
+\[
+    W*D
+    =
+    \int^{k\in K} W(k)\tensor D(k).
+\]
+This object satisfies the enriched weighted-colimit universal property in the
+self-enrichment of \(\mathbb V\).  Hence all small weighted colimits exist in
+\(\underline{\mathbb V}\), and in particular all finite-flat weighted colimits
+exist.
+
+The corresponding strict algebra structure for the finite-flat ideal monad is
+the map
+\[
+    \alpha_{\underline{\mathbb V}}:
+    \operatorname{Idl}_{\mathbb V}(\underline{\mathbb V})
+    \to
+    \underline{\mathbb V},
+    \qquad
+    I\longmapsto I*1_{\underline{\mathbb V}}.
+\]
+Thus
+\[
+    \underline{\mathbb V}
+\]
+is a fuzzy domain in
+\[
+    \mathbf{FDom}_{\mathbb V}^{+}.
+\]
+\end{proof}
+
+The affine condition
+\[
+    I\cong 1_{\mathbb V}
+\]
+supplies canonical weakening maps
+\[
+    A\to I
+\]
+for every \(A\in\mathbb V\).  There is no canonical contraction map
+\[
+    A\to A\tensor A
+\]
+unless the monoidal structure is cartesian or otherwise equipped with
+diagonals.  Thus the linear duality of this chapter is affine-linear rather
+than cartesian.
+
+\begin{definition}[Truth-value fuzzy domain]
+\label{def:truth-value-fuzzy-domain}
+The \emph{truth-value fuzzy domain} is the self-enriched fuzzy domain
+\[
+    \Omega_{\mathbb V}
+    =
+    \underline{\mathbb V}.
+\]
+When no confusion is possible, we continue to write
+\[
+    \underline{\mathbb V}
+\]
+for this object.
+\end{definition}
+
+\subsection{The posetal reflection}
+\label{subsec:truth-value-domain-posetal}
+
+Let
+\[
+    \Lambda=(L,\leq,\meet,\join,\tensor,\multimap,\bot,\top)
+\]
+be a fuzzy truth-value object.  The corresponding truth-value fuzzy domain is
+the separated fuzzy preorder
+\[
+    \Lambda
+\]
+whose underlying set is \(L\), and whose hom-values are
+\[
+    \Lambda(a,b)=a\multimap b.
+\]
+
+The fuzzy-domain structure is given by the existing weighted joins in \(L\).
+In particular, if
+\[
+    I:\Lambda^{\op}\to\Lambda
+\]
+is a fuzzy ideal, its join is computed by the corresponding weighted join in
+the truth-value preorder.
+
+\section{Fuzzy Scott observations}
+\label{sec:fuzzy-scott-observations}
+
+\subsection{The enriched construction}
+\label{subsec:fuzzy-scott-observations-enriched}
+
+\begin{definition}[Fuzzy Scott observation object]
+\label{def:fuzzy-scott-observation-object}
+For a fuzzy domain \(X\), its \emph{fuzzy Scott observation object} is
+\[
+    \mathcal O_{\mathbb V}(X)
+    =
+    [X,\underline{\mathbb V}]_{\mathrm{ff}}.
+\]
+Its objects are fuzzy-domain morphisms
+\[
+    X\to\underline{\mathbb V}.
+\]
+We call these \emph{fuzzy Scott observations}, or \emph{fuzzy Scott opens}.
+\end{definition}
+
+Thus \(\mathcal O_{\mathbb V}(X)\) is not the raw enriched functor category
+\[
+    [X,\underline{\mathbb V}],
+\]
+but the internal hom in fuzzy domains.  Equivalently, it is the full
+sub-\(\mathbb V\)-category of
+\[
+    [X,\underline{\mathbb V}]
+\]
+spanned by the finite-flat-colimit-preserving functors
+\[
+    X\to\underline{\mathbb V}.
+\]
+
+This agrees objectwise with the fuzzy Scott opens of the preceding development.
+Namely, a \(\mathbb V\)-functor
+\[
+    U:X\to\underline{\mathbb V}
+\]
+lies in
+\[
+    [X,\underline{\mathbb V}]_{\mathrm{ff}}
+\]
+exactly when it preserves finite-flat weighted colimits, equivalently when
+\[
+    U(\alpha_X(I))
+    \cong
+    \int^{x\in X} I(x)\tensor U(x)
+\]
+for every fuzzy ideal
+\[
+    I:X^{\op}\to\underline{\mathbb V}.
+\]
+The present chapter uses this Scott-open object as a fuzzy domain, via the
+internal hom structure, rather than only as a fuzzy frame.
+
+\begin{proposition}[Fuzzy Scott observations preserve fuzzy ideal joins]
+\label{prop:fuzzy-scott-observations-preserve-ideal-joins}
+Let \(X\) be a fuzzy domain.  A \(\mathbb V\)-functor
+\[
+    U:X\to\underline{\mathbb V}
+\]
+is an object of
+\[
+    \mathcal O_{\mathbb V}(X)
+\]
+if and only if it preserves finite-flat weighted colimits, equivalently fuzzy
+ideal joins.
+\end{proposition}
+
+\begin{proof}
+By definition,
+\[
+    [X,\underline{\mathbb V}]_{\mathrm{ff}}
+\]
+is the internal hom of fuzzy domains.  Its objects are precisely the
+fuzzy-domain morphisms
+\[
+    X\to\underline{\mathbb V}.
+\]
+A fuzzy-domain morphism is a \(\mathbb V\)-functor preserving finite-flat
+weighted colimits.  Since finite-flat weights are the fuzzy ideals of the
+fuzzy-domain doctrine, this is exactly preservation of fuzzy ideal joins.
+\end{proof}
+
+\begin{definition}[Pullback of fuzzy Scott observations]
+\label{def:pullback-fuzzy-scott-observations}
+Let
+\[
+    f:X\to Y
+\]
+be a fuzzy-domain morphism.  Pullback of fuzzy Scott observations along \(f\)
+is the morphism
+\[
+    f^\ast:
+    \mathcal O_{\mathbb V}(Y)\to\mathcal O_{\mathbb V}(X)
+\]
+defined by
+\[
+    f^\ast(V)=Vf.
+\]
+\end{definition}
+
+\begin{proposition}[Functoriality of fuzzy Scott observations]
+\label{prop:functoriality-fuzzy-scott-observations}
+The assignment
+\[
+    X\longmapsto\mathcal O_{\mathbb V}(X)
+\]
+defines a contravariant functor
+\[
+    \mathcal O_{\mathbb V}:
+    (\mathbf{FDom}_{\mathbb V}^{+})^{\op}
+    \longrightarrow
+    \mathbf{FDom}_{\mathbb V}^{+}.
+\]
+\end{proposition}
+
+\begin{proof}
+If
+\[
+    f:X\to Y
+\]
+is a fuzzy-domain morphism and
+\[
+    V:Y\to\underline{\mathbb V}
+\]
+preserves finite-flat colimits, then the composite
+\[
+    Vf:X\to\underline{\mathbb V}
+\]
+also preserves finite-flat colimits.  Thus \(f^\ast\) is well-defined on
+objects.
+
+The morphism
+\[
+    f^\ast:
+    [Y,\underline{\mathbb V}]_{\mathrm{ff}}
+    \to
+    [X,\underline{\mathbb V}]_{\mathrm{ff}}
+\]
+is induced by precomposition.  Since finite-flat colimits in internal homs are
+computed pointwise, precomposition preserves finite-flat colimits.  Hence
+\(f^\ast\) is a fuzzy-domain morphism.
+
+For composable fuzzy-domain morphisms
+\[
+    X\xrightarrow{f}Y\xrightarrow{g}Z
+\]
+one has
+\[
+    (gf)^\ast=f^\ast g^\ast,
+\]
+and
+\[
+    (\id_X)^\ast=\id_{\mathcal O_{\mathbb V}(X)}.
+\]
+Therefore \(\mathcal O_{\mathbb V}\) is contravariantly functorial.
+\end{proof}
+
+\subsection{The posetal reflection}
+\label{subsec:fuzzy-scott-observations-posetal}
+
+Let \(X\) be a fuzzy domain over a fuzzy truth-value object \(\Lambda\), with
+structure map
+\[
+    \alpha_X:\operatorname{Idl}_{\Lambda}(X)\to X.
+\]
+A fuzzy Scott observation is an upper fuzzy predicate
+\[
+    U:X\to L
+\]
+satisfying
+\[
+    U(\alpha_X(I))
+    =
+    \bigjoin_{x\in X}
+    I(x)\tensor U(x)
+\]
+for every fuzzy ideal
+\[
+    I:X^{\op}\to\Lambda.
+\]
+Thus
+\[
+    \mathcal O_{\Lambda}(X)
+    =
+    \operatorname{Scott}_{\Lambda}(X),
+\]
+the fuzzy Scott frame of \(X\), now regarded as a fuzzy domain via the internal
+hom
+\[
+    [X,\Lambda]_{\mathrm{ff}}.
+\]
+
+If
+\[
+    f:X\to Y
+\]
+is a fuzzy-domain morphism, then
+\[
+    f^\ast:
+    \mathcal O_{\Lambda}(Y)\to\mathcal O_{\Lambda}(X)
+\]
+is given by
+\[
+    f^\ast(V)=Vf.
+\]
+
+\section{The internal linear duality}
+\label{sec:internal-linear-duality}
+
+\subsection{The enriched construction}
+\label{subsec:internal-linear-duality-enriched}
+
+\begin{definition}[Linear dual]
+\label{def:fuzzy-domain-linear-dual}
+For a fuzzy domain \(X\), define its \emph{linear dual} by
+\[
+    X^{\perp}
+    =
+    [X,\underline{\mathbb V}]_{\mathrm{ff}}.
+\]
+Thus
+\[
+    X^{\perp}
+    =
+    \mathcal O_{\mathbb V}(X).
+\]
+\end{definition}
+
+The assignment
+\[
+    X\longmapsto X^{\perp}
+\]
+is contravariant:
+\[
+    (-)^{\perp}:
+    (\mathbf{FDom}_{\mathbb V}^{+})^{\op}
+    \to
+    \mathbf{FDom}_{\mathbb V}^{+}.
+\]
+
+The closed structure gives, for fuzzy domains \(A\) and \(X\), a natural
+bijection
+\[
+    \mathbf{FDom}_{\mathbb V}^{+}
+    (A,X^{\perp})
+    \cong
+    \mathbf{FDom}_{\mathbb V}^{+}
+    (A\boxtimes_{\mathrm{ff}}X,\underline{\mathbb V}).
+\]
+By symmetry of
+\[
+    \boxtimes_{\mathrm{ff}},
+\]
+this is naturally isomorphic to
+\[
+    \mathbf{FDom}_{\mathbb V}^{+}
+    (X,A^{\perp}).
+\]
+
+\begin{theorem}[Linear duality adjunction]
+\label{thm:linear-duality-adjunction}
+There is a contravariant self-adjunction
+\[
+    (-)^{\perp,\op}
+    \dashv
+    (-)^{\perp}
+    :
+    \mathbf{FDom}_{\mathbb V}^{+}
+    \rightleftarrows
+    (\mathbf{FDom}_{\mathbb V}^{+})^{\op}.
+\]
+Equivalently, for fuzzy domains \(A\) and \(X\), there is a natural bijection
+\[
+    \mathbf{FDom}_{\mathbb V}^{+}
+    (A,X^{\perp})
+    \cong
+    \mathbf{FDom}_{\mathbb V}^{+}
+    (X,A^{\perp}).
+\]
+\end{theorem}
+
+\begin{proof}
+Using closedness,
+\[
+\begin{aligned}
+    \mathbf{FDom}_{\mathbb V}^{+}(A,X^{\perp})
+    &=
+    \mathbf{FDom}_{\mathbb V}^{+}
+    (A,[X,\underline{\mathbb V}]_{\mathrm{ff}})
+    \\
+    &\cong
+    \mathbf{FDom}_{\mathbb V}^{+}
+    (A\boxtimes_{\mathrm{ff}}X,\underline{\mathbb V}).
+\end{aligned}
+\]
+By symmetry,
+\[
+    A\boxtimes_{\mathrm{ff}}X
+    \cong
+    X\boxtimes_{\mathrm{ff}}A.
+\]
+Applying closedness again gives
+\[
+\begin{aligned}
+    \mathbf{FDom}_{\mathbb V}^{+}
+    (X\boxtimes_{\mathrm{ff}}A,\underline{\mathbb V})
+    &\cong
+    \mathbf{FDom}_{\mathbb V}^{+}
+    (X,[A,\underline{\mathbb V}]_{\mathrm{ff}})
+    \\
+    &=
+    \mathbf{FDom}_{\mathbb V}^{+}
+    (X,A^{\perp}).
+\end{aligned}
+\]
+These bijections are natural in \(A\) and \(X\), giving the claimed
+contravariant adjunction.
+\end{proof}
+
+The transposition associated to a morphism
+\[
+    h:A\to X^{\perp}
+\]
+is the composite
+\[
+    A\boxtimes_{\mathrm{ff}}X
+    \xrightarrow{h\boxtimes 1_X}
+    X^{\perp}\boxtimes_{\mathrm{ff}}X
+    \xrightarrow{\operatorname{ev}}
+    \underline{\mathbb V},
+\]
+then re-curried, using symmetry, as a morphism
+\[
+    X\to A^{\perp}.
+\]
+
+\section{Fuzzy distributions as Scott double duals}
+\label{sec:fuzzy-distributions-scott-double-duals}
+
+\subsection{The enriched construction}
+\label{subsec:fuzzy-distributions-enriched}
+
+\begin{definition}[Fuzzy distribution object]
+\label{def:fuzzy-distribution-object}
+For a fuzzy domain \(X\), define its \emph{fuzzy distribution object} by
+\[
+    \mathbb D_{\mathbb V}X
+    =
+    X^{\perp\perp}
+    =
+    [X^{\perp},\underline{\mathbb V}]_{\mathrm{ff}}.
+\]
+Equivalently,
+\[
+    \mathbb D_{\mathbb V}X
+    =
+    [\mathcal O_{\mathbb V}(X),\underline{\mathbb V}]_{\mathrm{ff}}.
+\]
+\end{definition}
+
+An object
+\[
+    \mu\in\mathbb D_{\mathbb V}X
+\]
+is a fuzzy-domain morphism
+\[
+    \mu:\mathcal O_{\mathbb V}(X)\to\underline{\mathbb V}.
+\]
+Thus a distribution is a finite-flat-continuous functional on fuzzy Scott
+observations.
+
+\begin{definition}[Integration pairing]
+\label{def:fuzzy-integration-pairing}
+The \emph{integration pairing} is the evaluation morphism
+\[
+    \mathbb D_{\mathbb V}X
+    \boxtimes_{\mathrm{ff}}
+    \mathcal O_{\mathbb V}(X)
+    \longrightarrow
+    \underline{\mathbb V}.
+\]
+For
+\[
+    \mu\in\mathbb D_{\mathbb V}X
+\]
+and
+\[
+    U\in\mathcal O_{\mathbb V}(X),
+\]
+we write
+\[
+    \int_X U\,d\mu
+    =
+    \mu(U).
+\]
+\end{definition}
+
+The pairing is the evaluation map for the internal hom
+\[
+    [\mathcal O_{\mathbb V}(X),\underline{\mathbb V}]_{\mathrm{ff}}.
+\]
+
+\subsection{The posetal reflection}
+\label{subsec:fuzzy-distributions-posetal}
+
+For a fuzzy domain \(X\) over \(\Lambda\),
+\[
+    \mathbb D_{\Lambda}X
+    =
+    [\mathcal O_{\Lambda}(X),\Lambda]_{\mathrm{ff}}.
+\]
+Thus a fuzzy distribution is a fuzzy-domain morphism
+\[
+    \mu:\mathcal O_{\Lambda}(X)\to\Lambda.
+\]
+Equivalently, it is a finite-flat-colimit-preserving functional on the fuzzy
+Scott frame of \(X\).
+
+The hom-value between distributions
+\[
+    \mu,\nu:\mathcal O_{\Lambda}(X)\to\Lambda
+\]
+is
+\[
+    \mathbb D_{\Lambda}X(\mu,\nu)
+    =
+    \bigmeet_{U\in\mathcal O_{\Lambda}(X)}
+    \bigl(\mu(U)\multimap\nu(U)\bigr).
+\]
+
+Integration is evaluation:
+\[
+    \int_X U\,d\mu
+    =
+    \mu(U),
+    \qquad
+    U\in\mathcal O_{\Lambda}(X).
+\]
+
+\section{Dirac distributions}
+\label{sec:dirac-distributions-fuzzy-domain}
+
+\subsection{The enriched construction}
+\label{subsec:dirac-enriched}
+
+The evaluation morphism
+\[
+    X^{\perp}\boxtimes_{\mathrm{ff}}X
+    \longrightarrow
+    \underline{\mathbb V}
+\]
+has, by closedness and symmetry, a transpose
+\[
+    \delta_X:
+    X\to X^{\perp\perp}.
+\]
+
+\begin{definition}[Dirac distribution]
+\label{def:fuzzy-dirac-distribution}
+The \emph{Dirac map} of a fuzzy domain \(X\) is the morphism
+\[
+    \delta_X:
+    X\to\mathbb D_{\mathbb V}X
+\]
+obtained by transposing evaluation.  Elementwise,
+\[
+    \delta_x(U)=U(x)
+\]
+for
+\[
+    U\in\mathcal O_{\mathbb V}(X).
+\]
+\end{definition}
+
+\begin{proposition}[Dirac distributions are well-defined]
+\label{prop:dirac-distributions-well-defined}
+The map
+\[
+    \delta_X:X\to\mathbb D_{\mathbb V}X
+\]
+is a fuzzy-domain morphism.
+\end{proposition}
+
+\begin{proof}
+The evaluation morphism
+\[
+    X^{\perp}\boxtimes_{\mathrm{ff}}X
+    \to
+    \underline{\mathbb V}
+\]
+is a morphism in
+\[
+    \mathbf{FDom}_{\mathbb V}^{+}.
+\]
+By the closed structure, its transpose
+\[
+    X\to[X^{\perp},\underline{\mathbb V}]_{\mathrm{ff}}
+\]
+is also a fuzzy-domain morphism.  Since
+\[
+    [X^{\perp},\underline{\mathbb V}]_{\mathrm{ff}}
+    =
+    \mathbb D_{\mathbb V}X,
+\]
+this transpose is precisely \(\delta_X\).
+\end{proof}
+
+\begin{proposition}[Dirac integration]
+\label{prop:dirac-integration-fuzzy-domain}
+For every fuzzy Scott observation
+\[
+    U\in\mathcal O_{\mathbb V}(X),
+\]
+one has
+\[
+    \int_X U\,d\delta_x
+    =
+    U(x).
+\]
+\end{proposition}
+
+\begin{proof}
+By definition,
+\[
+    \int_X U\,d\delta_x
+    =
+    \delta_x(U)
+    =
+    U(x).
+\]
+\end{proof}
+
+\subsection{The posetal reflection}
+\label{subsec:dirac-posetal}
+
+For a fuzzy domain \(X\) over \(\Lambda\), the Dirac distribution at
+\(x\in X\) is
+\[
+    \delta_x:\mathcal O_{\Lambda}(X)\to\Lambda,
+    \qquad
+    \delta_x(U)=U(x).
+\]
+Since finite-flat weighted colimits in
+\[
+    \mathcal O_{\Lambda}(X)
+    =
+    [X,\Lambda]_{\mathrm{ff}}
+\]
+are computed pointwise, evaluation at \(x\) preserves them.  Hence
+\[
+    \delta_x:\mathcal O_{\Lambda}(X)\to\Lambda
+\]
+is a fuzzy-domain morphism.
+
+\section{Pushforward of fuzzy distributions}
+\label{sec:pushforward-fuzzy-distributions}
+
+\subsection{The enriched construction}
+\label{subsec:pushforward-enriched}
+
+Let
+\[
+    f:X\to Y
+\]
+be a fuzzy-domain morphism.  Pullback of observations gives
+\[
+    f^{\ast}:
+    Y^{\perp}\to X^{\perp}.
+\]
+Dualizing again gives
+\[
+    (f^{\ast})^{\perp}:
+    X^{\perp\perp}\to Y^{\perp\perp}.
+\]
+
+\begin{definition}[Pushforward]
+\label{def:fuzzy-pushforward}
+The \emph{pushforward} of fuzzy distributions along
+\[
+    f:X\to Y
+\]
+is the fuzzy-domain morphism
+\[
+    f_{\#}:
+    \mathbb D_{\mathbb V}X\to\mathbb D_{\mathbb V}Y
+\]
+defined by
+\[
+    f_{\#}
+    =
+    (f^{\ast})^{\perp}.
+\]
+Elementwise,
+\[
+    f_{\#}(\mu)(V)
+    =
+    \mu(Vf)
+\]
+for
+\[
+    V\in\mathcal O_{\mathbb V}(Y).
+\]
+\end{definition}
+
+\begin{proposition}[Functoriality of pushforward]
+\label{prop:pushforward-functoriality-fuzzy-domain}
+The assignment
+\[
+    X\longmapsto\mathbb D_{\mathbb V}X,
+    \qquad
+    f\longmapsto f_{\#}
+\]
+defines a covariant endofunctor
+\[
+    \mathbb D_{\mathbb V}:
+    \mathbf{FDom}_{\mathbb V}^{+}
+    \to
+    \mathbf{FDom}_{\mathbb V}^{+}.
+\]
+\end{proposition}
+
+\begin{proof}
+The observation assignment is contravariant:
+\[
+    f:X\to Y
+    \quad\mapsto\quad
+    f^{\ast}:Y^{\perp}\to X^{\perp}.
+\]
+Applying the same contravariant duality again gives a covariant assignment
+\[
+    (f^{\ast})^{\perp}:X^{\perp\perp}\to Y^{\perp\perp}.
+\]
+For composable maps
+\[
+    X\xrightarrow{f}Y\xrightarrow{g}Z,
+\]
+one has
+\[
+    (gf)^{\ast}=f^{\ast}g^{\ast}.
+\]
+Dualizing gives
+\[
+    (gf)_{\#}
+    =
+    g_{\#}f_{\#}.
+\]
+The identity law is immediate.
+\end{proof}
+
+\begin{proposition}[Change of variables]
+\label{prop:fuzzy-change-of-variables}
+For every fuzzy-domain morphism
+\[
+    f:X\to Y,
+\]
+every distribution
+\[
+    \mu\in\mathbb D_{\mathbb V}X,
+\]
+and every fuzzy Scott observation
+\[
+    V\in\mathcal O_{\mathbb V}(Y),
+\]
+one has
+\[
+    \int_Y V\,d(f_{\#}\mu)
+    =
+    \int_X Vf\,d\mu.
+\]
+\end{proposition}
+
+\begin{proof}
+By definition,
+\[
+    \int_Y V\,d(f_{\#}\mu)
+    =
+    f_{\#}\mu(V)
+    =
+    \mu(Vf)
+    =
+    \int_X Vf\,d\mu.
+\]
+\end{proof}
+
+\subsection{The posetal reflection}
+\label{subsec:pushforward-posetal}
+
+For a fuzzy-domain morphism
+\[
+    f:X\to Y
+\]
+over \(\Lambda\), pushforward is
+\[
+    f_{\#}(\mu)(V)
+    =
+    \mu(Vf),
+    \qquad
+    V\in\mathcal O_{\Lambda}(Y).
+\]
+This is a fuzzy-domain morphism
+\[
+    \mathbb D_{\Lambda}X\to\mathbb D_{\Lambda}Y.
+\]
+
+\section{The fuzzy distribution monad}
+\label{sec:fuzzy-distribution-monad}
+
+\subsection{Expectation observations}
+\label{subsec:expectation-observations}
+
+Let
+\[
+    X
+\]
+be a fuzzy domain.  For every fuzzy Scott observation
+\[
+    U\in X^{\perp},
+\]
+there is an associated fuzzy Scott observation on the distribution object
+\[
+    \widehat U:\mathbb D_{\mathbb V}X\to\underline{\mathbb V}
+\]
+defined by
+\[
+    \widehat U(\mu)=\mu(U).
+\]
+
+\begin{definition}[Expectation observation map]
+\label{def:expectation-observation-map}
+The \emph{expectation observation map} is the fuzzy-domain morphism
+\[
+    \operatorname{Exp}_X:
+    X^{\perp}\to(\mathbb D_{\mathbb V}X)^{\perp}
+\]
+defined by
+\[
+    \operatorname{Exp}_X(U)=\widehat U.
+\]
+\end{definition}
+
+Equivalently,
+\[
+    \operatorname{Exp}_X
+    =
+    \delta_{X^{\perp}}.
+\]
+Indeed, since
+\[
+    \mathbb D_{\mathbb V}X
+    =
+    X^{\perp\perp},
+\]
+we have
+\[
+    (\mathbb D_{\mathbb V}X)^{\perp}
+    =
+    X^{\perp\perp\perp},
+\]
+and for
+\[
+    U\in X^{\perp},
+    \qquad
+    \mu\in X^{\perp\perp},
+\]
+one has
+\[
+    \delta_{X^{\perp}}(U)(\mu)
+    =
+    \mu(U)
+    =
+    \widehat U(\mu).
+\]
+
+\begin{proposition}[Expectation observations are fuzzy Scott opens]
+\label{prop:expectation-observations-are-scott}
+The assignment
+\[
+    U\longmapsto\widehat U
+\]
+defines a fuzzy-domain morphism
+\[
+    \operatorname{Exp}_X:
+    X^{\perp}\to(\mathbb D_{\mathbb V}X)^{\perp}.
+\]
+\end{proposition}
+
+\begin{proof}
+The evaluation morphism for the internal hom
+\[
+    \mathbb D_{\mathbb V}X
+    =
+    [X^{\perp},\underline{\mathbb V}]_{\mathrm{ff}}
+\]
+is
+\[
+    \mathbb D_{\mathbb V}X
+    \boxtimes_{\mathrm{ff}}
+    X^{\perp}
+    \to
+    \underline{\mathbb V}.
+\]
+Using the symmetry of
+\[
+    \boxtimes_{\mathrm{ff}},
+\]
+we also have a morphism
+\[
+    X^{\perp}
+    \boxtimes_{\mathrm{ff}}
+    \mathbb D_{\mathbb V}X
+    \to
+    \underline{\mathbb V}.
+\]
+By closedness, this transposes to
+\[
+    X^{\perp}
+    \to
+    [\mathbb D_{\mathbb V}X,\underline{\mathbb V}]_{\mathrm{ff}}
+    =
+    (\mathbb D_{\mathbb V}X)^{\perp}.
+\]
+This transpose is exactly
+\[
+    U\mapsto\widehat U.
+\]
+\end{proof}
+
+\subsection{Monad multiplication}
+\label{subsec:monad-multiplication-fuzzy-distributions}
+
+\begin{definition}[Flattening]
+\label{def:fuzzy-distribution-flattening}
+Define
+\[
+    m_X:
+    \mathbb D_{\mathbb V}\mathbb D_{\mathbb V}X
+    \to
+    \mathbb D_{\mathbb V}X
+\]
+by dualizing the expectation observation map:
+\[
+    m_X
+    =
+    (\operatorname{Exp}_X)^{\perp}.
+\]
+Elementwise, for
+\[
+    \Xi\in\mathbb D_{\mathbb V}\mathbb D_{\mathbb V}X
+\]
+and
+\[
+    U\in\mathcal O_{\mathbb V}(X),
+\]
+\[
+    m_X(\Xi)(U)
+    =
+    \Xi(\widehat U).
+\]
+\end{definition}
+
+\begin{theorem}[Fuzzy distribution monad]
+\label{thm:fuzzy-distribution-monad}
+The endofunctor
+\[
+    \mathbb D_{\mathbb V}
+    =
+    (-)^{\perp\perp}
+\]
+together with the Dirac maps
+\[
+    \delta_X:X\to\mathbb D_{\mathbb V}X
+\]
+and flattening maps
+\[
+    m_X:\mathbb D_{\mathbb V}\mathbb D_{\mathbb V}X
+    \to
+    \mathbb D_{\mathbb V}X
+\]
+forms a monad on
+\[
+    \mathbf{FDom}_{\mathbb V}^{+}.
+\]
+\end{theorem}
+
+\begin{proof}
+The monad is induced by the contravariant self-adjunction
+\[
+    (-)^{\perp,\op}
+    \dashv
+    (-)^{\perp}.
+\]
+The unit of the monad is the unit of this adjunction,
+\[
+    \delta_X:X\to X^{\perp\perp},
+\]
+which is the transpose of evaluation
+\[
+    X^{\perp}\boxtimes_{\mathrm{ff}}X
+    \to
+    \underline{\mathbb V}.
+\]
+The multiplication is the corresponding adjunction multiplication
+\[
+    X^{\perp\perp\perp\perp}
+    \to
+    X^{\perp\perp}.
+\]
+Under the explicit description of
+\[
+    \mathbb D_{\mathbb V}X
+    =
+    [X^{\perp},\underline{\mathbb V}]_{\mathrm{ff}},
+\]
+this multiplication is exactly
+\[
+    m_X(\Xi)(U)=\Xi(\widehat U).
+\]
+
+The monad laws follow from the triangle identities of the adjunction.  We also
+record the elementwise verification.  For the left unit law,
+\[
+\begin{aligned}
+    m_X(\delta_{\mu})(U)
+    &=
+    \delta_{\mu}(\widehat U)\\
+    &=
+    \widehat U(\mu)\\
+    &=
+    \mu(U).
+\end{aligned}
+\]
+For the right unit law,
+\[
+\begin{aligned}
+    m_X((\delta_X)_{\#}\mu)(U)
+    &=
+    ((\delta_X)_{\#}\mu)(\widehat U)\\
+    &=
+    \mu(\widehat U\delta_X)\\
+    &=
+    \mu(U),
+\end{aligned}
+\]
+because
+\[
+    \widehat U(\delta_x)
+    =
+    \delta_x(U)
+    =
+    U(x).
+\]
+
+For associativity, let
+\[
+    \Theta\in \mathbb D_{\mathbb V}^{3}X,
+    \qquad
+    U\in X^{\perp}.
+\]
+Both composites
+\[
+    m_X m_{\mathbb D_{\mathbb V}X},
+    \qquad
+    m_X \mathbb D_{\mathbb V}(m_X)
+\]
+evaluate against \(U\) as follows:
+\[
+\begin{aligned}
+    m_X(m_{\mathbb D_{\mathbb V}X}(\Theta))(U)
+    &=
+    m_{\mathbb D_{\mathbb V}X}(\Theta)(\widehat U)\\
+    &=
+    \Theta(\widehat{\widehat U}),
+\end{aligned}
+\]
+and
+\[
+\begin{aligned}
+    m_X(\mathbb D_{\mathbb V}(m_X)(\Theta))(U)
+    &=
+    \mathbb D_{\mathbb V}(m_X)(\Theta)(\widehat U)\\
+    &=
+    \Theta(\widehat U\,m_X)\\
+    &=
+    \Theta(\widehat{\widehat U}).
+\end{aligned}
+\]
+Here
+\[
+    \widehat{\widehat U}(\Xi)
+    =
+    \Xi(\widehat U).
+\]
+Thus the two associativity composites agree.
+\end{proof}
+
+\subsection{Expectation of expectations}
+\label{subsec:expectation-of-expectations}
+
+For
+\[
+    \Xi\in\mathbb D_{\mathbb V}\mathbb D_{\mathbb V}X
+\]
+and
+\[
+    U\in\mathcal O_{\mathbb V}(X),
+\]
+flattening satisfies
+\[
+    \int_X U\,d\,m_X(\Xi)
+    =
+    \int_{\mu:\mathbb D_{\mathbb V}X}
+    \left(
+        \int_X U\,d\mu
+    \right)
+    d\Xi.
+\]
+Both sides are equal to
+\[
+    \Xi(\widehat U).
+\]
+
+\section{Fuzzy kernels and Chapman--Kolmogorov composition}
+\label{sec:fuzzy-kernels-chapman-kolmogorov}
+
+\subsection{The enriched construction}
+\label{subsec:kernels-enriched}
+
+\begin{definition}[Fuzzy kernel]
+\label{def:fuzzy-kernel}
+A \emph{fuzzy kernel} from \(X\) to \(Y\) is a fuzzy-domain morphism
+\[
+    k:X\to\mathbb D_{\mathbb V}Y.
+\]
+For \(x\in X\), the corresponding distribution on \(Y\) is denoted
+\[
+    k_x.
+\]
+\end{definition}
+
+\begin{definition}[Kleisli extension]
+\label{def:fuzzy-kleisli-extension}
+Let
+\[
+    k:X\to\mathbb D_{\mathbb V}Y
+\]
+be a fuzzy kernel.  Its Kleisli extension is
+\[
+    k^{\sharp}:
+    \mathbb D_{\mathbb V}X\to\mathbb D_{\mathbb V}Y
+\]
+defined by
+\[
+    k^{\sharp}
+    =
+    m_Y\circ\mathbb D_{\mathbb V}k.
+\]
+Elementwise,
+\[
+    k^{\sharp}(\mu)(V)
+    =
+    \mu(x\mapsto k_x(V))
+\]
+for
+\[
+    V\in\mathcal O_{\mathbb V}(Y).
+\]
+\end{definition}
+
+The observation
+\[
+    x\longmapsto k_x(V)
+\]
+is fuzzy Scott because it is the composite
+\[
+    X
+    \xrightarrow{k}
+    \mathbb D_{\mathbb V}Y
+    \xrightarrow{\widehat V}
+    \underline{\mathbb V}.
+\]
+Thus the elementwise formula is well-defined.
+
+\begin{definition}[Kleisli composite]
+\label{def:fuzzy-kleisli-composite}
+For fuzzy kernels
+\[
+    k:X\to\mathbb D_{\mathbb V}Y,
+    \qquad
+    \ell:Y\to\mathbb D_{\mathbb V}Z,
+\]
+their Kleisli composite is
+\[
+    \ell\star k
+    =
+    \ell^{\sharp}k.
+\]
+Explicitly,
+\[
+    (\ell\star k)_x(W)
+    =
+    k_x(y\mapsto \ell_y(W))
+\]
+for every
+\[
+    W\in\mathcal O_{\mathbb V}(Z).
+\]
+\end{definition}
+
+The observation
+\[
+    y\longmapsto \ell_y(W)
+\]
+is the composite
+\[
+    Y
+    \xrightarrow{\ell}
+    \mathbb D_{\mathbb V}Z
+    \xrightarrow{\widehat W}
+    \underline{\mathbb V}.
+\]
+Hence it lies in
+\[
+    \mathcal O_{\mathbb V}(Y).
+\]
+
+\begin{theorem}[Fuzzy Chapman--Kolmogorov formula]
+\label{thm:fuzzy-chapman-kolmogorov}
+For kernels
+\[
+    k:X\to\mathbb D_{\mathbb V}Y,
+    \qquad
+    \ell:Y\to\mathbb D_{\mathbb V}Z,
+\]
+and every fuzzy Scott observation
+\[
+    W\in\mathcal O_{\mathbb V}(Z),
+\]
+one has
+\[
+    \int_Z W\,d(\ell\star k)_x
+    =
+    \int_Y
+    \left(
+        \int_Z W\,d\ell_y
+    \right)
+    dk_x.
+\]
+\end{theorem}
+
+\begin{proof}
+By definition,
+\[
+\begin{aligned}
+    \int_Z W\,d(\ell\star k)_x
+    &=
+    (\ell\star k)_x(W)\\
+    &=
+    k_x(y\mapsto\ell_y(W))\\
+    &=
+    \int_Y
+    \left(
+        \int_Z W\,d\ell_y
+    \right)
+    dk_x.
+\end{aligned}
+\]
+\end{proof}
+
+\begin{proposition}[Associativity of kernel composition]
+\label{prop:fuzzy-kernel-composition-associative}
+Kleisli composition of fuzzy kernels is associative, and the Dirac kernel
+\[
+    \delta_X:X\to\mathbb D_{\mathbb V}X
+\]
+is a two-sided identity.
+\end{proposition}
+
+\begin{proof}
+This is associativity and unitality of Kleisli composition for the monad
+\[
+    \mathbb D_{\mathbb V}.
+\]
+Explicitly, for kernels
+\[
+    k:X\to\mathbb D_{\mathbb V}Y,
+    \qquad
+    \ell:Y\to\mathbb D_{\mathbb V}Z,
+    \qquad
+    r:Z\to\mathbb D_{\mathbb V}W,
+\]
+one has
+\[
+    r\star(\ell\star k)
+    =
+    (r\star\ell)\star k.
+\]
+After evaluation at
+\[
+    Q\in\mathcal O_{\mathbb V}(W),
+\]
+both sides are given by
+\[
+    k_x
+    \bigl(
+        y\mapsto
+        \ell_y
+        (z\mapsto r_z(Q))
+    \bigr).
+\]
+\end{proof}
+
+\section{Barycenter algebras}
+\label{sec:fuzzy-barycenter-algebras}
+
+\subsection{The enriched construction}
+\label{subsec:barycenter-enriched}
+
+\begin{definition}[Fuzzy barycenter algebra]
+\label{def:fuzzy-barycenter-algebra}
+A \emph{fuzzy barycenter algebra} is an algebra for the monad
+\[
+    \mathbb D_{\mathbb V}
+\]
+on
+\[
+    \mathbf{FDom}_{\mathbb V}^{+}.
+\]
+Thus it consists of a fuzzy domain \(A\) equipped with a fuzzy-domain morphism
+\[
+    b_A:\mathbb D_{\mathbb V}A\to A
+\]
+such that
+\[
+    b_A\delta_A=\id_A
+\]
+and
+\[
+    b_A\mathbb D_{\mathbb V}(b_A)=b_A m_A.
+\]
+\end{definition}
+
+\begin{definition}[Integration into a barycenter algebra]
+\label{def:fuzzy-barycentric-integration}
+Let
+\[
+    (A,b_A)
+\]
+be a fuzzy barycenter algebra.  For a fuzzy-domain morphism
+\[
+    f:X\to A
+\]
+and a distribution
+\[
+    \mu\in\mathbb D_{\mathbb V}X,
+\]
+define the barycentric integral by
+\[
+    \int_X f\,d\mu
+    =
+    b_A(f_{\#}\mu).
+\]
+Equivalently, the integration morphism is the composite
+\[
+    \mathbb D_{\mathbb V}X
+    \xrightarrow{f_{\#}}
+    \mathbb D_{\mathbb V}A
+    \xrightarrow{b_A}
+    A.
+\]
+\end{definition}
+
+\begin{proposition}[Dirac law for barycentric integration]
+\label{prop:fuzzy-barycentric-dirac-law}
+For every fuzzy-domain morphism
+\[
+    f:X\to A,
+\]
+one has
+\[
+    \int_X f\,d\delta_x
+    =
+    f(x).
+\]
+\end{proposition}
+
+\begin{proof}
+Since
+\[
+    f_{\#}\delta_x=\delta_{f(x)},
+\]
+the result follows from the algebra unit law
+\[
+    b_A\delta_A=\id_A.
+\]
+\end{proof}
+
+\begin{theorem}[Barycentric chain rule]
+\label{thm:fuzzy-barycentric-chain-rule}
+Let
+\[
+    (A,b_A)
+\]
+be a fuzzy barycenter algebra.  Let
+\[
+    k:X\to\mathbb D_{\mathbb V}Y
+\]
+be a fuzzy kernel, and let
+\[
+    g:Y\to A
+\]
+be a fuzzy-domain morphism.  Define
+\[
+    h:X\to A
+\]
+by
+\[
+    h(x)=\int_Y g\,dk_x.
+\]
+Equivalently,
+\[
+    h
+    =
+    X
+    \xrightarrow{k}
+    \mathbb D_{\mathbb V}Y
+    \xrightarrow{g_{\#}}
+    \mathbb D_{\mathbb V}A
+    \xrightarrow{b_A}
+    A.
+\]
+Then, for every
+\[
+    \mu\in\mathbb D_{\mathbb V}X,
+\]
+one has
+\[
+    \int_Y g\,d(k^{\sharp}\mu)
+    =
+    \int_X h\,d\mu.
+\]
+\end{theorem}
+
+\begin{proof}
+By definition,
+\[
+    k^{\sharp}
+    =
+    m_Y\mathbb D_{\mathbb V}k.
+\]
+Therefore
+\[
+\begin{aligned}
+    \int_Y g\,d(k^{\sharp}\mu)
+    &=
+    b_A\bigl(g_{\#}(m_Y(\mathbb D_{\mathbb V}k(\mu)))\bigr).
+\end{aligned}
+\]
+Naturality of the monad multiplication gives
+\[
+    g_{\#}m_Y
+    =
+    m_A\mathbb D_{\mathbb V}(g_{\#}).
+\]
+Hence the last expression is
+\[
+    b_A m_A
+    \bigl(
+        \mathbb D_{\mathbb V}(g_{\#})
+        \mathbb D_{\mathbb V}k(\mu)
+    \bigr).
+\]
+Using the algebra law
+\[
+    b_A m_A
+    =
+    b_A\mathbb D_{\mathbb V}(b_A),
+\]
+this becomes
+\[
+    b_A
+    \mathbb D_{\mathbb V}(b_A g_{\#}k)(\mu)
+    =
+    b_A h_{\#}(\mu)
+    =
+    \int_X h\,d\mu.
+\]
+\end{proof}
+
+\section{Comparison with fuzzy ideals and fuzzy Scott opens}
+\label{sec:comparison-fuzzy-ideals-scott-opens}
+
+The fuzzy distribution monad of this chapter does not use the full presheaf
+completion
+\[
+    [X^{\op},\underline{\mathbb V}]
+\]
+as a free module.  The presheaf object belongs to the fuzzy ideal and predicate
+doctrine.  Inside it, the finite-flat weights determine fuzzy ideals:
+\[
+    \operatorname{Idl}_{\mathbb V}(X)
+    \subseteq
+    [X^{\op},\underline{\mathbb V}].
+\]
+
+A fuzzy domain is a strict algebra for the fuzzy ideal monad, and its
+finite-flat colimits are the fuzzy ideal joins.  A fuzzy Scott open is not an
+arbitrary upper predicate
+\[
+    X\to\underline{\mathbb V}.
+\]
+It is an upper predicate preserving these fuzzy ideal joins.
+
+Thus the observation object in this chapter is
+\[
+    \mathcal O_{\mathbb V}(X)
+    =
+    [X,\underline{\mathbb V}]_{\mathrm{ff}},
+\]
+not the raw predicate object
+\[
+    [X,\underline{\mathbb V}].
+\]
+
+The comparison is:
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+    \mathcal O_{\mathbb V}(X)
+    =
+    [X,\underline{\mathbb V}]_{\mathrm{ff}}
+    \arrow[r,hook]
+    &
+    [X,\underline{\mathbb V}]
+    \\
+    \mathbb D_{\mathbb V}X
+    =
+    [\mathcal O_{\mathbb V}(X),\underline{\mathbb V}]_{\mathrm{ff}}
+    \arrow[u,phantom,"\text{dualizes Scott opens}" description]
+    &
+    [X^{\op},\underline{\mathbb V}]
+    \arrow[u,phantom,"\text{raw predicate/ideal ambient object}" description]
+\end{tikzcd}
+\]
+The upper-left object is the fuzzy Scott topology of \(X\).  The lower-left
+object is the fuzzy distribution object.  The presheaf object on the right is
+not the basis of the distribution construction.
+
+\section{The posetal reflection}
+\label{sec:posetal-reflection-fuzzy-distributions}
+
+Let
+\[
+    \Lambda=(L,\leq,\meet,\join,\tensor,\multimap,\bot,\top)
+\]
+be a fuzzy truth-value object.  For a fuzzy domain \(X\) over \(\Lambda\), with
+algebra map
+\[
+    \alpha_X:\operatorname{Idl}_{\Lambda}(X)\to X,
+\]
+the fuzzy Scott topology is
+\[
+    \mathcal O_{\Lambda}(X)
+    =
+    \operatorname{Scott}_{\Lambda}(X).
+\]
+Its elements are upper fuzzy predicates
+\[
+    U:X\to L
+\]
+such that
+\[
+    U(\alpha_X(I))
+    =
+    \bigjoin_{x\in X} I(x)\tensor U(x)
+\]
+for every fuzzy ideal
+\[
+    I:X^{\op}\to\Lambda.
+\]
+
+The fuzzy distribution object is
+\[
+    \mathbb D_{\Lambda}X
+    =
+    [\mathcal O_{\Lambda}(X),\Lambda]_{\mathrm{ff}}.
+\]
+Thus a fuzzy distribution is a finite-flat-continuous functional
+\[
+    \mu:\mathcal O_{\Lambda}(X)\to\Lambda.
+\]
+
+The basic elementwise formulas are:
+\[
+    \int_X U\,d\mu
+    =
+    \mu(U),
+\]
+\[
+    \delta_x(U)=U(x),
+\]
+\[
+    f_{\#}(\mu)(V)=\mu(Vf),
+\]
+and
+\[
+    m_X(\Xi)(U)
+    =
+    \Xi(\mu\mapsto\mu(U)).
+\]
+
+\section{Examples}
+\label{sec:fuzzy-distribution-examples}
+
+\subsection{The crisp separated case}
+\label{subsec:crisp-separated-distribution-recovery}
+
+For
+\[
+    \Lambda=2,
+\]
+separated fuzzy domains are dcpos, and fuzzy-domain morphisms are
+Scott-continuous maps.
+
+For a dcpo \(X\), the fuzzy Scott topology becomes the ordinary Scott topology:
+\[
+    \mathcal O_2(X)=\sigma(X),
+\]
+regarded as a dcpo ordered by inclusion.  The distribution object is
+\[
+    \mathbb D_2X
+    =
+    [\sigma(X),2]_{\mathrm{ff}}.
+\]
+Thus a \(2\)-valued fuzzy distribution is a Scott-continuous map
+\[
+    \sigma(X)\to 2.
+\]
+Equivalently, it is a Scott-open subset of the dcpo
+\[
+    \sigma(X).
+\]
+In other words, it is a Scott-open family of Scott opens of \(X\).
+
+The Dirac distribution at \(x\in X\) is
+\[
+    \delta_x(U)=1
+    \quad\Longleftrightarrow\quad
+    x\in U
+\]
+for Scott opens
+\[
+    U\in\sigma(X).
+\]
+
+This is not the finite-probability distribution monad and not the Giry monad.
+It is the Scott-topological double-dual monad
+\[
+    X\longmapsto[\sigma(X),2]_{\mathrm{ff}}
+\]
+internal to dcpos.
+
+\subsection{G\"odel truth values}
+\label{subsec:godel-distribution-example}
+
+For the G\"odel base, a fuzzy Scott open is a monotone degree-valued predicate
+\[
+    U:X\to[0,1]
+\]
+preserving fuzzy ideal joins by
+\[
+    U(\alpha_X(I))
+    =
+    \bigjoin_{x\in X}\min(I(x),U(x)).
+\]
+A distribution is a finite-flat-continuous functional
+\[
+    \mu:\mathcal O_{\Lambda}(X)\to[0,1].
+\]
+
+\subsection{\L ukasiewicz truth values}
+\label{subsec:lukasiewicz-distribution-example}
+
+For the \L ukasiewicz base,
+\[
+    a\tensor b=\max(0,a+b-1).
+\]
+The fuzzy Scott condition becomes
+\[
+    U(\alpha_X(I))
+    =
+    \bigjoin_{x\in X}
+    \max(0,I(x)+U(x)-1).
+\]
+Distributions are finite-flat-continuous functionals on these fuzzy Scott
+opens.
+
+\subsection{Product truth values}
+\label{subsec:product-distribution-example}
+
+For the product base,
+\[
+    a\tensor b=ab.
+\]
+The fuzzy Scott condition becomes
+\[
+    U(\alpha_X(I))
+    =
+    \bigjoin_{x\in X}
+    I(x)U(x).
+\]
+Distributions are product-linear Scott-continuous functionals on the fuzzy
+Scott topology.
+
+\subsection{The Lawvere base}
+\label{subsec:lawvere-distribution-example}
+
+For the Lawvere base
+\[
+    [0,\infty]^{\op},
+\]
+the tensor is addition and joins in the quantale are infima in the usual order.
+Thus the fuzzy Scott condition takes the form
+\[
+    U(\alpha_X(I))
+    =
+    \inf_{x\in X}
+    \bigl(I(x)+U(x)\bigr),
+\]
+written in the usual numerical order.  Internally this is the
+\(\Lambda\)-join formula
+\[
+    \bigjoin_x I(x)\tensor U(x),
+\]
+with
+\[
+    \bigjoin
+\]
+computed in the reversed order.  A distribution is a tropical-linear
+Scott-continuous functional on the domain of Scott-continuous potentials.
+
+\subsection{Non-chain truth values}
+\label{subsec:non-chain-distribution-example}
+
+For a non-chain truth-value object such as a downset lattice
+\[
+    L=\operatorname{Down}(P),
+\]
+fuzzy Scott opens are \(L\)-valued predicates preserving fuzzy ideal joins.
+Distributions are finite-flat-continuous functionals
+\[
+    \mathcal O_{\Lambda}(X)\to\Lambda.
+\]
+Thus the construction applies equally to multi-aspect or resource-indexed
+truth values.
+
+\section{Summary}
+\label{sec:summary-fuzzy-distributions}
+
+This chapter constructed the fuzzy distribution monad using the internal
+linear duality of fuzzy domains.
+
+The construction is not based on the raw presheaf object
+\[
+    [X^{\op},\underline{\mathbb V}]
+\]
+and not on the raw observation object
+\[
+    [X,\underline{\mathbb V}].
+\]
+Instead, for a fuzzy domain \(X\), the observation object is the fuzzy Scott
+topology
+\[
+    \mathcal O_{\mathbb V}(X)
+    =
+    [X,\underline{\mathbb V}]_{\mathrm{ff}}.
+\]
+Its objects are the fuzzy Scott opens of \(X\), equivalently the truth-valued
+fuzzy-domain morphisms
+\[
+    X\to\underline{\mathbb V}.
+\]
+
+The linear dual of a fuzzy domain is
+\[
+    X^{\perp}
+    =
+    [X,\underline{\mathbb V}]_{\mathrm{ff}}.
+\]
+The symmetric monoidal closed structure of fuzzy domains gives a contravariant
+self-adjunction
+\[
+    (-)^{\perp,\op}
+    \dashv
+    (-)^{\perp}.
+\]
+The associated double-dual monad is
+\[
+    \mathbb D_{\mathbb V}X
+    =
+    X^{\perp\perp}
+    =
+    [[X,\underline{\mathbb V}]_{\mathrm{ff}},
+      \underline{\mathbb V}]_{\mathrm{ff}}.
+\]
+
+A fuzzy distribution on \(X\) is therefore a fuzzy-domain morphism
+\[
+    \mu:\mathcal O_{\mathbb V}(X)\to\underline{\mathbb V}.
+\]
+Integration is evaluation:
+\[
+    \int_X U\,d\mu=\mu(U).
+\]
+The Dirac distribution is
+\[
+    \delta_x(U)=U(x).
+\]
+Pushforward along
+\[
+    f:X\to Y
+\]
+is
+\[
+    f_{\#}(\mu)(V)=\mu(Vf).
+\]
+Monad multiplication is expectation of expectations:
+\[
+    m_X(\Xi)(U)
+    =
+    \Xi(\mu\mapsto\mu(U)).
+\]
+
+Fuzzy kernels
+\[
+    k:X\to\mathbb D_{\mathbb V}Y
+\]
+compose by Kleisli composition, and satisfy the fuzzy
+Chapman--Kolmogorov formula
+\[
+    \int_Z W\,d(\ell\star k)_x
+    =
+    \int_Y
+    \left(
+        \int_Z W\,d\ell_y
+    \right)
+    dk_x.
+\]
+
+In the posetal reflection, for a fuzzy domain \(X\) over \(\Lambda\),
+\[
+    \mathcal O_{\Lambda}(X)
+    =
+    \operatorname{Scott}_{\Lambda}(X),
+\]
+and
+\[
+    \mathbb D_{\Lambda}X
+    =
+    [\operatorname{Scott}_{\Lambda}(X),\Lambda]_{\mathrm{ff}}.
+\]
+In the crisp separated case, this becomes
+\[
+    \mathbb D_2X
+    =
+    [\sigma(X),2]_{\mathrm{ff}},
+\]
+the Scott-continuous double dual of the Scott topology of the dcpo \(X\).

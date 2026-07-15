@@ -1,0 +1,1917 @@
+\chapter{The Category of Fuzzy Domains}
+\label{ch:category-fuzzy-domains}
+
+In Chapter~\ref{ch:fuzzy-ideal-monad}, the upper fuzzy character adjunction
+produced the fuzzy ideal monad.  After the finite-flat-weight representation and
+the strictification convention of that chapter, this monad is written
+\[
+    T_{\mathbb V}X=\operatorname{Idl}_{\mathbb V}(X),
+\]
+where \(\operatorname{Idl}_{\mathbb V}(X)\) is the full
+\(\mathbb V\)-subcategory of
+\[
+    [X^{\op},\underline{\mathbb V}]
+\]
+spanned by the finite-flat weights
+\[
+    I:X^{\op}\to\underline{\mathbb V}.
+\]
+Here \(\underline{\mathbb V}\) denotes the self-enriched
+\(\mathbb V\)-category of truth values.
+
+The unit is the Yoneda embedding
+\[
+    \eta_X:X\to\operatorname{Idl}_{\mathbb V}(X),
+    \qquad
+    x\longmapsto X(-,x),
+\]
+and the multiplication is flattening:
+\[
+    \mu_X(\mathcal I)(x)
+    =
+    \int^{I\in\operatorname{Idl}_{\mathbb V}(X)}
+        \mathcal I(I)\tensor I(x).
+\]
+All occurrences of \(\operatorname{Idl}_{\mathbb V}(X)\), functor categories,
+and Eilenberg--Moore categories are interpreted under the universe conventions
+fixed earlier.  Thus, when an ideal category is not small in the base universe,
+it is formed in the next universe and regarded there as small for the relevant
+enriched constructions.
+
+The purpose of this chapter is to study the ordinary Eilenberg--Moore category
+of strict algebras for this monad.  These strict algebras are the fuzzy domains.
+The main result is that the category of fuzzy domains is symmetric monoidal
+closed.  The tensor product is obtained by applying Kelly's tensor-product
+construction to the saturated commutative doctrine of finite-flat weighted
+colimits, and the internal hom is the fuzzy domain of finite-flat-colimit-
+preserving functors.
+
+The point of the chapter is not to add new structure to fuzzy domains.  Rather,
+we show that the finite-flat doctrine already used to define fuzzy ideals also
+determines the colimits, tensor product, and internal hom of fuzzy domains.
+
+\section{The finite-flat doctrine}
+\label{sec:finite-flat-doctrine-fdom}
+
+We first isolate the closure properties of finite-flat weights needed later.
+
+\begin{definition}[Finite-flat weights]
+\label{def:finite-flat-weights-fdom}
+Let \(X\) be a small \(\mathbb V\)-category.  A weight
+\[
+    I:X^{\op}\to\underline{\mathbb V}
+\]
+has associated weighted-colimit \(\mathbb V\)-functor
+\[
+    \chi_I:[X,\underline{\mathbb V}]\to\underline{\mathbb V},
+    \qquad
+    \chi_I(U)=\int^{x\in X} I(x)\tensor U(x).
+\]
+We say that \(I\) is finite-flat if \(\chi_I\) preserves the finite limits of
+the fuzzy-frame doctrine.
+
+We write
+\[
+    \Phi_{\mathrm{ff}}(X)
+\]
+for the full \(\mathbb V\)-subcategory of
+\([X^{\op},\underline{\mathbb V}]\) spanned by the finite-flat weights.  Thus
+\[
+    \Phi_{\mathrm{ff}}(X)
+    =
+    \operatorname{Idl}_{\mathbb V}(X).
+\]
+\end{definition}
+
+\begin{lemma}[Representables are finite-flat]
+\label{lem:representables-finite-flat-fdom-rewrite}
+For every object \(x\in X\), the representable weight
+\[
+    X(-,x):X^{\op}\to\underline{\mathbb V}
+\]
+is finite-flat.
+\end{lemma}
+
+\begin{proof}
+The colimit functional associated to \(X(-,x)\) is
+\[
+    \chi_{X(-,x)}(U)
+    =
+    \int^{y\in X}X(y,x)\tensor U(y).
+\]
+By the enriched co-Yoneda formula,
+\[
+    \chi_{X(-,x)}(U)\cong U(x).
+\]
+Thus \(\chi_{X(-,x)}\) is evaluation at \(x\).  Since the finite limits of the
+fuzzy-frame doctrine in \([X,\underline{\mathbb V}]\) are computed pointwise,
+evaluation at \(x\) preserves them.  Hence \(X(-,x)\) is finite-flat.
+\end{proof}
+
+\begin{lemma}[Finite-flat direct images]
+\label{lem:finite-flat-direct-images-fdom-rewrite}
+Let
+\[
+    D:K\to X
+\]
+be a \(\mathbb V\)-functor, and let
+\[
+    W:K^{\op}\to\underline{\mathbb V}
+\]
+be finite-flat.  Define
+\[
+    D_!W:X^{\op}\to\underline{\mathbb V}
+\]
+by the lower direct-image formula
+\[
+    (D_!W)(x)
+    =
+    \int^{k\in K} W(k)\tensor X(x,Dk).
+\]
+Then \(D_!W\) is finite-flat.
+\end{lemma}
+
+\begin{proof}
+Let
+\[
+    U:X\to\underline{\mathbb V}
+\]
+be an upper predicate on \(X\).  The colimit functional associated to \(D_!W\)
+satisfies
+\[
+\begin{aligned}
+    \chi_{D_!W}(U)
+    &=
+    \int^{x\in X}(D_!W)(x)\tensor U(x)
+    \\
+    &=
+    \int^{x\in X}
+        \left(
+            \int^{k\in K}W(k)\tensor X(x,Dk)
+        \right)\tensor U(x)
+    \\
+    &\cong
+    \int^{k\in K}
+        W(k)\tensor
+        \left(
+            \int^{x\in X}X(x,Dk)\tensor U(x)
+        \right)
+    \\
+    &\cong
+    \int^{k\in K}W(k)\tensor U(Dk)
+    \\
+    &=
+    \chi_W(UD).
+\end{aligned}
+\]
+The first isomorphism is Fubini for coends, and the second is co-Yoneda.
+
+Precomposition
+\[
+    D^*:[X,\underline{\mathbb V}]\to[K,\underline{\mathbb V}],
+    \qquad
+    U\longmapsto UD,
+\]
+preserves the finite limits of the fuzzy-frame doctrine, since these limits are
+computed pointwise.  Since \(W\) is finite-flat, \(\chi_W\) preserves those
+finite limits.  Hence
+\[
+    \chi_{D_!W}
+    \cong
+    \chi_WD^*
+\]
+preserves them.  Thus \(D_!W\) is finite-flat.
+\end{proof}
+
+\begin{proposition}[Finite-flat saturation]
+\label{prop:finite-flat-saturation-fdom-rewrite}
+Finite-flat weights are closed under finite-flat weighted colimits in presheaf
+categories.
+
+Explicitly, let
+\[
+    W:K^{\op}\to\underline{\mathbb V}
+\]
+be finite-flat, and let
+\[
+    H:K\to\operatorname{Idl}_{\mathbb V}(X)
+\]
+be a \(\mathbb V\)-functor.  Define
+\[
+    J:X^{\op}\to\underline{\mathbb V}
+\]
+pointwise by
+\[
+    J(x)
+    =
+    \int^{k\in K} W(k)\tensor Hk(x).
+\]
+Then \(J\) is finite-flat.
+\end{proposition}
+
+\begin{proof}
+Since presheaf colimits are computed pointwise, \(J\) is the \(W\)-weighted
+colimit of the diagram
+\[
+    H:K\to [X^{\op},\underline{\mathbb V}]
+\]
+in the ambient presheaf category.  Hence \(J\) is again a weight
+\[
+    J:X^{\op}\to\underline{\mathbb V}.
+\]
+
+For every upper predicate
+\[
+    U:X\to\underline{\mathbb V},
+\]
+we have
+\[
+\begin{aligned}
+    \chi_J(U)
+    &=
+    \int^{x\in X}J(x)\tensor U(x)
+    \\
+    &=
+    \int^{x\in X}
+        \left(
+            \int^{k\in K}W(k)\tensor Hk(x)
+        \right)\tensor U(x)
+    \\
+    &\cong
+    \int^{k\in K}
+        W(k)\tensor
+        \left(
+            \int^{x\in X}Hk(x)\tensor U(x)
+        \right)
+    \\
+    &=
+    \int^{k\in K}W(k)\tensor \chi_{Hk}(U).
+\end{aligned}
+\]
+Thus
+\[
+    \chi_J(U)
+    \cong
+    \chi_W(\overline H(U)),
+\]
+where
+\[
+    \overline H:[X,\underline{\mathbb V}]
+    \to
+    [K,\underline{\mathbb V}]
+\]
+is given by
+\[
+    \overline H(U)(k)=\chi_{Hk}(U).
+\]
+
+The assignment \(I\mapsto\chi_I\) is functorial on weights: a morphism
+\(I\to I'\) in the presheaf category induces, by functoriality of the coend, a
+morphism
+\[
+    \chi_I(U)\to\chi_{I'}(U)
+\]
+natural in \(U\).  Since
+\[
+    H:K\to\operatorname{Idl}_{\mathbb V}(X)
+\]
+is a \(\mathbb V\)-functor, the assignment
+\[
+    k\longmapsto \chi_{Hk}(U)
+\]
+is an upper predicate on \(K\).  Hence \(\overline H(U)\) is well-defined.
+
+Each \(Hk\) is finite-flat, so each
+\[
+    \chi_{Hk}:[X,\underline{\mathbb V}]\to\underline{\mathbb V}
+\]
+preserves the finite limits of the fuzzy-frame doctrine.  Since those finite
+limits in \([K,\underline{\mathbb V}]\) are computed pointwise, \(\overline H\)
+preserves them.  Since \(W\) is finite-flat, \(\chi_W\) preserves them.  Hence
+\[
+    \chi_J\cong\chi_W\overline H
+\]
+preserves the finite limits of the fuzzy-frame doctrine.  Therefore \(J\) is
+finite-flat.
+\end{proof}
+
+\begin{corollary}[Flattening is finite-flat]
+\label{cor:flattening-finite-flat-fdom-rewrite}
+If
+\[
+    \mathcal I:
+    \operatorname{Idl}_{\mathbb V}(X)^{\op}
+    \to
+    \underline{\mathbb V}
+\]
+is finite-flat, then the flattened weight
+\[
+    \mu_X(\mathcal I)(x)
+    =
+    \int^{I\in\operatorname{Idl}_{\mathbb V}(X)}
+        \mathcal I(I)\tensor I(x)
+\]
+is finite-flat.
+\end{corollary}
+
+\begin{proof}
+Apply Proposition~\ref{prop:finite-flat-saturation-fdom-rewrite} to the identity
+diagram
+\[
+    1_{\operatorname{Idl}_{\mathbb V}(X)}:
+    \operatorname{Idl}_{\mathbb V}(X)
+    \to
+    \operatorname{Idl}_{\mathbb V}(X).
+\]
+\end{proof}
+
+\section{The KZ property of the ideal monad}
+\label{sec:kz-property-ideal-monad-fdom-rewrite}
+
+The preceding chapter constructed the fuzzy ideal monad.  We now prove the
+property of that monad needed to identify its strict algebras with finite-flat
+colimit completions.
+
+\begin{proposition}[The KZ comparison for the ideal monad]
+\label{prop:ideal-monad-kz-fdom-rewrite}
+For every small \(\mathbb V\)-category \(X\), there is an enriched natural
+transformation
+\[
+    T_{\mathbb V}\eta_X
+    \Longrightarrow
+    \eta_{T_{\mathbb V}X}.
+\]
+Equivalently, for every finite-flat weight
+\[
+    I:X^{\op}\to\underline{\mathbb V},
+\]
+there is a canonical morphism in
+\[
+    [\operatorname{Idl}_{\mathbb V}(X)^{\op},\underline{\mathbb V}]
+\]
+from the weight \((T_{\mathbb V}\eta_X)(I)\) to the representable weight
+\[
+    \operatorname{Idl}_{\mathbb V}(X)(-,I).
+\]
+These transformations satisfy the lax-idempotent, or KZ, coherence equations for
+the ideal monad.
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    I\in\operatorname{Idl}_{\mathbb V}(X)
+\]
+and
+\[
+    J\in\operatorname{Idl}_{\mathbb V}(X).
+\]
+The value of \((T_{\mathbb V}\eta_X)(I)\) at \(J\) is
+\[
+    (T_{\mathbb V}\eta_X)(I)(J)
+    =
+    \int^{x\in X}
+        I(x)\tensor
+        \operatorname{Idl}_{\mathbb V}(X)(J,X(-,x)).
+\]
+By enriched Yoneda,
+\[
+    I(x)
+    \cong
+    [X^{\op},\underline{\mathbb V}](X(-,x),I).
+\]
+Composition in the presheaf category gives morphisms
+\[
+    \operatorname{Idl}_{\mathbb V}(X)(J,X(-,x))
+    \tensor
+    [X^{\op},\underline{\mathbb V}](X(-,x),I)
+    \longrightarrow
+    \operatorname{Idl}_{\mathbb V}(X)(J,I).
+\]
+Tensoring with the Yoneda identification and integrating over \(x\) gives
+\[
+    (T_{\mathbb V}\eta_X)(I)(J)
+    \longrightarrow
+    \operatorname{Idl}_{\mathbb V}(X)(J,I).
+\]
+This construction is natural in \(J\), and therefore defines a morphism of
+weights
+\[
+    (T_{\mathbb V}\eta_X)(I)
+    \longrightarrow
+    \operatorname{Idl}_{\mathbb V}(X)(-,I).
+\]
+It is also enriched-natural in \(I\), because it is induced by composition in the
+enriched presheaf category.
+
+This is precisely the standard KZ comparison for a free
+\(\Phi_{\mathrm{ff}}\)-cocompletion monad.  The functor \(T_{\mathbb V}\eta_X\)
+sends a finite-flat weight to the finite-flat colimit of its principal
+approximants, while \(\eta_{T_{\mathbb V}X}\) sends it to its representable
+presheaf.  The comparison is induced by the universal cocone from principal
+approximants into the weight.
+
+It remains only to identify the coherence.  The comparison just constructed is
+induced entirely by composition in
+\[
+    [X^{\op},\underline{\mathbb V}],
+\]
+while the multiplication
+\[
+    \mu_X:
+    \operatorname{Idl}_{\mathbb V}(\operatorname{Idl}_{\mathbb V}(X))
+    \to
+    \operatorname{Idl}_{\mathbb V}(X)
+\]
+is flattening.  Hence the unit and multiplication compatibilities reduce to
+associativity and unitality of composition in the presheaf category, together
+with Fubini for the coends defining flattening.
+
+Explicitly, after evaluating at
+\[
+    J\in\operatorname{Idl}_{\mathbb V}(X),
+\]
+the two multiplication-coherence composites are both the coend-composite
+\[
+    \int^{I,x}
+        \mathcal I(I)\tensor I(x)\tensor
+        \operatorname{Idl}_{\mathbb V}(X)(J,X(-,x))
+    \longrightarrow
+    \operatorname{Idl}_{\mathbb V}(X)(J,\mu_X\mathcal I),
+\]
+obtained by first composing
+\[
+    \operatorname{Idl}_{\mathbb V}(X)(J,X(-,x))
+    \tensor
+    [X^{\op},\underline{\mathbb V}](X(-,x),I)
+    \longrightarrow
+    \operatorname{Idl}_{\mathbb V}(X)(J,I),
+\]
+and then composing with the structure map expressing the flattening
+\[
+    \mathcal I(I)\tensor I
+    \longrightarrow
+    \mu_X\mathcal I.
+\]
+The unit-coherence equations are the corresponding special cases with
+representable weights, where the assertion is the enriched Yoneda identity.
+Therefore the displayed enriched natural transformation is the KZ comparison for
+the ideal monad.
+\end{proof}
+
+\begin{theorem}[The algebra structure is left adjoint to Yoneda]
+\label{thm:algebra-map-left-adjoint-y-fdom-rewrite}
+Let
+\[
+    \alpha:\operatorname{Idl}_{\mathbb V}(X)\to X
+\]
+be a strict algebra structure for the ideal monad.  Then
+\[
+    \alpha\dashv\eta_X
+\]
+with identity counit
+\[
+    \alpha\eta_X=1_X.
+\]
+Consequently, enriched-naturally in
+\(I\in\operatorname{Idl}_{\mathbb V}(X)\) and \(x\in X\), there is an
+isomorphism in \(\mathbb V\)
+\[
+    X(\alpha I,x)
+    \cong
+    \operatorname{Idl}_{\mathbb V}(X)(I,X(-,x)).
+\]
+\end{theorem}
+
+\begin{proof}
+The algebra unit law gives
+\[
+    \alpha\eta_X=1_X,
+\]
+so the counit of the desired adjunction is the identity.
+
+It remains to construct the unit
+\[
+    1_{\operatorname{Idl}_{\mathbb V}(X)}
+    \longrightarrow
+    \eta_X\alpha.
+\]
+Using Proposition~\ref{prop:ideal-monad-kz-fdom-rewrite}, we have an enriched
+natural transformation
+\[
+    T_{\mathbb V}\eta_X
+    \Longrightarrow
+    \eta_{T_{\mathbb V}X}.
+\]
+Applying \(T_{\mathbb V}\alpha\) gives
+\[
+    T_{\mathbb V}\alpha\;T_{\mathbb V}\eta_X
+    \longrightarrow
+    T_{\mathbb V}\alpha\;\eta_{T_{\mathbb V}X}.
+\]
+The left-hand side is
+\[
+    T_{\mathbb V}(\alpha\eta_X)
+    =
+    T_{\mathbb V}(1_X)
+    =
+    1_{\operatorname{Idl}_{\mathbb V}(X)}.
+\]
+By naturality of \(\eta\), the right-hand side is
+\[
+    \eta_X\alpha.
+\]
+Thus we obtain
+\[
+    1_{\operatorname{Idl}_{\mathbb V}(X)}
+    \longrightarrow
+    \eta_X\alpha.
+\]
+
+By the KZ coherence established in
+Proposition~\ref{prop:ideal-monad-kz-fdom-rewrite}, the above unit and the
+identity counit satisfy the triangle identities.  Therefore
+\[
+    \alpha\dashv\eta_X.
+\]
+The displayed hom-isomorphism is the hom-form of this enriched adjunction.
+\end{proof}
+
+\section{Fuzzy domains as finite-flat-cocomplete categories}
+\label{sec:fuzzy-domains-as-ff-cocomplete-rewrite}
+
+\begin{definition}[Fuzzy domain]
+\label{def:fuzzy-domain-category-rewrite}
+A fuzzy domain is a strict algebra
+\[
+    \alpha_X:
+    \operatorname{Idl}_{\mathbb V}(X)\to X
+\]
+for the ideal monad.  Thus
+\[
+    \alpha_X\eta_X=1_X,
+    \qquad
+    \alpha_X\mu_X
+    =
+    \alpha_XT_{\mathbb V}\alpha_X.
+\]
+
+A fuzzy-domain morphism
+\[
+    f:(X,\alpha_X)\to(Y,\alpha_Y)
+\]
+is a \(\mathbb V\)-functor
+\[
+    f:X\to Y
+\]
+such that
+\[
+    f\alpha_X
+    =
+    \alpha_YT_{\mathbb V}f.
+\]
+The ordinary category of fuzzy domains and fuzzy-domain morphisms is denoted
+\[
+    \mathbf{FDom}_{\mathbb V}.
+\]
+\end{definition}
+
+\begin{definition}[Strict coherent finite-flat colimits]
+\label{def:strict-coherent-ff-colimits-rewrite}
+A strict coherent choice of finite-flat weighted colimits in a small
+\(\mathbb V\)-category \(X\) consists of the following data.
+
+For every small \(\mathbb V\)-category \(K\), every finite-flat weight
+\[
+    W:K^{\op}\to\underline{\mathbb V},
+\]
+and every diagram
+\[
+    D:K\to X,
+\]
+there is a chosen object
+\[
+    W*D\in X
+\]
+with enriched-natural representing isomorphisms
+\[
+    X(W*D,x)
+    \cong
+    [K^{\op},\underline{\mathbb V}](W,X(D-,x)).
+\]
+These choices are strict on representables:
+\[
+    K(-,k)*D=Dk,
+\]
+and their iterated-colimit coherence is the flattening coherence
+\[
+    \alpha_X\mu_X=\alpha_XT_{\mathbb V}(\alpha_X),
+\]
+where
+\[
+    \alpha_X(I)=I*1_X.
+\]
+\end{definition}
+
+\begin{theorem}[Fuzzy domains and finite-flat colimits]
+\label{thm:fuzzy-domains-ff-colimits-rewrite}
+Let \(X\) be a small \(\mathbb V\)-category.
+
+To give \(X\) the structure of a fuzzy domain is equivalently to give a strict
+coherent choice of all finite-flat weighted colimits in \(X\).  Under this
+equivalence, the algebra map
+\[
+    \alpha_X:\operatorname{Idl}_{\mathbb V}(X)\to X
+\]
+sends a finite-flat weight \(I:X^{\op}\to\underline{\mathbb V}\) to the
+\(I\)-weighted colimit of the identity diagram:
+\[
+    \alpha_X(I)=I*1_X.
+\]
+
+More generally, if
+\[
+    D:K\to X
+\]
+is a diagram and
+\[
+    W:K^{\op}\to\underline{\mathbb V}
+\]
+is finite-flat, then
+\[
+    W*D
+    =
+    \alpha_X(D_!W),
+\]
+where
+\[
+    (D_!W)(x)
+    =
+    \int^{k\in K}W(k)\tensor X(x,Dk).
+\]
+
+A \(\mathbb V\)-functor between fuzzy domains is a fuzzy-domain morphism if and
+only if it preserves finite-flat weighted colimits.
+\end{theorem}
+
+\begin{proof}
+First suppose that
+\[
+    \alpha_X:\operatorname{Idl}_{\mathbb V}(X)\to X
+\]
+is a strict algebra.  By
+Theorem~\ref{thm:algebra-map-left-adjoint-y-fdom-rewrite},
+\[
+    \alpha_X\dashv\eta_X.
+\]
+Hence, for every finite-flat weight \(I\) and every \(x\in X\),
+\[
+\begin{aligned}
+    X(\alpha_XI,x)
+    &\cong
+    \operatorname{Idl}_{\mathbb V}(X)(I,\eta_Xx)
+    \\
+    &=
+    [X^{\op},\underline{\mathbb V}](I,X(-,x)).
+\end{aligned}
+\]
+This is precisely the universal property of the \(I\)-weighted colimit of the
+identity diagram.  Thus
+\[
+    \alpha_X(I)=I*1_X.
+\]
+
+Now let \(D:K\to X\), and let \(W:K^{\op}\to\underline{\mathbb V}\) be
+finite-flat.  By Lemma~\ref{lem:finite-flat-direct-images-fdom-rewrite},
+\(D_!W\) is finite-flat.  For every \(x\in X\),
+\[
+\begin{aligned}
+    X(\alpha_X(D_!W),x)
+    &\cong
+    [X^{\op},\underline{\mathbb V}](D_!W,X(-,x))
+    \\
+    &\cong
+    [K^{\op},\underline{\mathbb V}](W,X(D-,x)).
+\end{aligned}
+\]
+The second isomorphism is the weighted left-Kan-extension adjunction defining
+\(D_!W\).  This is the universal property of the weighted colimit \(W*D\).
+Therefore
+\[
+    W*D=\alpha_X(D_!W)
+\]
+under the strictification convention.
+
+Conversely, suppose \(X\) is equipped with a strict coherent choice of all
+finite-flat weighted colimits.  Define
+\[
+    \alpha_X(I)=I*1_X.
+\]
+The representing isomorphisms
+\[
+    X(\alpha_XI,x)
+    \cong
+    [X^{\op},\underline{\mathbb V}](I,X(-,x))
+\]
+are enriched-natural in \(I\) and \(x\).  Hence the assignment
+\(I\mapsto\alpha_XI\) extends uniquely to a \(\mathbb V\)-functor
+\[
+    \alpha_X:\operatorname{Idl}_{\mathbb V}(X)\to X
+\]
+left adjoint to the Yoneda embedding.
+
+For a representable weight,
+\[
+    X(-,x)*1_X=x,
+\]
+so
+\[
+    \alpha_X\eta_X=1_X.
+\]
+For a finite-flat weight
+\[
+    \mathcal I:
+    \operatorname{Idl}_{\mathbb V}(X)^{\op}
+    \to
+    \underline{\mathbb V},
+\]
+the left-hand side of the multiplication law is
+\[
+    \alpha_X\mu_X(\mathcal I)
+    =
+    \mu_X(\mathcal I)*1_X.
+\]
+The right-hand side is
+\[
+    \alpha_XT_{\mathbb V}\alpha_X(\mathcal I)
+    =
+    (T_{\mathbb V}\alpha_X)(\mathcal I)*1_X.
+\]
+The weight \(T_{\mathbb V}\alpha_X(\mathcal I)\) on \(X\) is the lower direct
+image of \(\mathcal I\) along
+\[
+    \alpha_X:\operatorname{Idl}_{\mathbb V}(X)\to X.
+\]
+Therefore its colimit against \(1_X\) is the same weighted colimit as
+\(\mathcal I\) against the diagram \(\alpha_X\):
+\[
+    (T_{\mathbb V}\alpha_X)(\mathcal I)*1_X
+    \cong
+    \mathcal I*\alpha_X.
+\]
+But
+\[
+    \mu_X(\mathcal I)(x)
+    =
+    \int^{I}\mathcal I(I)\tensor I(x)
+\]
+is the flattened weight computing the same iterated finite-flat colimit.  By the
+strict associativity coherence of the chosen finite-flat colimits,
+\[
+    \mu_X(\mathcal I)*1_X
+    =
+    \mathcal I*(I\mapsto I*1_X)
+    =
+    \mathcal I*\alpha_X.
+\]
+Thus
+\[
+    \alpha_X\mu_X
+    =
+    \alpha_XT_{\mathbb V}\alpha_X,
+\]
+so \(\alpha_X\) is a strict algebra.
+
+Finally, let
+\[
+    f:(X,\alpha_X)\to(Y,\alpha_Y)
+\]
+be a \(\mathbb V\)-functor.  If \(f\) is a fuzzy-domain morphism, then for every
+finite-flat \(I:X^{\op}\to\underline{\mathbb V}\),
+\[
+    f(I*1_X)
+    =
+    f\alpha_X(I)
+    =
+    \alpha_YT_{\mathbb V}f(I)
+    =
+    T_{\mathbb V}f(I)*1_Y.
+\]
+Thus \(f\) preserves finite-flat colimits of identity diagrams, and hence, by
+the direct-image formula, all finite-flat weighted colimits.
+
+Conversely, if \(f\) preserves finite-flat weighted colimits, then for every
+finite-flat \(I\),
+\[
+    f\alpha_X(I)
+    =
+    f(I*1_X)
+    =
+    T_{\mathbb V}f(I)*1_Y
+    =
+    \alpha_YT_{\mathbb V}f(I).
+\]
+Therefore
+\[
+    f\alpha_X=\alpha_YT_{\mathbb V}f.
+\]
+Thus \(f\) is a fuzzy-domain morphism.
+\end{proof}
+
+\section{Free fuzzy domains and limits}
+\label{sec:free-fuzzy-domains-limits-rewrite}
+
+\begin{theorem}[Free fuzzy domains]
+\label{thm:free-fuzzy-domains-rewrite}
+The forgetful functor
+\[
+    U:\mathbf{FDom}_{\mathbb V}\to\mathbb V\text{-}\mathbf{Cat}
+\]
+has a left adjoint
+\[
+    F:\mathbb V\text{-}\mathbf{Cat}\to\mathbf{FDom}_{\mathbb V},
+    \qquad
+    F(X)=\operatorname{Idl}_{\mathbb V}(X),
+\]
+where \(F(X)\) has algebra structure
+\[
+    \mu_X:
+    \operatorname{Idl}_{\mathbb V}(\operatorname{Idl}_{\mathbb V}(X))
+    \to
+    \operatorname{Idl}_{\mathbb V}(X).
+\]
+Thus, for every small \(\mathbb V\)-category \(X\) and every fuzzy domain \(A\),
+there is a natural bijection
+\[
+    \mathbf{FDom}_{\mathbb V}
+    \bigl(
+        \operatorname{Idl}_{\mathbb V}(X),
+        A
+    \bigr)
+    \cong
+    \mathbb V\text{-}\mathbf{Cat}(X,UA).
+\]
+\end{theorem}
+
+\begin{proof}
+This is the free-algebra adjunction of the monad \(T_{\mathbb V}\).  Explicitly,
+if
+\[
+    f:X\to UA
+\]
+is a \(\mathbb V\)-functor and
+\[
+    \alpha_A:\operatorname{Idl}_{\mathbb V}(A)\to A
+\]
+is the algebra map of \(A\), define
+\[
+    \overline f:
+    \operatorname{Idl}_{\mathbb V}(X)\to A
+\]
+by
+\[
+    \overline f(I)
+    =
+    \alpha_A(T_{\mathbb V}f(I)).
+\]
+Equivalently,
+\[
+    \overline f(I)=I*f.
+\]
+By Theorem~\ref{thm:fuzzy-domains-ff-colimits-rewrite},
+\(\overline f\) preserves finite-flat weighted colimits, so it is a
+fuzzy-domain morphism.  Moreover,
+\[
+    \overline f(\eta_Xx)
+    =
+    \alpha_A(\eta_A(fx))
+    =
+    fx.
+\]
+Thus
+\[
+    \overline f\eta_X=f.
+\]
+
+Conversely, if
+\[
+    g:\operatorname{Idl}_{\mathbb V}(X)\to A
+\]
+is a fuzzy-domain morphism, then \(g\) preserves finite-flat weighted colimits.
+For every finite-flat weight \(I:X^{\op}\to\underline{\mathbb V}\), the object
+\(I\in\operatorname{Idl}_{\mathbb V}(X)\) is the \(I\)-weighted colimit of the
+Yoneda diagram:
+\[
+    I \cong I*\eta_X.
+\]
+Therefore
+\[
+    g(I)
+    \cong
+    g(I*\eta_X)
+    \cong
+    I*(g\eta_X).
+\]
+Hence
+\[
+    g=\overline{g\eta_X}
+\]
+under the strictification convention.  The two constructions are inverse and
+natural.
+\end{proof}
+
+\begin{theorem}[Monadicity]
+\label{thm:fdom-monadicity-rewrite}
+The forgetful functor
+\[
+    U:\mathbf{FDom}_{\mathbb V}\to\mathbb V\text{-}\mathbf{Cat}
+\]
+is monadic, and the induced monad is the fuzzy ideal monad
+\[
+    T_{\mathbb V}.
+\]
+Thus
+\[
+    \mathbf{FDom}_{\mathbb V}
+    =
+    (\mathbb V\text{-}\mathbf{Cat})^{T_{\mathbb V}}.
+\]
+\end{theorem}
+
+\begin{proof}
+By definition, \(\mathbf{FDom}_{\mathbb V}\) is the Eilenberg--Moore category of
+strict algebras for \(T_{\mathbb V}\).  The adjunction of
+Theorem~\ref{thm:free-fuzzy-domains-rewrite} has underlying monad
+\[
+    UF=T_{\mathbb V},
+\]
+with Yoneda unit and flattening multiplication.  Therefore \(U\) is monadic.
+\end{proof}
+
+\begin{theorem}[Small conical limits]
+\label{thm:fdom-limits-rewrite}
+The category
+\[
+    \mathbf{FDom}_{\mathbb V}
+\]
+has all small conical limits whose underlying limits exist in
+\[
+    \mathbb V\text{-}\mathbf{Cat}.
+\]
+These limits are created by the forgetful functor
+\[
+    U:\mathbf{FDom}_{\mathbb V}\to\mathbb V\text{-}\mathbf{Cat}.
+\]
+\end{theorem}
+
+\begin{proof}
+Eilenberg--Moore categories have all limits that exist in the base category, and
+the forgetful functor creates them.
+
+Explicitly, let
+\[
+    D:J\to\mathbf{FDom}_{\mathbb V}
+\]
+be a small diagram, and suppose that
+\[
+    L=\lim_{j\in J}UD_j
+\]
+exists in \(\mathbb V\text{-}\mathbf{Cat}\), with projections
+\[
+    p_j:L\to UD_j.
+\]
+There is a unique algebra structure
+\[
+    \alpha_L:T_{\mathbb V}L\to L
+\]
+such that
+\[
+    p_j\alpha_L
+    =
+    \alpha_jT_{\mathbb V}(p_j)
+\]
+for every \(j\).  With this algebra structure, \(L\) satisfies the universal
+property of the limit in \(\mathbf{FDom}_{\mathbb V}\).
+\end{proof}
+
+\section{External products and Fubini}
+\label{sec:external-products-fubini-rewrite}
+
+\begin{definition}[External product of weights]
+\label{def:external-product-weights-rewrite}
+Let
+\[
+    W:K^{\op}\to\underline{\mathbb V},
+    \qquad
+    V:J^{\op}\to\underline{\mathbb V}
+\]
+be weights.  Their external product is the weight
+\[
+    W\boxtimes V:(K\tensor J)^{\op}\to\underline{\mathbb V}
+\]
+defined by
+\[
+    (W\boxtimes V)(k,j)=W(k)\tensor V(j).
+\]
+\end{definition}
+
+\begin{proposition}[External products of finite-flat weights]
+\label{prop:external-products-finite-flat-rewrite}
+If \(W\) and \(V\) are finite-flat, then
+\[
+    W\boxtimes V
+\]
+is finite-flat.
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    E:K\tensor J\to\underline{\mathbb V}
+\]
+be an upper predicate.  Then
+\[
+\begin{aligned}
+    \chi_{W\boxtimes V}(E)
+    &=
+    \int^{(k,j)\in K\tensor J}
+        W(k)\tensor V(j)\tensor E(k,j)
+    \\
+    &\cong
+    \int^{k\in K}
+        W(k)\tensor
+        \left(
+            \int^{j\in J}
+                V(j)\tensor E(k,j)
+        \right).
+\end{aligned}
+\]
+For each \(k\), the inner expression is
+\[
+    \chi_V(E(k,-)).
+\]
+Since \(V\) is finite-flat, this construction preserves the finite limits of the
+fuzzy-frame doctrine in the \(J\)-variable.
+
+The assignment
+\[
+    k\longmapsto \chi_V(E(k,-))
+\]
+is an upper predicate on \(K\), by functoriality of the character
+\(V\mapsto\chi_V\).  Since \(W\) is finite-flat, applying \(\chi_W\) preserves
+the finite limits of the fuzzy-frame doctrine.  Hence \(\chi_{W\boxtimes V}\)
+preserves those finite limits, so \(W\boxtimes V\) is finite-flat.
+\end{proof}
+
+\begin{proposition}[Finite-flat Fubini]
+\label{prop:finite-flat-fubini-rewrite}
+Let
+\[
+    W:K^{\op}\to\underline{\mathbb V},
+    \qquad
+    V:J^{\op}\to\underline{\mathbb V}
+\]
+be finite-flat.  For every diagram
+\[
+    E:K\tensor J\to C
+\]
+in a fuzzy domain \(C\), there are canonical isomorphisms
+\[
+    W*\bigl(k\mapsto V*(j\mapsto E(k,j))\bigr)
+    \cong
+    (W\boxtimes V)*E
+    \cong
+    V*\bigl(j\mapsto W*(k\mapsto E(k,j))\bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+These are the Fubini isomorphisms for enriched weighted colimits.  By
+Proposition~\ref{prop:external-products-finite-flat-rewrite}, the external
+product \(W\boxtimes V\) is finite-flat.  Since \(C\) is a fuzzy domain, all
+three finite-flat weighted colimits appearing above exist.
+\end{proof}
+
+\section{Internal homs}
+\label{sec:internal-homs-fdom-rewrite}
+
+Let \(B\) and \(C\) be fuzzy domains.  The enriched functor category
+\[
+    [B,C]
+\]
+contains a full \(\mathbb V\)-subcategory spanned by those
+\(\mathbb V\)-functors \(B\to C\) that preserve finite-flat weighted colimits.
+
+\begin{definition}[Internal hom fuzzy domain]
+\label{def:internal-hom-fdom-rewrite}
+For fuzzy domains \(B\) and \(C\), define
+\[
+    [B,C]_{\mathrm{ff}}
+\]
+to be the full \(\mathbb V\)-subcategory of \([B,C]\) spanned by the
+finite-flat-colimit-preserving \(\mathbb V\)-functors
+\[
+    B\to C.
+\]
+\end{definition}
+
+\begin{proposition}[Internal homs are fuzzy domains]
+\label{prop:internal-homs-fdom-rewrite}
+For fuzzy domains \(B\) and \(C\), the \(\mathbb V\)-category
+\[
+    [B,C]_{\mathrm{ff}}
+\]
+is a fuzzy domain.  Its finite-flat weighted colimits are computed pointwise in
+\(C\).
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    W:K^{\op}\to\underline{\mathbb V}
+\]
+be finite-flat, and let
+\[
+    H:K\to[B,C]_{\mathrm{ff}}
+\]
+be a diagram.  Since \(C\) is a fuzzy domain, the pointwise formula
+\[
+    (W*H)(b)
+    =
+    W*(k\mapsto Hk(b))
+\]
+defines the \(W\)-weighted colimit of \(H\) in the ambient functor category
+\([B,C]\).
+
+It remains to show that \(W*H\) preserves finite-flat weighted colimits in \(B\).
+Let
+\[
+    V:J^{\op}\to\underline{\mathbb V}
+\]
+be finite-flat, and let
+\[
+    D:J\to B
+\]
+be a diagram.  Then
+\[
+\begin{aligned}
+    (W*H)(V*D)
+    &\cong
+    W*\bigl(k\mapsto Hk(V*D)\bigr)
+    \\
+    &\cong
+    W*\bigl(k\mapsto V*(j\mapsto Hk(Dj))\bigr)
+    \\
+    &\cong
+    V*\bigl(j\mapsto W*(k\mapsto Hk(Dj))\bigr)
+    \\
+    &\cong
+    V*((W*H)D).
+\end{aligned}
+\]
+The second isomorphism uses that each
+\[
+    Hk:B\to C
+\]
+preserves finite-flat weighted colimits.  The third isomorphism is
+Proposition~\ref{prop:finite-flat-fubini-rewrite}.  Hence \(W*H\) preserves
+finite-flat weighted colimits in \(B\).
+
+Therefore \([B,C]_{\mathrm{ff}}\) is closed under finite-flat weighted colimits
+inside \([B,C]\).  Since \([B,C]_{\mathrm{ff}}\) is full in \([B,C]\), the
+ambient weighted-colimit universal property restricts to
+\([B,C]_{\mathrm{ff}}\).  By
+Theorem~\ref{thm:fuzzy-domains-ff-colimits-rewrite},
+\([B,C]_{\mathrm{ff}}\) is a fuzzy domain.
+
+The algebra structure on \([B,C]_{\mathrm{ff}}\) sends a finite-flat weight
+\(W\) on a diagram \(H\) to the pointwise colimit
+\[
+    b\longmapsto W*(k\mapsto Hk(b)).
+\]
+\end{proof}
+
+\section{Bimorphisms and the Kelly tensor product}
+\label{sec:bimorphisms-kelly-tensor-rewrite}
+
+\begin{definition}[Finite-flat bimorphism]
+\label{def:finite-flat-bimorphism-rewrite}
+Let \(A,B,C\) be fuzzy domains.  A finite-flat bimorphism
+\[
+    M:A\tensor B\to C
+\]
+is a \(\mathbb V\)-functor such that:
+\begin{enumerate}
+    \item for each \(a\in A\), the partial functor
+    \[
+        M(a,-):B\to C
+    \]
+    preserves finite-flat weighted colimits;
+    \item for each \(b\in B\), the partial functor
+    \[
+        M(-,b):A\to C
+    \]
+    preserves finite-flat weighted colimits.
+\end{enumerate}
+We write
+\[
+    \operatorname{Bimor}_{\mathrm{ff}}(A,B;C)
+\]
+for the set of finite-flat bimorphisms from \(A,B\) to \(C\).
+\end{definition}
+
+\begin{proposition}[Currying finite-flat bimorphisms]
+\label{prop:currying-bimorphisms-rewrite}
+For fuzzy domains \(A,B,C\), there is a natural bijection
+\[
+    \operatorname{Bimor}_{\mathrm{ff}}(A,B;C)
+    \cong
+    \mathbf{FDom}_{\mathbb V}
+    \bigl(A,[B,C]_{\mathrm{ff}}\bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    M:A\tensor B\to C
+\]
+be a finite-flat bimorphism.  By enriched currying, \(M\) corresponds to a
+\(\mathbb V\)-functor
+\[
+    \widehat M:A\to[B,C],
+    \qquad
+    \widehat M(a)(b)=M(a,b).
+\]
+Since \(M\) preserves finite-flat weighted colimits in the \(B\)-variable, each
+\[
+    \widehat M(a):B\to C
+\]
+lies in \([B,C]_{\mathrm{ff}}\).  Thus \(\widehat M\) factors through
+\[
+    [B,C]_{\mathrm{ff}}\subseteq[B,C].
+\]
+Since \(M\) preserves finite-flat weighted colimits in the \(A\)-variable and
+finite-flat colimits in \([B,C]_{\mathrm{ff}}\) are computed pointwise,
+\[
+    \widehat M:A\to[B,C]_{\mathrm{ff}}
+\]
+preserves finite-flat weighted colimits.  Hence \(\widehat M\) is a
+fuzzy-domain morphism.
+
+Conversely, let
+\[
+    H:A\to[B,C]_{\mathrm{ff}}
+\]
+be a fuzzy-domain morphism.  Uncurrying gives
+\[
+    \widetilde H:A\tensor B\to C,
+    \qquad
+    \widetilde H(a,b)=H(a)(b).
+\]
+For each \(a\), the partial functor
+\[
+    \widetilde H(a,-)=H(a)
+\]
+preserves finite-flat weighted colimits because \(H(a)\) is an object of
+\([B,C]_{\mathrm{ff}}\).  For each \(b\), the partial functor
+\[
+    \widetilde H(-,b):A\to C
+\]
+preserves finite-flat weighted colimits because \(H\) does and colimits in
+\([B,C]_{\mathrm{ff}}\) are computed pointwise.  Hence \(\widetilde H\) is a
+finite-flat bimorphism.
+
+The two constructions are inverse by the enriched tensor--hom adjunction.
+\end{proof}
+
+The preceding saturation and Fubini results supply the hypotheses needed for
+Kelly's tensor-product theorem for categories with a saturated commutative class
+of specified weighted colimits.  We apply that theorem to the doctrine
+\[
+    \Phi_{\mathrm{ff}}
+\]
+of finite-flat weights.  All constructions are interpreted under the universe
+conventions fixed in the earlier chapters.
+
+\begin{theorem}[Kelly tensor product for fuzzy domains]
+\label{thm:kelly-tensor-product-fdom-rewrite}
+For fuzzy domains \(A\) and \(B\), there is a fuzzy domain
+\[
+    A\boxtimes_{\mathrm{ff}}B
+\]
+and a finite-flat bimorphism
+\[
+    \kappa_{A,B}:A\tensor B\to A\boxtimes_{\mathrm{ff}}B
+\]
+such that, for every fuzzy domain \(C\), composition with \(\kappa_{A,B}\)
+induces a natural bijection
+\[
+    \mathbf{FDom}_{\mathbb V}
+    (A\boxtimes_{\mathrm{ff}}B,C)
+    \cong
+    \operatorname{Bimor}_{\mathrm{ff}}(A,B;C).
+\]
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{lem:representables-finite-flat-fdom-rewrite},
+Lemma~\ref{lem:finite-flat-direct-images-fdom-rewrite}, and
+Proposition~\ref{prop:finite-flat-saturation-fdom-rewrite}, the assignment
+\[
+    X\longmapsto \Phi_{\mathrm{ff}}(X)
+\]
+contains the representables, is stable under lower direct image along
+\(\mathbb V\)-functors, and is closed under \(\Phi_{\mathrm{ff}}\)-weighted
+colimits in presheaf categories.  Hence it is saturated in Kelly's sense.
+
+Moreover, Proposition~\ref{prop:external-products-finite-flat-rewrite} and
+Proposition~\ref{prop:finite-flat-fubini-rewrite} show that
+\(\Phi_{\mathrm{ff}}\) is a commutative doctrine: finite-flat weighted colimits
+commute with finite-flat weighted colimits.
+
+Therefore Kelly's tensor-product theorem for categories equipped with a
+saturated commutative class of specified weighted colimits applies to the
+finite-flat doctrine.  The representing object for separately
+finite-flat-colimit-preserving functors
+\[
+    A\tensor B\to C
+\]
+is denoted
+\[
+    A\boxtimes_{\mathrm{ff}}B.
+\]
+Its universal map
+\[
+    \kappa_{A,B}:A\tensor B\to A\boxtimes_{\mathrm{ff}}B
+\]
+is a finite-flat bimorphism, and the displayed bijection is exactly the
+representing universal property.
+\end{proof}
+
+\begin{corollary}[Tensor product of free fuzzy domains]
+\label{cor:tensor-free-fdom-rewrite}
+For small \(\mathbb V\)-categories \(X\) and \(Y\), there is a canonical
+equivalence
+\[
+    \operatorname{Idl}_{\mathbb V}(X)
+    \boxtimes_{\mathrm{ff}}
+    \operatorname{Idl}_{\mathbb V}(Y)
+    \simeq
+    \operatorname{Idl}_{\mathbb V}(X\tensor Y).
+\]
+\end{corollary}
+
+\begin{proof}
+For every fuzzy domain \(C\), there are natural bijections
+\[
+\begin{aligned}
+\mathbf{FDom}_{\mathbb V}
+\bigl(
+    \operatorname{Idl}_{\mathbb V}(X)
+    \boxtimes_{\mathrm{ff}}
+    \operatorname{Idl}_{\mathbb V}(Y),
+    C
+\bigr)
+&\cong
+\operatorname{Bimor}_{\mathrm{ff}}
+\bigl(
+    \operatorname{Idl}_{\mathbb V}(X),
+    \operatorname{Idl}_{\mathbb V}(Y);
+    C
+\bigr)
+\\
+&\cong
+\mathbb V\text{-}\mathbf{Cat}(X\tensor Y,UC)
+\\
+&\cong
+\mathbf{FDom}_{\mathbb V}
+\bigl(
+    \operatorname{Idl}_{\mathbb V}(X\tensor Y),
+    C
+\bigr).
+\end{aligned}
+\]
+
+We spell out the middle bijection.  A finite-flat bimorphism
+\[
+    M:\operatorname{Idl}_{\mathbb V}(X)\tensor
+      \operatorname{Idl}_{\mathbb V}(Y)\to C
+\]
+restricts along
+\[
+    \eta_X\tensor\eta_Y:X\tensor Y\to
+    \operatorname{Idl}_{\mathbb V}(X)\tensor
+    \operatorname{Idl}_{\mathbb V}(Y)
+\]
+to a \(\mathbb V\)-functor
+\[
+    m:X\tensor Y\to UC.
+\]
+Conversely, given
+\[
+    m:X\tensor Y\to UC,
+\]
+define
+\[
+    \widetilde m:
+    \operatorname{Idl}_{\mathbb V}(X)\tensor
+    \operatorname{Idl}_{\mathbb V}(Y)
+    \to C
+\]
+by
+\[
+    \widetilde m(I,J)
+    =
+    I*\bigl(x\mapsto J*(y\mapsto m(x,y))\bigr).
+\]
+Since \(I\) and \(J\) are finite-flat, \(I\boxtimes J\) is finite-flat by
+Proposition~\ref{prop:external-products-finite-flat-rewrite}.  By finite-flat
+Fubini,
+\[
+    \widetilde m(I,J)
+    \cong
+    (I\boxtimes J)*m.
+\]
+The functor \(\widetilde m\) preserves finite-flat weighted colimits separately
+in \(I\) and \(J\), and it is the unique finite-flat bimorphism extending
+\(m\).  This gives the middle bijection.
+
+By representability, the displayed equivalence follows.
+\end{proof}
+
+\begin{corollary}[Tensor unit]
+\label{cor:tensor-unit-fdom-rewrite}
+Let
+\[
+    \mathbb 1
+\]
+be the terminal small \(\mathbb V\)-category.  The tensor unit for fuzzy domains
+is
+\[
+    \operatorname{Idl}_{\mathbb V}(\mathbb 1).
+\]
+\end{corollary}
+
+\begin{proof}
+For every fuzzy domain \(C\),
+\[
+\begin{aligned}
+    \mathbf{FDom}_{\mathbb V}
+    \bigl(
+        \operatorname{Idl}_{\mathbb V}(\mathbb 1)
+        \boxtimes_{\mathrm{ff}}A,
+        C
+    \bigr)
+    &\cong
+    \operatorname{Bimor}_{\mathrm{ff}}
+    \bigl(
+        \operatorname{Idl}_{\mathbb V}(\mathbb 1),
+        A;
+        C
+    \bigr)
+    \\
+    &\cong
+    \mathbf{FDom}_{\mathbb V}(A,C).
+\end{aligned}
+\]
+The second bijection uses that
+\(\operatorname{Idl}_{\mathbb V}(\mathbb 1)\) is freely generated as a fuzzy
+domain by the unique object of \(\mathbb 1\).  Hence
+\[
+    \operatorname{Idl}_{\mathbb V}(\mathbb 1)
+    \boxtimes_{\mathrm{ff}}A
+    \simeq
+    A.
+\]
+The right unit law is analogous.
+\end{proof}
+
+\section{Symmetric monoidal closure}
+\label{sec:smc-fdom-rewrite}
+
+\begin{theorem}[Symmetric monoidal closure of fuzzy domains]
+\label{thm:fdom-smc-rewrite}
+The category
+\[
+    \mathbf{FDom}_{\mathbb V}
+\]
+is symmetric monoidal closed.  Its tensor product is
+\[
+    A\boxtimes_{\mathrm{ff}}B,
+\]
+its tensor unit is
+\[
+    \operatorname{Idl}_{\mathbb V}(\mathbb 1),
+\]
+and its internal hom is
+\[
+    [B,C]_{\mathrm{ff}}.
+\]
+The closed structure is the natural bijection
+\[
+    \mathbf{FDom}_{\mathbb V}
+    (A\boxtimes_{\mathrm{ff}}B,C)
+    \cong
+    \mathbf{FDom}_{\mathbb V}
+    \bigl(A,[B,C]_{\mathrm{ff}}\bigr).
+\]
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:kelly-tensor-product-fdom-rewrite},
+\[
+    \mathbf{FDom}_{\mathbb V}
+    (A\boxtimes_{\mathrm{ff}}B,C)
+    \cong
+    \operatorname{Bimor}_{\mathrm{ff}}(A,B;C).
+\]
+By Proposition~\ref{prop:currying-bimorphisms-rewrite},
+\[
+    \operatorname{Bimor}_{\mathrm{ff}}(A,B;C)
+    \cong
+    \mathbf{FDom}_{\mathbb V}
+    \bigl(A,[B,C]_{\mathrm{ff}}\bigr).
+\]
+Composing these bijections gives the closed structure.
+
+The symmetry of \(\boxtimes_{\mathrm{ff}}\) follows from the symmetry of
+\[
+    A\tensor B\cong B\tensor A
+\]
+and from the symmetric nature of the condition of preserving finite-flat
+weighted colimits separately in the two variables.
+
+Associativity follows by representability.  For every fuzzy domain \(D\), both
+\[
+    (A\boxtimes_{\mathrm{ff}}B)\boxtimes_{\mathrm{ff}}C
+\]
+and
+\[
+    A\boxtimes_{\mathrm{ff}}(B\boxtimes_{\mathrm{ff}}C)
+\]
+represent trilinear \(\mathbb V\)-functors
+\[
+    A\tensor B\tensor C\to D
+\]
+that preserve finite-flat weighted colimits separately in each variable.  Hence
+they are canonically equivalent.
+
+The tensor unit is
+\[
+    \operatorname{Idl}_{\mathbb V}(\mathbb 1)
+\]
+by Corollary~\ref{cor:tensor-unit-fdom-rewrite}.  Therefore
+\(\mathbf{FDom}_{\mathbb V}\) is symmetric monoidal closed.
+\end{proof}
+
+\begin{corollary}[Evaluation]
+\label{cor:evaluation-fdom-rewrite}
+For fuzzy domains \(B\) and \(C\), there is an evaluation morphism
+\[
+    [B,C]_{\mathrm{ff}}
+    \boxtimes_{\mathrm{ff}}
+    B
+    \longrightarrow
+    C.
+\]
+On generators it is given by
+\[
+    (f,b)\longmapsto f(b).
+\]
+\end{corollary}
+
+\begin{proof}
+The ordinary enriched evaluation
+\[
+    [B,C]\tensor B\to C
+\]
+restricts to a finite-flat bimorphism
+\[
+    [B,C]_{\mathrm{ff}}\tensor B\to C.
+\]
+It is finite-flat-colimit-preserving in the \(B\)-variable because every object
+of \([B,C]_{\mathrm{ff}}\) preserves finite-flat weighted colimits.  It is
+finite-flat-colimit-preserving in the \([B,C]_{\mathrm{ff}}\)-variable because
+finite-flat colimits there are computed pointwise in \(C\).  By the universal
+property of \(\boxtimes_{\mathrm{ff}}\), this bimorphism induces the displayed
+fuzzy-domain morphism.
+\end{proof}
+
+\section{The posetal specialization}
+\label{sec:posetal-specialization-fdom-rewrite}
+
+Let
+\[
+    \Lambda=(L,\leq,\meet,\join,\tensor,\multimap,\bot_L,\top_L)
+\]
+be a fuzzy truth-value object.  A fuzzy domain over \(\Lambda\) is a fuzzy
+preorder \(X\) equipped with a strict algebra
+\[
+    \alpha_X:\operatorname{Idl}_{\Lambda}(X)\to X.
+\]
+The map \(\alpha_X\) sends a fuzzy ideal \(I\) to its fuzzy ideal-join.
+
+If
+\[
+    D:K\to X
+\]
+is a \(\Lambda\)-functor and
+\[
+    W:K^{\op}\to\Lambda
+\]
+is a fuzzy ideal of \(K\), then
+\[
+    W*D
+    =
+    \alpha_X(D_!W),
+\]
+where
+\[
+    (D_!W)(x)
+    =
+    \bigjoin_{k\in K}
+        W(k)\tensor X(x,Dk).
+\]
+A morphism of fuzzy domains
+\[
+    f:X\to Y
+\]
+is a \(\Lambda\)-functor satisfying
+\[
+    f\alpha_X
+    =
+    \alpha_YT_{\Lambda}f.
+\]
+Equivalently, for every fuzzy ideal \(I\) of \(X\),
+\[
+    f(\alpha_X(I))
+    =
+    \alpha_Y(T_{\Lambda}f(I)).
+\]
+Here the direct image \(T_\Lambda f(I)\) is given by
+\[
+    (T_\Lambda f)(I)(y)
+    =
+    \bigjoin_{x\in X} I(x)\tensor Y(y,fx).
+\]
+
+For fuzzy domains \(B\) and \(C\), the internal hom
+\[
+    [B,C]_{\mathrm{ff}}
+\]
+has as objects the fuzzy-domain morphisms
+\[
+    B\to C.
+\]
+Its hom-values are inherited from the enriched functor preorder:
+\[
+    [B,C]_{\mathrm{ff}}(f,g)
+    =
+    \bigmeet_{b\in B}C(fb,gb).
+\]
+Finite-flat joins in \([B,C]_{\mathrm{ff}}\) are computed pointwise in \(C\).
+
+The tensor product
+\[
+    A\boxtimes_{\mathrm{ff}}B
+\]
+represents fuzzy bimorphisms
+\[
+    A\tensor B\to C
+\]
+that preserve fuzzy ideal joins separately in each variable.
+
+\section{The crisp separated case}
+\label{sec:crisp-separated-case-fdom-rewrite}
+
+For \(\Lambda=2\), finite-flat weights are ordinary ideals.  On separated
+preorders, strict algebras for the ideal monad are precisely dcpos, and
+fuzzy-domain morphisms are precisely Scott-continuous maps.  Thus
+\[
+    \mathbf{FDom}_{2}^{\mathrm{sep}}
+    \simeq
+    \mathbf{DCPO},
+\]
+where \(\mathbf{DCPO}\) denotes the category of dcpos small in the chosen
+universe.
+
+In this case, finite-flat bimorphisms are monotone maps
+\[
+    A\times B\to C
+\]
+between dcpos that are Scott-continuous in each variable separately.  The
+monotonicity is part of the bimorphism data, since a bimorphism is in particular
+a \(2\)-functor
+\[
+    A\tensor B\to C.
+\]
+Such maps are Scott-continuous for the product dcpo.
+
+Indeed, let
+\[
+    D\subseteq A\times B
+\]
+be nonempty and directed.  Then \(\pi_A D\) and \(\pi_BD\) are nonempty directed
+subsets, and
+\[
+    \bigjoin D
+    =
+    \left(
+        \bigjoin\pi_A D,
+        \bigjoin\pi_BD
+    \right).
+\]
+If
+\[
+    f:A\times B\to C
+\]
+is separately Scott-continuous, then
+\[
+\begin{aligned}
+    f\left(\bigjoin D\right)
+    &=
+    f\left(
+        \bigjoin\pi_A D,
+        \bigjoin\pi_B D
+    \right)
+    \\
+    &=
+    \bigjoin_{a\in\pi_A D}
+        f\left(a,\bigjoin\pi_BD\right)
+    \\
+    &=
+    \bigjoin_{a\in\pi_A D}
+        \bigjoin_{b\in\pi_BD}
+            f(a,b).
+\end{aligned}
+\]
+Since \(D\) is directed, every pair
+\[
+    (a,b)\in\pi_A D\times\pi_BD
+\]
+is bounded above by some element of \(D\).  By monotonicity,
+\[
+    \bigjoin_{a\in\pi_A D,\;b\in\pi_BD}f(a,b)
+    =
+    \bigjoin_{(a,b)\in D}f(a,b).
+\]
+Hence
+\[
+    f\left(\bigjoin D\right)
+    =
+    \bigjoin_{(a,b)\in D}f(a,b).
+\]
+Thus \(f\) is Scott-continuous on the product dcpo.
+
+Consequently, the product dcpo \(A\times B\) represents finite-flat bimorphisms.
+By the universal property of the Kelly tensor product, there is a canonical
+isomorphism
+\[
+    A\boxtimes_{\mathrm{ff}}B
+    \cong
+    A\times B.
+\]
+The internal hom is the dcpo of Scott-continuous maps
+\[
+    B\to C
+\]
+ordered pointwise, with directed joins computed pointwise.
+
+Thus, under the equivalence
+\[
+    \mathbf{FDom}_{2}^{\mathrm{sep}}
+    \simeq
+    \mathbf{DCPO},
+\]
+the symmetric monoidal closed structure constructed above is identified with the
+usual cartesian closed structure of dcpos.
+
+\section{Products versus tensor products}
+\label{sec:products-versus-tensors-fdom-rewrite}
+
+The category \(\mathbf{FDom}_{\mathbb V}\) has categorical products whenever the
+corresponding products exist in
+\[
+    \mathbb V\text{-}\mathbf{Cat},
+\]
+and these products are created by the forgetful functor.  The categorical
+product
+\[
+    A\times B
+\]
+is characterized by
+\[
+    \mathbf{FDom}_{\mathbb V}(X,A\times B)
+    \cong
+    \mathbf{FDom}_{\mathbb V}(X,A)
+    \times
+    \mathbf{FDom}_{\mathbb V}(X,B).
+\]
+
+The Kelly tensor product
+\[
+    A\boxtimes_{\mathrm{ff}}B
+\]
+is characterized instead by
+\[
+    \mathbf{FDom}_{\mathbb V}(A\boxtimes_{\mathrm{ff}}B,C)
+    \cong
+    \operatorname{Bimor}_{\mathrm{ff}}(A,B;C).
+\]
+Thus the categorical product represents pairs of morphisms out of a common
+domain, whereas the Kelly tensor product represents separately
+finite-flat-colimit-preserving bimorphisms.
+
+For general fuzzy truth-value bases these are different universal properties, so
+there is no canonical identification between
+\[
+    A\times B
+\]
+and
+\[
+    A\boxtimes_{\mathrm{ff}}B
+\]
+without a separate comparison theorem.  In the crisp separated case, the
+separate theorem is that separately Scott-continuous maps out of the product
+dcpo are jointly Scott-continuous.  Hence, for dcpos,
+\[
+    A\boxtimes_{\mathrm{ff}}B
+    \cong
+    A\times B.
+\]
+
+\section{Summary}
+\label{sec:summary-fdom-rewrite}
+
+The category of fuzzy domains is the Eilenberg--Moore category of the fuzzy ideal
+monad:
+\[
+    \mathbf{FDom}_{\mathbb V}
+    =
+    (\mathbb V\text{-}\mathbf{Cat})^{T_{\mathbb V}}.
+\]
+A fuzzy domain is equivalently a small \(\mathbb V\)-category equipped with a
+strict coherent choice of finite-flat weighted colimits, and a fuzzy-domain
+morphism is equivalently a \(\mathbb V\)-functor preserving those colimits.
+
+The forgetful functor
+\[
+    U:\mathbf{FDom}_{\mathbb V}\to\mathbb V\text{-}\mathbf{Cat}
+\]
+is monadic.  Its left adjoint sends
+\[
+    X
+    \longmapsto
+    \operatorname{Idl}_{\mathbb V}(X).
+\]
+The category \(\mathbf{FDom}_{\mathbb V}\) has the small conical limits created
+by \(U\), whenever the corresponding underlying limits exist in
+\(\mathbb V\text{-}\mathbf{Cat}\).
+
+The finite-flat doctrine is saturated and commutative.  It is saturated because
+finite-flat weights contain the representables, are stable under lower direct
+image, and are closed under finite-flat weighted colimits in presheaf
+categories.  It is commutative because external products of finite-flat weights
+are finite-flat and finite-flat weighted colimits satisfy Fubini.  Therefore
+Kelly's tensor-product theorem applies to the finite-flat doctrine.  The
+resulting tensor product
+\[
+    A\boxtimes_{\mathrm{ff}}B
+\]
+represents finite-flat bimorphisms
+\[
+    A\tensor B\to C.
+\]
+The internal hom is
+\[
+    [B,C]_{\mathrm{ff}},
+\]
+the fuzzy domain of finite-flat-colimit-preserving functors
+\[
+    B\to C.
+\]
+Thus
+\[
+    \mathbf{FDom}_{\mathbb V}
+    (A\boxtimes_{\mathrm{ff}}B,C)
+    \cong
+    \mathbf{FDom}_{\mathbb V}
+    \bigl(A,[B,C]_{\mathrm{ff}}\bigr),
+\]
+so \(\mathbf{FDom}_{\mathbb V}\) is symmetric monoidal closed.
+
+In the crisp separated case,
+\[
+    \mathbf{FDom}_{2}^{\mathrm{sep}}
+    \simeq
+    \mathbf{DCPO},
+\]
+where dcpos are taken small in the chosen universe.  The Kelly tensor product is
+canonically identified with the cartesian product of dcpos,
+\[
+    A\boxtimes_{\mathrm{ff}}B
+    \cong
+    A\times B,
+\]
+and the internal hom is the dcpo of Scott-continuous maps ordered pointwise.

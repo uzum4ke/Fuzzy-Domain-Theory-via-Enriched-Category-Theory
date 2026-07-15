@@ -1,0 +1,3959 @@
+\chapter{Recursive Domain Equations by Finite-Flat Cofinal Approximation}
+\label{ch:recursive-domain-equations-finite-flat}
+
+In the preceding chapters we constructed the fuzzy ideal monad
+\[
+    T_{\mathbb V}X
+    =
+    \operatorname{Idl}_{\mathbb V}(X),
+\]
+where \(\operatorname{Idl}_{\mathbb V}(X)\) is the full
+\(\mathbb V\)-subcategory of
+\[
+    [X^{\op},\underline{\mathbb V}]
+\]
+spanned by the finite-flat weights
+\[
+    I:X^{\op}\to\underline{\mathbb V}.
+\]
+Here \(\mathbb V\) denotes the fuzzy cosmos and
+\(\underline{\mathbb V}\) denotes its self-enriched
+\(\mathbb V\)-category of truth values.
+
+Strict algebras for this monad are the fuzzy domains.  Equivalently, a fuzzy
+domain is a small \(\mathbb V\)-category equipped with a strict coherent choice
+of finite-flat weighted colimits, and a fuzzy-domain morphism is a
+finite-flat-colimit-preserving \(\mathbb V\)-functor.
+
+We also use the symmetric monoidal closed structure on fuzzy domains:
+\[
+    A\boxtimes_{\mathrm{ff}}B
+    \dashv
+    [B,-]_{\mathrm{ff}}.
+\]
+Thus
+\[
+    \mathbf{FDom}_{\mathbb V}
+    (A\boxtimes_{\mathrm{ff}}B,C)
+    \cong
+    \mathbf{FDom}_{\mathbb V}
+    \bigl(A,[B,C]_{\mathrm{ff}}\bigr),
+\]
+where \([B,C]_{\mathrm{ff}}\) is the fuzzy domain of
+finite-flat-colimit-preserving \(\mathbb V\)-functors \(B\to C\).
+
+The purpose of this chapter is to formulate recursive domain equation
+constructions inside the finite-flat doctrine.  The classical construction by
+\(\omega\)-chain bilimits in dcpos is recovered as the crisp separated
+specialization.  The general replacement for an ordinary directed indexing
+chain is a finite-flat approximation shape
+\[
+    (A,W),
+    \qquad
+    W:A^{\op}\to\underline{\mathbb V}.
+\]
+Cofinality is expressed by lower direct image of weights.  Tails and common
+successors are not chosen arbitrarily; they are given by canonical
+comma-style constructions, and the relevant exactness conditions say that
+these canonical constructions are cofinal in the finite-flat sense.
+
+The semantic target in the general resource-sensitive setting is not an
+ordinary cartesian reflexive object
+\[
+    D\simeq [D,D]_{\mathrm{ff}}.
+\]
+In an affine enriched setting there is no canonical diagonal functor
+\[
+    A\to A\tensor A,
+\]
+since such a functor would require canonical contraction morphisms
+\[
+    A(a,a')\to A(a,a')\tensor A(a,a').
+\]
+Affinity gives weakening morphisms
+\[
+    A(a,a')\to I,
+\]
+not contraction into tensor squares.
+
+Consequently the general internal-hom approximation theorem is
+external-product-indexed:
+\[
+    (A\tensor A,W\boxtimes W).
+\]
+The same-index collapse is recovered only in the crisp separated/cartesian
+specialization, where the ordinary diagonal
+\[
+    \omega\to\omega\times\omega
+\]
+exists and is cofinal for the ordinary directed ideal.
+
+\section{Finite-flat approximation shapes}
+\label{sec:finite-flat-approximation-shapes}
+
+Throughout this chapter, finite-flatness is understood relative to the
+finite-limit doctrine used in the definition of categorical fuzzy frames.  Thus
+in a predicate category \([X,\underline{\mathbb V}]\), the specified finite
+limits are computed pointwise.  In the posetal scalar-frame specialization this
+means preservation of the terminal predicate and binary meets.
+
+\begin{definition}[Finite-flat approximation shape]
+\label{def:finite-flat-approximation-shape}
+A \emph{finite-flat approximation shape} is a pair
+\[
+    (A,W),
+\]
+where \(A\) is a small \(\mathbb V\)-category and
+\[
+    W:A^{\op}\to\underline{\mathbb V}
+\]
+is a finite-flat weight.  Equivalently,
+\[
+    W\in\operatorname{Idl}_{\mathbb V}(A).
+\]
+
+If \(X\) is a fuzzy domain and
+\[
+    D:A\to X
+\]
+is a \(\mathbb V\)-functor, the corresponding approximation object is the
+finite-flat weighted colimit
+\[
+    W*D.
+\]
+\end{definition}
+
+Thus the passage from ordinary directed joins to fuzzy-domain approximation is
+the passage
+\[
+    \bigvee_{a\in A}D_a
+    \quad\leadsto\quad
+    W*D.
+\]
+
+\begin{definition}[Lower direct image of a weight]
+\label{def:lower-direct-image-weight-rde}
+Let
+\[
+    h:A\to B
+\]
+be a \(\mathbb V\)-functor, and let
+\[
+    W:A^{\op}\to\underline{\mathbb V}
+\]
+be a weight.  The lower direct image of \(W\) along \(h\) is the weight
+\[
+    h_!W:B^{\op}\to\underline{\mathbb V}
+\]
+defined by
+\[
+    (h_!W)(b)
+    =
+    \int^{a\in A}
+        W(a)\tensor B(b,ha).
+\]
+Equivalently, \(h_!W\) is the weighted left Kan extension of \(W\) along
+\[
+    h^{\op}:A^{\op}\to B^{\op}.
+\]
+\end{definition}
+
+By the finite-flat direct-image theorem for the ideal doctrine, if \(W\) is
+finite-flat, then \(h_!W\) is finite-flat.
+
+\begin{definition}[Cofinal map of approximation shapes]
+\label{def:cofinal-map-approximation-shapes}
+Let
+\[
+    (A,W),
+    \qquad
+    (B,U)
+\]
+be finite-flat approximation shapes.  A \(\mathbb V\)-functor
+\[
+    h:A\to B
+\]
+is \emph{cofinal from \((A,W)\) to \((B,U)\)} if the canonical comparison
+exhibits an isomorphism of weights
+\[
+    h_!W\cong U.
+\]
+When \(A=B\) and \(U=W\), we say that \(h\) is \(W\)-cofinal.
+\end{definition}
+
+Thus cofinality is equality of approximation weights after lower direct image,
+not merely a pointwise finality condition on objects.
+
+\begin{proposition}[Cofinality for finite-flat weighted colimits]
+\label{prop:finite-flat-cofinality}
+Let
+\[
+    h:(A,W)\to(B,U)
+\]
+be a cofinal map of finite-flat approximation shapes.  Then for every fuzzy
+domain \(X\) and every diagram
+\[
+    D:B\to X,
+\]
+there is a canonical isomorphism
+\[
+    U*D
+    \cong
+    W*(Dh).
+\]
+\end{proposition}
+
+\begin{proof}
+Since \(h\) is cofinal,
+\[
+    U\cong h_!W.
+\]
+For every \(x\in X\), the universal property of weighted colimits and the
+weighted left-Kan-extension adjunction give
+\[
+\begin{aligned}
+    X((h_!W)*D,x)
+    &\cong
+    [B^{\op},\underline{\mathbb V}]
+    (h_!W,X(D-,x))
+    \\
+    &\cong
+    [A^{\op},\underline{\mathbb V}]
+    (W,X(Dh-,x))
+    \\
+    &\cong
+    X(W*(Dh),x).
+\end{aligned}
+\]
+By enriched Yoneda,
+\[
+    (h_!W)*D\cong W*(Dh).
+\]
+Using \(U\cong h_!W\), this gives
+\[
+    U*D\cong W*(Dh).
+\]
+\end{proof}
+
+\begin{definition}[External product of approximation shapes]
+\label{def:external-product-approximation-shapes-rde}
+Let
+\[
+    (A,W),
+    \qquad
+    (B,Q)
+\]
+be finite-flat approximation shapes.  Their external product is
+\[
+    (A,W)\boxtimes(B,Q)
+    =
+    (A\tensor B,W\boxtimes Q),
+\]
+where
+\[
+    (W\boxtimes Q)(a,b)
+    =
+    W(a)\tensor Q(b).
+\]
+By closure of finite-flat weights under external products,
+\[
+    W\boxtimes Q
+\]
+is finite-flat.
+\end{definition}
+
+\begin{lemma}[Constant diagrams]
+\label{lem:constant-diagrams-finite-flat}
+Let
+\[
+    (A,W)
+\]
+be a finite-flat approximation shape.  For every fuzzy domain \(X\) and every
+object \(x\in X\), the \(W\)-weighted colimit of the constant diagram at \(x\)
+is canonically \(x\):
+\[
+    W*\Delta x\cong x.
+\]
+\end{lemma}
+
+\begin{proof}
+Let
+\[
+    !:A\to\mathbb 1
+\]
+be the terminal functor, and let
+\[
+    \bar x:\mathbb 1\to X
+\]
+classify the object \(x\).  The constant diagram at \(x\) is
+\[
+    \Delta x=\bar x!.
+\]
+
+Since \(W\) is finite-flat, its character
+\[
+    \chi_W:[A,\underline{\mathbb V}]\to\underline{\mathbb V}
+\]
+preserves the terminal predicate.  Let
+\[
+    \top_A:A\to\underline{\mathbb V}
+\]
+be the constant upper predicate at \(I\).  Then
+\[
+\begin{aligned}
+    (!_!W)(*)
+    &=
+    \int^{a\in A}W(a)\tensor \mathbb 1(*,!a)
+    \\
+    &\cong
+    \int^{a\in A}W(a)\tensor I
+    \\
+    &=
+    \chi_W(\top_A)
+    \\
+    &\cong
+    I.
+\end{aligned}
+\]
+Thus
+\[
+    !_!W\cong \mathbb 1(-,*).
+\]
+By Proposition~\ref{prop:finite-flat-cofinality},
+\[
+    W*(\bar x!)
+    \cong
+    (!_!W)*\bar x
+    \cong
+    \mathbb 1(-,*)*\bar x
+    \cong
+    x.
+\]
+\end{proof}
+
+\begin{lemma}[Functoriality of finite-flat colimits in diagrams]
+\label{lem:ff-colimits-functorial-in-diagrams}
+Let \(C\) be a fuzzy domain, let
+\[
+    R:P^{\op}\to\underline{\mathbb V}
+\]
+be finite-flat, and let
+\[
+    H,H':P\to C
+\]
+be \(\mathbb V\)-functors.  A \(\mathbb V\)-natural transformation
+\[
+    \gamma:H\Rightarrow H'
+\]
+induces a canonical morphism
+\[
+    R*H\longrightarrow R*H'
+\]
+in \(C\).  This construction is functorial in \(\gamma\).
+\end{lemma}
+
+\begin{proof}
+For each object \(c\in C\), the universal property of the weighted colimit gives
+natural isomorphisms
+\[
+    C(R*H,c)
+    \cong
+    [P^{\op},\underline{\mathbb V}]
+    (R,C(H-,c))
+\]
+and
+\[
+    C(R*H',c)
+    \cong
+    [P^{\op},\underline{\mathbb V}]
+    (R,C(H'-,c)).
+\]
+The natural transformation
+\[
+    \gamma:H\Rightarrow H'
+\]
+induces by precomposition a \(\mathbb V\)-natural transformation
+\[
+    C(H'-,c)\Rightarrow C(H-,c).
+\]
+Transporting across the representing isomorphisms gives a morphism
+\[
+    C(R*H',c)\longrightarrow C(R*H,c)
+\]
+natural in \(c\).  By enriched Yoneda this family is represented by a unique
+morphism
+\[
+    R*H\longrightarrow R*H'.
+\]
+Functoriality follows from functoriality of precomposition and uniqueness in
+the representing property.
+\end{proof}
+
+\section{Support categories and projection-pair systems}
+\label{sec:support-categories-split-systems}
+
+Projection-pair systems indexed by an enriched category use global support
+arrows for the actual transition projection pairs.  The remaining enriched
+hom-structure enters through transition-strength morphisms.
+
+\begin{definition}[Support category of an enriched index]
+\label{def:support-category-enriched-index}
+Let \(A\) be a small \(\mathbb V\)-category.  Its support category
+\[
+    A_0
+\]
+is the ordinary category with the same objects as \(A\), and hom-set
+\[
+    A_0(a,a')=\mathbb V(I,A(a,a')).
+\]
+If
+\[
+    u:I\to A(a,a')
+    \qquad\text{and}\qquad
+    v:I\to A(a',a'')
+\]
+are arrows in \(A_0\), their composite is the global element
+\[
+    I\cong I\tensor I
+    \xrightarrow{\,v\tensor u\,}
+    A(a',a'')\tensor A(a,a')
+    \longrightarrow
+    A(a,a'')
+\]
+induced by composition in \(A\).  Identities are the enriched identity maps
+\[
+    I\to A(a,a).
+\]
+
+In the posetal specialization, \(A_0(a,a')\) has a unique arrow precisely when
+\[
+    A(a,a')=\top.
+\]
+\end{definition}
+
+\begin{lemma}[Support projections from an enriched tensor product]
+\label{lem:support-projections-tensor-product}
+Let \(A\) and \(B\) be small \(\mathbb V\)-categories.  There is a canonical
+ordinary functor
+\[
+    (A\tensor B)_0\to A_0\times B_0.
+\]
+On objects it sends
+\[
+    (a,b)\longmapsto(a,b).
+\]
+On arrows, a global element
+\[
+    \xi:I\to A(a,a')\tensor B(b,b')
+\]
+is sent to the pair
+\[
+    \xi_A:I\to A(a,a'),
+    \qquad
+    \xi_B:I\to B(b,b'),
+\]
+where \(\xi_A\) is obtained by composing \(\xi\) with
+\[
+    A(a,a')\tensor B(b,b')
+    \xrightarrow{1\tensor !}
+    A(a,a')\tensor I
+    \cong
+    A(a,a'),
+\]
+and \(\xi_B\) is obtained similarly using
+\[
+    A(a,a')\tensor B(b,b')
+    \xrightarrow{!\tensor 1}
+    I\tensor B(b,b')
+    \cong
+    B(b,b').
+\]
+\end{lemma}
+
+\begin{proof}
+The terminality of \(I\) gives the weakening maps
+\[
+    B(b,b')\to I,
+    \qquad
+    A(a,a')\to I.
+\]
+Thus the two displayed projections are canonical.
+
+Compatibility with identities is immediate from the unit constraints.  For
+composition, the composition in \(A\tensor B\) is induced by the tensor of the
+compositions in \(A\) and \(B\).  Applying the two weakening projections sends
+this composite to the ordinary composites in \(A_0\) and \(B_0\).  Hence the
+assignment defines an ordinary functor.
+\end{proof}
+
+\begin{definition}[The locally ordinary \(2\)-category of fuzzy domains]
+\label{def:locally-ordinary-2-category-fdom}
+Let
+\[
+    \mathbf{FDom}^{(2)}_{\mathbb V}
+\]
+be the locally ordinary \(2\)-category defined as follows.
+
+Its objects are fuzzy domains.  Its \(1\)-cells are fuzzy-domain morphisms.
+For fuzzy domains \(X,Y\), the hom-category is the support category of the
+internal-hom fuzzy domain:
+\[
+    \mathbf{FDom}^{(2)}_{\mathbb V}(X,Y)
+    =
+    \bigl([X,Y]_{\mathrm{ff}}\bigr)_0.
+\]
+Thus a \(2\)-cell
+\[
+    \alpha:f\Rightarrow g
+\]
+is a global element
+\[
+    I\to [X,Y]_{\mathrm{ff}}(f,g).
+\]
+
+Horizontal composition is induced by the finite-flat-continuous composition
+bimorphism
+\[
+    [Y,Z]_{\mathrm{ff}}\boxtimes_{\mathrm{ff}}[X,Y]_{\mathrm{ff}}
+    \longrightarrow
+    [X,Z]_{\mathrm{ff}}.
+\]
+Vertical composition is inherited from the support categories of the internal
+homs.
+\end{definition}
+
+\begin{definition}[Fuzzy projection pair]
+\label{def:fuzzy-projection-pair-ff}
+Let \(X\) and \(Y\) be fuzzy domains.  A \emph{fuzzy projection pair}
+\[
+    (e,p):X\triangleleft Y
+\]
+consists of fuzzy-domain morphisms
+\[
+    e:X\to Y,
+    \qquad
+    p:Y\to X,
+\]
+together with an adjunction
+\[
+    e\dashv p
+\]
+in \(\mathbf{FDom}^{(2)}_{\mathbb V}\), whose unit
+\[
+    \eta:\id_X\Rightarrow pe
+\]
+is invertible.
+
+Equivalently, after choosing the inverse of the unit, one has
+\[
+    pe\cong \id_X
+\]
+and a counit comparison
+\[
+    ep\Rightarrow \id_Y
+\]
+satisfying the triangle identities.  The morphism \(e\) is called the
+embedding and \(p\) the projection.
+\end{definition}
+
+\begin{lemma}[Composition of fuzzy projection pairs]
+\label{lem:composition-fuzzy-projection-pairs-ff}
+Fuzzy projection pairs compose.  If
+\[
+    (e,p):X\triangleleft Y
+\]
+and
+\[
+    (e',p'):Y\triangleleft Z
+\]
+are fuzzy projection pairs, then
+\[
+    (e'e,pp'):X\triangleleft Z
+\]
+is a fuzzy projection pair.
+\end{lemma}
+
+\begin{proof}
+The composite of adjunctions
+\[
+    e\dashv p,
+    \qquad
+    e'\dashv p'
+\]
+is an adjunction
+\[
+    e'e\dashv pp'.
+\]
+Its unit is the composite
+\[
+    \id_X
+    \Rightarrow
+    pe
+    \Rightarrow
+    pp'e'e.
+\]
+Both displayed unit maps are invertible, hence the composite unit is invertible.
+The counit and the triangle identities are those of the composite adjunction.
+\end{proof}
+
+\begin{definition}[Projection-pair 2-cells]
+\label{def:projection-pair-2-cells}
+Let
+\[
+    (e,p),(e',p'):X\triangleleft Y
+\]
+be fuzzy projection pairs.  A 2-cell
+\[
+    (\alpha,\beta):(e,p)\Rightarrow(e',p')
+\]
+consists of enriched natural transformations
+\[
+    \alpha:e\Rightarrow e',
+    \qquad
+    \beta:p'\Rightarrow p
+\]
+which are mates under the adjunctions
+\[
+    e\dashv p,
+    \qquad
+    e'\dashv p'.
+\]
+\end{definition}
+
+\begin{definition}[Projection-pair 2-category]
+\label{def:projection-pair-2-category-ff}
+The locally ordinary \(2\)-category
+\[
+    \mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+has fuzzy domains as objects, fuzzy projection pairs as \(1\)-cells, and
+mate-compatible pairs of enriched natural transformations as \(2\)-cells.
+The identity \(1\)-cell on \(X\) is
+\[
+    (\id_X,\id_X):X\triangleleft X,
+\]
+and composition is
+\[
+    (e',p')\circ(e,p)=(e'e,pp').
+\]
+Vertical and horizontal composition of \(2\)-cells are inherited from
+\(\mathbf{FDom}^{(2)}_{\mathbb V}\); mate-compatibility is preserved by the
+calculus of mates.
+\end{definition}
+
+\begin{definition}[Split \(A\)-indexed projection-pair system]
+\label{def:split-A-indexed-projection-pair-system}
+Let \(A\) be a small \(\mathbb V\)-category.  A
+\emph{split \(A\)-indexed projection-pair system}
+\[
+    D:A\rightsquigarrow\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+consists of:
+
+\begin{enumerate}
+    \item for every object \(a\in A\), a fuzzy domain \(D_a\);
+
+    \item for every arrow
+    \[
+        u:a\to a'
+    \]
+    in the support category \(A_0\), a fuzzy projection pair
+    \[
+        (e_u,p_u):D_a\triangleleft D_{a'};
+    \]
+
+    \item normality isomorphisms
+    \[
+        (e_{1_a},p_{1_a})\cong(\id_{D_a},\id_{D_a});
+    \]
+
+    \item composition isomorphisms
+    \[
+        e_v e_u\cong e_{vu},
+        \qquad
+        p_u p_v\cong p_{vu}
+    \]
+    for composable support arrows
+    \[
+        a\xrightarrow{u}a'\xrightarrow{v}a'';
+    \]
+
+    \item the coherence equations for identities, composition, and
+    associativity.
+\end{enumerate}
+\end{definition}
+
+If
+\[
+    h:A\to B
+\]
+is a \(\mathbb V\)-functor, it induces an ordinary functor
+\[
+    h_0:A_0\to B_0.
+\]
+Thus a split \(B\)-indexed system
+\[
+    D:B\rightsquigarrow\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+has a reindexing
+\[
+    Dh:A\rightsquigarrow\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+defined on objects by
+\[
+    (Dh)_a=D_{ha}
+\]
+and on support arrows by applying \(D\) to their images under \(h_0\).
+
+\begin{definition}[Compatible projection-pair cone]
+\label{def:compatible-projection-pair-cone-split}
+Let
+\[
+    D:A\rightsquigarrow\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+be a split \(A\)-indexed projection-pair system, and let \(Z\) be a fuzzy
+domain.
+
+A \emph{compatible projection-pair cone} from \(D\) to \(Z\) consists of
+projection pairs
+\[
+    (\varepsilon_a,\pi_a):D_a\triangleleft Z
+    \qquad(a\in A),
+\]
+together with:
+
+\begin{enumerate}
+    \item for every support arrow
+    \[
+        u:a\to a'
+    \]
+    in \(A_0\), coherent isomorphisms
+    \[
+        \varepsilon_{a'}e_u\cong \varepsilon_a,
+        \qquad
+        p_u\pi_{a'}\cong \pi_a;
+    \]
+
+    \item writing
+    \[
+        r_a=\varepsilon_a\pi_a:Z\to Z,
+    \]
+    enriched transition-strength morphisms
+    \[
+        \theta^Z_{a,a'}:
+        A(a,a')
+        \longrightarrow
+        [Z,Z]_{\mathrm{ff}}(r_a,r_{a'})
+    \]
+    satisfying the identity and composition axioms for a \(\mathbb V\)-functor
+    \[
+        r:A\to[Z,Z]_{\mathrm{ff}};
+    \]
+
+    \item for every support arrow
+    \[
+        u:I\to A(a,a'),
+    \]
+    the composite
+    \[
+        I
+        \xrightarrow{u}
+        A(a,a')
+        \xrightarrow{\theta^Z_{a,a'}}
+        [Z,Z]_{\mathrm{ff}}(r_a,r_{a'})
+    \]
+    is the canonical comparison
+    \[
+        \varepsilon_a\pi_a
+        \cong
+        \varepsilon_{a'}e_u p_u\pi_{a'}
+        \Rightarrow
+        \varepsilon_{a'}\pi_{a'}
+    \]
+    induced by the counit
+    \[
+        e_u p_u\Rightarrow \id_{D_{a'}}.
+    \]
+\end{enumerate}
+
+A morphism of compatible cones is a family of mate-compatible enriched natural
+transformations between the corresponding projection pairs, compatible with the
+support-arrow cone isomorphisms and with the transition-strength morphisms.  The
+resulting category of compatible cones is denoted
+\[
+    \operatorname{Cone}_{\triangleleft}(D;Z).
+\]
+\end{definition}
+
+\begin{lemma}[The approximant functor of a compatible cone]
+\label{lem:approximants-are-functorial}
+Let
+\[
+    D:A\rightsquigarrow\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+be a split \(A\)-indexed projection-pair system, and let
+\[
+    (\varepsilon_a,\pi_a):D_a\triangleleft Z
+\]
+be a compatible projection-pair cone.  Define
+\[
+    r_a=\varepsilon_a\pi_a:Z\to Z.
+\]
+Then the objects \(r_a\) assemble canonically to a \(\mathbb V\)-functor
+\[
+    r:A\to[Z,Z]_{\mathrm{ff}}.
+\]
+\end{lemma}
+
+\begin{proof}
+This is precisely the content of the transition-strength data in
+Definition~\ref{def:compatible-projection-pair-cone-split}.
+\end{proof}
+
+\section{Canonical tails and common successors}
+\label{sec:canonical-tails-common-successors}
+
+The ordinary \(\omega\)-chain construction uses two elementary cofinality
+facts: every tail of \(\omega\) is cofinal, and any two indices have a common
+later index.  In the finite-flat enriched setting these facts are represented
+by canonical support-comma constructions.
+
+\subsection{Canonical tails}
+
+\begin{definition}[Canonical support tail]
+\label{def:canonical-support-tail}
+Let \(A\) be a small \(\mathbb V\)-category and let \(a_0\in A\).  The
+\emph{canonical support tail} of \(A\) at \(a_0\) is the enriched category
+\[
+    \operatorname{Tail}_A(a_0)
+\]
+defined as follows.
+
+Its objects are pairs
+\[
+    (a,u),
+    \qquad
+    u:a_0\to a
+\]
+where \(u\) is an arrow in the support category \(A_0\).
+
+The hom-object from
+\[
+    (a,u)
+\]
+to
+\[
+    (a',u')
+\]
+is the equalizer in \(\mathbb V\)
+\[
+    \operatorname{Tail}_A(a_0)((a,u),(a',u'))
+    \longrightarrow
+    A(a,a')
+    \rightrightarrows
+    A(a_0,a').
+\]
+The first parallel map is composition with the global element
+\[
+    u:I\to A(a_0,a).
+\]
+The second is the constant map determined by the global element
+\[
+    u':I\to A(a_0,a'),
+\]
+using the terminality of \(I\).  Composition and identities are inherited from
+\(A\), by the universal property of the equalizers.
+
+The evident projection
+\[
+    \tau_{a_0}:\operatorname{Tail}_A(a_0)\to A,
+    \qquad
+    (a,u)\longmapsto a,
+\]
+is a \(\mathbb V\)-functor.
+\end{definition}
+
+In the crisp preorder case, \(\operatorname{Tail}_A(a_0)\) is the full tail
+suborder on the elements \(a\) satisfying \(a_0\leq a\).
+
+\begin{definition}[Canonical tail weight]
+\label{def:canonical-tail-weight}
+Let
+\[
+    (A,W)
+\]
+be a finite-flat approximation shape and let \(a_0\in A\).  The
+\emph{canonical tail weight} at \(a_0\) is
+\[
+    W^{a_0}
+    =
+    \tau_{a_0}^{*}W
+    :
+    \operatorname{Tail}_A(a_0)^{\op}
+    \to
+    \underline{\mathbb V}.
+\]
+Thus
+\[
+    W^{a_0}(a,u)=W(a).
+\]
+\end{definition}
+
+\begin{definition}[Tail-cofinal approximation shape]
+\label{def:tail-cofinal-approximation-shape}
+A finite-flat approximation shape
+\[
+    (A,W)
+\]
+is \emph{tail-cofinal} if, for every object \(a_0\in A\), the canonical tail
+weight
+\[
+    W^{a_0}=\tau_{a_0}^{*}W
+\]
+is finite-flat and the canonical direct-image comparison is an isomorphism:
+\[
+    (\tau_{a_0})_!W^{a_0}\cong W.
+\]
+\end{definition}
+
+\begin{lemma}[Constant diagrams over canonical tails]
+\label{lem:constant-diagrams-canonical-tail}
+Let
+\[
+    (A,W)
+\]
+be tail-cofinal, and let \(a_0\in A\).  For every fuzzy domain \(X\) and every
+object \(x\in X\),
+\[
+    W^{a_0}*\Delta x\cong x.
+\]
+\end{lemma}
+
+\begin{proof}
+By tail-cofinality, \(W^{a_0}\) is finite-flat.  Hence the result is
+Lemma~\ref{lem:constant-diagrams-finite-flat} applied to
+\[
+    (\operatorname{Tail}_A(a_0),W^{a_0}).
+\]
+\end{proof}
+
+\subsection{Canonical common successors}
+
+\begin{definition}[Canonical common-successor category]
+\label{def:canonical-common-successor-category}
+Let \(P\) be a small \(\mathbb V\)-category.  The
+\emph{canonical common-successor category}
+\[
+    \operatorname{Com}(P)
+\]
+is defined as follows.
+
+An object of \(\operatorname{Com}(P)\) is a tuple
+\[
+    (i,j,k,u,v),
+\]
+where \(i,j,k\in P\), and
+\[
+    u:i\to k,
+    \qquad
+    v:j\to k
+\]
+are arrows in the support category \(P_0\).
+
+For two objects
+\[
+    c=(i,j,k,u,v),
+    \qquad
+    c'=(i',j',k',u',v'),
+\]
+the hom-object
+\[
+    \operatorname{Com}(P)(c,c')
+\]
+is the equalizer in \(\mathbb V\) of the compatibility maps expressing
+\[
+    u'r=tu,
+    \qquad
+    v's=tv
+\]
+for triples
+\[
+    r:i\to i',
+    \qquad
+    s:j\to j',
+    \qquad
+    t:k\to k'.
+\]
+Explicitly, it is the equalizer of the two pairs of maps from
+\[
+    P(i,i')\tensor P(j,j')\tensor P(k,k')
+\]
+to
+\[
+    P(i,k')\times P(j,k')
+\]
+obtained respectively from the composites
+\[
+    u'r,\quad tu,
+    \qquad
+    v's,\quad tv.
+\]
+Composition and identities are inherited from those of \(P\).
+
+There are canonical \(\mathbb V\)-functors
+\[
+    c_P:\operatorname{Com}(P)\to P\tensor P,
+    \qquad
+    m_P:\operatorname{Com}(P)\to P
+\]
+defined on objects by
+\[
+    c_P(i,j,k,u,v)=(i,j),
+    \qquad
+    m_P(i,j,k,u,v)=k.
+\]
+\end{definition}
+
+In the crisp preorder case, an object of \(\operatorname{Com}(P)\) is exactly
+a common upper bound
+\[
+    i\leq k,
+    \qquad
+    j\leq k.
+\]
+
+\begin{definition}[Canonical common-successor weight]
+\label{def:canonical-common-successor-weight}
+Let
+\[
+    (P,R)
+\]
+be a finite-flat approximation shape.  The
+\emph{canonical common-successor weight} is
+\[
+    R^{\mathrm{com}}
+    =
+    m_P^{*}R:
+    \operatorname{Com}(P)^{\op}
+    \to
+    \underline{\mathbb V}.
+\]
+Thus, on objects,
+\[
+    R^{\mathrm{com}}(i,j,k,u,v)=R(k).
+\]
+\end{definition}
+
+\begin{definition}[Common-successor-cofinal approximation shape]
+\label{def:common-successor-cofinal-shape}
+A finite-flat approximation shape
+\[
+    (P,R)
+\]
+is \emph{common-successor-cofinal} if the canonical common-successor weight
+\[
+    R^{\mathrm{com}}=m_P^*R
+\]
+is finite-flat and the canonical maps
+\[
+    c_P:\operatorname{Com}(P)\to P\tensor P,
+    \qquad
+    m_P:\operatorname{Com}(P)\to P
+\]
+satisfy
+\[
+    (c_P)_!R^{\mathrm{com}}\cong R\boxtimes R,
+    \qquad
+    (m_P)_!R^{\mathrm{com}}\cong R.
+\]
+\end{definition}
+
+Thus common-successor-cofinality is the finite-flat analogue of directedness:
+double approximation indexed by \(P\tensor P\) can be compared with
+approximation over canonical common successors, and then with single
+approximation over \(P\).
+
+\begin{definition}[Linear-cofinal finite-flat approximation shape]
+\label{def:linear-cofinal-ff-approximation-shape}
+A finite-flat approximation shape
+\[
+    (A,W)
+\]
+is \emph{linear-cofinal} if:
+
+\begin{enumerate}
+    \item it is tail-cofinal;
+
+    \item its external product
+    \[
+        (A\tensor A,W\boxtimes W)
+    \]
+    is common-successor-cofinal.
+\end{enumerate}
+\end{definition}
+
+This deliberately does not include a diagonal comparison
+\[
+    A\to A\tensor A.
+\]
+The diagonal is a cartesian feature and appears only in the crisp separated
+collapse.
+
+\section{Weight-cofinal iteration shapes}
+\label{sec:weight-cofinal-iteration-shapes}
+
+\begin{definition}[Weight-cofinal iteration shape]
+\label{def:weight-cofinal-iteration-shape}
+A \emph{weight-cofinal iteration shape} is a triple
+\[
+    (A,W,s),
+\]
+where \((A,W)\) is a finite-flat approximation shape and
+\[
+    s:A\to A
+\]
+is a \(W\)-cofinal endofunctor:
+\[
+    s_!W\cong W.
+\]
+\end{definition}
+
+\begin{lemma}[Shift invariance for weighted approximation]
+\label{lem:shift-invariance-rde}
+Let
+\[
+    (A,W,s)
+\]
+be a weight-cofinal iteration shape.  For every fuzzy domain \(X\) and every
+diagram
+\[
+    D:A\to X,
+\]
+there is a canonical isomorphism
+\[
+    W*(Ds)
+    \cong
+    W*D.
+\]
+\end{lemma}
+
+\begin{proof}
+Apply Proposition~\ref{prop:finite-flat-cofinality} to the \(W\)-cofinal map
+\[
+    s:(A,W)\to(A,W).
+\]
+\end{proof}
+
+\section{Finite-flat cofinal bilimits}
+\label{sec:finite-flat-cofinal-bilimits}
+
+\begin{definition}[\(W\)-bilimit cone]
+\label{def:W-bilimit-cone}
+Let
+\[
+    (A,W)
+\]
+be a finite-flat approximation shape, and let
+\[
+    D:A\rightsquigarrow\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+be a split \(A\)-indexed projection-pair system.
+
+A \emph{\(W\)-bilimit cone} over \(D\) consists of a fuzzy domain
+\[
+    D_\infty
+\]
+and a compatible projection-pair cone
+\[
+    (\varepsilon_a,\pi_a):D_a\triangleleft D_\infty
+    \qquad(a\in A),
+\]
+such that:
+
+\begin{enumerate}
+    \item the cone represents compatible projection-pair cones: for every fuzzy
+    domain \(Z\), composition with the cone induces an equivalence
+    \[
+        \mathbf{FDom}_{\mathbb V}^{\triangleleft}(D_\infty,Z)
+        \simeq
+        \operatorname{Cone}_{\triangleleft}(D;Z);
+    \]
+
+    \item if
+    \[
+        r:A\to[D_\infty,D_\infty]_{\mathrm{ff}}
+    \]
+    is the approximant functor
+    \[
+        r_a=\varepsilon_a\pi_a,
+    \]
+    then the finite-flat approximation identity holds:
+    \[
+        W*r
+        \cong
+        \id_{D_\infty}
+    \]
+    in
+    \[
+        [D_\infty,D_\infty]_{\mathrm{ff}}.
+    \]
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}[Uniqueness of \(W\)-bilimits]
+\label{lem:uniqueness-W-bilimits}
+Any two \(W\)-bilimit cones over the same split projection-pair system are
+equivalent, and the equivalence is unique up to invertible compatible \(2\)-cell.
+\end{lemma}
+
+\begin{proof}
+This is the uniqueness part of the representing equivalence in
+Definition~\ref{def:W-bilimit-cone}.  The approximation identity is transported
+along the resulting compatible equivalence because it is expressed in the
+internal hom of endomorphisms.
+\end{proof}
+
+\begin{definition}[Bilimit-cofinal reindexing]
+\label{def:bilimit-cofinal-reindexing}
+Let
+\[
+    h:(A,W)\to(B,U)
+\]
+be a cofinal map of finite-flat approximation shapes, and let
+\[
+    D:B\rightsquigarrow\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+be a split \(B\)-indexed projection-pair system.
+
+We say that \(h\) is \emph{bilimit-cofinal for \(D\)} if restriction along
+\(h\) induces, for every fuzzy domain \(Z\), an equivalence of compatible cone
+categories
+\[
+    \operatorname{Cone}_{\triangleleft}(D;Z)
+    \simeq
+    \operatorname{Cone}_{\triangleleft}(Dh;Z).
+\]
+Under this equivalence, the derived approximant functor for a reindexed cone is
+the precomposition of the original derived approximant functor with \(h\).
+\end{definition}
+
+\begin{lemma}[Cofinal reindexing of \(W\)-bilimits]
+\label{lem:cofinal-reindexing-W-bilimits}
+Let
+\[
+    h:(A,W)\to(B,U)
+\]
+be cofinal and bilimit-cofinal for
+\[
+    D:B\rightsquigarrow\mathbf{FDom}_{\mathbb V}^{\triangleleft}.
+\]
+Then \(D\) has a \(U\)-bilimit with vertex \(D_\infty\) if and only if the
+reindexed system
+\[
+    Dh:A\rightsquigarrow\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+has a \(W\)-bilimit with the corresponding transported cone on the same object
+\(D_\infty\).
+\end{lemma}
+
+\begin{proof}
+The projection-pair universal property is transported along the equivalence of
+cone categories.
+
+It remains to compare approximation identities.  Let
+\[
+    r:B\to[D_\infty,D_\infty]_{\mathrm{ff}}
+\]
+be the approximant functor for the \(B\)-indexed cone.  The approximant functor
+for the reindexed cone is
+\[
+    rh:A\to[D_\infty,D_\infty]_{\mathrm{ff}}.
+\]
+Since
+\[
+    h_!W\cong U,
+\]
+Proposition~\ref{prop:finite-flat-cofinality} gives
+\[
+    W*(rh)
+    \cong
+    U*r.
+\]
+Thus
+\[
+    U*r\cong\id_{D_\infty}
+\]
+if and only if
+\[
+    W*(rh)\cong\id_{D_\infty}.
+\]
+\end{proof}
+
+\begin{theorem}[Shifted bilimits]
+\label{thm:shifted-bilimits-ff}
+Let
+\[
+    (A,W,s)
+\]
+be a weight-cofinal iteration shape.  Let
+\[
+    D:A\rightsquigarrow\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+be a split \(A\)-indexed projection-pair system with \(W\)-bilimit
+\(D_\infty\).  If
+\[
+    s:(A,W)\to(A,W)
+\]
+is bilimit-cofinal for \(D\), then \(D_\infty\) is also a \(W\)-bilimit of the
+shifted system
+\[
+    Ds:A\rightsquigarrow\mathbf{FDom}_{\mathbb V}^{\triangleleft}.
+\]
+\end{theorem}
+
+\begin{proof}
+Apply Lemma~\ref{lem:cofinal-reindexing-W-bilimits} to the map
+\[
+    s:(A,W)\to(A,W).
+\]
+Equivalently, if
+\[
+    r:A\to[D_\infty,D_\infty]_{\mathrm{ff}}
+\]
+is the approximant functor for the original cone, then the approximant functor
+for the shifted cone is
+\[
+    rs:A\to[D_\infty,D_\infty]_{\mathrm{ff}},
+\]
+and
+\[
+    W*(rs)
+    \cong
+    W*r
+    \cong
+    \id_{D_\infty}
+\]
+by Lemma~\ref{lem:shift-invariance-rde}.
+\end{proof}
+
+\section{Recursive domain equations by cofinal approximation}
+\label{sec:rde-by-cofinal-approximation}
+
+\begin{definition}[\(W\)-bilimit-preserving endopseudofunctor]
+\label{def:W-bilimit-preserving-endofunctor}
+Let
+\[
+    (A,W)
+\]
+be a finite-flat approximation shape.  A projection-pair endopseudofunctor
+\[
+    F:\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+      \to
+      \mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+is \emph{\(W\)-bilimit-preserving} if it sends \(W\)-bilimit cones of split
+\(A\)-indexed projection-pair systems to \(W\)-bilimit cones.
+\end{definition}
+
+\begin{theorem}[Finite-flat cofinal recursive-domain-equation theorem]
+\label{thm:finite-flat-cofinal-rde}
+Let
+\[
+    (A,W,s)
+\]
+be a weight-cofinal iteration shape.  Let
+\[
+    F:\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+      \to
+      \mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+be a \(W\)-bilimit-preserving projection-pair endopseudofunctor.
+
+Let
+\[
+    D:A\rightsquigarrow\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+be a split \(A\)-indexed projection-pair system equipped with an isomorphism of
+split projection-pair systems
+\[
+    Ds\cong FD.
+\]
+If \(s\) is bilimit-cofinal for \(D\) and \(D_\infty\) is a \(W\)-bilimit of
+\(D\), then there is an equivalence of fuzzy domains
+\[
+    D_\infty\simeq F(D_\infty).
+\]
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:shifted-bilimits-ff}, \(D_\infty\) is a \(W\)-bilimit of
+the shifted system \(Ds\).  Since
+\[
+    Ds\cong FD
+\]
+as split projection-pair systems, \(D_\infty\) is also a \(W\)-bilimit of
+\(FD\).
+
+Since \(F\) preserves \(W\)-bilimits,
+\[
+    F(D_\infty)
+\]
+is also a \(W\)-bilimit of \(FD\).  By
+Lemma~\ref{lem:uniqueness-W-bilimits},
+\[
+    D_\infty\simeq F(D_\infty).
+\]
+\end{proof}
+
+\section{Composition and external-product internal-hom approximation}
+\label{sec:composition-and-internal-homs-rde}
+
+\begin{lemma}[Separate continuity of composition]
+\label{lem:separate-continuity-composition-rde}
+For fuzzy domains \(A,B,C\), composition determines a finite-flat bimorphism
+\[
+    [B,C]_{\mathrm{ff}}\tensor [A,B]_{\mathrm{ff}}
+    \longrightarrow
+    [A,C]_{\mathrm{ff}},
+    \qquad
+    (g,f)\longmapsto gf.
+\]
+Equivalently, it induces a fuzzy-domain morphism
+\[
+    [B,C]_{\mathrm{ff}}
+    \boxtimes_{\mathrm{ff}}
+    [A,B]_{\mathrm{ff}}
+    \longrightarrow
+    [A,C]_{\mathrm{ff}}.
+\]
+\end{lemma}
+
+\begin{proof}
+Finite-flat colimits in internal homs are computed pointwise.
+
+Fix
+\[
+    f:A\to B.
+\]
+For a finite-flat weight
+\[
+    W:K^{\op}\to\underline{\mathbb V}
+\]
+and a diagram
+\[
+    H:K\to[B,C]_{\mathrm{ff}},
+\]
+one has pointwise
+\[
+\begin{aligned}
+    \bigl(W*H\bigr)\circ f
+    &=
+    a\longmapsto (W*H)(fa)
+    \\
+    &\cong
+    a\longmapsto W*(k\mapsto Hk(fa))
+    \\
+    &\cong
+    W*(k\mapsto Hk\circ f).
+\end{aligned}
+\]
+Hence precomposition by \(f\) preserves finite-flat colimits.
+
+Fix
+\[
+    g:B\to C.
+\]
+Since \(g\) is a fuzzy-domain morphism, it preserves finite-flat colimits in
+\(B\).  Therefore, for every finite-flat
+\[
+    W:K^{\op}\to\underline{\mathbb V}
+\]
+and every diagram
+\[
+    H:K\to[A,B]_{\mathrm{ff}},
+\]
+one has pointwise
+\[
+    g\bigl(W*(k\mapsto Hk(a))\bigr)
+    \cong
+    W*(k\mapsto g(Hk(a))).
+\]
+Thus postcomposition by \(g\) preserves finite-flat colimits.  Therefore
+composition is finite-flat-continuous separately in both variables.
+\end{proof}
+
+Let
+\[
+    X:A\rightsquigarrow\mathbf{FDom}_{\mathbb V}^{\triangleleft},
+    \qquad
+    Y:A\rightsquigarrow\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+be split \(A\)-indexed projection-pair systems.  Their associated
+\emph{external-product internal-hom system}
+\[
+    [X,Y]_{\mathrm{ext}}
+    :
+    A\tensor A
+    \rightsquigarrow
+    \mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+is defined on objects by
+\[
+    [X,Y]_{\mathrm{ext}}(a,a')
+    =
+    [X_{a'},Y_a]_{\mathrm{ff}}.
+\]
+
+For a support arrow
+\[
+    \xi:(a,a')\to(b,b')
+\]
+in \((A\tensor A)_0\), let
+\[
+    \xi_1:a\to b,
+    \qquad
+    \xi_2:a'\to b'
+\]
+be its two support projections.  The transition projection pair
+\[
+    [X_{a'},Y_a]_{\mathrm{ff}}
+    \triangleleft
+    [X_{b'},Y_b]_{\mathrm{ff}}
+\]
+has embedding
+\[
+    \mathsf E_\xi(f)
+    =
+    e^Y_{\xi_1}\, f\, p^X_{\xi_2},
+\]
+and projection
+\[
+    \mathsf P_\xi(g)
+    =
+    p^Y_{\xi_1}\, g\, e^X_{\xi_2}.
+\]
+
+\begin{lemma}[Internal-hom transitions are projection pairs]
+\label{lem:internal-hom-transitions-projection-pairs}
+For every support arrow \(\xi\) in \((A\tensor A)_0\), the pair
+\[
+    (\mathsf E_\xi,\mathsf P_\xi)
+\]
+defined above is a fuzzy projection pair.
+\end{lemma}
+
+\begin{proof}
+The two maps preserve finite-flat colimits by
+Lemma~\ref{lem:separate-continuity-composition-rde}.
+
+For
+\[
+    f:X_{a'}\to Y_a,
+\]
+one has
+\[
+\begin{aligned}
+    \mathsf P_\xi\mathsf E_\xi(f)
+    &=
+    p^Y_{\xi_1}e^Y_{\xi_1}\, f\,
+    p^X_{\xi_2}e^X_{\xi_2}
+    \\
+    &\cong
+    f,
+\end{aligned}
+\]
+using the unit isomorphisms of the projection pairs for \(X\) and \(Y\).
+
+For
+\[
+    g:X_{b'}\to Y_b,
+\]
+one has
+\[
+    \mathsf E_\xi\mathsf P_\xi(g)
+    =
+    e^Y_{\xi_1}p^Y_{\xi_1}\, g\,
+    e^X_{\xi_2}p^X_{\xi_2}.
+\]
+The counit comparisons
+\[
+    e^Y_{\xi_1}p^Y_{\xi_1}\Rightarrow \id_{Y_b},
+    \qquad
+    e^X_{\xi_2}p^X_{\xi_2}\Rightarrow \id_{X_{b'}}
+\]
+induce
+\[
+    \mathsf E_\xi\mathsf P_\xi(g)
+    \Rightarrow
+    g.
+\]
+The triangle identities follow from the triangle identities of the projection
+pairs in \(X\) and \(Y\).
+\end{proof}
+
+Now suppose
+\[
+    (\varepsilon_a^X,\pi_a^X):X_a\triangleleft X_\infty,
+    \qquad
+    (\varepsilon_a^Y,\pi_a^Y):Y_a\triangleleft Y_\infty
+\]
+are compatible projection-pair cones.  Define
+\[
+    E_{a,a'}:[X_{a'},Y_a]_{\mathrm{ff}}
+    \to [X_\infty,Y_\infty]_{\mathrm{ff}}
+\]
+and
+\[
+    \Pi_{a,a'}:[X_\infty,Y_\infty]_{\mathrm{ff}}
+    \to [X_{a'},Y_a]_{\mathrm{ff}}
+\]
+by
+\[
+    E_{a,a'}(f)=\varepsilon_a^Y f\pi_{a'}^X,
+\]
+and
+\[
+    \Pi_{a,a'}(g)=\pi_a^Y g\varepsilon_{a'}^X.
+\]
+
+\begin{lemma}[Internal-hom cone components are projection pairs]
+\label{lem:internal-hom-cone-components-projection-pairs}
+For every \(a,a'\), the pair
+\[
+    (E_{a,a'},\Pi_{a,a'}):
+    [X_{a'},Y_a]_{\mathrm{ff}}
+    \triangleleft
+    [X_\infty,Y_\infty]_{\mathrm{ff}}
+\]
+is a fuzzy projection pair.
+\end{lemma}
+
+\begin{proof}
+The maps \(E_{a,a'}\) and \(\Pi_{a,a'}\) preserve finite-flat colimits by
+Lemma~\ref{lem:separate-continuity-composition-rde}.
+
+For \(f:X_{a'}\to Y_a\),
+\[
+\begin{aligned}
+    \Pi_{a,a'}E_{a,a'}(f)
+    &=
+    \pi_a^Y\varepsilon_a^Y f\pi_{a'}^X\varepsilon_{a'}^X
+    \\
+    &\cong
+    f,
+\end{aligned}
+\]
+using the unit isomorphisms of the projection pairs in the two bilimit cones.
+
+For \(g:X_\infty\to Y_\infty\),
+\[
+    E_{a,a'}\Pi_{a,a'}(g)
+    =
+    \varepsilon_a^Y\pi_a^Y g\varepsilon_{a'}^X\pi_{a'}^X.
+\]
+The counit comparisons
+\[
+    \varepsilon_a^Y\pi_a^Y\Rightarrow\id_{Y_\infty},
+    \qquad
+    \varepsilon_{a'}^X\pi_{a'}^X\Rightarrow\id_{X_\infty}
+\]
+induce
+\[
+    E_{a,a'}\Pi_{a,a'}(g)\Rightarrow g.
+\]
+The triangle identities follow from the triangle identities of the two
+projection-pair cones.
+\end{proof}
+
+\begin{theorem}[External-product internal-hom approximation theorem]
+\label{thm:external-product-internal-hom-approximation}
+Let
+\[
+    (A,W)
+\]
+be a finite-flat approximation shape.  Suppose
+\[
+    X_\infty
+\]
+and
+\[
+    Y_\infty
+\]
+are \(W\)-bilimits of split \(A\)-indexed projection-pair systems
+\[
+    X
+    \qquad\text{and}\qquad
+    Y.
+\]
+Then the external-product internal-hom cone
+\[
+    (E_{a,a'},\Pi_{a,a'}):
+    [X_{a'},Y_a]_{\mathrm{ff}}
+    \triangleleft
+    [X_\infty,Y_\infty]_{\mathrm{ff}}
+\]
+has approximants satisfying
+\[
+    (W\boxtimes W)*
+    \bigl((a,a')\mapsto E_{a,a'}\Pi_{a,a'}\bigr)
+    \cong
+    \id_{[X_\infty,Y_\infty]_{\mathrm{ff}}}.
+\]
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+    x_{a'}=\varepsilon_{a'}^X\pi_{a'}^X
+    \in [X_\infty,X_\infty]_{\mathrm{ff}},
+    \qquad
+    y_a=\varepsilon_a^Y\pi_a^Y
+    \in [Y_\infty,Y_\infty]_{\mathrm{ff}}.
+\]
+Then
+\[
+    E_{a,a'}\Pi_{a,a'}(g)=y_a\,g\,x_{a'}.
+\]
+By separate finite-flat-continuity of composition and finite-flat Fubini, the
+\((W\boxtimes W)\)-weighted colimit of these endofunctors is
+\[
+    g
+    \longmapsto
+    \bigl(W*(a\mapsto y_a)\bigr)\,
+    g\,
+    \bigl(W*(a'\mapsto x_{a'})\bigr).
+\]
+Since \(X_\infty\) and \(Y_\infty\) are \(W\)-bilimits,
+\[
+    W*(a'\mapsto x_{a'})
+    \cong
+    \id_{X_\infty},
+    \qquad
+    W*(a\mapsto y_a)
+    \cong
+    \id_{Y_\infty}.
+\]
+Thus the displayed endofunctor is naturally isomorphic to the identity on
+\[
+    [X_\infty,Y_\infty]_{\mathrm{ff}}.
+\]
+\end{proof}
+
+\section{Canonical common-successor comparisons}
+\label{sec:canonical-common-successor-comparisons}
+
+The general enriched setting permits canonical comparison maps from double
+approximations to single approximations.  These comparisons are not generally
+invertible; this is the precise point at which the absence of contraction
+matters.
+
+Let
+\[
+    (P,R)
+\]
+be common-successor-cofinal.  Let
+\[
+    H:P\rightsquigarrow\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+be a split \(P\)-indexed projection-pair system.  Let
+\[
+    (E_i,\Pi_i):H_i\triangleleft H_\infty
+    \qquad(i\in P)
+\]
+be a compatible cone, and let
+\[
+    (\delta_i,\rho_i):H_i\triangleleft Z
+    \qquad(i\in P)
+\]
+be another compatible cone.
+
+Write
+\[
+    L_i=\delta_i\Pi_i:H_\infty\to Z,
+    \qquad
+    M_i=E_i\rho_i:Z\to H_\infty.
+\]
+
+\begin{lemma}[Canonical tail restrictions]
+\label{lem:canonical-tail-restrictions}
+Assume \((P,R)\) is tail-cofinal.  For every \(i\in P\),
+\[
+    R*(j\mapsto L_jE_i)
+    \cong
+    \delta_i,
+\]
+and
+\[
+    R*(j\mapsto \Pi_iM_j)
+    \cong
+    \rho_i.
+\]
+\end{lemma}
+
+\begin{proof}
+Let
+\[
+    \tau_i:\operatorname{Tail}_P(i)\to P
+\]
+be the canonical support tail.  Since \((P,R)\) is tail-cofinal,
+\[
+    (\tau_i)_!R^i\cong R.
+\]
+Therefore, by Proposition~\ref{prop:finite-flat-cofinality},
+\[
+    R*(j\mapsto L_jE_i)
+    \cong
+    R^i*((j,u)\mapsto L_jE_i).
+\]
+
+For an object \((j,u:i\to j)\) of \(\operatorname{Tail}_P(i)\), cone
+compatibility gives
+\[
+    E_j e_u\cong E_i,
+    \qquad
+    p_u\Pi_j\cong \Pi_i,
+    \qquad
+    \delta_j e_u\cong \delta_i.
+\]
+Hence
+\[
+\begin{aligned}
+    L_jE_i
+    &=
+    \delta_j\Pi_jE_i
+    \\
+    &\cong
+    \delta_j\Pi_jE_j e_u
+    \\
+    &\cong
+    \delta_j e_u
+    \\
+    &\cong
+    \delta_i.
+\end{aligned}
+\]
+Thus the restricted diagram is constant at \(\delta_i\), and
+\[
+    R^i*((j,u)\mapsto L_jE_i)
+    \cong
+    R^i*\Delta(\delta_i)
+    \cong
+    \delta_i
+\]
+by Lemma~\ref{lem:constant-diagrams-canonical-tail}.
+
+The proof of
+\[
+    R*(j\mapsto \Pi_iM_j)
+    \cong
+    \rho_i
+\]
+is analogous.  For \((j,u:i\to j)\), cone compatibility gives
+\[
+    p_u\rho_j\cong \rho_i
+\]
+and
+\[
+\begin{aligned}
+    \Pi_iM_j
+    &=
+    \Pi_iE_j\rho_j
+    \\
+    &\cong
+    p_u\Pi_jE_j\rho_j
+    \\
+    &\cong
+    p_u\rho_j
+    \\
+    &\cong
+    \rho_i.
+\end{aligned}
+\]
+\end{proof}
+
+\begin{lemma}[Canonical double-to-single comparison]
+\label{lem:canonical-double-to-single-comparison}
+Assume \((P,R)\) is common-successor-cofinal.  Then there is a canonical
+comparison
+\[
+    (R\boxtimes R)*
+    \bigl((i,j)\mapsto M_iL_j\bigr)
+    \Rightarrow
+    R*(k\mapsto E_k\Pi_k).
+\]
+Moreover, there is a canonical counit comparison
+\[
+    (R\boxtimes R)*
+    \bigl((i,j)\mapsto L_iM_j\bigr)
+    \Rightarrow
+    \id_Z.
+\]
+\end{lemma}
+
+\begin{proof}
+Let
+\[
+    R^{\mathrm{com}}=m_P^*R
+\]
+be the canonical common-successor weight.  By common-successor-cofinality,
+\[
+    (c_P)_!R^{\mathrm{com}}\cong R\boxtimes R,
+    \qquad
+    (m_P)_!R^{\mathrm{com}}\cong R.
+\]
+Hence
+\[
+\begin{aligned}
+    (R\boxtimes R)*
+    \bigl((i,j)\mapsto M_iL_j\bigr)
+    &\cong
+    R^{\mathrm{com}}*
+    \bigl((i,j,k,u,v)\mapsto M_iL_j\bigr).
+\end{aligned}
+\]
+
+For an object
+\[
+    (i,j,k,u:i\to k,v:j\to k)
+\]
+of \(\operatorname{Com}(P)\), cone compatibility gives
+\[
+    E_k e_u\cong E_i,
+    \qquad
+    p_u\rho_k\cong \rho_i,
+\]
+and
+\[
+    \delta_k e_v\cong \delta_j,
+    \qquad
+    p_v\Pi_k\cong \Pi_j.
+\]
+Therefore
+\[
+\begin{aligned}
+    M_iL_j
+    &=
+    E_i\rho_i\delta_j\Pi_j
+    \\
+    &\cong
+    E_k e_u p_u\rho_k\delta_k e_vp_v\Pi_k
+    \\
+    &\cong
+    E_k e_u p_u e_vp_v\Pi_k
+    \\
+    &\Rightarrow
+    E_k\Pi_k.
+\end{aligned}
+\]
+The final comparison is induced by the counits
+\[
+    e_up_u\Rightarrow \id_{H_k},
+    \qquad
+    e_vp_v\Rightarrow \id_{H_k}.
+\]
+These comparisons are coherent in \(\operatorname{Com}(P)\).  Taking the
+\(R^{\mathrm{com}}\)-weighted colimit and using
+\[
+    (m_P)_!R^{\mathrm{com}}\cong R
+\]
+gives the first comparison.
+
+For the second comparison, again use cofinality of \(c_P\).  For an object
+\[
+    (i,j,k,u:i\to k,v:j\to k)
+\]
+there is a canonical comparison
+\[
+    L_iM_j\Rightarrow \id_Z.
+\]
+Indeed,
+\[
+\begin{aligned}
+    L_iM_j
+    &=
+    \delta_i\Pi_iE_j\rho_j
+    \\
+    &\cong
+    \delta_k e_u p_u\Pi_kE_k e_vp_v\rho_k
+    \\
+    &\Rightarrow
+    \delta_k\rho_k
+    \\
+    &\Rightarrow
+    \id_Z.
+\end{aligned}
+\]
+The final comparison is the counit of
+\[
+    (\delta_k,\rho_k):H_k\triangleleft Z.
+\]
+Taking the \(R^{\mathrm{com}}\)-weighted colimit and using
+Lemma~\ref{lem:constant-diagrams-finite-flat} for the constant diagram at
+\(\id_Z\) gives the second comparison.
+\end{proof}
+
+\begin{theorem}[Lax reconstruction of external-product cones]
+\label{thm:lax-reconstruction-internal-hom-cones}
+Let
+\[
+    (A,W)
+\]
+be linear-cofinal.  Put
+\[
+    P=A\tensor A,
+    \qquad
+    R=W\boxtimes W.
+\]
+Let
+\[
+    H_\infty=[X_\infty,Y_\infty]_{\mathrm{ff}}
+\]
+with external-product approximants
+\[
+    (E_i,\Pi_i):H_i\triangleleft H_\infty
+    \qquad(i\in P).
+\]
+Let
+\[
+    (\delta_i,\rho_i):H_i\triangleleft Z
+\]
+be a compatible cone.  Define
+\[
+    \delta
+    =
+    R*(i\mapsto \delta_i\Pi_i):
+    H_\infty\to Z
+\]
+and
+\[
+    \rho
+    =
+    R*(i\mapsto E_i\rho_i):
+    Z\to H_\infty.
+\]
+Then
+\[
+    \delta E_i\cong \delta_i,
+    \qquad
+    \Pi_i\rho\cong \rho_i,
+\]
+and there are canonical comparisons
+\[
+    \rho\delta\Rightarrow \id_{H_\infty},
+    \qquad
+    \delta\rho\Rightarrow \id_Z.
+\]
+\end{theorem}
+
+\begin{proof}
+The restriction equations follow from
+Lemma~\ref{lem:canonical-tail-restrictions}.
+
+For the first comparison, separate finite-flat-continuity of composition and
+finite-flat Fubini give
+\[
+    \rho\delta
+    \cong
+    (R\boxtimes R)*
+    \bigl((i,j)\mapsto M_iL_j\bigr).
+\]
+By Lemma~\ref{lem:canonical-double-to-single-comparison},
+\[
+    (R\boxtimes R)*
+    \bigl((i,j)\mapsto M_iL_j\bigr)
+    \Rightarrow
+    R*(k\mapsto E_k\Pi_k).
+\]
+By Theorem~\ref{thm:external-product-internal-hom-approximation},
+\[
+    R*(k\mapsto E_k\Pi_k)
+    \cong
+    \id_{H_\infty}.
+\]
+Thus
+\[
+    \rho\delta\Rightarrow\id_{H_\infty}.
+\]
+The comparison
+\[
+    \delta\rho\Rightarrow \id_Z
+\]
+is the second comparison of
+Lemma~\ref{lem:canonical-double-to-single-comparison}.
+\end{proof}
+
+\section{Linear application in the general finite-flat setting}
+\label{sec:linear-application-general-ff}
+
+The preceding theorem reconstructs canonical lax application data from
+external-product finite-stage cones.  It does not produce a projection-pair
+retract in full generality; the missing ingredient is precisely a diagonal or
+contraction comparison.
+
+\begin{definition}[Linear reflexive fuzzy domain]
+\label{def:linear-reflexive-fuzzy-domain-ff}
+A \emph{linear reflexive fuzzy domain} is a fuzzy domain \(D\) equipped with a
+fuzzy projection pair
+\[
+    [D,D]_{\mathrm{ff}}\triangleleft D.
+\]
+Equivalently, it consists of fuzzy-domain morphisms
+\[
+    \operatorname{encode}:[D,D]_{\mathrm{ff}}\to D,
+    \qquad
+    \operatorname{decode}:D\to [D,D]_{\mathrm{ff}},
+\]
+together with an adjunction
+\[
+    \operatorname{encode}\dashv \operatorname{decode}
+\]
+whose unit is invertible.  Thus
+\[
+    \operatorname{decode}\operatorname{encode}
+    \cong
+    \id_{[D,D]_{\mathrm{ff}}},
+\]
+and there is a counit comparison
+\[
+    \operatorname{encode}\operatorname{decode}
+    \Rightarrow
+    \id_D
+\]
+satisfying the triangle identities.
+
+It is \emph{extensional} if the counit is also invertible.
+\end{definition}
+
+The associated application morphism is
+\[
+    D\boxtimes_{\mathrm{ff}}D
+    \xrightarrow{\operatorname{decode}\boxtimes 1_D}
+    [D,D]_{\mathrm{ff}}\boxtimes_{\mathrm{ff}}D
+    \xrightarrow{\operatorname{ev}}
+    D.
+\]
+
+\begin{definition}[\((G,T)\)-linear reflexive fuzzy domain]
+\label{def:mixed-linear-reflexive-fuzzy-domain-ff}
+Let
+\[
+    G,T:\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+      \to
+      \mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+be projection-pair endopseudofunctors.  A
+\emph{\((G,T)\)-linear reflexive fuzzy domain} is a fuzzy domain \(D\) equipped
+with a fuzzy projection pair
+\[
+    [GD,TD]_{\mathrm{ff}}\triangleleft D.
+\]
+The associated application morphism has type
+\[
+    D\boxtimes_{\mathrm{ff}}GD\to TD
+\]
+and is the composite
+\[
+    D\boxtimes_{\mathrm{ff}}GD
+    \xrightarrow{\operatorname{decode}\boxtimes 1_{GD}}
+    [GD,TD]_{\mathrm{ff}}\boxtimes_{\mathrm{ff}}GD
+    \xrightarrow{\operatorname{ev}}
+    TD.
+\]
+\end{definition}
+
+\begin{definition}[External finite-stage endomorphism system]
+\label{def:external-finite-stage-endomorphism-system}
+Let
+\[
+    D:A\rightsquigarrow\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+be a split \(A\)-indexed projection-pair system.  Its
+\emph{external finite-stage endomorphism system} is the split
+\((A\tensor A)\)-indexed projection-pair system
+\[
+    \operatorname{End}_{\mathrm{ext}}(D)
+    :
+    A\tensor A
+    \rightsquigarrow
+    \mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+defined by
+\[
+    \operatorname{End}_{\mathrm{ext}}(D)(a,a')
+    =
+    [D_{a'},D_a]_{\mathrm{ff}}.
+\]
+\end{definition}
+
+\begin{definition}[Linear self-application cone]
+\label{def:linear-self-application-cone}
+Let
+\[
+    (A,W)
+\]
+be linear-cofinal, and let
+\[
+    D:A\rightsquigarrow\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+be a split \(A\)-indexed projection-pair system with \(W\)-bilimit
+\[
+    D_\infty.
+\]
+A \emph{linear self-application cone} on \(D\) is a compatible projection-pair
+cone
+\[
+    (\kappa_{a,a'},\lambda_{a,a'}):
+    [D_{a'},D_a]_{\mathrm{ff}}
+    \triangleleft
+    D_\infty
+\]
+over the external finite-stage endomorphism system
+\[
+    \operatorname{End}_{\mathrm{ext}}(D).
+\]
+\end{definition}
+
+\begin{theorem}[Pure lax linear application theorem]
+\label{thm:pure-lax-linear-application}
+Let
+\[
+    (A,W)
+\]
+be linear-cofinal, and suppose
+\[
+    D_\infty
+\]
+is a \(W\)-bilimit of a split \(A\)-indexed projection-pair system \(D\).
+Let
+\[
+    H_\infty=[D_\infty,D_\infty]_{\mathrm{ff}}.
+\]
+If \(D\) carries a linear self-application cone, then there are canonical
+fuzzy-domain morphisms
+\[
+    \operatorname{encode}:H_\infty\to D_\infty,
+    \qquad
+    \operatorname{decode}:D_\infty\to H_\infty
+\]
+defined by
+\[
+    \operatorname{encode}
+    =
+    (W\boxtimes W)*
+    \bigl((a,a')\mapsto
+        \kappa_{a,a'}\Pi_{a,a'}
+    \bigr),
+\]
+and
+\[
+    \operatorname{decode}
+    =
+    (W\boxtimes W)*
+    \bigl((a,a')\mapsto
+        E_{a,a'}\lambda_{a,a'}
+    \bigr).
+\]
+They satisfy canonical comparisons
+\[
+    \operatorname{decode}\operatorname{encode}
+    \Rightarrow
+    \id_{H_\infty},
+    \qquad
+    \operatorname{encode}\operatorname{decode}
+    \Rightarrow
+    \id_{D_\infty}.
+\]
+Consequently there is a canonical resource-sensitive application morphism
+\[
+    D_\infty\boxtimes_{\mathrm{ff}}D_\infty
+    \longrightarrow
+    D_\infty.
+\]
+\end{theorem}
+
+\begin{proof}
+Apply Theorem~\ref{thm:lax-reconstruction-internal-hom-cones} to the external
+endomorphism system
+\[
+    (a,a')\longmapsto [D_{a'},D_a]_{\mathrm{ff}}
+\]
+and to the compatible cone
+\[
+    (\kappa_{a,a'},\lambda_{a,a'}):
+    [D_{a'},D_a]_{\mathrm{ff}}
+    \triangleleft
+    D_\infty.
+\]
+The resulting maps are precisely the displayed
+\(\operatorname{encode}\) and \(\operatorname{decode}\).  The application
+morphism is
+\[
+    D_\infty\boxtimes_{\mathrm{ff}}D_\infty
+    \xrightarrow{\operatorname{decode}\boxtimes 1}
+    [D_\infty,D_\infty]_{\mathrm{ff}}
+    \boxtimes_{\mathrm{ff}}
+    D_\infty
+    \xrightarrow{\operatorname{ev}}
+    D_\infty.
+\]
+\end{proof}
+
+\begin{definition}[Mixed external finite-stage function-space system]
+\label{def:mixed-external-finite-stage-function-space-system}
+Let
+\[
+    G,T:\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+      \to
+      \mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+be projection-pair endopseudofunctors, and let
+\[
+    D:A\rightsquigarrow\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+be a split \(A\)-indexed projection-pair system.  The
+\emph{mixed external finite-stage function-space system} is the split
+\((A\tensor A)\)-indexed system
+\[
+    (a,a')\longmapsto [GD_{a'},TD_a]_{\mathrm{ff}}.
+\]
+\end{definition}
+
+\begin{definition}[Mixed linear self-application cone]
+\label{def:mixed-linear-self-application-cone}
+Let
+\[
+    (A,W)
+\]
+be linear-cofinal.  Let
+\[
+    G,T:\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+      \to
+      \mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+be projection-pair endopseudofunctors preserving \(W\)-bilimits.  Let
+\[
+    D:A\rightsquigarrow\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+be a split \(A\)-indexed projection-pair system with \(W\)-bilimit
+\[
+    D_\infty.
+\]
+A \emph{mixed linear self-application cone} is a compatible projection-pair cone
+\[
+    [GD_{a'},TD_a]_{\mathrm{ff}}
+    \triangleleft
+    D_\infty
+\]
+over the mixed external finite-stage function-space system.
+\end{definition}
+
+\begin{theorem}[Mixed lax linear application theorem]
+\label{thm:mixed-lax-linear-application}
+Let
+\[
+    (A,W)
+\]
+be linear-cofinal.  Let
+\[
+    G,T:\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+      \to
+      \mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+be projection-pair endopseudofunctors preserving \(W\)-bilimits.  Suppose
+\[
+    D_\infty
+\]
+is a \(W\)-bilimit of a split \(A\)-indexed projection-pair system \(D\).
+If \(D\) carries a mixed linear self-application cone, then there are canonical
+morphisms
+\[
+    \operatorname{encode}:[GD_\infty,TD_\infty]_{\mathrm{ff}}\to D_\infty,
+\]
+and
+\[
+    \operatorname{decode}:D_\infty\to[GD_\infty,TD_\infty]_{\mathrm{ff}},
+\]
+with canonical comparisons
+\[
+    \operatorname{decode}\operatorname{encode}
+    \Rightarrow
+    \id_{[GD_\infty,TD_\infty]_{\mathrm{ff}}},
+    \qquad
+    \operatorname{encode}\operatorname{decode}
+    \Rightarrow
+    \id_{D_\infty}.
+\]
+The associated application morphism has type
+\[
+    D_\infty\boxtimes_{\mathrm{ff}}GD_\infty\to TD_\infty.
+\]
+\end{theorem}
+
+\begin{proof}
+Since \(G\) and \(T\) preserve \(W\)-bilimits,
+\[
+    GD_\infty
+\]
+is a \(W\)-bilimit of \(GD\), and
+\[
+    TD_\infty
+\]
+is a \(W\)-bilimit of \(TD\).  Apply
+Theorem~\ref{thm:lax-reconstruction-internal-hom-cones} to the mixed external
+finite-stage function-space system.
+\end{proof}
+
+\subsection{Finite-stage generation of self-application cones}
+
+The preceding lax application theorem requires a compatible cone from the
+finite-stage function-space system into the bilimit.  The following construction
+supplies such data over the canonical common-successor category.
+
+\begin{definition}[Finite-stage linear self-application data]
+\label{def:finite-stage-linear-self-application-data}
+Let
+\[
+    (A,W)
+\]
+be linear-cofinal, and let
+\[
+    D:A\rightsquigarrow\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+be a split \(A\)-indexed projection-pair system.  Finite-stage linear
+self-application data consist of:
+
+\begin{enumerate}
+    \item a support endofunctor
+    \[
+        s:A\to A;
+    \]
+
+    \item for every \(k\in A\), a fuzzy projection pair
+    \[
+        (\sigma_k,\tau_k):
+        [D_k,D_k]_{\mathrm{ff}}
+        \triangleleft
+        D_{sk};
+    \]
+
+    \item coherence isomorphisms saying that, for every support arrow
+    \[
+        w:k\to k',
+    \]
+    the square of projection pairs comparing
+    \[
+        [D_k,D_k]_{\mathrm{ff}}
+        \triangleleft
+        D_{sk}
+    \]
+    with
+    \[
+        [D_{k'},D_{k'}]_{\mathrm{ff}}
+        \triangleleft
+        D_{sk'}
+    \]
+    is compatible with the internal-hom transition maps and with the transition
+    projection pair
+    \[
+        D_{sk}\triangleleft D_{sk'}.
+    \]
+\end{enumerate}
+\end{definition}
+
+\begin{construction}[Common-successor finite-stage encoding]
+\label{con:common-successor-finite-stage-encoding}
+Let
+\[
+    (i,j,k,u:i\to k,v:j\to k)
+\]
+be an object of \(\operatorname{Com}(A)\).  The transition projection pairs in
+\(D\) induce a projection pair
+\[
+    [D_j,D_i]_{\mathrm{ff}}
+    \triangleleft
+    [D_k,D_k]_{\mathrm{ff}}.
+\]
+Its embedding sends
+\[
+    f:D_j\to D_i
+\]
+to
+\[
+    e_u f p_v:D_k\to D_k,
+\]
+and its projection sends
+\[
+    g:D_k\to D_k
+\]
+to
+\[
+    p_u g e_v:D_j\to D_i.
+\]
+Composing with
+\[
+    [D_k,D_k]_{\mathrm{ff}}
+    \triangleleft
+    D_{sk}
+\]
+and then with the bilimit cone component
+\[
+    D_{sk}\triangleleft D_\infty
+\]
+gives a projection pair
+\[
+    [D_j,D_i]_{\mathrm{ff}}
+    \triangleleft
+    D_\infty.
+\]
+The coherence axioms for finite-stage self-application data make these
+projection pairs compatible over \(\operatorname{Com}(A)\).
+\end{construction}
+
+\begin{theorem}[Common-successor finite-stage encodings over \(\operatorname{Com}(A)\)]
+\label{thm:common-successor-encodings-over-com}
+Let
+\[
+    (A,W)
+\]
+be linear-cofinal, and let
+\[
+    D:A\rightsquigarrow\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+be a split \(A\)-indexed system with \(W\)-bilimit \(D_\infty\).  Suppose \(D\)
+is equipped with finite-stage linear self-application data.  Then the
+construction above gives a compatible projection-pair cone over the pullback of
+the external endomorphism system along
+\[
+    c_A:\operatorname{Com}(A)\to A\tensor A.
+\]
+\end{theorem}
+
+\begin{proof}
+For each object
+\[
+    (i,j,k,u,v)
+\]
+of \(\operatorname{Com}(A)\), Construction~\ref{con:common-successor-finite-stage-encoding}
+gives a projection pair
+\[
+    [D_j,D_i]_{\mathrm{ff}}\triangleleft D_\infty.
+\]
+Compatibility with arrows of \(\operatorname{Com}(A)\) follows from the
+coherence of the split system \(D\), the coherence of the finite-stage
+self-application data, and the calculus of mates.
+\end{proof}
+
+\section{Constant-map seeds}
+\label{sec:constant-map-seeds-ff}
+
+The following construction supplies standard finite-stage seeds.
+
+\begin{lemma}[Constant finite-flat-continuous maps]
+\label{lem:constant-ff-continuous}
+Let \(X\) and \(Y\) be fuzzy domains, and let \(y\in Y\).  Since
+\(\mathbb V\) is affine, \(y\) determines a constant \(\mathbb V\)-functor
+\[
+    \operatorname{const}_y:X\to Y.
+\]
+This constant functor preserves finite-flat weighted colimits.
+\end{lemma}
+
+\begin{proof}
+The constant assignment is a \(\mathbb V\)-functor because, for every
+\(x,x'\in X\), affinity gives a canonical morphism
+\[
+    X(x,x')\to I,
+\]
+and the identity of \(y\) gives
+\[
+    I\to Y(y,y).
+\]
+Their composite supplies the hom-map
+\[
+    X(x,x')\to Y(y,y).
+\]
+
+Let
+\[
+    W:K^{\op}\to\underline{\mathbb V}
+\]
+be finite-flat and let
+\[
+    D:K\to X
+\]
+be a diagram.  Since \(W\) is finite-flat,
+Lemma~\ref{lem:constant-diagrams-finite-flat} gives
+\[
+    W*(\operatorname{const}_yD)
+    \cong
+    y.
+\]
+Therefore
+\[
+    \operatorname{const}_y(W*D)
+    =
+    y
+    \cong
+    W*(\operatorname{const}_yD).
+\]
+Thus \(\operatorname{const}_y\) preserves finite-flat weighted colimits.
+\end{proof}
+
+\begin{proposition}[Pure constant-map seed]
+\label{prop:pure-constant-map-seed-ff}
+Suppose a fuzzy domain \(D_0\) has an enriched initial object
+\[
+    \bot\in D_0.
+\]
+Define
+\[
+    e:D_0\to [D_0,D_0]_{\mathrm{ff}}
+\]
+by
+\[
+    e(a)=\operatorname{const}_a,
+\]
+and define
+\[
+    p:[D_0,D_0]_{\mathrm{ff}}\to D_0
+\]
+by
+\[
+    p(f)=f(\bot).
+\]
+Then
+\[
+    (e,p):D_0\triangleleft [D_0,D_0]_{\mathrm{ff}}
+\]
+is a fuzzy projection pair.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:constant-ff-continuous}, each \(\operatorname{const}_a\)
+lies in \([D_0,D_0]_{\mathrm{ff}}\).  The assignment
+\[
+    a\longmapsto\operatorname{const}_a
+\]
+is a \(\mathbb V\)-functor because the end defining the internal hom admits the
+evident pointwise wedge
+\[
+    D_0(a,a')\to D_0(a,a').
+\]
+It preserves finite-flat colimits by Lemma~\ref{lem:constant-ff-continuous} and
+Lemma~\ref{lem:constant-diagrams-finite-flat}.
+
+The functor \(p\) is evaluation at \(\bot\).  Evaluation is a
+\(\mathbb V\)-functor and preserves pointwise finite-flat colimits.  Thus \(p\)
+is a fuzzy-domain morphism.
+
+Moreover,
+\[
+    p(e(a))
+    =
+    \operatorname{const}_a(\bot)
+    =
+    a.
+\]
+Thus
+\[
+    pe=\id_{D_0}.
+\]
+
+For \(f:D_0\to D_0\), the composite \(ep(f)\) is
+\[
+    \operatorname{const}_{f(\bot)}.
+\]
+The enriched initiality of \(\bot\) gives a canonical enriched natural
+transformation
+\[
+    \Delta\bot\Rightarrow 1_{D_0}.
+\]
+Applying \(f\) yields
+\[
+    \Delta f(\bot)\Rightarrow f.
+\]
+This is precisely
+\[
+    ep(f)\Rightarrow f.
+\]
+The triangle identities follow from \(pe=\id_{D_0}\) and from functoriality of
+the canonical initial-object comparison.  Therefore \(e\dashv p\) with
+invertible unit.
+\end{proof}
+
+\begin{proposition}[Mixed constant-map seed]
+\label{prop:mixed-constant-map-seed-ff}
+Let
+\[
+    G,T:\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+      \to
+      \mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+be projection-pair endopseudofunctors.  Suppose \(GD_0\) has an enriched initial
+object
+\[
+    \bot_{GD_0}\in GD_0,
+\]
+and suppose there is a fuzzy projection pair
+\[
+    (u,v):D_0\triangleleft TD_0.
+\]
+Define
+\[
+    e:D_0\to[GD_0,TD_0]_{\mathrm{ff}}
+\]
+by
+\[
+    e(a)=\operatorname{const}_{u(a)},
+\]
+and define
+\[
+    p:[GD_0,TD_0]_{\mathrm{ff}}\to D_0
+\]
+by
+\[
+    p(f)=v(f(\bot_{GD_0})).
+\]
+Then
+\[
+    (e,p):D_0\triangleleft[GD_0,TD_0]_{\mathrm{ff}}
+\]
+is a fuzzy projection pair.
+\end{proposition}
+
+\begin{proof}
+Constant maps preserve finite-flat colimits by
+Lemma~\ref{lem:constant-ff-continuous}.  Since \(u\) preserves finite-flat
+colimits, the functor
+\[
+    e(a)=\operatorname{const}_{u(a)}
+\]
+preserves finite-flat colimits.
+
+The functor \(p\) is the composite of evaluation at \(\bot_{GD_0}\) with
+\[
+    v:TD_0\to D_0.
+\]
+Evaluation preserves pointwise finite-flat colimits, and \(v\) is a
+fuzzy-domain morphism.  Hence \(p\) is a fuzzy-domain morphism.
+
+For \(a\in D_0\),
+\[
+    p(e(a))
+    =
+    v(u(a))
+    \cong
+    a
+\]
+by the unit isomorphism of the projection pair \((u,v)\).
+
+For \(f:GD_0\to TD_0\), the composite \(ep(f)\) is the constant map at
+\[
+    u(v(f(\bot_{GD_0}))).
+\]
+The counit comparison
+\[
+    uv\Rightarrow \id_{TD_0}
+\]
+gives
+\[
+    u(v(f(\bot_{GD_0})))\to f(\bot_{GD_0}).
+\]
+The enriched initiality of \(\bot_{GD_0}\) gives
+\[
+    \Delta\bot_{GD_0}\Rightarrow 1_{GD_0}.
+\]
+Applying \(f\) gives
+\[
+    \Delta f(\bot_{GD_0})\Rightarrow f.
+\]
+Composing these transformations gives
+\[
+    ep(f)\Rightarrow f.
+\]
+The triangle identities follow from the triangle identities of \((u,v)\) and
+from functoriality of the canonical initial-object comparison.
+\end{proof}
+
+\section{The posetal reflection}
+\label{sec:posetal-reflection-ff-rde}
+
+Let
+\[
+    \Lambda=(L,\leq,\meet,\join,\tensor,\multimap,\bot_L,\top_L)
+\]
+be a fuzzy truth-value object.  In the posetal reflection, finite-flat
+approximation shapes are fuzzy ideal weights
+\[
+    W:A^{\op}\to\Lambda.
+\]
+For a \(\Lambda\)-functor
+\[
+    h:A\to B,
+\]
+the lower direct image is computed by
+\[
+    (h_!W)(b)
+    =
+    \bigjoin_{a\in A}
+        W(a)\tensor B(b,ha).
+\]
+Cofinality means
+\[
+    h_!W\cong U.
+\]
+Since the truth-value fuzzy preorder \(\Lambda\) is separated, the presheaf
+fuzzy preorder
+\[
+    [B^{\op},\Lambda]
+\]
+is separated.  Hence an isomorphism of weights may be written as equality:
+\[
+    h_!W=U.
+\]
+
+For every finite-flat weight \(W\), the terminal direct image satisfies
+\[
+    !_!W\cong \top_L.
+\]
+Equivalently,
+\[
+    \bigjoin_{a\in A}W(a)=\top_L.
+\]
+This is the posetal reflection of preservation of the terminal finite-limit
+predicate by the character \(\chi_W\).
+
+A projection pair
+\[
+    (e,p):X\triangleleft Y
+\]
+is a pair of fuzzy-domain morphisms satisfying
+\[
+    pe\cong \id_X,
+    \qquad
+    ep\leq \id_Y
+\]
+in the induced crisp preorder on fuzzy-domain morphisms, where
+\[
+    f\leq g
+    \quad:\Longleftrightarrow\quad
+    [X,Y]_{\mathrm{ff}}(f,g)=\top_L.
+\]
+
+A \(W\)-bilimit cone has approximation identity
+\[
+    W*(a\mapsto \varepsilon_a\pi_a)
+    \cong
+    \id_{D_\infty}
+\]
+inside
+\[
+    [D_\infty,D_\infty]_{\mathrm{ff}}.
+\]
+The finite-flat cofinal recursive-domain-equation theorem therefore gives:
+if
+\[
+    Ds\cong FD,
+\]
+if \(s\) is bilimit-cofinal for \(D\), and if \(F\) preserves the corresponding
+\(W\)-bilimit, then
+\[
+    D_\infty\simeq F(D_\infty).
+\]
+
+The general enriched internal-hom theorem gives external-product approximation
+\[
+    (W\boxtimes W)*
+    \bigl((a,a')\mapsto E_{a,a'}\Pi_{a,a'}\bigr)
+    \cong
+    \id_{[X_\infty,Y_\infty]_{\mathrm{ff}}}.
+\]
+It does not generally collapse to a same-index equation, because there is no
+canonical diagonal
+\[
+    A\to A\tensor A.
+\]
+
+\section{Pointed finite-flat minimal invariants}
+\label{sec:pointed-ff-minimal-invariants}
+
+The preceding recursive-domain-equation theorem produces solutions from
+finite-flat bilimits.  We now isolate the pointed form of the construction,
+which is the finite-flat analogue of the classical pointed-dcpo minimal
+solution theorem.
+
+The point of pointedness is not that every solution of
+\[
+    X\simeq F(X)
+\]
+is unique.  That statement is false already in ordinary pointed dcpos: for
+\(F=\id\), every pointed dcpo is a solution.  Rather, pointedness supplies a
+canonical initial approximation process.  The resulting bilimit is the
+canonical generated invariant of \(F\).
+
+\begin{definition}[Pointed fuzzy domain]
+\label{def:pointed-fuzzy-domain}
+A \emph{pointed fuzzy domain} is a fuzzy domain \(X\) equipped with an enriched
+initial object
+\[
+    \bot_X\in X.
+\]
+Thus
+\[
+    X(\bot_X,x)\cong I
+\]
+naturally in \(x\in X\).
+
+A morphism of pointed fuzzy domains is a fuzzy-domain morphism
+\[
+    f:X\to Y.
+\]
+It is called \emph{strict} if
+\[
+    f(\bot_X)\cong \bot_Y.
+\]
+\end{definition}
+
+\begin{lemma}[Projection pairs between pointed domains are strict]
+\label{lem:projection-pairs-between-pointed-domains-are-strict}
+Let
+\[
+    (e,p):X\triangleleft Y
+\]
+be a fuzzy projection pair between pointed fuzzy domains.  Then both
+\[
+    e:X\to Y
+    \qquad
+    p:Y\to X
+\]
+preserve the chosen initial objects:
+\[
+    e(\bot_X)\cong \bot_Y,
+    \qquad
+    p(\bot_Y)\cong \bot_X.
+\]
+\end{lemma}
+
+\begin{proof}
+Since \(e\dashv p\), for every \(y\in Y\) there are natural isomorphisms
+\[
+    Y(e\bot_X,y)
+    \cong
+    X(\bot_X,py)
+    \cong
+    I.
+\]
+Thus \(e\bot_X\) is an enriched initial object of \(Y\), so
+\[
+    e(\bot_X)\cong\bot_Y.
+\]
+Using the invertible unit of the projection pair,
+\[
+    pe\cong\id_X,
+\]
+we obtain
+\[
+    p(\bot_Y)
+    \cong
+    p(e\bot_X)
+    \cong
+    \bot_X.
+\]
+\end{proof}
+
+\begin{definition}[Pointed projection-pair category]
+\label{def:pointed-projection-pair-category}
+Let
+\[
+    \mathbf{FDom}^{\triangleleft}_{\mathbb V,\bot}
+\]
+denote the locally ordinary \(2\)-category whose objects are pointed fuzzy
+domains, whose \(1\)-cells are fuzzy projection pairs between pointed fuzzy
+domains, and whose \(2\)-cells are mate-compatible pairs of enriched natural
+transformations.
+
+By Lemma~\ref{lem:projection-pairs-between-pointed-domains-are-strict}, every
+\(1\)-cell in
+\[
+    \mathbf{FDom}^{\triangleleft}_{\mathbb V,\bot}
+\]
+is automatically strict on the chosen initial objects.
+\end{definition}
+
+\begin{definition}[The one-point pointed fuzzy domain]
+\label{def:one-point-pointed-fuzzy-domain}
+Let
+\[
+    \mathbf 1_\bot
+\]
+denote the one-object fuzzy domain.  Its unique object is written
+\[
+    \bot.
+\]
+It is pointed by its unique object.
+\end{definition}
+
+\begin{lemma}[The one-point domain embeds into every pointed fuzzy domain]
+\label{lem:one-point-domain-embeds-into-pointed-domain}
+For every pointed fuzzy domain \(X\), there is a canonical fuzzy projection pair
+\[
+    \mathbf 1_\bot\triangleleft X.
+\]
+Its embedding sends the unique object of \(\mathbf 1_\bot\) to
+\[
+    \bot_X,
+\]
+and its projection is the unique functor
+\[
+    X\to\mathbf 1_\bot.
+\]
+\end{lemma}
+
+\begin{proof}
+Let
+\[
+    e:\mathbf 1_\bot\to X
+\]
+send the unique object to \(\bot_X\), and let
+\[
+    p:X\to\mathbf 1_\bot
+\]
+be the unique functor.  Since \(\bot_X\) is enriched initial, for every
+\(x\in X\) one has
+\[
+    X(e*,x)=X(\bot_X,x)\cong I
+    \cong
+    \mathbf 1_\bot(*,px).
+\]
+Thus
+\[
+    e\dashv p.
+\]
+The unit is the identity, and the counit is the enriched natural transformation
+\[
+    \Delta\bot_X\Rightarrow\id_X
+\]
+induced by initiality of \(\bot_X\).
+\end{proof}
+
+\begin{definition}[Sequential finite-flat approximation shape]
+\label{def:sequential-ff-approximation-shape}
+A \emph{sequential finite-flat approximation shape} is a linear-cofinal
+finite-flat approximation shape
+\[
+    (\omega_{\mathbb V},W_\omega)
+\]
+whose support category is the ordinary preorder \(\omega\), together with a
+\(\mathbb V\)-endofunctor
+\[
+    s:\omega_{\mathbb V}\to\omega_{\mathbb V}
+\]
+whose action on support objects is
+\[
+    n\longmapsto n+1,
+\]
+such that
+\[
+    s_!W_\omega\cong W_\omega.
+\]
+\end{definition}
+
+\begin{definition}[Sequential finite-flat cofinality]
+\label{def:sequential-ff-cofinality}
+The fuzzy cosmos \(\mathbb V\) is \emph{sequentially finite-flat cofinal} if
+there is a sequential finite-flat approximation shape
+\[
+    (\omega_{\mathbb V},W_\omega,s)
+\]
+such that:
+
+\begin{enumerate}
+    \item \(s\) is \(W_\omega\)-cofinal:
+    \[
+        s_!W_\omega\cong W_\omega;
+    \]
+
+    \item \(s\) is bilimit-cofinal for the pointed sequential projection-pair
+    systems considered below;
+
+    \item the canonical tails and canonical external-product common-successor
+    comparisons are cofinal in the senses of
+    Definitions~\ref{def:tail-cofinal-approximation-shape},
+    \ref{def:common-successor-cofinal-shape}, and
+    \ref{def:linear-cofinal-ff-approximation-shape}.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Pointed projection-pair endopseudofunctor]
+\label{def:pointed-projection-pair-endopseudofunctor}
+A \emph{pointed projection-pair endopseudofunctor} is a pseudofunctor
+\[
+    F:
+    \mathbf{FDom}^{\triangleleft}_{\mathbb V,\bot}
+    \longrightarrow
+    \mathbf{FDom}^{\triangleleft}_{\mathbb V,\bot}.
+\]
+\end{definition}
+
+\begin{definition}[Pointed initial iteration]
+\label{def:pointed-initial-iteration}
+Let
+\[
+    F:
+    \mathbf{FDom}^{\triangleleft}_{\mathbb V,\bot}
+    \to
+    \mathbf{FDom}^{\triangleleft}_{\mathbb V,\bot}
+\]
+be a pointed projection-pair endopseudofunctor.
+
+The \emph{pointed initial \(F\)-iteration} is the sequential split
+projection-pair system
+\[
+    D:\omega_{\mathbb V}
+      \rightsquigarrow
+      \mathbf{FDom}^{\triangleleft}_{\mathbb V,\bot}
+\]
+defined on objects by
+\[
+    D_0=\mathbf 1_\bot,
+    \qquad
+    D_{n+1}=F(D_n).
+\]
+The adjacent transition projection pair
+\[
+    D_n\triangleleft D_{n+1}
+\]
+is obtained by applying \(F^n\) to the canonical projection pair
+\[
+    \mathbf 1_\bot\triangleleft F(\mathbf 1_\bot).
+\]
+For \(n\leq m\), the transition projection pair
+\[
+    D_n\triangleleft D_m
+\]
+is the composite of the adjacent transition projection pairs.
+\end{definition}
+
+\begin{definition}[Pointed generated invariant]
+\label{def:pointed-generated-invariant}
+Let
+\[
+    F:
+    \mathbf{FDom}^{\triangleleft}_{\mathbb V,\bot}
+    \to
+    \mathbf{FDom}^{\triangleleft}_{\mathbb V,\bot}
+\]
+be a pointed projection-pair endopseudofunctor, and let
+\[
+    D:\omega_{\mathbb V}
+      \rightsquigarrow
+      \mathbf{FDom}^{\triangleleft}_{\mathbb V,\bot}
+\]
+be its pointed initial iteration.
+
+A \emph{pointed generated invariant} of \(F\) consists of a pointed fuzzy domain
+\(X\), an equivalence
+\[
+    X\simeq F(X),
+\]
+and a compatible projection-pair cone
+\[
+    (\varepsilon_n,\pi_n):D_n\triangleleft X
+    \qquad(n\in\omega_{\mathbb V})
+\]
+which exhibits \(X\) as the \(W_\omega\)-bilimit of the pointed initial
+iteration \(D\).
+\end{definition}
+
+\begin{theorem}[Pointed finite-flat minimal-invariant theorem]
+\label{thm:pointed-ff-minimal-invariant}
+Assume that \(\mathbb V\) is sequentially finite-flat cofinal.  Let
+\[
+    F:
+    \mathbf{FDom}^{\triangleleft}_{\mathbb V,\bot}
+    \to
+    \mathbf{FDom}^{\triangleleft}_{\mathbb V,\bot}
+\]
+be a pointed projection-pair endopseudofunctor preserving \(W_\omega\)-bilimits
+of pointed sequential projection-pair systems.
+
+Let
+\[
+    D:\omega_{\mathbb V}
+      \rightsquigarrow
+      \mathbf{FDom}^{\triangleleft}_{\mathbb V,\bot}
+\]
+be the pointed initial \(F\)-iteration.  Suppose \(D\) has a
+\(W_\omega\)-bilimit
+\[
+    D_\infty.
+\]
+Then there is a canonical equivalence of pointed fuzzy domains
+\[
+    D_\infty\simeq F(D_\infty).
+\]
+
+Moreover, \(D_\infty\) is unique as a pointed generated invariant: if \(X\) is
+any other pointed generated invariant of \(F\), then there is an equivalence
+\[
+    X\simeq D_\infty
+\]
+unique up to invertible compatible \(2\)-cell.
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+    s:\omega_{\mathbb V}\to\omega_{\mathbb V}
+\]
+be the successor endofunctor.  By construction of the pointed initial
+iteration,
+\[
+    Ds\cong FD
+\]
+as split projection-pair systems.
+
+Since \(s\) is \(W_\omega\)-cofinal and bilimit-cofinal for \(D\),
+Theorem~\ref{thm:shifted-bilimits-ff} shows that
+\[
+    D_\infty
+\]
+is a \(W_\omega\)-bilimit of
+\[
+    Ds.
+\]
+Since \(F\) preserves \(W_\omega\)-bilimits,
+\[
+    F(D_\infty)
+\]
+is a \(W_\omega\)-bilimit of
+\[
+    FD.
+\]
+Using
+\[
+    Ds\cong FD,
+\]
+both \(D_\infty\) and \(F(D_\infty)\) are \(W_\omega\)-bilimits of the same
+system.  By uniqueness,
+\[
+    D_\infty\simeq F(D_\infty).
+\]
+
+If \(X\) is another pointed generated invariant, then \(X\) is also a
+\(W_\omega\)-bilimit of the pointed initial iteration \(D\).  Hence uniqueness
+of \(W_\omega\)-bilimits gives
+\[
+    X\simeq D_\infty
+\]
+uniquely up to invertible compatible \(2\)-cell.
+\end{proof}
+
+\section{Pointed finite-flat generated algebraic compactness}
+\label{sec:pointed-ff-algebraic-compactness}
+
+The minimal-invariant theorem gives an equivalence
+\[
+    D_\infty\simeq F(D_\infty).
+\]
+To express the algebraic-compactness content, we record the associated
+initial-algebra and final-coalgebra behavior inside the generated
+projection-pair fragment.
+
+Throughout this section \(F\) is assumed to act locally on fuzzy-domain
+morphisms and to preserve finite-flat colimits on hom fuzzy domains.
+
+\begin{definition}[Locally finite-flat-continuous pointed endopseudofunctor]
+\label{def:locally-ff-continuous-endopseudofunctor}
+A pointed projection-pair endopseudofunctor
+\[
+    F:
+    \mathbf{FDom}^{\triangleleft}_{\mathbb V,\bot}
+    \to
+    \mathbf{FDom}^{\triangleleft}_{\mathbb V,\bot}
+\]
+is \emph{locally finite-flat-continuous} if it is the restriction to projection
+pairs of a pseudofunctor
+\[
+    \widetilde F:
+    \mathbf{FDom}^{(2)}_{\mathbb V,\bot}
+    \to
+    \mathbf{FDom}^{(2)}_{\mathbb V,\bot}
+\]
+on the locally ordinary \(2\)-category of pointed fuzzy domains and
+fuzzy-domain morphisms, and for every pair of pointed fuzzy domains \(X,Y\),
+the induced hom-action
+\[
+    \widetilde F_{X,Y}:
+    [X,Y]_{\mathrm{ff}}
+    \to
+    [FX,FY]_{\mathrm{ff}}
+\]
+preserves finite-flat weighted colimits.
+\end{definition}
+
+\begin{definition}[Generated projection-pair \(F\)-algebra]
+\label{def:generated-projection-pair-F-algebra}
+Let
+\[
+    F:
+    \mathbf{FDom}^{\triangleleft}_{\mathbb V,\bot}
+    \to
+    \mathbf{FDom}^{\triangleleft}_{\mathbb V,\bot}
+\]
+be locally finite-flat-continuous, and let
+\[
+    D:\omega_{\mathbb V}\rightsquigarrow
+    \mathbf{FDom}^{\triangleleft}_{\mathbb V,\bot}
+\]
+be its pointed initial iteration.
+
+A \emph{generated projection-pair \(F\)-algebra} is a pointed fuzzy domain
+\(X\) equipped with a projection pair
+\[
+    a=(a_e,a_p):FX\triangleleft X.
+\]
+The embedding
+\[
+    a_e:FX\to X
+\]
+is the algebra structure, and the projection
+\[
+    a_p:X\to FX
+\]
+is the associated coalgebra structure.
+
+The projection pair \(a\) generates a compatible cone
+\[
+    \lambda^a_n:D_n\triangleleft X
+\]
+by recursion:
+\[
+    \lambda^a_0:\mathbf 1_\bot\triangleleft X
+\]
+is the canonical projection pair, and
+\[
+    \lambda^a_{n+1}
+    =
+    a\circ F(\lambda^a_n).
+\]
+\end{definition}
+
+\begin{definition}[Generated algebra and coalgebra categories]
+\label{def:generated-algebra-coalgebra-categories}
+The locally ordinary \(2\)-category of generated projection-pair \(F\)-algebras
+is denoted
+\[
+    \operatorname{Alg}^{\mathrm{gen}}_{\triangleleft}(F).
+\]
+The same data may be read coalgebraically: the projection half
+\[
+    a_p:X\to FX
+\]
+of
+\[
+    a=(a_e,a_p):FX\triangleleft X
+\]
+is an \(F\)-coalgebra structure.  With the same objects, but with the
+coalgebra-half compatibility emphasized, we write
+\[
+    \operatorname{Coalg}^{\mathrm{gen}}_{\triangleleft}(F).
+\]
+\end{definition}
+
+\begin{construction}[The canonical generated algebra-coalgebra]
+\label{con:canonical-generated-algebra-coalgebra}
+Let
+\[
+    D_\infty
+\]
+be the \(W_\omega\)-bilimit of the pointed initial iteration.  By
+Theorem~\ref{thm:pointed-ff-minimal-invariant}, there is an equivalence
+\[
+    D_\infty\simeq F(D_\infty).
+\]
+Choosing the corresponding projection-pair representative gives a canonical
+generated projection-pair algebra
+\[
+    a_\infty=(a_{\infty,e},a_{\infty,p}):
+    F(D_\infty)\triangleleft D_\infty.
+\]
+\end{construction}
+
+\begin{lemma}[Generated folds from the bilimit]
+\label{lem:generated-folds-from-bilimit}
+Let
+\[
+    a=(a_e,a_p):FX\triangleleft X
+\]
+be a generated projection-pair \(F\)-algebra.  Then the generated cone
+\[
+    \lambda^a_n:D_n\triangleleft X
+\]
+induces a projection pair
+\[
+    \operatorname{fold}_a:D_\infty\triangleleft X.
+\]
+Moreover, its embedding half is an algebra morphism
+\[
+    (D_\infty,a_\infty)\to(X,a),
+\]
+and its projection half is a coalgebra morphism
+\[
+    (X,a_p)\to(D_\infty,a_{\infty,p}).
+\]
+\end{lemma}
+
+\begin{proof}
+Since \(D_\infty\) represents compatible cones over the pointed initial
+iteration, the generated compatible cone
+\[
+    \lambda^a_n:D_n\triangleleft X
+\]
+is represented by a projection pair
+\[
+    \operatorname{fold}_a:D_\infty\triangleleft X.
+\]
+The algebra and coalgebra compatibility equations are checked on finite
+approximants.  At stage \(n+1\), both sides are obtained from stage \(n\) by
+applying \(F\) and then composing with \(a\).  Detection by the bilimit
+representation gives the required compatible \(2\)-cells.
+\end{proof}
+
+\begin{lemma}[Uniqueness of generated folds]
+\label{lem:uniqueness-generated-folds}
+Let
+\[
+    a=(a_e,a_p):FX\triangleleft X
+\]
+be a generated projection-pair \(F\)-algebra.  Any two generated algebra
+morphisms
+\[
+    (D_\infty,a_\infty)\to(X,a)
+\]
+are uniquely isomorphic by an invertible compatible \(2\)-cell.  Dually, any
+two generated coalgebra morphisms
+\[
+    (X,a_p)\to(D_\infty,a_{\infty,p})
+\]
+are uniquely isomorphic by an invertible compatible \(2\)-cell.
+\end{lemma}
+
+\begin{proof}
+The restrictions of a generated algebra morphism to finite approximants are
+forced recursively.  At stage \(0\) they are the canonical map from
+\(\mathbf 1_\bot\).  If the restrictions agree at stage \(n\), algebra
+compatibility forces agreement at stage \(n+1\).  Thus any two such morphisms
+represent the same compatible cone, and uniqueness follows from the
+representing property of the bilimit.  The coalgebra statement is the mate
+dual.
+\end{proof}
+
+\begin{theorem}[Pointed finite-flat generated algebraic compactness]
+\label{thm:pointed-ff-algebraic-compactness}
+Assume that \(\mathbb V\) is sequentially finite-flat cofinal.  Let
+\[
+    F:
+    \mathbf{FDom}^{\triangleleft}_{\mathbb V,\bot}
+    \to
+    \mathbf{FDom}^{\triangleleft}_{\mathbb V,\bot}
+\]
+be a pointed projection-pair endopseudofunctor which preserves
+\(W_\omega\)-bilimits of pointed sequential projection-pair systems and is
+locally finite-flat-continuous.
+
+Let
+\[
+    D:\omega_{\mathbb V}
+      \rightsquigarrow
+      \mathbf{FDom}^{\triangleleft}_{\mathbb V,\bot}
+\]
+be the pointed initial \(F\)-iteration, and suppose it has a
+\(W_\omega\)-bilimit
+\[
+    D_\infty.
+\]
+Then the canonical projection pair
+\[
+    a_\infty=(a_{\infty,e},a_{\infty,p}):
+    F(D_\infty)\triangleleft D_\infty
+\]
+exhibits \(D_\infty\) as the generated algebraically compact solution of \(F\):
+
+\begin{enumerate}
+    \item the embedding half
+    \[
+        a_{\infty,e}:F(D_\infty)\to D_\infty
+    \]
+    is initial in
+    \[
+        \operatorname{Alg}^{\mathrm{gen}}_{\triangleleft}(F);
+    \]
+
+    \item the projection half
+    \[
+        a_{\infty,p}:D_\infty\to F(D_\infty)
+    \]
+    is final in
+    \[
+        \operatorname{Coalg}^{\mathrm{gen}}_{\triangleleft}(F);
+    \]
+
+    \item the algebra and coalgebra structures are inverse halves of the same
+    projection-pair equivalence
+    \[
+        F(D_\infty)\triangleleft D_\infty.
+    \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Theorem~\ref{thm:pointed-ff-minimal-invariant} gives
+\[
+    D_\infty\simeq F(D_\infty).
+\]
+Choosing the corresponding projection-pair representative gives
+\[
+    a_\infty:F(D_\infty)\triangleleft D_\infty.
+\]
+
+For any generated projection-pair \(F\)-algebra
+\[
+    a:FX\triangleleft X,
+\]
+Lemma~\ref{lem:generated-folds-from-bilimit} gives a generated fold
+\[
+    \operatorname{fold}_a:D_\infty\triangleleft X.
+\]
+Its embedding half is an algebra morphism, and its projection half is a
+coalgebra morphism.  Lemma~\ref{lem:uniqueness-generated-folds} gives
+uniqueness up to invertible compatible \(2\)-cell.  Hence the embedding half of
+\(a_\infty\) is initial in the generated algebra category, and the projection
+half is final in the generated coalgebra category.
+
+The two structures are inverse halves of the same projection-pair equivalence
+by construction.
+\end{proof}
+
+\section{The crisp separated case}
+\label{sec:crisp-separated-ff-rde}
+
+For
+\[
+    \Lambda=2,
+\]
+finite-flat weights are ordinary ideals.  On separated fuzzy domains, strict
+algebras for the ideal monad are precisely dcpos, and fuzzy-domain morphisms
+are precisely Scott-continuous maps.
+
+Let
+\[
+    \omega=0\leq1\leq2\leq\cdots
+\]
+and let
+\[
+    W_\omega:\omega^{\op}\to 2
+\]
+be the constant-true weight:
+\[
+    W_\omega(n)=1.
+\]
+This is the ordinary directed ideal \(\omega\subseteq\omega\).
+
+For a dcpo system
+\[
+    D_0\triangleleft D_1\triangleleft D_2\triangleleft\cdots
+\]
+of projection pairs, a \(W_\omega\)-bilimit is exactly the usual bilimit:
+there are projection pairs
+\[
+    (\varepsilon_n,\pi_n):D_n\triangleleft D_\infty
+\]
+such that the approximants satisfy
+\[
+    \bigvee_{n<\omega}
+        \varepsilon_n\pi_n
+    =
+    \id_{D_\infty}
+\]
+in the dcpo of Scott-continuous endomorphisms of \(D_\infty\).
+
+In the crisp case, the ordinary diagonal
+\[
+    \Delta_\omega:\omega\to\omega\times\omega,
+    \qquad
+    n\longmapsto(n,n),
+\]
+is a monotone map.  It is cofinal for the ideal weight because for every pair
+\[
+    (m,n)\in\omega\times\omega
+\]
+there is
+\[
+    k\geq m,n.
+\]
+Hence
+\[
+    (\Delta_\omega)_!W_\omega
+    =
+    W_\omega\boxtimes W_\omega.
+\]
+This diagonal is the cartesian feature that permits same-index function-space
+equations.
+
+\begin{theorem}[Crisp separated same-index function-space collapse]
+\label{thm:crisp-separated-same-index-collapse}
+Let
+\[
+    \Lambda=2.
+\]
+Let
+\[
+    D_0\triangleleft D_1\triangleleft D_2\triangleleft\cdots
+\]
+be a sequential dcpo projection-pair system with bilimit \(D_\infty\), and
+suppose
+\[
+    D_{n+1}\cong [D_n,D_n]
+\]
+as projection-pair systems.  Then
+\[
+    D_\infty\cong [D_\infty,D_\infty].
+\]
+\end{theorem}
+
+\begin{proof}
+For \(\Lambda=2\), the finite-flat weight
+\[
+    W_\omega:\omega^{\op}\to 2
+\]
+is the ordinary directed ideal.  The product weight
+\[
+    W_\omega\boxtimes W_\omega
+\]
+is the ordinary directed ideal on \(\omega\times\omega\).
+
+The diagonal
+\[
+    \Delta_\omega:\omega\to\omega\times\omega
+\]
+is cofinal, so restriction along \(\Delta_\omega\) preserves the relevant
+bilimit.  The external function-space system is
+\[
+    (m,n)\longmapsto [D_n,D_m].
+\]
+Restricting along the diagonal gives
+\[
+    n\longmapsto [D_n,D_n]\cong D_{n+1}.
+\]
+The successor shift is cofinal, so the shifted chain has the same bilimit
+\(D_\infty\).  On the other hand, the standard bilimit theorem for dcpo
+projection-pair chains gives that
+\[
+    [D_\infty,D_\infty]
+\]
+is the bilimit of the same external function-space system.  By uniqueness of
+bilimits,
+\[
+    D_\infty\cong [D_\infty,D_\infty].
+\]
+\end{proof}
+
+Similarly, for a locally Scott-continuous bilimit-preserving endofunctor \(T\)
+on dcpos, the effectful constructor
+\[
+    \Phi_T(D)=[D,TD]
+\]
+gives, after diagonal collapse, the equation
+\[
+    D_\infty\cong [D_\infty,TD_\infty].
+\]
+For a bilimit-preserving coeffect functor \(G\), the coeffectful form is
+\[
+    D_\infty\cong [GD_\infty,D_\infty],
+\]
+and for mixed effect/coeffect structure,
+\[
+    D_\infty\cong [GD_\infty,TD_\infty].
+\]
+
+In the crisp separated case the Kelly tensor product of fuzzy domains is the
+cartesian product of dcpos, so the application maps have their usual cartesian
+types:
+\[
+    D_\infty\times D_\infty\to D_\infty,
+\]
+\[
+    D_\infty\times D_\infty\to TD_\infty,
+\]
+and
+\[
+    D_\infty\times GD_\infty\to TD_\infty
+\]
+in the pure, effectful, and mixed cases respectively.
+
+\begin{proposition}[Crisp separated pointed minimal invariants]
+\label{prop:crisp-separated-pointed-minimal-invariants}
+For
+\[
+    \Lambda=2,
+\]
+the pointed finite-flat minimal-invariant and generated algebraic-compactness
+theorems specialize to the classical pointed-dcpo bilimit construction.
+
+More explicitly:
+
+\begin{enumerate}
+    \item pointed fuzzy domains are precisely pointed dcpos;
+
+    \item fuzzy projection pairs are precisely embedding-projection pairs
+    \[
+        e:D\to E,
+        \qquad
+        p:E\to D,
+        \qquad
+        pe=\id_D,
+        \qquad
+        ep\leq\id_E;
+    \]
+
+    \item the finite-flat weight
+    \[
+        W_\omega:\omega^{\op}\to 2
+    \]
+    is the ordinary directed ideal on \(\omega\);
+
+    \item the \(W_\omega\)-bilimit approximation identity becomes
+    \[
+        \bigvee_{n<\omega}\varepsilon_n\pi_n
+        =
+        \id_{D_\infty}
+    \]
+    in the dcpo of Scott-continuous endomorphisms of \(D_\infty\);
+
+    \item a locally finite-flat-continuous endopseudofunctor becomes a locally
+    Scott-continuous endofunctor on the projection-pair category of pointed
+    dcpos;
+
+    \item the canonical projection pair
+    \[
+        F(D_\infty)\triangleleft D_\infty
+    \]
+    gives the generated coincidence of the initial algebra and final coalgebra.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+For \(\Lambda=2\), finite-flat weights are ordinary ideals and strict algebras
+for the ideal monad on separated preorders are precisely dcpos.  An enriched
+initial object is exactly a least element, so pointed fuzzy domains are pointed
+dcpos.
+
+A fuzzy projection pair
+\[
+    (e,p):D\triangleleft E
+\]
+is an adjunction
+\[
+    e\dashv p
+\]
+with invertible unit.  In order-enriched notation this is precisely
+\[
+    pe=\id_D,
+    \qquad
+    ep\leq\id_E.
+\]
+Thus projection pairs are the usual embedding-projection pairs.
+
+The weight
+\[
+    W_\omega:\omega^{\op}\to 2
+\]
+is constant true, hence is the ordinary directed ideal on \(\omega\).  Therefore
+a \(W_\omega\)-weighted colimit in an internal hom dcpo is an ordinary directed
+join.  The approximation identity
+\[
+    W_\omega*(n\mapsto\varepsilon_n\pi_n)
+    \cong
+    \id_{D_\infty}
+\]
+therefore becomes
+\[
+    \bigvee_{n<\omega}\varepsilon_n\pi_n
+    =
+    \id_{D_\infty}.
+\]
+
+The generated projection-pair algebra
+\[
+    F(D_\infty)\triangleleft D_\infty
+\]
+has embedding half
+\[
+    F(D_\infty)\to D_\infty
+\]
+and projection half
+\[
+    D_\infty\to F(D_\infty).
+\]
+These are the classical inverse algebra and coalgebra maps obtained from the
+bilimit of the initial embedding-projection chain.
+\end{proof}
+
+\section{Summary}
+\label{sec:summary-ff-rde}
+
+Recursive domain equations in fuzzy domains are governed by the finite-flat
+doctrine.  The primitive approximation objects are finite-flat approximation
+shapes
+\[
+    (A,W),
+    \qquad
+    W\in\operatorname{Idl}_{\mathbb V}(A).
+\]
+Cofinality of weights is expressed by lower direct image:
+\[
+    h:(A,W)\to(B,U)
+    \quad\Longleftrightarrow\quad
+    h_!W\cong U.
+\]
+An iteration shape is a finite-flat approximation shape equipped with a
+weight-cofinal self-map
+\[
+    s:A\to A,
+    \qquad
+    s_!W\cong W.
+\]
+
+Tails are canonical support-comma categories
+\[
+    \operatorname{Tail}_A(a_0),
+\]
+equipped with their canonical projection
+\[
+    \tau_{a_0}:\operatorname{Tail}_A(a_0)\to A.
+\]
+Tail-cofinality says that
+\[
+    \tau_{a_0}^*W
+\]
+is finite-flat and
+\[
+    (\tau_{a_0})_!\tau_{a_0}^{*}W\cong W.
+\]
+Common successors are encoded by
+\[
+    \operatorname{Com}(P),
+\]
+whose objects are tuples
+\[
+    (i,j,k,u:i\to k,v:j\to k).
+\]
+The canonical maps
+\[
+    c_P:\operatorname{Com}(P)\to P\tensor P,
+    \qquad
+    m_P:\operatorname{Com}(P)\to P
+\]
+are cofinal when
+\[
+    (c_P)_!m_P^*R\cong R\boxtimes R,
+    \qquad
+    (m_P)_!m_P^*R\cong R.
+\]
+
+For bilimits, weight-cofinality is paired with bilimit-cofinality: restriction
+along the indexing map must preserve compatible projection-pair cone
+categories.  With this distinction in place, a split projection-pair system
+\[
+    D:A\rightsquigarrow\mathbf{FDom}_{\mathbb V}^{\triangleleft}
+\]
+satisfying
+\[
+    Ds\cong FD
+\]
+has a generated solution whenever \(D\) has a \(W\)-bilimit, \(s\) is
+bilimit-cofinal for \(D\), and \(F\) preserves that bilimit:
+\[
+    D_\infty\simeq F(D_\infty).
+\]
+
+The general internal-hom theorem is external-product-indexed.  If
+\[
+    X_\infty
+    \qquad\text{and}\qquad
+    Y_\infty
+\]
+are \(W\)-bilimits of split systems \(X\) and \(Y\), then
+\[
+    [X_\infty,Y_\infty]_{\mathrm{ff}}
+\]
+has external-product approximants
+\[
+    (a,a')\longmapsto [X_{a'},Y_a]_{\mathrm{ff}},
+\]
+and these satisfy
+\[
+    (W\boxtimes W)*
+    \bigl((a,a')\mapsto E_{a,a'}\Pi_{a,a'}\bigr)
+    \cong
+    \id_{[X_\infty,Y_\infty]_{\mathrm{ff}}}.
+\]
+Compatible cones over the external-product system reconstruct canonically to
+lax application data.  They do not generally reconstruct to projection pairs,
+because the common-successor comparison supplies
+\[
+    \rho\delta\Rightarrow\id
+\]
+rather than an invertible unit
+\[
+    \id\Rightarrow\rho\delta.
+\]
+This is exactly the resource-sensitive obstruction caused by the absence of a
+canonical diagonal
+\[
+    A\to A\tensor A.
+\]
+
+In the pointed case, a sequential finite-flat approximation shape
+\[
+    (\omega_{\mathbb V},W_\omega,s)
+\]
+replaces the ordinary chain
+\[
+    0\leq1\leq2\leq\cdots.
+\]
+The pointed initial iteration
+\[
+    D_0=\mathbf 1_\bot,
+    \qquad
+    D_{n+1}=F(D_n)
+\]
+has a \(W_\omega\)-bilimit \(D_\infty\).  If \(F\) preserves this bilimit, then
+\[
+    D_\infty\simeq F(D_\infty).
+\]
+If \(F\) is locally finite-flat-continuous, the resulting projection pair
+\[
+    F(D_\infty)\triangleleft D_\infty
+\]
+is the generated algebraically compact solution: its embedding half is the
+initial generated algebra, its projection half is the final generated
+coalgebra, and the two structures are inverse halves of the same projection-pair
+equivalence.
+
+In the crisp separated case, taking the ordinary ideal
+\[
+    W_\omega=\omega\subseteq\omega
+\]
+recovers the standard bilimit method for solving recursive domain equations of
+dcpos.  The ordinary reflexive-domain equation
+\[
+    D_\infty\cong [D_\infty,D_\infty]
+\]
+is recovered precisely because the cartesian diagonal
+\[
+    \omega\to\omega\times\omega
+\]
+collapses the external-product function-space approximation to a same-index
+chain.

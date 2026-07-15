@@ -1,0 +1,2214 @@
+\chapter{The Affine Linear Type Theory of a Reflexive Fuzzy Domain}
+\label{ch:affine-linear-type-theory-reflexive-fuzzy-domain}
+
+\section{Introduction}
+\label{sec:affine-linear-type-theory-introduction}
+
+The preceding chapters constructed the semantic category of fuzzy domains.
+A fuzzy domain is a strict algebra for the fuzzy ideal monad
+\[
+    T_{\mathbb V}X
+    =
+    \operatorname{Idl}_{\mathbb V}(X),
+\]
+and fuzzy-domain morphisms are the \(\mathbb V\)-functors preserving
+finite-flat weighted colimits.  The category
+\[
+    \mathbf{FDom}_{\mathbb V}
+\]
+of fuzzy domains carries a symmetric monoidal closed structure
+\[
+    A\boxtimes_{\mathrm{ff}}B
+    \dashv
+    [B,-]_{\mathrm{ff}}.
+\]
+Its tensor unit is terminal.  Thus the semantic structure is affine:
+there are canonical weakening morphisms
+\[
+    X\longrightarrow I_{\mathrm{ff}},
+\]
+but there are no canonical contraction morphisms
+\[
+    X\longrightarrow X\boxtimes_{\mathrm{ff}}X
+\]
+in general.
+
+This chapter extracts the corresponding type theory.  The natural syntax is
+therefore not cartesian, but affine linear.  Contexts are interpreted by tensor
+products, linear function types are interpreted by the internal hom, and
+weakening is interpreted by the terminality of the tensor unit.
+
+The central semantic object is a linear reflexive fuzzy domain.  This is a
+fuzzy domain \(D\) equipped with a projection pair
+\[
+    [D,D]_{\mathrm{ff}}\triangleleft D.
+\]
+Equivalently, there are fuzzy-domain morphisms
+\[
+    \operatorname{encode}:[D,D]_{\mathrm{ff}}\to D,
+    \qquad
+    \operatorname{decode}:D\to [D,D]_{\mathrm{ff}},
+\]
+with
+\[
+    \operatorname{decode}\operatorname{encode}
+    \cong
+    \id_{[D,D]_{\mathrm{ff}}}
+\]
+and a counit comparison
+\[
+    \operatorname{encode}\operatorname{decode}
+    \Rightarrow
+    \id_D.
+\]
+Such a domain carries a canonical affine self-application operation
+\[
+    D\boxtimes_{\mathrm{ff}}D\longrightarrow D.
+\]
+
+The proof theory is enriched over the fuzzy cosmos.  The primitive comparison
+judgement is not a scalar inequality, but an evidence-indexed judgement
+\[
+    \Gamma\vdash_R s\preceq t:A,
+    \qquad
+    R\in\mathbb V.
+\]
+Semantically this means a morphism in the fuzzy cosmos
+\[
+    R
+    \longrightarrow
+    [\llbracket \Gamma\rrbracket,
+     \llbracket A\rrbracket]_{\mathrm{ff}}
+    (\llbracket s\rrbracket,\llbracket t\rrbracket).
+\]
+When \(\mathbb V\) is the posetal fuzzy cosmos associated to a fuzzy
+truth-value object
+\[
+    \Lambda=(L,\leq,\wedge,\vee,\otimes,\multimap,\bot,\top),
+\]
+this judgement becomes the scalar judgement
+\[
+    \Gamma\vdash_a s\preceq t:A,
+    \qquad
+    a\in L,
+\]
+with semantic meaning
+\[
+    a
+    \leq
+    [\llbracket \Gamma\rrbracket,
+     \llbracket A\rrbracket]_{\mathrm{ff}}
+    (\llbracket s\rrbracket,\llbracket t\rrbracket).
+\]
+
+The chapter constructs the raw affine-linear syntax as a locally
+\(\mathbb V\)-categorical symmetric affine monoidal closed category, then
+applies the fuzzy ideal monad locally to obtain its finite-flat syntactic
+envelope.  The main results are soundness, the enriched truth lemma,
+initiality of the syntactic envelope, and the posetal soundness-completeness
+theorem.
+
+\section{The finite-flat affine semantic base}
+\label{sec:finite-flat-affine-semantic-base}
+
+We write
+\[
+    \mathbf{FDom}_{\mathbb V}
+\]
+for the ordinary category of fuzzy domains and finite-flat-colimit-preserving
+\(\mathbb V\)-functors.  Its tensor product, tensor unit, and internal hom are
+denoted
+\[
+    A\boxtimes_{\mathrm{ff}}B,
+    \qquad
+    I_{\mathrm{ff}},
+    \qquad
+    [A,B]_{\mathrm{ff}}.
+\]
+The closed structure gives natural bijections
+\[
+    \mathbf{FDom}_{\mathbb V}
+    (A\boxtimes_{\mathrm{ff}}B,C)
+    \cong
+    \mathbf{FDom}_{\mathbb V}
+    (A,[B,C]_{\mathrm{ff}}).
+\]
+The corresponding evaluation morphism is written
+\[
+    \operatorname{ev}_{A,B}:
+    [A,B]_{\mathrm{ff}}\boxtimes_{\mathrm{ff}}A
+    \longrightarrow B.
+\]
+
+We use the locally \(\mathbb V\)-categorical enhancement of
+\(\mathbf{FDom}_{\mathbb V}\).  Its objects are fuzzy domains and its hom
+\(\mathbb V\)-categories are
+\[
+    \mathbf{FDom}_{\mathbb V}^{\mathbb V}(A,B)
+    =
+    [A,B]_{\mathrm{ff}}.
+\]
+Thus the objects of the hom \(\mathbb V\)-category are finite-flat-continuous
+\(\mathbb V\)-functors
+\[
+    A\to B,
+\]
+and the hom-objects between such functors are those of the internal hom
+\([A,B]_{\mathrm{ff}}\).
+
+Composition is the finite-flat-continuous bimorphism
+\[
+    [B,C]_{\mathrm{ff}}
+    \boxtimes_{\mathrm{ff}}
+    [A,B]_{\mathrm{ff}}
+    \longrightarrow
+    [A,C]_{\mathrm{ff}},
+    \qquad
+    (g,f)\longmapsto gf.
+\]
+The identity at \(A\) is the object
+\[
+    \id_A\in[A,A]_{\mathrm{ff}}.
+\]
+
+Because \(I_{\mathrm{ff}}\) is terminal, each fuzzy domain \(X\) has a canonical
+weakening morphism
+\[
+    {!}_X:X\longrightarrow I_{\mathrm{ff}}.
+\]
+No diagonal
+\[
+    X\longrightarrow X\boxtimes_{\mathrm{ff}}X
+\]
+is part of this structure.
+
+\section{Linear reflexive fuzzy domains}
+\label{sec:linear-reflexive-fuzzy-domains}
+
+\begin{definition}[Linear reflexive fuzzy domain]
+\label{def:linear-reflexive-fuzzy-domain-type-theory}
+A \emph{linear reflexive fuzzy domain} is a fuzzy domain \(D\) equipped with a
+fuzzy projection pair
+\[
+    [D,D]_{\mathrm{ff}}\triangleleft D.
+\]
+Thus it consists of fuzzy-domain morphisms
+\[
+    \operatorname{encode}:[D,D]_{\mathrm{ff}}\to D,
+    \qquad
+    \operatorname{decode}:D\to [D,D]_{\mathrm{ff}},
+\]
+together with an adjunction
+\[
+    \operatorname{encode}\dashv \operatorname{decode}
+\]
+in the locally ordinary support \(2\)-category of fuzzy domains, whose unit is
+invertible.  Equivalently,
+\[
+    \operatorname{decode}\operatorname{encode}
+    \cong
+    \id_{[D,D]_{\mathrm{ff}}},
+\]
+and there is a counit comparison
+\[
+    \operatorname{encode}\operatorname{decode}
+    \Rightarrow
+    \id_D
+\]
+satisfying the triangle identities.
+\end{definition}
+
+\begin{definition}[Extensional linear reflexive fuzzy domain]
+\label{def:extensional-linear-reflexive-fuzzy-domain-type-theory}
+A linear reflexive fuzzy domain is \emph{extensional} if the counit comparison
+\[
+    \operatorname{encode}\operatorname{decode}
+    \Rightarrow
+    \id_D
+\]
+is invertible.  Equivalently,
+\[
+    \operatorname{encode}\operatorname{decode}
+    \cong
+    \id_D.
+\]
+\end{definition}
+
+\begin{definition}[Canonical self-application]
+\label{def:canonical-self-application-fuzzy-domain}
+Let \(D\) be a linear reflexive fuzzy domain.  The \emph{canonical
+self-application} morphism is
+\[
+    \mathsf{app}_D:
+    D\boxtimes_{\mathrm{ff}}D
+    \longrightarrow
+    D
+\]
+defined by the composite
+\[
+    D\boxtimes_{\mathrm{ff}}D
+    \xrightarrow{\operatorname{decode}\boxtimes 1_D}
+    [D,D]_{\mathrm{ff}}\boxtimes_{\mathrm{ff}}D
+    \xrightarrow{\operatorname{ev}_{D,D}}
+    D.
+\]
+\end{definition}
+
+\begin{proposition}[Canonical affine applicative structure]
+\label{prop:canonical-affine-applicative-structure-fuzzy-domain}
+Every linear reflexive fuzzy domain carries the canonical affine applicative
+structure
+\[
+    \mathsf{app}_D:
+    D\boxtimes_{\mathrm{ff}}D
+    \longrightarrow
+    D.
+\]
+\end{proposition}
+
+\begin{proof}
+The morphism \(\operatorname{decode}\boxtimes 1_D\) is a fuzzy-domain morphism
+because \(\boxtimes_{\mathrm{ff}}\) is functorial.  The evaluation map is a
+fuzzy-domain morphism by the closed structure of
+\(\mathbf{FDom}_{\mathbb V}\).  Therefore their composite is a fuzzy-domain
+morphism.
+\end{proof}
+
+\section{The cosmos-indexed affine linear language}
+\label{sec:cosmos-indexed-affine-linear-language}
+
+\subsection{Types and contexts}
+\label{subsec:types-and-contexts-cosmos-indexed}
+
+\begin{definition}[Types]
+\label{def:affine-linear-types-cosmos}
+The types are generated by
+\[
+    A,B ::= \mathbf 1 \mid D \mid A\otimes B \mid A\multimap B.
+\]
+Here \(\mathbf 1\) is the tensor unit type, \(D\) is the distinguished
+computational type, \(A\otimes B\) is the tensor type, and
+\(A\multimap B\) is the linear function type.
+\end{definition}
+
+\begin{definition}[Affine linear contexts]
+\label{def:affine-linear-contexts-cosmos}
+A context is a finite list
+\[
+    \Gamma=x_1:A_1,\dots,x_n:A_n.
+\]
+The empty context is denoted
+\[
+    \varnothing.
+\]
+Context concatenation is written
+\[
+    \Gamma,\Delta.
+\]
+Contexts are identified up to the canonical associativity, unit, and symmetry
+isomorphisms generated by the affine symmetric monoidal structure.
+\end{definition}
+
+\subsection{Term judgements}
+\label{subsec:term-judgements-cosmos-indexed}
+
+Term judgements have the form
+\[
+    \Gamma\vdash t:A.
+\]
+The term constructors are those of affine linear natural deduction:
+
+\[
+    \frac{}
+         {x:A\vdash x:A},
+\]
+
+\[
+    \frac{}
+         {\Gamma\vdash *:\mathbf 1},
+\]
+
+\[
+    \frac{\Gamma\vdash s:A
+          \qquad
+          \Delta\vdash t:B}
+         {\Gamma,\Delta\vdash s\otimes t:A\otimes B},
+\]
+
+\[
+    \frac{\Gamma\vdash p:A\otimes B
+          \qquad
+          \Delta,x:A,y:B\vdash u:C}
+         {\Gamma,\Delta\vdash
+          \operatorname{let}\ x\otimes y=p\ \operatorname{in}\ u:C},
+\]
+
+\[
+    \frac{\Gamma,x:A\vdash t:B}
+         {\Gamma\vdash \lambda x.t:A\multimap B},
+\]
+
+\[
+    \frac{\Gamma\vdash f:A\multimap B
+          \qquad
+          \Delta\vdash u:A}
+         {\Gamma,\Delta\vdash f\,u:B}.
+\]
+
+Weakening is admissible:
+\[
+    \frac{\Gamma\vdash t:A}
+         {\Gamma,\Delta\vdash t:A}.
+\]
+Exchange is admissible by the symmetry of the tensor.
+
+There is no contraction rule.  In particular, one does not have a general rule
+\[
+    \frac{\Gamma,x:A,x:A\vdash t:B}
+         {\Gamma,x:A\vdash t:B}.
+\]
+Such a rule would require a semantic diagonal
+\[
+    \llbracket A\rrbracket
+    \longrightarrow
+    \llbracket A\rrbracket
+    \boxtimes_{\mathrm{ff}}
+    \llbracket A\rrbracket,
+\]
+which is not available in the affine fuzzy-domain setting.
+
+The ordinary beta and eta equations for tensor and linear function types are
+included:
+\[
+    \operatorname{let}\ x\otimes y=(s\otimes t)\ \operatorname{in}\ u
+    \equiv
+    u[s/x,t/y],
+\]
+\[
+    \operatorname{let}\ x\otimes y=p\ \operatorname{in}\ x\otimes y
+    \equiv
+    p,
+\]
+\[
+    (\lambda x.t)\,u
+    \equiv
+    t[u/x],
+\]
+\[
+    \lambda x.f\,x
+    \equiv
+    f,
+    \qquad x\notin \operatorname{FV}(f).
+\]
+The unit type is terminal:
+\[
+    \Gamma\vdash u:\mathbf 1
+    \quad\Longrightarrow\quad
+    u\equiv *.
+\]
+
+\subsection{Encode, decode, and derived self-application}
+\label{subsec:encode-decode-derived-self-application-cosmos}
+
+The distinguished type \(D\) carries primitive term formers
+\[
+    \frac{\Gamma\vdash f:D\multimap D}
+         {\Gamma\vdash \operatorname{encode}(f):D},
+\]
+and
+\[
+    \frac{\Gamma\vdash d:D}
+         {\Gamma\vdash \operatorname{decode}(d):D\multimap D}.
+\]
+
+The reflexive beta law is invertible:
+\[
+    \operatorname{decode}(\operatorname{encode}(f))
+    \equiv
+    f
+    :
+    D\multimap D.
+\]
+The reflexive eta law is one-sided:
+\[
+    \operatorname{encode}(\operatorname{decode}(d))
+    \preceq
+    d
+    :
+    D.
+\]
+Its precise enriched meaning is given below as a global comparison cell.
+
+Define derived self-application by
+\[
+    s\bullet t
+    :=
+    \operatorname{decode}(s)(t).
+\]
+Thus from
+\[
+    \Gamma\vdash s:D,
+    \qquad
+    \Delta\vdash t:D,
+\]
+one obtains
+\[
+    \Gamma,\Delta\vdash s\bullet t:D.
+\]
+
+If
+\[
+    \Gamma,x:D\vdash t:D,
+\]
+define derived \(D\)-abstraction by
+\[
+    \lambda^D x.t
+    :=
+    \operatorname{encode}(\lambda x.t).
+\]
+Then
+\[
+    \Gamma\vdash \lambda^D x.t:D.
+\]
+The derived beta law is
+\[
+    (\lambda^D x.t)\bullet u
+    \equiv
+    t[u/x].
+\]
+The derived eta approximation is
+\[
+    \lambda^D x.(d\bullet x)
+    \preceq
+    d,
+    \qquad
+    x\notin \operatorname{FV}(d).
+\]
+
+\section{Cosmos-indexed approximation judgements}
+\label{sec:cosmos-indexed-approximation-judgements}
+
+\subsection{Evidence-indexed comparison}
+\label{subsec:evidence-indexed-comparison}
+
+\begin{definition}[Cosmos-indexed approximation judgement]
+\label{def:cosmos-indexed-approximation-judgement}
+Let \(R\in\mathbb V\).  A \emph{cosmos-indexed approximation judgement} has
+the form
+\[
+    \Gamma\vdash_R s\preceq t:A.
+\]
+It is read as: \(R\) is an object of evidence witnessing that \(s\)
+approximates \(t\).
+\end{definition}
+
+The intended semantics is a morphism
+\[
+    R
+    \longrightarrow
+    [\llbracket \Gamma\rrbracket,
+     \llbracket A\rrbracket]_{\mathrm{ff}}
+    (\llbracket s\rrbracket,\llbracket t\rrbracket)
+\]
+in the fuzzy cosmos.
+
+\subsection{Structural rules for evidence}
+\label{subsec:structural-rules-evidence}
+
+Reflexivity is witnessed by the tensor unit:
+\[
+    \frac{}
+         {\Gamma\vdash_I t\preceq t:A}.
+\]
+
+Transitivity composes evidence by tensor:
+\[
+    \frac{\Gamma\vdash_R r\preceq s:A
+          \qquad
+          \Gamma\vdash_S s\preceq t:A}
+         {\Gamma\vdash_{S\otimes R} r\preceq t:A}.
+\]
+The order \(S\otimes R\) matches the enriched composition map
+\[
+    C(s,t)\otimes C(r,s)
+    \longrightarrow
+    C(r,t).
+\]
+
+Evidence is contravariantly functorial in the evidence object:
+\[
+    \frac{q:Q\to R
+          \qquad
+          \Gamma\vdash_R s\preceq t:A}
+         {\Gamma\vdash_Q s\preceq t:A}.
+\]
+
+Small coproducts aggregate evidence:
+\[
+    \frac{\Gamma\vdash_{R_i} s\preceq t:A\quad(i\in I)}
+         {\Gamma\vdash_{\coprod_{i\in I}R_i} s\preceq t:A}.
+\]
+The induced comparison is obtained by the universal property of the coproduct.
+
+\subsection{Congruence rules}
+\label{subsec:congruence-rules-cosmos}
+
+All term formers are enriched functorial.
+
+Tensor introduction is monotone:
+\[
+    \frac{\Gamma\vdash_R s\preceq s':A
+          \qquad
+          \Delta\vdash_S t\preceq t':B}
+         {\Gamma,\Delta\vdash_{R\otimes S}
+          s\otimes t\preceq s'\otimes t':A\otimes B}.
+\]
+
+Linear application is monotone:
+\[
+    \frac{\Gamma\vdash_R f\preceq g:A\multimap B
+          \qquad
+          \Delta\vdash_S u\preceq v:A}
+         {\Gamma,\Delta\vdash_{R\otimes S}
+          f\,u\preceq g\,v:B}.
+\]
+
+Linear abstraction is enriched functorial:
+\[
+    \frac{\Gamma,x:A\vdash_R s\preceq t:B}
+         {\Gamma\vdash_R
+          \lambda x.s\preceq \lambda x.t:A\multimap B}.
+\]
+
+Encode is enriched functorial:
+\[
+    \frac{\Gamma\vdash_R f\preceq g:D\multimap D}
+         {\Gamma\vdash_R
+          \operatorname{encode}(f)\preceq\operatorname{encode}(g):D}.
+\]
+
+Decode is enriched functorial:
+\[
+    \frac{\Gamma\vdash_R d\preceq e:D}
+         {\Gamma\vdash_R
+          \operatorname{decode}(d)\preceq\operatorname{decode}(e):D\multimap D}.
+\]
+
+Self-application is enriched functorial:
+\[
+    \frac{\Gamma\vdash_R s\preceq s':D
+          \qquad
+          \Delta\vdash_S t\preceq t':D}
+         {\Gamma,\Delta\vdash_{R\otimes S}
+          s\bullet t\preceq s'\bullet t':D}.
+\]
+
+\subsection{Beta and eta comparisons}
+\label{subsec:beta-eta-comparisons-cosmos}
+
+The ordinary beta and eta laws for the genuine linear function type hold by
+invertible \(I\)-evidence in both directions:
+\[
+    \Gamma,\Delta
+    \vdash_I
+    (\lambda x.t)\,u
+    \preceq
+    t[u/x]
+    :
+    B,
+\]
+\[
+    \Gamma,\Delta
+    \vdash_I
+    t[u/x]
+    \preceq
+    (\lambda x.t)\,u
+    :
+    B.
+\]
+Likewise,
+\[
+    \Gamma
+    \vdash_I
+    \lambda x.f\,x
+    \preceq
+    f
+    :
+    A\multimap B,
+\]
+and
+\[
+    \Gamma
+    \vdash_I
+    f
+    \preceq
+    \lambda x.f\,x
+    :
+    A\multimap B,
+\]
+where \(x\notin\operatorname{FV}(f)\).
+
+The reflexive beta law holds by invertible \(I\)-evidence:
+\[
+    \Gamma
+    \vdash_I
+    \operatorname{decode}(\operatorname{encode}(f))
+    \preceq
+    f
+    :
+    D\multimap D,
+\]
+and
+\[
+    \Gamma
+    \vdash_I
+    f
+    \preceq
+    \operatorname{decode}(\operatorname{encode}(f))
+    :
+    D\multimap D.
+\]
+
+The reflexive eta law is one-sided:
+\[
+    \Gamma
+    \vdash_I
+    \operatorname{encode}(\operatorname{decode}(d))
+    \preceq
+    d
+    :
+    D.
+\]
+Equivalently,
+\[
+    \Gamma
+    \vdash_I
+    \lambda^D x.(d\bullet x)
+    \preceq
+    d
+    :
+    D.
+\]
+
+\begin{definition}[Definitional equality]
+\label{def:definitional-equality-cosmos}
+Define
+\[
+    \Gamma\vdash s\equiv t:A
+\]
+to mean that both
+\[
+    \Gamma\vdash_I s\preceq t:A
+    \qquad\text{and}\qquad
+    \Gamma\vdash_I t\preceq s:A
+\]
+are derivable, and that the corresponding comparison cells are inverse in the
+support groupoid of the relevant hom \(\mathbb V\)-category.
+\end{definition}
+
+\section{The raw locally \(\mathbb V\)-categorical syntax}
+\label{sec:raw-locally-V-categorical-syntax}
+
+The syntax is organized as a locally \(\mathbb V\)-categorical affine closed
+category.  Its objects are contexts.  Its hom \(\mathbb V\)-categories are
+categories of affine substitutions.
+
+\subsection{Term \(\mathbb V\)-categories}
+\label{subsec:term-V-categories}
+
+For each context \(\Gamma\) and type \(A\), let
+\[
+    \mathsf{Tm}_D(\Gamma,A)
+\]
+be the \(\mathbb V\)-category presented as follows.
+
+Its objects are terms
+\[
+    \Gamma\vdash t:A.
+\]
+For terms \(s,t\), the hom-object
+\[
+    \mathsf{Tm}_D(\Gamma,A)(s,t)\in\mathbb V
+\]
+is generated by the cosmos-indexed approximation judgements
+\[
+    \Gamma\vdash_R s\preceq t:A.
+\]
+A derivation of such a judgement is equivalently a morphism
+\[
+    R\longrightarrow \mathsf{Tm}_D(\Gamma,A)(s,t)
+\]
+in \(\mathbb V\).
+
+The identity morphism
+\[
+    I\to \mathsf{Tm}_D(\Gamma,A)(t,t)
+\]
+is generated by reflexivity.  Composition
+\[
+    \mathsf{Tm}_D(\Gamma,A)(s,t)
+    \otimes
+    \mathsf{Tm}_D(\Gamma,A)(r,s)
+    \longrightarrow
+    \mathsf{Tm}_D(\Gamma,A)(r,t)
+\]
+is generated by transitivity.
+
+The equations imposed on the presentation are exactly the identity,
+associativity, functoriality, beta, eta, and triangle equations of the
+approximation calculus.
+
+\begin{lemma}[Term categories are \(\mathbb V\)-categories]
+\label{lem:term-categories-are-V-categories}
+For every context \(\Gamma\) and type \(A\), the presented structure
+\[
+    \mathsf{Tm}_D(\Gamma,A)
+\]
+is a small \(\mathbb V\)-category.
+\end{lemma}
+
+\begin{proof}
+The reflexivity rule supplies the enriched identities.  The transitivity rule
+supplies the enriched composition.  The identity and associativity equations
+imposed on derivations are precisely the enriched category axioms.  Smallness
+follows because terms and formal derivations are generated by a small grammar
+from small collections of variables, types, and rules.
+\end{proof}
+
+\subsection{Affine substitutions}
+\label{subsec:affine-substitutions}
+
+Let
+\[
+    \Gamma=x_1:A_1,\dots,x_m:A_m
+\]
+and
+\[
+    \Delta=y_1:B_1,\dots,y_n:B_n
+\]
+be contexts.
+
+An affine substitution
+\[
+    \sigma:\Gamma\Rightarrow\Delta
+\]
+assigns to each \(y_i:B_i\) a term
+\[
+    \Gamma_i\vdash t_i:B_i,
+\]
+where the contexts \(\Gamma_1,\dots,\Gamma_n\) form an affine decomposition
+of \(\Gamma\): each variable of \(\Gamma\) occurs in at most one \(\Gamma_i\),
+and variables not appearing in any \(\Gamma_i\) are discarded by weakening.
+Exchange is accounted for by the symmetry of the tensor.
+
+For two substitutions
+\[
+    \sigma=(t_1,\dots,t_n),
+    \qquad
+    \tau=(u_1,\dots,u_n)
+\]
+with a common affine source decomposition
+\[
+    \Gamma_1,\dots,\Gamma_n,
+\]
+define their comparison object by
+\[
+    \mathsf{Sub}_D(\Gamma,\Delta)(\sigma,\tau)
+    =
+    \bigotimes_{i=1}^n
+    \mathsf{Tm}_D(\Gamma_i,B_i)(t_i,u_i),
+\]
+with the empty tensor interpreted as \(I\).  For substitutions represented
+using different affine decompositions, the comparison object is obtained as
+the coproduct over common affine refinements.  The universal maps from the
+refined presentations implement exchange and weakening coherence.
+
+Thus for every pair of contexts \(\Gamma,\Delta\) we obtain a
+\(\mathbb V\)-category
+\[
+    \mathsf{Sub}_D(\Gamma,\Delta).
+\]
+
+\begin{lemma}[Substitution homs]
+\label{lem:substitution-homs-V-categories}
+For every pair of contexts \(\Gamma,\Delta\), the substitutions
+\[
+    \Gamma\Rightarrow\Delta
+\]
+with the comparison objects above form a small \(\mathbb V\)-category
+\[
+    \mathsf{Sub}_D(\Gamma,\Delta).
+\]
+\end{lemma}
+
+\begin{proof}
+Identities are given componentwise by the identities in the term
+\(\mathbb V\)-categories.  Composition is given componentwise by composition
+in the term \(\mathbb V\)-categories, followed by the coherence maps induced
+by affine refinement.  The equations imposed on affine decompositions ensure
+independence of the chosen refinement.  Associativity and the unit laws reduce
+to the corresponding enriched category axioms for the term categories.
+\end{proof}
+
+\subsection{The raw syntactic category}
+\label{subsec:raw-syntactic-category}
+
+\begin{definition}[The raw syntactic category]
+\label{def:raw-syntactic-category}
+Let
+\[
+    \mathcal L_D
+\]
+be the locally \(\mathbb V\)-categorical category defined as follows.
+
+Its objects are affine linear contexts.  Its hom \(\mathbb V\)-category is
+\[
+    \mathcal L_D(\Gamma,\Delta)
+    =
+    \mathsf{Sub}_D(\Gamma,\Delta).
+\]
+Composition
+\[
+    \mathcal L_D(\Delta,\Theta)
+    \otimes
+    \mathcal L_D(\Gamma,\Delta)
+    \longrightarrow
+    \mathcal L_D(\Gamma,\Theta)
+\]
+is substitution.  Identities are identity substitutions.
+\end{definition}
+
+\begin{lemma}[Substitution is enriched functorial]
+\label{lem:substitution-enriched-functorial}
+Composition by substitution defines a \(\mathbb V\)-functor
+\[
+    \mathcal L_D(\Delta,\Theta)
+    \otimes
+    \mathcal L_D(\Gamma,\Delta)
+    \longrightarrow
+    \mathcal L_D(\Gamma,\Theta).
+\]
+\end{lemma}
+
+\begin{proof}
+On objects, composition is ordinary affine simultaneous substitution.
+On hom-objects, the substitution and approximation-substitution rules send
+componentwise comparison evidence for
+\[
+    \sigma\preceq\sigma'
+    \qquad\text{and}\qquad
+    \tau\preceq\tau'
+\]
+to comparison evidence for
+\[
+    \tau\sigma\preceq\tau'\sigma'.
+\]
+The evidence object is the tensor product of the input evidence objects,
+exactly as required for a \(\mathbb V\)-functor out of the tensor product of
+hom \(\mathbb V\)-categories.  The compatibility equations are precisely the
+substitution associativity and identity equations of the syntax.
+\end{proof}
+
+\begin{proposition}[The raw syntactic category]
+\label{prop:raw-syntactic-category}
+The structure
+\[
+    \mathcal L_D
+\]
+is a locally \(\mathbb V\)-categorical category.
+\end{proposition}
+
+\begin{proof}
+The homs are \(\mathbb V\)-categories by
+Lemma~\ref{lem:substitution-homs-V-categories}.  Composition is enriched
+functorial by Lemma~\ref{lem:substitution-enriched-functorial}.  The identity
+and associativity axioms are the ordinary identity and associativity laws for
+affine simultaneous substitution, together with their comparison-cell
+coherence equations.
+\end{proof}
+
+\section{Affine closed structure of the raw syntax}
+\label{sec:affine-closed-structure-raw-syntax}
+
+\begin{definition}[Tensor and unit in raw syntax]
+\label{def:tensor-unit-raw-syntax}
+The tensor product in
+\[
+    \mathcal L_D
+\]
+is context concatenation:
+\[
+    \Gamma\otimes\Delta
+    :=
+    \Gamma,\Delta.
+\]
+The tensor unit is the empty context
+\[
+    \varnothing.
+\]
+The symmetry, associativity, and unit constraints are generated by exchange
+and the structural equations of affine contexts.
+\end{definition}
+
+\begin{lemma}[Affinity of the raw syntax]
+\label{lem:affinity-raw-syntax}
+The tensor unit
+\[
+    \varnothing
+\]
+is terminal in the raw syntactic category.
+\end{lemma}
+
+\begin{proof}
+For every context \(\Gamma\), there is a unique affine substitution
+\[
+    \Gamma\Rightarrow\varnothing,
+\]
+namely the empty tuple of terms.  Its comparison object with itself is the
+empty tensor, hence \(I\).  Therefore the empty context is terminal in the
+support and enriched senses.
+\end{proof}
+
+\begin{definition}[Internal hom in raw syntax]
+\label{def:internal-hom-raw-syntax}
+For types \(A,B\), the internal hom is represented by the type
+\[
+    A\multimap B.
+\]
+For contexts, the closed structure is generated by the bijective
+correspondence between terms
+\[
+    \Gamma,x:A\vdash t:B
+\]
+and terms
+\[
+    \Gamma\vdash \lambda x.t:A\multimap B.
+\]
+\end{definition}
+
+\begin{proposition}[Raw affine closed structure]
+\label{prop:raw-affine-closed-structure}
+The locally \(\mathbb V\)-categorical category
+\[
+    \mathcal L_D
+\]
+is symmetric affine monoidal closed.
+\end{proposition}
+
+\begin{proof}
+The tensor and unit are given by context concatenation and the empty context.
+The exchange, associativity, and unit equations give the symmetric monoidal
+structure.  Lemma~\ref{lem:affinity-raw-syntax} gives affinity.
+
+For closedness, abstraction and application define mutually inverse enriched
+functors between the relevant hom \(\mathbb V\)-categories:
+\[
+    \mathcal L_D(\Gamma\otimes A,B)
+    \cong
+    \mathcal L_D(\Gamma,A\multimap B).
+\]
+The beta and eta laws for the genuine linear function type are precisely the
+triangle identities of this enriched tensor--hom adjunction.  Functoriality on
+comparison evidence is exactly the abstraction and application congruence
+rules.
+\end{proof}
+
+\section{The reflexive object in raw syntax}
+\label{sec:reflexive-object-raw-syntax}
+
+The distinguished type \(D\) is an object of \(\mathcal L_D\).  The primitive
+term formers encode and decode give morphisms
+\[
+    \operatorname{encode}:D\multimap D\longrightarrow D,
+\]
+and
+\[
+    \operatorname{decode}:D\longrightarrow D\multimap D
+\]
+in the support category of \(\mathcal L_D\).
+
+Using the closed structure, the type \(D\multimap D\) represents the internal
+hom from \(D\) to \(D\).  Thus the pair above is the syntactic analogue of
+\[
+    [D,D]\triangleleft D.
+\]
+
+\begin{definition}[Raw syntactic reflexive structure]
+\label{def:raw-syntactic-reflexive-structure}
+The raw syntactic reflexive structure on \(D\) consists of the support maps
+\[
+    \operatorname{encode}:D\multimap D\to D,
+    \qquad
+    \operatorname{decode}:D\to D\multimap D,
+\]
+together with:
+
+\begin{enumerate}
+    \item invertible comparison cells
+    \[
+        \operatorname{decode}\operatorname{encode}
+        \cong
+        \id_{D\multimap D};
+    \]
+
+    \item a counit comparison cell
+    \[
+        \operatorname{encode}\operatorname{decode}
+        \Rightarrow
+        \id_D;
+    \]
+
+    \item the triangle equations for the adjunction
+    \[
+        \operatorname{encode}\dashv\operatorname{decode}.
+    \]
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}[Raw syntactic linear reflexivity]
+\label{prop:raw-syntactic-linear-reflexivity}
+The distinguished object \(D\) of \(\mathcal L_D\) is a linear reflexive object:
+\[
+    [D,D]_{\mathcal L_D}\triangleleft D.
+\]
+\end{proposition}
+
+\begin{proof}
+The closed structure identifies
+\[
+    [D,D]_{\mathcal L_D}
+\]
+with the type \(D\multimap D\).  The maps
+\(\operatorname{encode}\) and \(\operatorname{decode}\) are the primitive
+syntactic maps.  The reflexive beta comparison supplies the invertible unit
+\[
+    \operatorname{decode}\operatorname{encode}
+    \cong
+    \id_{D\multimap D},
+\]
+and the reflexive eta comparison supplies the counit
+\[
+    \operatorname{encode}\operatorname{decode}
+    \Rightarrow
+    \id_D.
+\]
+The triangle equations are imposed as equations of comparison cells in the raw
+syntactic presentation.  Hence the pair is a projection pair.
+\end{proof}
+
+\section{Finite-flat syntactic envelope}
+\label{sec:finite-flat-syntactic-envelope}
+
+The raw syntax is locally \(\mathbb V\)-categorical, but its homs are not
+required to be fuzzy domains.  We now apply the fuzzy ideal monad locally.
+
+\begin{definition}[Finite-flat syntactic envelope]
+\label{def:finite-flat-syntactic-envelope}
+The \emph{finite-flat syntactic envelope}
+\[
+    \mathcal L_D^{\mathrm{ff}}
+\]
+has the same objects as
+\[
+    \mathcal L_D.
+\]
+For contexts \(\Gamma,\Delta\), its hom fuzzy domain is
+\[
+    \mathcal L_D^{\mathrm{ff}}(\Gamma,\Delta)
+    =
+    \operatorname{Idl}_{\mathbb V}
+    \bigl(\mathcal L_D(\Gamma,\Delta)\bigr).
+\]
+The Yoneda embedding of each hom \(\mathbb V\)-category is written
+\[
+    Y_{\Gamma,\Delta}:
+    \mathcal L_D(\Gamma,\Delta)
+    \longrightarrow
+    \mathcal L_D^{\mathrm{ff}}(\Gamma,\Delta).
+\]
+\end{definition}
+
+Let
+\[
+    c_{\Gamma,\Delta,\Theta}:
+    \mathcal L_D(\Delta,\Theta)\otimes
+    \mathcal L_D(\Gamma,\Delta)
+    \longrightarrow
+    \mathcal L_D(\Gamma,\Theta)
+\]
+be raw composition.  Given finite-flat weights
+\[
+    P\in
+    \operatorname{Idl}_{\mathbb V}
+    \bigl(\mathcal L_D(\Delta,\Theta)\bigr),
+\]
+and
+\[
+    Q\in
+    \operatorname{Idl}_{\mathbb V}
+    \bigl(\mathcal L_D(\Gamma,\Delta)\bigr),
+\]
+their composite is defined by external product followed by lower direct image:
+\[
+    P\circ_{\mathrm{ff}}Q
+    =
+    (c_{\Gamma,\Delta,\Theta})_!
+    (P\boxtimes Q).
+\]
+Thus composition in the finite-flat envelope is
+\[
+    \mathcal L_D^{\mathrm{ff}}(\Delta,\Theta)
+    \boxtimes_{\mathrm{ff}}
+    \mathcal L_D^{\mathrm{ff}}(\Gamma,\Delta)
+    \longrightarrow
+    \mathcal L_D^{\mathrm{ff}}(\Gamma,\Theta).
+\]
+
+\begin{lemma}[Finite-flat composition]
+\label{lem:finite-flat-composition-syntactic-envelope}
+Composition in
+\[
+    \mathcal L_D^{\mathrm{ff}}
+\]
+is finite-flat-continuous in each variable.
+\end{lemma}
+
+\begin{proof}
+External products of finite-flat weights are finite-flat.  Lower direct image
+along a \(\mathbb V\)-functor preserves finite-flat weights.  Hence the
+displayed composite is again a finite-flat weight.
+
+Finite-flat continuity in each variable follows from the Fubini law for
+finite-flat weights and functoriality of lower direct image:
+iterated finite-flat colimits of external products are computed by the
+corresponding finite-flat colimit of composites.
+\end{proof}
+
+\begin{lemma}[Associativity and units in the envelope]
+\label{lem:associativity-units-finite-flat-envelope}
+The finite-flat composition above is associative and unital.
+\end{lemma}
+
+\begin{proof}
+Associativity of raw substitution gives equality of the two raw composition
+functors
+\[
+    \mathcal L_D(\Theta,\Xi)\otimes
+    \mathcal L_D(\Delta,\Theta)\otimes
+    \mathcal L_D(\Gamma,\Delta)
+    \longrightarrow
+    \mathcal L_D(\Gamma,\Xi).
+\]
+Taking external products of finite-flat weights and then lower direct image
+along these equal raw composites gives equal results.
+
+The unit laws follow similarly from the raw identity substitution.  The
+principal ideal of the identity substitution acts as a unit because lower
+direct image along the raw identity functor is the identity on finite-flat
+weights.
+\end{proof}
+
+\begin{theorem}[Finite-flat syntactic envelope]
+\label{thm:finite-flat-syntactic-envelope}
+The structure
+\[
+    \mathcal L_D^{\mathrm{ff}}
+\]
+is a locally fuzzy-domain-enriched category.  Its homs are fuzzy domains, its
+composition preserves finite-flat colimits in each variable, and the Yoneda
+maps
+\[
+    Y_{\Gamma,\Delta}:
+    \mathcal L_D(\Gamma,\Delta)
+    \to
+    \mathcal L_D^{\mathrm{ff}}(\Gamma,\Delta)
+\]
+are locally fully faithful.
+\end{theorem}
+
+\begin{proof}
+Each hom is a fuzzy domain by construction as an ideal completion.  Composition
+is finite-flat-continuous by
+Lemma~\ref{lem:finite-flat-composition-syntactic-envelope}.  Associativity and
+unitality follow from
+Lemma~\ref{lem:associativity-units-finite-flat-envelope}.  Local full
+faithfulness of the Yoneda maps is the enriched Yoneda lemma for the principal
+ideal embedding.
+\end{proof}
+
+\begin{proposition}[Affine closed structure extends]
+\label{prop:affine-closed-structure-extends-to-envelope}
+The symmetric affine monoidal closed structure of
+\[
+    \mathcal L_D
+\]
+extends uniquely to
+\[
+    \mathcal L_D^{\mathrm{ff}}.
+\]
+\end{proposition}
+
+\begin{proof}
+The tensor on objects is still context concatenation.  On hom fuzzy domains it
+is obtained by applying external product of finite-flat weights to the raw
+tensor functor
+\[
+    \mathcal L_D(\Gamma,\Gamma')
+    \otimes
+    \mathcal L_D(\Delta,\Delta')
+    \longrightarrow
+    \mathcal L_D(\Gamma\otimes\Delta,\Gamma'\otimes\Delta')
+\]
+and then taking lower direct image.
+
+The tensor unit remains the empty context, whose terminality is preserved by
+finite-flat completion because the unique raw map into the empty context
+extends uniquely to the ideal-completed homs.
+
+The closed structure is the finite-flat extension of the raw enriched
+bijections
+\[
+    \mathcal L_D(\Gamma\otimes A,B)
+    \cong
+    \mathcal L_D(\Gamma,A\multimap B).
+\]
+Since ideal completion is functorial and locally fully faithful on principal
+ideals, these raw enriched isomorphisms extend to isomorphisms of hom fuzzy
+domains
+\[
+    \mathcal L_D^{\mathrm{ff}}(\Gamma\otimes A,B)
+    \cong
+    \mathcal L_D^{\mathrm{ff}}(\Gamma,A\multimap B).
+\]
+Thus the affine symmetric monoidal closed structure extends.
+\end{proof}
+
+\begin{proposition}[The completed syntactic reflexive object]
+\label{prop:completed-syntactic-reflexive-object}
+The distinguished object \(D\) of
+\[
+    \mathcal L_D^{\mathrm{ff}}
+\]
+is a linear reflexive object:
+\[
+    [D,D]_{\mathcal L_D^{\mathrm{ff}}}\triangleleft D.
+\]
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:affine-closed-structure-extends-to-envelope},
+\[
+    [D,D]_{\mathcal L_D^{\mathrm{ff}}}
+    \cong
+    D\multimap D.
+\]
+The raw encode and decode maps embed under Yoneda as principal finite-flat
+weights, giving maps
+\[
+    \operatorname{encode}:D\multimap D\to D,
+    \qquad
+    \operatorname{decode}:D\to D\multimap D
+\]
+in the completed support category.  The invertible unit, the counit comparison,
+and the triangle equations are the images under Yoneda of the corresponding
+raw syntactic comparison cells.  Local full faithfulness of Yoneda preserves
+these equations.  Hence the completed distinguished object is linearly
+reflexive.
+\end{proof}
+
+\section{Models and interpretation}
+\label{sec:models-and-interpretation-affine-linear-cosmos}
+
+\begin{definition}[Linear reflexive fuzzy-domain model]
+\label{def:linear-reflexive-fuzzy-domain-model-cosmos}
+A \emph{linear reflexive fuzzy-domain model} is a linear reflexive fuzzy domain
+\[
+    M
+\]
+in the sense of Definition~\ref{def:linear-reflexive-fuzzy-domain-type-theory}.
+\end{definition}
+
+Such a model determines an interpretation of the syntactic envelope
+\[
+    \llbracket-\rrbracket_M:
+    \mathcal L_D^{\mathrm{ff}}
+    \longrightarrow
+    \mathbf{FDom}_{\mathbb V}^{\mathbb V}.
+\]
+On types,
+\[
+    \llbracket \mathbf 1\rrbracket_M
+    =
+    I_{\mathrm{ff}},
+\]
+\[
+    \llbracket D\rrbracket_M
+    =
+    M,
+\]
+\[
+    \llbracket A\otimes B\rrbracket_M
+    =
+    \llbracket A\rrbracket_M
+    \boxtimes_{\mathrm{ff}}
+    \llbracket B\rrbracket_M,
+\]
+and
+\[
+    \llbracket A\multimap B\rrbracket_M
+    =
+    [\llbracket A\rrbracket_M,
+     \llbracket B\rrbracket_M]_{\mathrm{ff}}.
+\]
+On contexts,
+\[
+    \llbracket \varnothing\rrbracket_M
+    =
+    I_{\mathrm{ff}},
+\]
+and
+\[
+    \llbracket x_1:A_1,\dots,x_n:A_n\rrbracket_M
+    =
+    \llbracket A_1\rrbracket_M
+    \boxtimes_{\mathrm{ff}}
+    \cdots
+    \boxtimes_{\mathrm{ff}}
+    \llbracket A_n\rrbracket_M.
+\]
+
+A term judgement
+\[
+    \Gamma\vdash t:A
+\]
+is interpreted as a fuzzy-domain morphism
+\[
+    \llbracket t\rrbracket_M:
+    \llbracket \Gamma\rrbracket_M
+    \longrightarrow
+    \llbracket A\rrbracket_M.
+\]
+
+The primitive encode and decode terms are interpreted by the structure maps
+of \(M\):
+\[
+    \operatorname{encode}_M:
+    [M,M]_{\mathrm{ff}}\to M,
+\]
+\[
+    \operatorname{decode}_M:
+    M\to [M,M]_{\mathrm{ff}}.
+\]
+The derived self-application is interpreted by
+\[
+    \mathsf{app}_M
+    =
+    \operatorname{ev}_{M,M}
+    \circ
+    (\operatorname{decode}_M\boxtimes 1_M).
+\]
+
+\begin{theorem}[Interpretation theorem]
+\label{thm:interpretation-theorem-affine-linear}
+Every linear reflexive fuzzy-domain model \(M\) induces a finite-flat-continuous
+affine symmetric monoidal closed locally \(\mathbb V\)-functor
+\[
+    \llbracket-\rrbracket_M:
+    \mathcal L_D^{\mathrm{ff}}
+    \longrightarrow
+    \mathbf{FDom}_{\mathbb V}^{\mathbb V}
+\]
+preserving the distinguished linear reflexive object.
+\end{theorem}
+
+\begin{proof}
+The raw term interpretation is defined by induction on terms.  Variables are
+interpreted by projections obtained from weakening all unused tensor factors.
+The unit term is interpreted by the unique map to \(I_{\mathrm{ff}}\).  Tensor
+introduction is interpreted by the tensor product of morphisms.  Tensor
+elimination is interpreted by the universal property of the tensor.  Linear
+abstraction is interpreted by currying, and linear application by evaluation.
+Encode and decode are interpreted by the reflexive structure maps of \(M\).
+
+The beta, eta, reflexive beta, reflexive eta, and triangle equations are
+satisfied because \(M\) is a linear reflexive fuzzy domain and
+\(\mathbf{FDom}_{\mathbb V}\) is symmetric affine monoidal closed.
+
+Thus the raw interpretation is a structure-preserving locally
+\(\mathbb V\)-functor
+\[
+    \mathcal L_D
+    \to
+    \mathbf{FDom}_{\mathbb V}^{\mathbb V}.
+\]
+Since the homs of \(\mathcal L_D^{\mathrm{ff}}\) are finite-flat completions
+of the raw homs, and the target homs \([X,Y]_{\mathrm{ff}}\) are fuzzy
+domains, the universal property of \(\operatorname{Idl}_{\mathbb V}\) extends
+the raw interpretation uniquely to a finite-flat-continuous interpretation on
+\[
+    \mathcal L_D^{\mathrm{ff}}.
+\]
+The extension preserves tensor, unit, internal hom, encode, and decode because
+all of these structures are defined by finite-flat extension of their raw
+generators.
+\end{proof}
+
+\section{Cosmos-level soundness}
+\label{sec:cosmos-level-soundness}
+
+\begin{definition}[Semantic validity of evidence judgements]
+\label{def:semantic-validity-evidence-judgements}
+Let \(M\) be a linear reflexive fuzzy-domain model.  A judgement
+\[
+    \Gamma\vdash_R s\preceq t:A
+\]
+is \emph{valid in \(M\)} if there is a morphism
+\[
+    R
+    \longrightarrow
+    [\llbracket \Gamma\rrbracket_M,
+     \llbracket A\rrbracket_M]_{\mathrm{ff}}
+    (\llbracket s\rrbracket_M,\llbracket t\rrbracket_M)
+\]
+in \(\mathbb V\).
+\end{definition}
+
+\begin{theorem}[Cosmos-level soundness]
+\label{thm:cosmos-level-soundness}
+If
+\[
+    \Gamma\vdash_R s\preceq t:A
+\]
+is derivable, then it is valid in every linear reflexive fuzzy-domain model
+\(M\).
+\end{theorem}
+
+\begin{proof}
+A derivation of
+\[
+    \Gamma\vdash_R s\preceq t:A
+\]
+is, by construction of the term \(\mathbb V\)-category, a morphism
+\[
+    R
+    \longrightarrow
+    \mathsf{Tm}_D(\Gamma,A)(s,t).
+\]
+Equivalently, it is a morphism into the relevant raw syntactic hom-object.
+
+Applying the interpretation functor of
+Theorem~\ref{thm:interpretation-theorem-affine-linear} gives a morphism
+\[
+    R
+    \longrightarrow
+    [\llbracket \Gamma\rrbracket_M,
+     \llbracket A\rrbracket_M]_{\mathrm{ff}}
+    (\llbracket s\rrbracket_M,\llbracket t\rrbracket_M).
+\]
+This is exactly semantic validity in \(M\).
+\end{proof}
+
+\section{The enriched truth lemma}
+\label{sec:enriched-truth-lemma}
+
+Let
+\[
+    Y:
+    \mathcal L_D(\Gamma,A)
+    \longrightarrow
+    \mathcal L_D^{\mathrm{ff}}(\Gamma,A)
+\]
+be the Yoneda embedding of the raw hom \(\mathbb V\)-category into its
+finite-flat completion.
+
+For raw terms
+\[
+    \Gamma\vdash s,t:A,
+\]
+write
+\[
+    Ys,Yt
+\]
+for their images as principal finite-flat weights.
+
+\begin{theorem}[Enriched truth lemma]
+\label{thm:enriched-truth-lemma}
+For every evidence object \(R\in\mathbb V\), there is a natural bijection
+\[
+    \mathbb V
+    \bigl(
+        R,
+        \mathcal L_D^{\mathrm{ff}}(\Gamma,A)(Ys,Yt)
+    \bigr)
+    \cong
+    \left\{
+        \Gamma\vdash_R s\preceq t:A
+    \right\}.
+\]
+Equivalently, the hom-object between principal syntactic terms in the
+finite-flat envelope is canonically
+\[
+    \mathcal L_D^{\mathrm{ff}}(\Gamma,A)(Ys,Yt)
+    \cong
+    \mathcal L_D(\Gamma,A)(s,t).
+\]
+\end{theorem}
+
+\begin{proof}
+The second displayed isomorphism is the enriched Yoneda full-faithfulness of
+the principal ideal embedding
+\[
+    Y:
+    \mathcal L_D(\Gamma,A)
+    \to
+    \operatorname{Idl}_{\mathbb V}(\mathcal L_D(\Gamma,A)).
+\]
+Applying the ordinary hom-functor
+\[
+    \mathbb V(R,-)
+\]
+gives
+\[
+    \mathbb V
+    \bigl(
+        R,
+        \mathcal L_D^{\mathrm{ff}}(\Gamma,A)(Ys,Yt)
+    \bigr)
+    \cong
+    \mathbb V
+    \bigl(
+        R,
+        \mathcal L_D(\Gamma,A)(s,t)
+    \bigr).
+\]
+By definition of the raw term \(\mathbb V\)-category, a morphism
+\[
+    R\to \mathcal L_D(\Gamma,A)(s,t)
+\]
+is precisely a derivation of
+\[
+    \Gamma\vdash_R s\preceq t:A.
+\]
+This proves the claim.
+\end{proof}
+
+\section{Initiality and completeness}
+\label{sec:initiality-completeness-cosmos}
+
+\begin{definition}[Finite-flat affine reflexive target]
+\label{def:finite-flat-affine-reflexive-target}
+A \emph{finite-flat affine reflexive target} is a locally
+\(\mathbb V\)-categorical category \(\mathcal E\) such that:
+
+\begin{enumerate}
+    \item every hom \(\mathbb V\)-category of \(\mathcal E\) is a fuzzy domain;
+
+    \item composition preserves finite-flat colimits in each variable;
+
+    \item \(\mathcal E\) is symmetric affine monoidal closed;
+
+    \item \(\mathcal E\) contains a specified linear reflexive object
+    \[
+        R_{\mathcal E}
+    \]
+    with
+    \[
+        [R_{\mathcal E},R_{\mathcal E}]\triangleleft R_{\mathcal E}.
+    \]
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Morphisms of finite-flat affine reflexive targets]
+\label{def:morphisms-finite-flat-affine-reflexive-targets}
+A morphism
+\[
+    F:\mathcal E\to\mathcal F
+\]
+of finite-flat affine reflexive targets is a locally \(\mathbb V\)-functor
+which:
+
+\begin{enumerate}
+    \item preserves finite-flat colimits on hom fuzzy domains;
+
+    \item preserves the symmetric affine monoidal closed structure;
+
+    \item sends the distinguished reflexive object of \(\mathcal E\) to the
+    distinguished reflexive object of \(\mathcal F\);
+
+    \item preserves the encode, decode, unit, counit, and triangle data of the
+    reflexive projection pair.
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Initiality of the finite-flat syntactic envelope]
+\label{thm:initiality-finite-flat-syntactic-envelope}
+The finite-flat syntactic envelope
+\[
+    \mathcal L_D^{\mathrm{ff}}
+\]
+is the initial finite-flat affine reflexive target.
+
+Equivalently, for every finite-flat affine reflexive target \(\mathcal E\),
+there is a unique structure-preserving locally \(\mathbb V\)-functor
+\[
+    \mathcal L_D^{\mathrm{ff}}
+    \longrightarrow
+    \mathcal E.
+\]
+\end{theorem}
+
+\begin{proof}
+The raw syntactic category \(\mathcal L_D\) is freely generated by the affine
+linear type formers, the distinguished object \(D\), the encode and decode
+maps, and the specified comparison cells expressing beta, eta, reflexive beta,
+reflexive eta, and the projection-pair triangle identities.
+
+Therefore any finite-flat affine reflexive target \(\mathcal E\) receives a
+unique raw structure-preserving locally \(\mathbb V\)-functor from
+\[
+    \mathcal L_D
+\]
+by interpreting the generators in \(\mathcal E\).
+
+Since the homs of \(\mathcal E\) are fuzzy domains and composition in
+\(\mathcal E\) preserves finite-flat colimits in each variable, this raw
+functor extends uniquely along the local ideal completions
+\[
+    \mathcal L_D(\Gamma,\Delta)
+    \to
+    \operatorname{Idl}_{\mathbb V}(\mathcal L_D(\Gamma,\Delta))
+    =
+    \mathcal L_D^{\mathrm{ff}}(\Gamma,\Delta).
+\]
+The extension preserves composition because composition in
+\(\mathcal L_D^{\mathrm{ff}}\) is defined by external product of finite-flat
+weights followed by direct image, and the target composition preserves the same
+finite-flat colimits.  It preserves tensor, unit, internal hom, and the
+reflexive projection-pair data because these structures in
+\(\mathcal L_D^{\mathrm{ff}}\) are the finite-flat extensions of the raw
+generators.
+
+Uniqueness follows from local density of principal ideals: every object of
+each hom fuzzy domain in \(\mathcal L_D^{\mathrm{ff}}\) is a finite-flat
+colimit of principal syntactic substitutions.
+\end{proof}
+
+\begin{corollary}[Cosmos-level completeness]
+\label{cor:cosmos-level-completeness}
+Let
+\[
+    \Gamma\vdash s,t:A
+\]
+be raw terms.  If every linear reflexive fuzzy-domain model validates an
+evidence comparison from \(R\) between \(s\) and \(t\), then the classifying
+syntax contains the corresponding comparison morphism
+\[
+    R
+    \longrightarrow
+    \mathcal L_D^{\mathrm{ff}}(\Gamma,A)(Ys,Yt).
+\]
+For principal syntactic terms, this comparison is represented uniquely by a
+derivation
+\[
+    \Gamma\vdash_R s\preceq t:A.
+\]
+\end{corollary}
+
+\begin{proof}
+Semantic validity in all models includes validity in the initial model
+\[
+    \mathcal L_D^{\mathrm{ff}}.
+\]
+Thus there is a morphism
+\[
+    R
+    \to
+    \mathcal L_D^{\mathrm{ff}}(\Gamma,A)(Ys,Yt).
+\]
+By the enriched truth lemma, this is equivalently a derivation
+\[
+    \Gamma\vdash_R s\preceq t:A.
+\]
+\end{proof}
+
+\section{Morphism of concrete reflexive fuzzy-domain models}
+\label{sec:morphisms-concrete-reflexive-models}
+
+For concrete models, the correct notion of morphism uses projection pairs,
+because a single morphism
+\[
+    D\to E
+\]
+does not induce a canonical map
+\[
+    [D,D]_{\mathrm{ff}}\to [E,E]_{\mathrm{ff}}.
+\]
+A projection pair does.
+
+\begin{definition}[Induced internal-hom projection pair]
+\label{def:induced-internal-hom-projection-pair}
+Let
+\[
+    (e,p):D\triangleleft E
+\]
+be a fuzzy projection pair.  Define
+\[
+    \widehat e:[D,D]_{\mathrm{ff}}\to [E,E]_{\mathrm{ff}}
+\]
+by
+\[
+    \widehat e(h)=e\,h\,p,
+\]
+and define
+\[
+    \widehat p:[E,E]_{\mathrm{ff}}\to [D,D]_{\mathrm{ff}}
+\]
+by
+\[
+    \widehat p(k)=p\,k\,e.
+\]
+Then
+\[
+    (\widehat e,\widehat p):
+    [D,D]_{\mathrm{ff}}
+    \triangleleft
+    [E,E]_{\mathrm{ff}}
+\]
+is the induced internal-hom projection pair.
+\end{definition}
+
+\begin{proof}
+The maps preserve finite-flat colimits by separate finite-flat-continuity of
+composition.  Moreover,
+\[
+    \widehat p\widehat e(h)
+    =
+    p(ehp)e
+    \cong
+    h
+\]
+using the invertible unit
+\[
+    pe\cong \id_D.
+\]
+For
+\[
+    k:E\to E,
+\]
+one has
+\[
+    \widehat e\widehat p(k)
+    =
+    e(pke)p
+    \cong
+    (ep)k(ep)
+    \Rightarrow
+    k
+\]
+using the counit comparison
+\[
+    ep\Rightarrow\id_E.
+\]
+The triangle identities follow from those of \((e,p)\) and the functoriality
+of composition.
+\end{proof}
+
+\begin{definition}[Projection-pair morphism of linear reflexive models]
+\label{def:projection-pair-morphism-linear-reflexive-models}
+Let
+\[
+    \mathcal M=(D,\operatorname{encode}_D,\operatorname{decode}_D)
+\]
+and
+\[
+    \mathcal N=(E,\operatorname{encode}_E,\operatorname{decode}_E)
+\]
+be linear reflexive fuzzy-domain models.  A morphism
+\[
+    \mathcal M\to\mathcal N
+\]
+is a fuzzy projection pair
+\[
+    (e,p):D\triangleleft E
+\]
+such that, with
+\[
+    (\widehat e,\widehat p):
+    [D,D]_{\mathrm{ff}}\triangleleft [E,E]_{\mathrm{ff}}
+\]
+as in Definition~\ref{def:induced-internal-hom-projection-pair}, there are
+coherent comparison isomorphisms
+\[
+    e\,\operatorname{encode}_D
+    \cong
+    \operatorname{encode}_E\,\widehat e,
+\]
+and
+\[
+    \widehat p\,\operatorname{decode}_E
+    \cong
+    \operatorname{decode}_D\,p.
+\]
+The comparison cells are required to be compatible with the unit, counit, and
+triangle identities of the reflexive projection pairs.
+\end{definition}
+
+\section{Extensional reflection}
+\label{sec:extensional-reflection-cosmos}
+
+\begin{definition}[Extensional syntax]
+\label{def:extensional-syntax-cosmos}
+The \emph{extensional affine reflexive syntax} is obtained from the raw syntax
+by adjoining the reverse reflexive eta comparison
+\[
+    d
+    \preceq
+    \operatorname{encode}(\operatorname{decode}(d))
+    :
+    D.
+\]
+Equivalently, it adjoins
+\[
+    d
+    \preceq
+    \lambda^D x.(d\bullet x)
+    :
+    D.
+\]
+At the cosmos level, this is the addition of a global comparison cell
+\[
+    I
+    \longrightarrow
+    \mathsf{Tm}_D(\Gamma,D)
+    \bigl(d,\operatorname{encode}(\operatorname{decode}(d))\bigr)
+\]
+natural in \(\Gamma\) and \(d\).
+\end{definition}
+
+Let
+\[
+    \mathcal L_D^{\mathrm{ext}}
+\]
+be the raw locally \(\mathbb V\)-categorical syntax with this additional
+comparison cell and its coherence equations.  Let
+\[
+    (\mathcal L_D^{\mathrm{ext}})^{\mathrm{ff}}
+\]
+be its finite-flat syntactic envelope.
+
+\begin{theorem}[Extensional initiality]
+\label{thm:extensional-initiality-cosmos}
+The finite-flat envelope
+\[
+    (\mathcal L_D^{\mathrm{ext}})^{\mathrm{ff}}
+\]
+is the initial finite-flat affine reflexive target whose distinguished
+reflexive object is extensional.
+\end{theorem}
+
+\begin{proof}
+The proof is the same as
+Theorem~\ref{thm:initiality-finite-flat-syntactic-envelope}, using the
+extended enriched presentation.  In any extensional target, the semantic
+counit
+\[
+    \operatorname{encode}\operatorname{decode}
+    \Rightarrow
+    \id_D
+\]
+is invertible, so the added reverse comparison is interpreted by its inverse.
+Conversely, the added comparison makes the syntactic counit invertible in the
+initial target.
+\end{proof}
+
+\begin{corollary}[Extensional soundness and completeness]
+\label{cor:extensional-soundness-completeness-cosmos}
+For extensional linear reflexive fuzzy-domain models, the extensional syntax is
+sound and complete in the sense of
+Theorem~\ref{thm:cosmos-level-soundness} and
+Corollary~\ref{cor:cosmos-level-completeness}.
+\end{corollary}
+
+\section{The posetal reflection}
+\label{sec:posetal-reflection-affine-linear-type-theory}
+
+Let
+\[
+    \Lambda=(L,\leq,\wedge,\vee,\otimes,\multimap,\bot,\top)
+\]
+be a fuzzy truth-value object, regarded as a posetal fuzzy cosmos.  In this
+case an evidence object is a truth value
+\[
+    a\in L,
+\]
+and a morphism
+\[
+    a\to C(x,y)
+\]
+is precisely the inequality
+\[
+    a\leq C(x,y).
+\]
+
+Thus the cosmos-indexed judgement
+\[
+    \Gamma\vdash_R s\preceq t:A
+\]
+specializes to the scalar fuzzy judgement
+\[
+    \Gamma\vdash_a s\preceq t:A.
+\]
+
+The structural rules become:
+
+\[
+    \frac{}
+         {\Gamma\vdash_{\top} t\preceq t:A},
+\]
+
+\[
+    \frac{\Gamma\vdash_a r\preceq s:A
+          \qquad
+          \Gamma\vdash_b s\preceq t:A}
+         {\Gamma\vdash_{b\otimes a} r\preceq t:A},
+\]
+
+\[
+    \frac{\Gamma\vdash_b s\preceq t:A
+          \qquad
+          a\leq b}
+         {\Gamma\vdash_a s\preceq t:A},
+\]
+
+and
+\[
+    \frac{\Gamma\vdash_{a_i} s\preceq t:A\quad(i\in I)}
+         {\Gamma\vdash_{\bigvee_{i\in I}a_i} s\preceq t:A}.
+\]
+
+The congruence rules specialize to the expected tensor-degree rules:
+\[
+    \frac{\Gamma\vdash_a s\preceq s':A
+          \qquad
+          \Delta\vdash_b t\preceq t':B}
+         {\Gamma,\Delta\vdash_{a\otimes b}
+          s\otimes t\preceq s'\otimes t':A\otimes B},
+\]
+\[
+    \frac{\Gamma\vdash_a f\preceq g:A\multimap B
+          \qquad
+          \Delta\vdash_b u\preceq v:A}
+         {\Gamma,\Delta\vdash_{a\otimes b}
+          f\,u\preceq g\,v:B},
+\]
+and similarly for encode, decode, abstraction, and self-application.
+
+\begin{definition}[Posetal semantic validity]
+\label{def:posetal-semantic-validity-affine-linear}
+For a linear reflexive \(\Lambda\)-domain model \(M\), write
+\[
+    M\models \Gamma\vdash_a s\preceq t:A
+\]
+if
+\[
+    a
+    \leq
+    [\llbracket \Gamma\rrbracket_M,
+     \llbracket A\rrbracket_M]_{\mathrm{ff}}
+    (\llbracket s\rrbracket_M,\llbracket t\rrbracket_M).
+\]
+Write
+\[
+    \Gamma\models_a s\preceq t:A
+\]
+if this holds in every linear reflexive \(\Lambda\)-domain model.
+\end{definition}
+
+\begin{theorem}[Posetal soundness and completeness]
+\label{thm:posetal-soundness-completeness-affine-linear}
+For every context \(\Gamma\), terms
+\[
+    \Gamma\vdash s,t:A,
+\]
+and truth value \(a\in L\),
+\[
+    \Gamma\vdash_a s\preceq t:A
+    \quad\Longleftrightarrow\quad
+    \Gamma\models_a s\preceq t:A.
+\]
+\end{theorem}
+
+\begin{proof}
+The forward implication is the posetal specialization of
+Theorem~\ref{thm:cosmos-level-soundness}.
+
+For the reverse implication, evaluate the judgement in the initial
+finite-flat syntactic envelope.  By the enriched truth lemma,
+\[
+    a
+    \leq
+    \mathcal L_D^{\mathrm{ff}}(\Gamma,A)(Ys,Yt)
+\]
+holds if and only if there is a derivation
+\[
+    \Gamma\vdash_a s\preceq t:A.
+\]
+Thus semantic validity in all models implies derivability.
+\end{proof}
+
+\begin{definition}[Top-degree definitional equality]
+\label{def:top-degree-definitional-equality-posetal}
+In the posetal reflection, define
+\[
+    \Gamma\vdash s\equiv t:A
+\]
+to mean that both
+\[
+    \Gamma\vdash_{\top} s\preceq t:A
+\]
+and
+\[
+    \Gamma\vdash_{\top} t\preceq s:A
+\]
+are derivable.
+\end{definition}
+
+Ordinary beta and eta for the genuine linear function type are definitional
+equalities.  Reflexive beta is a definitional equality.  Reflexive eta is
+generally only the one-sided approximation
+\[
+    \Gamma
+    \vdash_{\top}
+    \operatorname{encode}(\operatorname{decode}(d))
+    \preceq
+    d
+    :
+    D.
+\]
+In extensional models, the reverse approximation is also valid and derivable
+in the extensional reflection.
+
+\section{The crisp cartesian specialization}
+\label{sec:crisp-cartesian-specialization-affine-linear}
+
+Let
+\[
+    \Lambda=2.
+\]
+In the separated case, fuzzy domains specialize to dcpos, and fuzzy-domain
+morphisms specialize to Scott-continuous maps.  Finite-flat weights specialize
+to ordinary directed ideals.
+
+In this crisp separated specialization, the tensor product of fuzzy domains
+specializes to the cartesian product of dcpos:
+\[
+    A\boxtimes_{\mathrm{ff}}B
+    =
+    A\times B.
+\]
+Thus every object has a diagonal
+\[
+    X\longrightarrow X\times X.
+\]
+Consequently contraction becomes sound after passing to the cartesian
+specialization.
+
+A linear reflexive fuzzy domain becomes an ordinary reflexive dcpo
+projection-pair situation
+\[
+    [D,D]\triangleleft D.
+\]
+If the projection pair is extensional, then
+\[
+    D\cong [D,D].
+\]
+The derived operations
+\[
+    s\bullet t
+    =
+    \operatorname{decode}(s)(t)
+\]
+and
+\[
+    \lambda^D x.t
+    =
+    \operatorname{encode}(\lambda x.t)
+\]
+recover the usual reflexive-domain interpretation of the untyped lambda
+calculus.
+
+The general fuzzy-cosmos theory is therefore not a notational deformation of
+cartesian lambda calculus.  Its affine-linear discipline is forced by the
+absence of canonical contraction maps in the symmetric affine monoidal closed
+category of fuzzy domains.
+
+\section{Summary}
+\label{sec:summary-affine-linear-type-theory}
+
+This chapter constructed the affine linear type theory associated to a
+reflexive fuzzy domain in the fuzzy cosmos setting.
+
+The semantic base is the locally \(\mathbb V\)-categorical category of fuzzy
+domains
+\[
+    \mathbf{FDom}_{\mathbb V}^{\mathbb V},
+\]
+with hom fuzzy domains
+\[
+    [A,B]_{\mathrm{ff}}.
+\]
+Its tensor is affine, not cartesian.  Hence weakening is available, but
+contraction is not.
+
+The primitive proof-theoretic comparison judgement is cosmos-indexed:
+\[
+    \Gamma\vdash_R s\preceq t:A,
+    \qquad
+    R\in\mathbb V.
+\]
+It is interpreted as a morphism
+\[
+    R
+    \longrightarrow
+    [\llbracket \Gamma\rrbracket,
+     \llbracket A\rrbracket]_{\mathrm{ff}}
+    (\llbracket s\rrbracket,\llbracket t\rrbracket)
+\]
+in the fuzzy cosmos.
+
+The raw syntax forms a locally \(\mathbb V\)-categorical symmetric affine
+monoidal closed category
+\[
+    \mathcal L_D
+\]
+with a distinguished linear reflexive object \(D\).  Applying the fuzzy ideal
+monad locally gives the finite-flat syntactic envelope
+\[
+    \mathcal L_D^{\mathrm{ff}}(\Gamma,\Delta)
+    =
+    \operatorname{Idl}_{\mathbb V}
+    \bigl(\mathcal L_D(\Gamma,\Delta)\bigr).
+\]
+This envelope is the initial finite-flat affine closed locally
+\(\mathbb V\)-categorical category equipped with a linear reflexive object.
+
+Soundness follows by interpreting the initial syntax in any linear reflexive
+fuzzy-domain model.  Completeness follows from the enriched truth lemma:
+for raw terms \(s,t\),
+\[
+    \mathcal L_D^{\mathrm{ff}}(\Gamma,A)(Ys,Yt)
+    \cong
+    \mathcal L_D(\Gamma,A)(s,t).
+\]
+In the posetal reflection over a fuzzy truth-value object \(\Lambda\), this
+becomes the scalar theorem
+\[
+    \Gamma\vdash_a s\preceq t:A
+    \quad\Longleftrightarrow\quad
+    \Gamma\models_a s\preceq t:A.
+\]
+
+In the crisp separated specialization \(\Lambda=2\), the affine tensor becomes
+the cartesian product of dcpos, contraction becomes sound, and the
+distinguished \(D\)-fragment recovers the ordinary reflexive-domain semantics
+of the untyped lambda calculus.

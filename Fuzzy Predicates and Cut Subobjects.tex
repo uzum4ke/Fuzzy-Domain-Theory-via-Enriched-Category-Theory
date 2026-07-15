@@ -1,0 +1,4375 @@
+\chapter{Fuzzy Predicates and Cut Subobjects}
+\label{ch:fuzzy-predicates-and-cut-subobjects}
+
+\section{Introduction}
+\label{sec:introduction-fuzzy-predicates-and-cut-subobjects}
+
+This chapter develops the categorical framework for fuzzy predicates and their associated cut subobjects. The guiding idea is that a system of fuzzy truth values should be treated not merely as a set of degrees, but as an enriched base. A fuzzy predicate on a fuzzy preorder \(X\) is then a contravariant truth-valued enriched functor
+\[
+    X^{\mathrm{op}}\longrightarrow \Lambda,
+\]
+and the collection of all such predicates forms the enriched presheaf object
+\[
+    P_\Lambda(X)=[X^{\mathrm{op}},\Lambda].
+\]
+
+The chapter has four main purposes. First, we fix the base structures used throughout the manuscript: fuzzy cosmoses in the enriched-categorical setting and fuzzy truth-value objects in the posetal, quantale-enriched setting. Second, we construct tensor products, internal homs, and the truth-value fuzzy preorder, so that fuzzy predicates can be treated as ordinary enriched presheaves. Third, we show that the predicate object \(P_\Lambda(X)\) behaves as a fuzzy power object: it carries a generic fuzzy predicate and classifies indexed fuzzy predicates by the tensor--hom adjunction. Finally, we prove a cut-subobject representation theorem, identifying fuzzy predicates with coherent systems of level cuts.
+
+In the crisp two-valued case, this construction reduces to the familiar correspondence between lower subsets of a preorder and their characteristic maps. For standard chain-valued bases such as the G\"odel, {\L}ukasiewicz, product, and Lawvere quantales, the same formalism yields the corresponding notions of fuzzy lower predicates, cost-valued potentials, and level-cut filtrations. The point of the enriched formulation is that these examples, including non-chain truth-value bases, are treated uniformly.
+
+\section{Fuzzy cosmoses, truth values, and fuzzy preorders}
+\label{sec:truth-values-and-fuzzy-preorders}
+
+This section fixes the categorical and order-theoretic framework used throughout the manuscript. We begin with the enriched-categorical setting: a fuzzy cosmos is an affine symmetric monoidal closed base, regarded as a categorified object of fuzzy truth values. The underlying enriched category theory follows the standard conventions of Kelly \cite[Sections~1.1--1.6]{Kelly1982BasicConcepts}; the posetal specialization is the theory of quantale-enriched categories \cite[Definitions~2.1 and~2.2]{stubbe-2014-quantaloid-enriched}.
+
+We then specialize to the posetal case, where the enriched structure becomes a quantale of fuzzy truth values. The resulting formalism covers ordinary preorders, standard chain-valued semantics for fuzzy logic, Lawvere metric spaces, and non-chain bases within a single framework; see also Lawvere's original treatment of metric spaces as enriched categories \cite{Lawvere1973MetricSpaces} and Stubbe's survey \cite[Examples~2.3 and~2.4]{stubbe-2014-quantaloid-enriched}.
+
+\paragraph{Set-theoretic conventions.}
+We work relative to a fixed tower of Grothendieck universes
+\[
+    \mathbb U_0\in \mathbb U_1\in \mathbb U_2.
+\]
+Unless otherwise specified, \textbf{small} means \(\mathbb U_0\)-small, \textbf{large} means \(\mathbb U_1\)-small, and all constructions are formed inside \(\mathbb U_2\).
+
+All ordinary sets underlying fuzzy preorders are assumed small. The truth-value objects used in the posetal part of the manuscript are also assumed small. Thus, when \(L\) is the underlying set of truth values, joins such as
+\[
+    \bigvee_{a\in L} u_a
+\]
+are small joins.
+
+A categorical base \(\mathbb V\) may be large, but is always assumed locally small: its ordinary hom-sets are small. Completeness and cocompleteness of a categorical base always mean existence of small limits and small colimits.
+
+If \(X\) is a possibly large \(\mathbb V\)-category, we write
+\[
+    \mathcal P(X)
+\]
+for the \(\mathbb V\)-category of small \(\mathbb V\)-presheaves on \(X\), that is, those presheaves
+\[
+    X^{\mathrm{op}}\longrightarrow \mathbb V
+\]
+obtained as small weighted colimits of representables. Accordingly, the Yoneda embedding is always interpreted as a functor
+\[
+    Y:X\longrightarrow \mathcal P(X)
+\]
+into small presheaves. This is the universe-bounded version of the presheaf and Yoneda formalism for enriched categories \cite[Sections~1.6 and~1.9]{Kelly1982BasicConcepts}.
+
+Accordingly, a coend indexed by a possibly large \(\mathbb V\)-category is used only when the corresponding weight is small. In particular, for the self-enriched truth-value object \(\underline{\mathbb V}\), an expression of the form
+\[
+    \int^{A\in \underline{\mathbb V}} F(A)\otimes A
+\]
+means the weighted colimit of the identity functor
+\[
+    \underline{\mathbb V}\longrightarrow \mathbb V
+\]
+by a small presheaf \(F\in\mathcal P(\underline{\mathbb V})\).
+
+We shall also use the tensor--hom adjunction in the following universe-bounded form. If \(X\) and \(S\) are small \(\mathbb V\)-categories and \(Y\) is a locally small possibly large \(\mathbb V\)-category for which the functor category \([X,Y]\) is defined by small ends, then there is a natural bijection
+\[
+    \mathbb V\text{-}\mathbf{CAT}(S\otimes X,Y)
+    \cong
+    \mathbb V\text{-}\mathbf{CAT}(S,[X,Y]).
+\]
+Here \(\mathbb V\text{-}\mathbf{CAT}\) denotes the ordinary category whose objects are the locally small \(\mathbb V\)-categories in the chosen universe and whose morphisms are \(\mathbb V\)-functors. The notation
+\[
+    \mathbb V\text{-}\mathbf{Cat}
+\]
+will be reserved for the full subcategory on small \(\mathbb V\)-categories.
+
+\subsection{Fuzzy cosmoses and enriched categories}
+\label{subsec:fuzzy-cosmoses-and-enriched-categories}
+
+We first record the categorical setting whose posetal specialization gives the fuzzy truth-value bases used below.
+
+\begin{definition}[Fuzzy cosmos]\label{def:fuzzy-cosmos}
+    A \textbf{fuzzy cosmos} is a locally small complete and cocomplete symmetric monoidal closed category
+    \[
+        (\mathbb V,\otimes,I,[-,-])
+    \]
+    such that the monoidal unit \(I\) is terminal. We call this condition \textbf{affinity}.
+\end{definition}
+
+The terminology is adapted to the present work. The standard background notions are those of symmetric monoidal categories and closed monoidal categories in Kelly \cite[Sections~1.1, 1.4, and~1.5]{Kelly1982BasicConcepts}. Since \(\mathbb V\) is symmetric monoidal closed, for every object \(A\in\mathbb V\) the functor
+\[
+    A\otimes -:\mathbb V\to\mathbb V
+\]
+is left adjoint to \([A,-]\). Hence \(A\otimes-\) preserves all small colimits. We shall refer to this consequence as \textbf{distributivity}. In the posetal case, it becomes the quantale distributivity law
+\[
+    a\otimes\Big(\bigvee_i b_i\Big)
+    =
+    \bigvee_i(a\otimes b_i),
+\]
+for small joins. The affinity condition categorifies integrality: in a truth-value quantale, the monoidal unit is the top element.
+
+\begin{definition}[Self-enrichment]\label{def:self-enrichment}
+    Let \(\mathbb V\) be a fuzzy cosmos. We write
+    \[
+        \underline{\mathbb V}
+    \]
+    for the \(\mathbb V\)-enriched category obtained by self-enriching \(\mathbb V\). Its objects are the objects of \(\mathbb V\), and its hom-objects are
+    \[
+        \underline{\mathbb V}(A,B):=[A,B].
+    \]
+
+    Composition is induced by the closed structure, using the evaluation maps
+    \[
+        [B,C]\otimes[A,B]\otimes A
+        \longrightarrow
+        [B,C]\otimes B
+        \longrightarrow
+        C,
+    \]
+    and identities are induced by the transposes of the unit isomorphisms
+    \[
+        I\otimes A\cong A.
+    \]
+\end{definition}
+
+This is the standard self-enrichment of a symmetric monoidal closed category \cite[Section~1.6, especially formula~(1.28)]{Kelly1982BasicConcepts}. Thus \(\underline{\mathbb V}\) denotes the categorical analogue of the object of truth values. In the posetal case, its hom-object
+\[
+    \underline{\mathbb V}(a,b)
+\]
+is the residual implication
+\[
+    a\multimap b.
+\]
+
+\begin{remark}[Co-Yoneda reconstruction]\label{rem:canonical-density}
+    For every \(B\in\mathbb V\), the enriched co-Yoneda formula gives a canonical reconstruction
+    \[
+        B
+        \cong
+        \int^{A\in\underline{\mathbb V}}
+        \underline{\mathbb V}(A,B)\otimes A
+        =
+        \int^{A\in\underline{\mathbb V}}
+        [A,B]\otimes A.
+    \]
+    This is the enriched density, or co-Yoneda, formula associated to the Yoneda embedding \cite[Section~1.9; Section~3.1, especially formula~(3.17); Section~4.2, formula~(4.31); Section~5.1]{Kelly1982BasicConcepts}. By the set-theoretic conventions above, this coend is interpreted as the weighted colimit of the identity functor
+    \[
+        \underline{\mathbb V}\to \mathbb V
+    \]
+    by the small representable presheaf
+    \[
+        Y(B)=\underline{\mathbb V}(-,B).
+    \]
+\end{remark}
+
+We now recall the corresponding enriched notion of category.
+
+\begin{definition}[Fuzzy category]\label{def:fuzzy-category}
+    Let \(\mathbb V\) be a fuzzy cosmos. A \textbf{fuzzy category}, or \textbf{small \(\mathbb V\)-category}, \(X\) consists of:
+    \begin{enumerate}
+        \item a small set of objects, also denoted \(X\);
+
+        \item for each \(x,y\in X\), a hom-object
+        \[
+            X(x,y)\in\mathbb V;
+        \]
+
+        \item identity morphisms
+        \[
+            I\longrightarrow X(x,x);
+        \]
+
+        \item composition morphisms
+        \[
+            X(y,z)\otimes X(x,y)\longrightarrow X(x,z);
+        \]
+    \end{enumerate}
+    satisfying the usual associativity and unit axioms.
+\end{definition}
+
+This is the definition of a \(\mathbb V\)-category \cite[Section~1.2]{Kelly1982BasicConcepts}, specialized only by the choice of the affine base \(\mathbb V\).
+
+\begin{definition}[Fuzzy functors and opposites]
+\label{def:fuzzy-functor-opposite}
+    Let \(X\) and \(Y\) be fuzzy categories.
+    \begin{enumerate}
+        \item A \textbf{fuzzy functor}, or \textbf{\(\mathbb V\)-functor}, \(F:X\to Y\) consists of a function on objects together with morphisms
+        \[
+            X(x,x')\longrightarrow Y(Fx,Fx')
+        \]
+        compatible with identities and composition.
+
+        \item The \textbf{opposite} fuzzy category \(X^{\mathrm{op}}\) has the same objects as \(X\) and hom-objects
+        \[
+            X^{\mathrm{op}}(x,y):=X(y,x),
+        \]
+        with composition induced using the symmetry of \(\mathbb V\).
+    \end{enumerate}
+\end{definition}
+
+The definition of \(\mathbb V\)-functor is standard \cite[Section~1.2]{Kelly1982BasicConcepts}; the construction of the opposite \(\mathbb V\)-category in the symmetric case is given in Kelly \cite[formula~(1.19)]{Kelly1982BasicConcepts}.
+
+\subsection{Fuzzy truth values as posetal bases}
+\label{subsec:fuzzy-truth-values}
+
+We now specialize the fuzzy-cosmic setting to the case where the base \(\mathbb V\) is a posetal symmetric monoidal closed category. The underlying order-theoretic structure is a commutative integral quantale; compare Stubbe's definition of quantale
+\cite[Definition~2.1]{stubbe-2014-quantaloid-enriched}. We impose complete distributivity as a standing structural condition so that the induced predicate algebras are frames and the level-cut constructions below interact well with arbitrary joins and meets.
+
+\begin{definition}[Fuzzy truth-value object]
+\label{def:fuzzy-truth-value-object}
+    A \textbf{fuzzy truth-value object} is a small structure
+    \[
+        \Lambda=(L,\leq,\wedge,\vee,\otimes,\multimap,\bot,\top)
+    \]
+    such that:
+    \begin{enumerate}
+        \item \((L,\leq,\wedge,\vee,\bot,\top)\) is a completely distributive complete lattice;
+
+        \item \((L,\otimes,\top)\) is a commutative monoid;
+
+        \item for all \(a,b,c\in L\),
+        \begin{equation}\label{eq:residuation-law}
+            a\otimes b\leq c
+            \quad\Longleftrightarrow\quad
+            b\leq a\multimap c.
+        \end{equation}
+    \end{enumerate}
+    Equivalently, \(\Lambda\) is a small completely distributive complete commutative integral residuated lattice, where integrality means that the monoidal unit coincides with the top element~\(\top\).
+\end{definition}
+
+The monoidal product \(\otimes\) encodes conjunction or composition of degrees, and the operation \(a\multimap c\) is the associated residual implication. Equivalently, for each fixed \(a\in L\), residuation says that there is an adjunction
+\[
+    \begin{tikzcd}[column sep=large]
+        L \arrow[r,shift left=1.1ex,"a\otimes -"] &
+        L \arrow[l,shift left=1.1ex,"a\multimap -"']
+    \end{tikzcd}
+    \qquad
+    a\otimes - \dashv a\multimap - .
+\]
+This adjunction is the order-theoretic source of quantale distributivity.
+
+\begin{proposition}[Posetal fuzzy cosmoses and fuzzy truth values]
+\label{prop:thin-fuzzy-cosmoses-and-fuzzy-truth-values}
+    Every fuzzy truth-value object \(\Lambda\) determines a posetal fuzzy cosmos. Its underlying category is the thin category associated to \((L,\leq)\), its tensor product is \(\otimes\), its unit is \(\top\), and its internal hom is the residual \(\multimap\).
+
+    Conversely, every small posetal fuzzy cosmos whose object-poset is a completely distributive complete lattice determines a fuzzy truth-value object.
+\end{proposition}
+
+\begin{proof}
+    Let \(\Lambda\) be a fuzzy truth-value object. Regard \(L\) as a thin category, with a unique morphism \(a\to b\) precisely when \(a\leq b\). Completeness and cocompleteness of this thin category are exactly completeness of the lattice \(L\). The monoidal structure is given by \(\otimes\), with unit \(\top\). Affinity follows from integrality, since \(\top\) is terminal in the thin category. The residuation law \eqref{eq:residuation-law} says exactly that the tensor is closed, with internal hom \(a\multimap b\). Since the monoidal structure is commutative, the resulting posetal category is symmetric monoidal closed.
+
+    The self-enriched truth-value object \(\underline{\Lambda}\) has object set \(L\) and hom-values
+    \[
+        \underline{\Lambda}(a,b)=a\multimap b.
+    \]
+    The canonical levels are therefore the truth values \(a\in L\) themselves, represented by the Yoneda presheaves
+    \[
+        Y(a)=\underline{\Lambda}(-,a).
+    \]
+    No level system is chosen.
+
+    Conversely, let \(\mathbb V\) be a small posetal fuzzy cosmos whose object-poset is a completely distributive complete lattice \(L\). The affine symmetric monoidal closed structure gives a commutative monoid \((L,\otimes,\top)\), and closedness gives a residual operation \(\multimap\) satisfying \eqref{eq:residuation-law}. Thus the underlying posetal symmetric monoidal closed category determines a fuzzy truth-value object.
+\end{proof}
+
+\begin{proposition}[Tensor preserves joins]
+\label{prop:tensor-preserves-joins}
+    For every \(a\in L\) and every small family \((b_i)_{i\in I}\) in
+    \(L\),
+    \[
+        a\otimes \Big(\bigvee_{i\in I} b_i\Big)
+        =
+        \bigvee_{i\in I}(a\otimes b_i),
+        \qquad
+        \Big(\bigvee_{i\in I} b_i\Big)\otimes a
+        =
+        \bigvee_{i\in I}(b_i\otimes a).
+    \]
+    Consequently, every fuzzy truth-value object determines a commutative
+    unital quantale in the sense of \cite[Definition~2.1]{stubbe-2014-quantaloid-enriched}.
+\end{proposition}
+
+\begin{proof}
+    Fix \(a\in L\). By \eqref{eq:residuation-law}, the map
+    \[
+        a\otimes - : L\to L
+    \]
+    is left adjoint to
+    \[
+        a\multimap - : L\to L.
+    \]
+    Since left adjoints between complete lattices preserve joins,
+    \[
+        a\otimes \Big(\bigvee_{i\in I} b_i\Big)
+        =
+        \bigvee_{i\in I}(a\otimes b_i).
+    \]
+    The second identity follows by commutativity of \(\otimes\).
+\end{proof}
+
+Definition~\ref{def:fuzzy-truth-value-object} includes both the standard truth-value algebras of fuzzy logic and other familiar bases for degree-valued order. The use of \([0,1]\)-valued and \(L\)-valued truth degrees goes back to Zadeh and Goguen \cite{Zadeh1965FuzzySets,Goguen1967LFuzzySets}; the connection with left-continuous \(t\)-norms, residual implications, and quantale bases is standard in mathematical fuzzy logic \cite[Example~2.4]{stubbe-2014-quantaloid-enriched} \cite[Sections~1, 2, and~7]{sep-logic-fuzzy}.
+
+\begin{example}[The crisp quantale]\label{ex:crisp-quantale}
+    Let
+    \[
+        L=\{0<1\},
+        \qquad
+        a\otimes b:=a\wedge b,
+        \qquad
+        a\multimap b:=(a\Rightarrow b),
+    \]
+    where \(\Rightarrow\) denotes ordinary two-valued implication. With
+    \[
+        \bot=0,
+        \qquad
+        \top=1,
+    \]
+    the structure
+    \[
+        \Lambda=(L,\leq,\wedge,\vee,\otimes,\multimap,\bot,\top)
+    \]
+    is a fuzzy truth-value object. This is the two-valued case and recovers ordinary order theory, equivalently enrichment over the two-element Boolean quantale
+    \cite[Definition~2.2 and the paragraph following it]{stubbe-2014-quantaloid-enriched}.
+\end{example}
+
+\begin{example}[Standard \(t\)-norm quantales]
+\label{ex:standard-tnorm-quantale}
+    Let \(\ast\) be a left-continuous \(t\)-norm on \([0,1]\), and set
+    \[
+        L=[0,1],
+        \qquad
+        a\otimes b:=a\ast b,
+        \qquad
+        a\multimap b:=\sup\{c\in[0,1]\mid a\ast c\leq b\},
+        \qquad
+        \bot:=0,
+        \qquad
+        \top:=1.
+    \]
+    The complete lattice \([0,1]\) is completely distributive because it is a complete chain. For a left-continuous \(t\)-norm, each map
+    \[
+        a\ast-:[0,1]\to[0,1]
+    \]
+    preserves arbitrary suprema in the complete chain \([0,1]\): if \(s=\sup_i b_i\), then monotonicity gives
+    \[
+        \sup_i(a\ast b_i)\leq a\ast s,
+    \]
+    while left-continuity gives the reverse inequality by approximating \(s\) from below. Hence \(a\ast-\) has the displayed right adjoint, namely its residuum \cite[Example~2.4]{stubbe-2014-quantaloid-enriched}. Therefore
+    \[
+        \Lambda=(L,\leq,\wedge,\vee,\otimes,\multimap,\bot,\top)
+    \]
+    is a fuzzy truth-value object. This yields the algebraic semantics of left-continuous \(t\)-norm logics \cite[Sections~1, 2, and~7]{sep-logic-fuzzy} \cite{cintula-hajek-noguera-2011-hmfl1}.
+\end{example}
+
+\begin{example}[The G\"odel quantale]\label{ex:godel-quantale}
+    Let \(L=[0,1]\) with the order, and define
+    \[
+        a\otimes b:=a\wedge b,
+        \qquad
+        a\multimap b:=
+        \begin{cases}
+            1,&a\leq b,\\
+            b,&a>b,
+        \end{cases}
+        \qquad
+        \bot:=0,
+        \qquad
+        \top:=1.
+    \]
+    Then
+    \[
+        \Lambda=(L,\leq,\wedge,\vee,\otimes,\multimap,\bot,\top)
+    \]
+    is a fuzzy truth-value object. This is the quantale associated to the minimum \(t\)-norm \cite[Example~2.4]{stubbe-2014-quantaloid-enriched}. Composition is governed by the weaker of the two input degrees.
+\end{example}
+
+\begin{example}[The {\L}ukasiewicz quantale]
+\label{ex:lukasiewicz-quantale}
+    Let \(L=[0,1]\) with the order, and define
+    \[
+        a\otimes b:=\max\{0,a+b-1\},
+        \qquad
+        a\multimap b:=\min\{1,1-a+b\},
+        \qquad
+        \bot:=0,
+        \qquad
+        \top:=1.
+    \]
+    Then
+    \[
+        \Lambda=(L,\leq,\wedge,\vee,\otimes,\multimap,\bot,\top)
+    \]
+    is a fuzzy truth-value object. This is the quantale associated to the
+    {\L}ukasiewicz \(t\)-norm \cite[Example~2.4]{stubbe-2014-quantaloid-enriched}. Composition is bounded-additive rather than bottleneck-type.
+\end{example}
+
+\begin{example}[The product quantale]\label{ex:product-quantale}
+    Let \(L=[0,1]\) with the order, and define
+    \[
+        a\otimes b:=ab,
+        \qquad
+        a\multimap b:=
+        \begin{cases}
+            1,&a\leq b,\\[1mm]
+            \dfrac{b}{a},&a>b,
+        \end{cases}
+        \qquad
+        \bot:=0,
+        \qquad
+        \top:=1.
+    \]
+    Then
+    \[
+        \Lambda=(L,\leq,\wedge,\vee,\otimes,\multimap,\bot,\top)
+    \]
+    is a fuzzy truth-value object. This is the quantale associated to the product \(t\)-norm \cite[Example~2.4]{stubbe-2014-quantaloid-enriched}. Composition is
+    multiplicative and therefore attenuates non-maximal degrees along chains.
+\end{example}
+
+\begin{example}[The nilpotent minimum quantale]
+\label{ex:nilpotent-minimum-quantale}
+    Let \(L=[0,1]\) with the order, and define
+    \[
+        a\otimes b:=
+        \begin{cases}
+            a\wedge b,&a+b>1,\\
+            0,&a+b\leq 1,
+        \end{cases}
+        \qquad
+        a\multimap b:=
+        \begin{cases}
+            1,&a\leq b,\\
+            \max\{1-a,b\},&a>b,
+        \end{cases}
+    \]
+    with
+    \[
+        \bot:=0,
+        \qquad
+        \top:=1.
+    \]
+    Then
+    \[
+        \Lambda=(L,\leq,\wedge,\vee,\otimes,\multimap,\bot,\top)
+    \]
+    is a fuzzy truth-value object. The operation \(\otimes\) is the nilpotent minimum \(t\)-norm, a standard left-continuous example \cite[Example~2.4, footnote~5]{stubbe-2014-quantaloid-enriched}. Here composition is possible only above a threshold of joint support.
+\end{example}
+
+\begin{example}[Finite many-valued chains]
+\label{ex:finite-many-valued-chains}
+    For each integer \(n\geq 2\), let
+    \[
+        L_n=
+        \left\{
+        0,\frac{1}{n-1},\frac{2}{n-1},\dots,\frac{n-2}{n-1},1
+        \right\}
+        \subseteq [0,1].
+    \]
+    Restricting either the G\"odel operations or the {\L}ukasiewicz operations from \([0,1]\) to \(L_n\) yields a finite fuzzy truth-value object
+    \[
+        \Lambda_n=(L_n,\leq,\wedge,\vee,\otimes,\multimap,\bot,\top).
+    \]
+\end{example}
+
+\begin{example}[The Lawvere quantale]\label{ex:lawvere-quantale}
+    Let \(L=[0,\infty]\) with the reverse of the usual order:
+    \[
+        a\leq_L b
+        \quad:\Longleftrightarrow\quad
+        a\geq b
+        \quad\text{in the usual order.}
+    \]
+    Define
+    \[
+        a\otimes b:=a+b,
+        \qquad
+        a\multimap c:=c\ominus a
+        :=
+        \inf_{\mathrm{usual}}\{r\in[0,\infty]\mid a+r\geq c\},
+        \qquad
+        \top:=0,
+        \qquad
+        \bot:=\infty.
+    \]
+    Equivalently,
+    \[
+        c\ominus a=
+        \begin{cases}
+            0,&a\geq c,\\
+            c-a,&a<c<\infty,\\
+            \infty,&a<\infty,\ c=\infty.
+        \end{cases}
+    \]
+    Thus \(a\multimap c\) is the truncated difference \(c-a\), computed with respect to the usual order, with truncation at \(0\) and with the usual extended-value conventions. The reversed order on a completely distributive complete chain is again completely distributive. Hence
+    \[
+        \Lambda=(L,\leq_L,\wedge,\vee,\otimes,\multimap,\bot,\top)
+    \]
+    is a fuzzy truth-value object. Here \(\wedge\) and \(\vee\) are computed with respect to the reversed order, so \(\wedge\) is the supremum and \(\vee\) is the infimum on \([0,\infty]\). This is Lawvere's base for generalized metric spaces \cite{Lawvere1973MetricSpaces} \cite[Example~2.3]{stubbe-2014-quantaloid-enriched}.
+
+    Under the change of variables
+    \[
+        p=e^{-a},
+        \qquad
+        e^{-\infty}=0,
+    \]
+    this base is isomorphic, as a commutative integral residuated quantale, to the product quantale on \([0,1]\) \cite[Example~2.4]{stubbe-2014-quantaloid-enriched}. The compatibility of tensor products is expressed by the commutative diagram
+    \[
+        \begin{tikzcd}[column sep=large,row sep=large]
+            \left[0,\infty\right]^{\mathrm{op}}\times [0,\infty]^{\mathrm{op}}
+            \arrow[r,"+"]
+            \arrow[d,"e^{-(-)}\times e^{-(-)}"']
+            &
+            \left[0,\infty\right]^{\mathrm{op}}
+            \arrow[d,"e^{-(-)}"]
+            \\
+            [0,1]\times[0,1]
+            \arrow[r,"\cdot"']
+            &
+            [0,1].
+        \end{tikzcd}
+    \]
+    Thus addition of costs corresponds to multiplication of similarities.
+\end{example}
+
+\subsection{Fuzzy preorders}
+\label{subsec:fuzzy-preorders}
+
+We now specialize Definition~\ref{def:fuzzy-category} to the posetal fuzzy cosmos determined by a fuzzy truth-value object \(\Lambda\). In the fuzzy-set literature, closely related \(L\)-valued and quantale-valued preorder structures occur throughout the work on fuzzy preorders and fuzzy topologies; see, for example, \cite{LaiZhang2006FuzzyPreorderTopology,pu-zhang-2012-gl-monoid}.
+
+\begin{definition}[Fuzzy preorder]\label{def:fuzzy-preorder}
+    A \textbf{fuzzy preorder over \(\Lambda\)} is a pair \((X,\alpha)\) consisting of a small set \(X\) and a map
+    \[
+        \alpha:X\times X\to L
+    \]
+    such that for all \(x,y,z\in X\),
+    \begin{align}
+        \top &\leq \alpha(x,x),\label{eq:fuzzy-refl}\\
+        \alpha(x,y)\otimes \alpha(y,z)&\leq \alpha(x,z).
+        \label{eq:fuzzy-trans}
+    \end{align}
+    We usually suppress \(\alpha\) from the notation and write \(\alpha(x,y)\) simply as \(X(x,y)\).
+\end{definition}
+
+Since \(\top\) is the greatest element of \(L\), condition \eqref{eq:fuzzy-refl} is equivalent to
+\[
+    X(x,x)=\top
+    \qquad
+    \text{for all }x\in X.
+\]
+Thus \(X(x,y)\) records a degree-valued comparison whose interpretation depends on the chosen base \(\Lambda\).
+
+\begin{remark}[Posetal enrichment]\label{rem:enriched-viewpoint}
+    Definition~\ref{def:fuzzy-preorder} is precisely Definition~\ref{def:fuzzy-category} in the posetal case \(\mathbb V=\Lambda\). The identity morphism
+    \[
+        I\longrightarrow X(x,x)
+    \]
+    becomes the inequality
+    \[
+        \top\leq X(x,x),
+    \]
+    and composition becomes the transitivity inequality
+    \[
+        X(x,y)\otimes X(y,z)\leq X(x,z).
+    \]
+\end{remark}
+
+\begin{definition}[\(\Lambda\)-functors, opposites, and fuzzy orders]
+\label{def:lambda-functor-opposite-separated}
+    Let \(X\) and \(Y\) be fuzzy preorders over \(\Lambda\).
+    \begin{enumerate}[label=\textup{(\arabic*)}]
+        \item A \textbf{\(\Lambda\)-functor} \(f:X\to Y\) is a function
+        \(f:X\to Y\) such that
+        \[
+            X(x,x')\leq Y(fx,fx')
+            \qquad
+            \text{for all }x,x'\in X.
+        \]
+
+        \item The \textbf{opposite} fuzzy preorder \(X^{\mathrm{op}}\)
+        has the same underlying set as \(X\) and hom-values
+        \[
+            X^{\mathrm{op}}(x,y):=X(y,x).
+        \]
+
+        \item A fuzzy preorder \(X\) is called \textbf{separated}\footnote{This is the separatedness condition for generalized metric spaces \cite[Example~2.3]{stubbe-2014-quantaloid-enriched}.} if
+        \[
+            X(x,y)=\top=X(y,x)
+            \quad\Longrightarrow\quad
+            x=y.
+        \]
+    \end{enumerate}
+    A \textbf{fuzzy order over \(\Lambda\)} is a separated fuzzy preorder
+    over \(\Lambda\).
+\end{definition}
+
+\begin{proposition}\label{prop:fuzzy-preorders-form-category}
+    Fuzzy preorders over \(\Lambda\) and \(\Lambda\)-functors form a category, denoted
+    \[
+        \Pre_\Lambda.
+    \]
+    Moreover, fuzzy orders over \(\Lambda\) and \(\Lambda\)-functors form a full subcategory
+    \[
+        \Ord_\Lambda\subseteq \Pre_\Lambda.
+    \]
+\end{proposition}
+
+\begin{proof}
+    The identity map on a fuzzy preorder is clearly a \(\Lambda\)-functor. If
+    \[
+        f:X\to Y,
+        \qquad
+        g:Y\to Z
+    \]
+    are \(\Lambda\)-functors, then for all \(x,x'\in X\),
+    \[
+        X(x,x')\leq Y(fx,fx')\leq Z(g(fx),g(fx')).
+    \]
+    Hence \(g\circ f:X\to Z\) is again a \(\Lambda\)-functor. Associativity of composition and the identity laws are inherited from the category of sets.
+
+    The second statement is immediate: \(\Ord_\Lambda\) is the full subcategory of \(\Pre_\Lambda\) on the separated objects.
+\end{proof}
+
+The inclusion of fuzzy orders into fuzzy preorders will be denoted by
+\[
+    \begin{tikzcd}
+        \Ord_\Lambda \arrow[r,hook] & \Pre_\Lambda .
+    \end{tikzcd}
+\]
+
+Once the base \(\Lambda\) has been fixed, the abstract definition specializes in familiar ways.
+
+\begin{example}[Ordinary preorders]\label{ex:ordinary-preorders}
+    For \(\Lambda\) equal to the crisp quantale of Example~\ref{ex:crisp-quantale}, a fuzzy preorder over \(\Lambda\) is precisely an ordinary preorder. Indeed, if we write
+    \[
+        x\preceq y
+        \quad:\Longleftrightarrow\quad
+        X(x,y)=1,
+    \]
+    then \eqref{eq:fuzzy-refl} and \eqref{eq:fuzzy-trans} become reflexivity and transitivity of \(\preceq\). This is the two-element case of quantale-enriched categories \cite[Definition~2.2 and the paragraph following it]{stubbe-2014-quantaloid-enriched}.
+\end{example}
+
+\begin{example}[Lawvere metric spaces]\label{ex:lawvere-metric-spaces}
+    For the Lawvere quantale of Example~\ref{ex:lawvere-quantale}, all inequalities defining fuzzy preorders are interpreted in the reversed order \(\leq_L\). Translating them back to the usual order, a fuzzy preorder is exactly a Lawvere metric space, equivalently an extended quasi-pseudometric space
+    \cite{Lawvere1973MetricSpaces} \cite[Example~2.3]{stubbe-2014-quantaloid-enriched}. Writing \(d(x,y)\) for \(X(x,y)\), the axioms become
+    \[
+        d(x,x)=0,
+        \qquad
+        d(x,z)\leq d(x,y)+d(y,z)
+    \]
+    in the usual order on \([0,\infty]\). In this case a \(\Lambda\)-functor is exactly a nonexpansive map:
+    \[
+        d_Y(fx,fx')\leq d_X(x,x').
+    \]
+\end{example}
+
+\begin{example}[Chain-valued fuzzy preorders]
+\label{ex:chain-valued-fuzzy-preorders}
+    For the G\"odel, {\L}ukasiewicz, and product quantales of Examples~\ref{ex:godel-quantale}, \ref{ex:lukasiewicz-quantale}, and \ref{ex:product-quantale}, a fuzzy preorder is a map
+    \[
+        X:X\times X\to [0,1]
+    \]
+    satisfying \(X(x,x)=1\) together with, respectively,
+    \[
+        X(x,z)\geq \min\{X(x,y),X(y,z)\},
+    \]
+    \[
+        X(x,z)\geq \max\{0,\,X(x,y)+X(y,z)-1\},
+    \]
+    or
+    \[
+        X(x,z)\geq X(x,y)\,X(y,z),
+    \]
+    for all \(x,y,z\in X\). Thus the same definition interpolates between bottleneck, bounded-additive, and multiplicative transitivity laws. Quantale-enriched categories over left-continuous \(t\)-norms are often described as fuzzy preorders relative to the chosen \(t\)-norm \cite[Example~2.4]{stubbe-2014-quantaloid-enriched}.
+\end{example}
+
+\subsection{Non-chain fuzzy truth values}
+\label{subsec:non-chain-fuzzy-truth-values}
+
+The preceding examples are chain-valued. Since one aim of this chapter is to work uniformly over arbitrary bases, it is useful to record that genuinely non-chain examples already arise at the level of truth values. The following examples are elementary finite or product constructions; they illustrate that the theory is not intrinsically tied to linearly ordered truth values, in the spirit of \(L\)-fuzzy set theory \cite{Goguen1967LFuzzySets}.
+
+\begin{example}[A five-element non-chain truth-value algebra]
+\label{ex:finite-nonchain-truth-value-algebra}
+    Let \(P=\{p,q,r\}\) be the poset with
+    \[
+        p<r,
+        \qquad
+        q<r,
+    \]
+    and with \(p\) and \(q\) incomparable. Let \(L=\Down(P)\) be the set of downsets of \(P\):
+    \[
+        L=\bigl\{\varnothing,\{p\},\{q\},\{p,q\},\{p,q,r\}\bigr\},
+    \]
+    ordered by inclusion. Define
+    \[
+        U\otimes V:=U\cap V,
+        \qquad
+        U\multimap V:=\bigcup\{W\in L\mid U\cap W\subseteq V\},
+        \qquad
+        \bot:=\varnothing,
+        \qquad
+        \top:=P.
+    \]
+    Since unions of downsets are again downsets, the right-hand side indeed lies in \(L\). Moreover, the displayed formula is precisely the Heyting implication associated to the meet operation \(U\cap V\). Since every finite distributive lattice is completely distributive, \(L\) satisfies the lattice condition in Definition~\ref{def:fuzzy-truth-value-object}. Therefore
+    \[
+        \Lambda=(L,\subseteq,\cap,\cup,\otimes,\multimap,\bot,\top)
+    \]
+    is a fuzzy truth-value object. This is not a chain, since
+    \[
+        \{p\}\not\subseteq \{q\},
+        \qquad
+        \{q\}\not\subseteq \{p\}.
+    \]
+\end{example}
+
+\begin{example}[A seven-element non-chain truth-value algebra]
+\label{ex:seven-element-nonchain-truth-value-algebra}
+    Let \(P=\{p,q,r,s\}\) be the poset with
+    \[
+        p<r,\qquad p<s,\qquad q<r,\qquad q<s,
+    \]
+    and with \(p\) and \(q\) incomparable and \(r\) and \(s\) incomparable. Let \(L=\Down(P)\) be the set of downsets of \(P\):
+    \[
+        L=
+        \bigl\{
+            \varnothing,\{p\},\{q\},\{p,q\},
+            \{p,q,r\},\{p,q,s\},\{p,q,r,s\}
+        \bigr\},
+    \]
+    ordered by inclusion. Define
+    \[
+        U\otimes V:=U\cap V,
+        \qquad
+        U\multimap V:=\bigcup\{W\in L\mid U\cap W\subseteq V\},
+        \qquad
+        \bot:=\varnothing,
+        \qquad
+        \top:=P.
+    \]
+    Again, this is the Heyting implication associated to the meet operation \(U\cap V\). Since every finite distributive lattice is completely distributive, \(L\) satisfies the lattice condition in Definition~\ref{def:fuzzy-truth-value-object}. Hence
+    \[
+        \Lambda=(L,\subseteq,\cap,\cup,\otimes,\multimap,\bot,\top)
+    \]
+    is a fuzzy truth-value object. This base is not a chain: for example,
+    \[
+        \{p\}\not\subseteq \{q\},
+        \qquad
+        \{q\}\not\subseteq \{p\},
+    \]
+    and also
+    \[
+        \{p,q,r\}\not\subseteq \{p,q,s\},
+        \qquad
+        \{p,q,s\}\not\subseteq \{p,q,r\}.
+    \]
+\end{example}
+
+\begin{example}[A non-chain product of chain-based truth-value objects]
+\label{ex:coordinatewise-product-truth-value-algebra}
+    Let \(L=[0,1]\times [0,1]\), ordered coordinatewise:
+    \[
+        (a_1,a_2)\leq (b_1,b_2)
+        \quad:\Longleftrightarrow\quad
+        a_1\leq b_1
+        \ \text{and}\
+        a_2\leq b_2.
+    \]
+    Define the operations coordinatewise using the {\L}ukasiewicz formulas:
+    \[
+        (a_1,a_2)\otimes (b_1,b_2)
+        :=
+        \bigl(
+        \max\{0,a_1+b_1-1\},
+        \max\{0,a_2+b_2-1\}
+        \bigr),
+    \]
+    \[
+        (a_1,a_2)\multimap (b_1,b_2)
+        :=
+        \bigl(
+            \min\{1,1-a_1+b_1\},
+            \min\{1,1-a_2+b_2\}
+        \bigr),
+    \]
+    with
+    \[
+        \bot:=(0,0),
+        \qquad
+        \top:=(1,1).
+    \]
+    Complete distributivity is inherited by finite products, since the complete distributivity law is checked coordinatewise. Therefore
+    \[
+        \Lambda=(L,\leq,\wedge,\vee,\otimes,\multimap,\bot,\top)
+    \]
+    is a fuzzy truth-value object, where \(\wedge\) and \(\vee\) are taken coordinatewise. This is not a chain, since
+    \[
+        (1,0)\nleq (0,1),
+        \qquad
+        (0,1)\nleq (1,0).
+    \]
+    Thus even when one begins with standard chain-based truth-value objects, their coordinatewise combination typically produces a non-chain fuzzy truth-value object.
+\end{example}
+
+\section{Tensor products, internal homs, and truth-value objects}
+\label{sec:tensor-products-internal-homs-and-the-truth-value-object}
+
+This section records the monoidal closed structure used throughout the manuscript. We first recall the standard tensor product and internal hom for categories enriched in a fuzzy cosmos, following the construction of the symmetric monoidal closed structure on \(\mathbb V\)-categories \cite[Section~1.4 and Sections~2.2--2.3]{Kelly1982BasicConcepts}. We then specialize these constructions to fuzzy preorders over a small fuzzy truth-value object \(\Lambda\). In that specialization, the general enriched formulas become the familiar pointwise formulas for tensor products, internal homs, and the truth-value fuzzy preorder.
+
+The final corollary isolates the object
+\[
+    [X^{\mathrm{op}},\Lambda],
+\]
+which will be studied in the next section as the fuzzy preorder of \(\Lambda\)-valued contravariant predicates on \(X\).
+
+\subsection{Tensor products and internal homs in a fuzzy cosmos}
+\label{subsec:tensor-products-and-internal-homs-in-a-fuzzy-cosmos}
+
+Let
+\[
+    (\mathbb V,\otimes,I,[-,-])
+\]
+be a fuzzy cosmos. We write
+\[
+    \mathbb V\text{-}\mathbf{Cat}
+\]
+for the ordinary category of small \(\mathbb V\)-categories and \(\mathbb V\)-functors. Since the object sets of the enriched categories under consideration are small and \(\mathbb V\) is locally small, the ordinary hom-sets of \(\mathbb V\text{-}\mathbf{Cat}\) are small. This is the underlying ordinary category associated to the enriched functor category formalism of Kelly \cite[Section~2.2, especially formula~(2.16)]{Kelly1982BasicConcepts}.
+
+\begin{definition}[Tensor product and unit]
+\label{def:v-tensor-product-and-unit}
+    Let \(X\) and \(Y\) be small \(\mathbb V\)-categories. Their \textbf{tensor product}
+    \[
+        X\otimes Y
+    \]
+    is the \(\mathbb V\)-category whose objects are pairs \((x,y)\in X\times Y\), with hom-objects
+    \[
+        (X\otimes Y)\bigl((x,y),(x',y')\bigr)
+        :=
+        X(x,x')\otimes Y(y,y').
+    \]
+    The identity and composition morphisms are induced from those of \(X\) and \(Y\), using the unit, associativity, and symmetry of the tensor product in \(\mathbb V\).
+
+    The \textbf{unit \(\mathbb V\)-category}
+    \[
+        \mathbf 1
+    \]
+    has one object \(\ast\) and hom-object
+    \[
+        \mathbf 1(\ast,\ast)=I.
+    \]
+\end{definition}
+
+This is the tensor product of enriched categories over a symmetric monoidal base \cite[Section~1.4, formulas~(1.17)--(1.18)]{Kelly1982BasicConcepts}. The use of the symmetry in the definition of composition is the middle-four interchange construction.
+
+\begin{definition}[Enriched internal hom]
+\label{def:v-internal-hom}
+    Let \(X\) and \(Y\) be small \(\mathbb V\)-categories. The \textbf{internal hom}, or enriched functor category,
+    \[
+        [X,Y]
+    \]
+    is the \(\mathbb V\)-category whose objects are \(\mathbb V\)-functors
+    \[
+        F:X\to Y,
+    \]
+    and whose hom-objects are given by the end formula \cite[Section~2.2, formula~(2.10)]{Kelly1982BasicConcepts}
+    \[
+        [X,Y](F,G)
+        :=
+        \int_{x\in X}Y(Fx,Gx).
+    \]
+    The end exists because \(X\) is small and \(\mathbb V\) is complete. Composition and identities are induced pointwise from those of \(Y\).
+\end{definition}
+
+The composition and identity maps are those of the enriched functor
+category
+\cite[Section~2.2, formulas~(2.14)--(2.15)]{Kelly1982BasicConcepts}.
+
+There is a canonical evaluation \(\mathbb V\)-functor
+\[
+    \operatorname{ev}:[X,Y]\otimes X\longrightarrow Y,
+    \qquad
+    \operatorname{ev}(F,x):=F(x),
+\]
+as in the enriched functor-category construction
+\cite[Section~2.2, formula~(2.17)]{Kelly1982BasicConcepts}.
+The tensor--hom adjunction says that every \(\mathbb V\)-functor
+\[
+    h:Z\otimes X\to Y
+\]
+has a unique transpose
+\[
+    \widetilde h:Z\to [X,Y],
+    \qquad
+    \widetilde h(z)(x):=h(z,x),
+\]
+equivalently making the diagram
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+Z\otimes X
+    \arrow[rr,"h"]
+    \arrow[dr,"\widetilde h\otimes 1_X"']
+&&
+Y
+\\
+&
+\left[X,Y\right]\otimes X
+    \arrow[ur,"\operatorname{ev}"']
+\end{tikzcd}
+\]
+commute.
+
+\begin{proposition}[Tensor--hom adjunction in a fuzzy cosmos]
+\label{prop:v-tensor-hom-adjunction}
+    For small \(\mathbb V\)-categories \(X,Y,Z\), there is a natural bijection
+    \[
+        \mathbb V\text{-}\mathbf{Cat}(Z\otimes X,Y)
+        \cong
+        \mathbb V\text{-}\mathbf{Cat}(Z,[X,Y]).
+    \]
+    Hence the ordinary category \(\mathbb V\text{-}\mathbf{Cat}\) is symmetric monoidal closed under the tensor product of Definition~\ref{def:v-tensor-product-and-unit}.
+\end{proposition}
+
+\begin{proof}
+    This is the tensor--hom adjunction for enriched categories \cite[Section~2.3, especially formula~(2.20)]{Kelly1982BasicConcepts}. Explicitly, a \(\mathbb V\)-functor
+    \[
+        h:Z\otimes X\to Y
+    \]
+    is transposed to the \(\mathbb V\)-functor
+    \[
+        \widetilde h:Z\to [X,Y]
+    \]
+    defined on objects by
+    \[
+        \widetilde h(z)(x):=h(z,x).
+    \]
+    Conversely, a \(\mathbb V\)-functor
+    \[
+        k:Z\to [X,Y]
+    \]
+    is transposed to the \(\mathbb V\)-functor
+    \[
+        \check k:Z\otimes X\to Y
+    \]
+    defined by
+    \[
+        \check k(z,x):=k(z)(x).
+    \]
+    The enriched functor axioms for these two transposes are equivalent by the universal property of the end defining \([X,Y]\). The two assignments are inverse to one another, and naturality in \(X,Y,Z\) is immediate.
+\end{proof}
+
+\begin{remark}[Universe-bounded tensor--hom use]
+\label{rem:universe-bounded-tensor-hom-use}
+    Later we apply the same tensor--hom construction when the codomain is a locally small possibly large \(\mathbb V\)-category, such as the self-enriched truth-value object \(\underline{\mathbb V}\) or a small-presheaf category \(\mathcal P(\underline{\mathbb V})\). This is justified by the universe-bounded convention stated in Section~\ref{sec:truth-values-and-fuzzy-preorders}: all ends are indexed by small domains, and all hom-objects of the codomain are small enough for the relevant end formulas.
+\end{remark}
+
+\subsection{The posetal specialization}
+\label{subsec:posetal-specialization-of-tensor-hom}
+
+We now specialize the preceding constructions to the posetal fuzzy cosmos determined by a small fuzzy truth-value object \(\Lambda\).
+
+Recall that if \(X\) is a fuzzy preorder, then its opposite \(X^{\mathrm{op}}\) has the same underlying set as \(X\) and hom-values
+\[
+    X^{\mathrm{op}}(x,y):=X(y,x).
+\]
+
+\begin{definition}[Tensor product and unit]
+\label{def:tensor-product-and-unit}
+    Let \(X\) and \(Y\) be fuzzy preorders over \(\Lambda\). Their \textbf{tensor product}
+    \[
+        X\otimes Y
+    \]
+    is the fuzzy preorder with underlying set \(X\times Y\) and hom-values
+    \[
+        (X\otimes Y)\bigl((x,y),(x',y')\bigr)
+        :=
+        X(x,x')\otimes Y(y,y').
+    \]
+    If
+    \[
+        f:X\to X',
+        \qquad
+        g:Y\to Y'
+    \]
+    are \(\Lambda\)-functors, define
+    \[
+        f\otimes g:X\otimes Y\to X'\otimes Y'
+    \]
+    by
+    \[
+        (f\otimes g)(x,y):=\bigl(f(x),g(y)\bigr).
+    \]
+
+    The \textbf{unit fuzzy preorder}
+    \[
+        1
+    \]
+    is the one-element fuzzy preorder with unique element \(\ast\) and hom-value
+    \[
+        1(\ast,\ast)=\top.
+    \]
+\end{definition}
+
+This is the specialization of the enriched tensor product of Definition~\ref{def:v-tensor-product-and-unit} to the quantale-enriched case \cite[Section~1.4, formulas~(1.17)--(1.18)]{Kelly1982BasicConcepts}.
+
+\begin{proposition}
+\label{prop:tensor-product-gives-symmetric-monoidal-structure}
+    The tensor product of Definition~\ref{def:tensor-product-and-unit} makes
+    \[
+        \Pre_\Lambda
+    \]
+    into a symmetric monoidal category with unit object \(1\).
+\end{proposition}
+
+\begin{proof}
+    This is the posetal instance of the tensor product of enriched categories \cite[Section~1.4]{Kelly1982BasicConcepts}. Directly, reflexivity follows from
+    \[
+        \top=\top\otimes\top
+        \leq
+        X(x,x)\otimes Y(y,y),
+    \]
+    and transitivity follows from associativity, commutativity, monotonicity of \(\otimes\), and transitivity in \(X\) and \(Y\):
+    \[
+        \bigl(X(x,x')\otimes Y(y,y')\bigr)
+        \otimes
+        \bigl(X(x',x'')\otimes Y(y',y'')\bigr)
+        \leq
+        X(x,x'')\otimes Y(y,y'').
+    \]
+    The statement for tensor products of \(\Lambda\)-functors follows from monotonicity of \(\otimes\). The associativity, unit, and symmetry isomorphisms are induced by the corresponding bijections of cartesian products of sets.
+\end{proof}
+
+\begin{lemma}[Pullbacks in \(\Pre_\Lambda\)]
+\label{lem:pullbacks-in-prelambda}
+    The category \(\Pre_\Lambda\) has conical pullbacks. The pullback of
+    \[
+        X \xrightarrow{f} Z \xleftarrow{g} Y
+    \]
+    has underlying set the ordinary pullback
+    \[
+        P=\{(x,y)\in X\times Y\mid f(x)=g(y)\},
+    \]
+    and hom-values
+    \[
+        P\bigl((x,y),(x',y')\bigr)
+        :=
+        X(x,x')\wedge Y(y,y').
+    \]
+\end{lemma}
+
+\begin{proof}
+    Reflexivity follows from reflexivity in \(X\) and \(Y\). For transitivity, use monotonicity of \(\otimes\), the inequalities
+    \[
+        u\wedge v\leq u,
+        \qquad
+        u\wedge v\leq v,
+    \]
+    and transitivity in \(X\) and \(Y\):
+    \[
+        \begin{aligned}
+        &
+        \bigl(X(x,x')\wedge Y(y,y')\bigr)
+        \otimes
+        \bigl(X(x',x'')\wedge Y(y',y'')\bigr)
+        \\
+        &\qquad\leq
+        \bigl(X(x,x')\otimes X(x',x'')\bigr)
+        \wedge
+        \bigl(Y(y,y')\otimes Y(y',y'')\bigr)
+        \\
+        &\qquad\leq
+        X(x,x'')\wedge Y(y,y'').
+        \end{aligned}
+    \]
+    The two projections are \(\Lambda\)-functors. Given \(T\to X\) and \(T\to Y\) with equal composites into \(Z\), the induced ordinary function \(T\to P\) is a \(\Lambda\)-functor because its hom condition is exactly the conjunction of the two hom conditions for \(T\to X\) and \(T\to Y\). This gives the usual pullback universal property.
+\end{proof}
+
+\subsection{The truth-value fuzzy preorder}
+\label{subsec:the-truth-value-object}
+
+The self-enriched base \(\underline{\mathbb V}\) specializes, in the posetal case, to the fuzzy preorder whose hom-values are residual implications. This is the thin, quantale-enriched instance of the self-enrichment of a symmetric monoidal closed category \cite[Section~1.6, especially formula~(1.28)]{Kelly1982BasicConcepts}.
+
+\begin{definition}[The truth-value fuzzy preorder]
+\label{def:truth-value-object-as-fuzzy-preorder}
+    By abuse of notation, we also write
+    \[
+        \Lambda
+    \]
+    for the fuzzy preorder whose underlying set is \(L\) and whose
+    hom-values are
+    \[
+        \Lambda(a,b):=a\multimap b.
+    \]
+    Equivalently, this is the self-enriched \(\Lambda\)-category \(\underline{\Lambda}\).
+\end{definition}
+
+\begin{proposition}
+\label{prop:truth-value-object-is-fuzzy-preorder}
+    The structure \(\Lambda\) of Definition~\ref{def:truth-value-object-as-fuzzy-preorder} is a separated fuzzy preorder.
+\end{proposition}
+
+\begin{proof}
+    This is the posetal form of the self-enrichment of \(\mathbb V\) \cite[Section~1.6]{Kelly1982BasicConcepts}. Directly, residuation gives
+    \[
+        \top\leq a\multimap a
+    \]
+    because \(a\otimes \top=a\leq a\). For transitivity, the inequalities
+    \[
+        a\otimes(a\multimap b)\leq b,
+        \qquad
+        b\otimes(b\multimap c)\leq c
+    \]
+    imply
+    \[
+        a\otimes\bigl((a\multimap b)\otimes(b\multimap c)\bigr)\leq c,
+    \]
+    hence
+    \[
+        (a\multimap b)\otimes(b\multimap c)\leq a\multimap c.
+    \]
+    If \(a\multimap b=\top=b\multimap a\), then residuation gives \(a\leq b\) and \(b\leq a\), hence \(a=b\).
+\end{proof}
+
+\subsection{Internal homs}
+\label{subsec:internal-homs}
+
+The general enriched internal hom of Definition~\ref{def:v-internal-hom} specializes to the pointwise fuzzy preorder of \(\Lambda\)-functors.
+
+\begin{definition}[Internal hom]
+\label{def:internal-hom}
+    Let \(X\) and \(Y\) be fuzzy preorders over \(\Lambda\). Define
+    \[
+        [X,Y]
+    \]
+    to be the fuzzy preorder whose underlying set is the set of \(\Lambda\)-functors \(f:X\to Y\), and whose hom-values are
+    \[
+        [X,Y](f,g)
+        :=
+        \bigwedge_{x\in X}Y\bigl(f(x),g(x)\bigr).
+    \]
+\end{definition}
+
+The meet in this formula is the posetal form of the enriched end
+\[
+    \int_{x\in X}Y(fx,gx)
+\]
+appearing in the enriched functor-category formula \cite[Section~2.2, formula~(2.10)]{Kelly1982BasicConcepts}. In a thin enriched base, this end is computed as the greatest lower bound of the pointwise hom-values satisfying the usual wedge conditions. These wedge conditions follow from functoriality of \(f\) and \(g\).
+
+\begin{proposition}
+\label{prop:internal-hom-is-fuzzy-preorder}
+    For fuzzy preorders \(X\) and \(Y\), the structure \([X,Y]\) of Definition~\ref{def:internal-hom} is a fuzzy preorder. If \(Y\) is separated, then \([X,Y]\) is separated.
+\end{proposition}
+
+\begin{proof}
+    This is the posetal instance of the enriched functor-category construction \cite[Section~2.2, formulas~(2.10), (2.14), and~(2.15)]{Kelly1982BasicConcepts}. Reflexivity and transitivity are checked pointwise:
+    \[
+        \top\leq Y(fx,fx)
+        \quad\text{and}\quad
+        [X,Y](f,g)\otimes[X,Y](g,h)\leq Y(fx,hx)
+    \]
+    for every \(x\in X\). Taking the meet over \(x\) gives the fuzzy preorder axioms.
+
+    If \(Y\) is separated and
+    \[
+        [X,Y](f,g)=\top=[X,Y](g,f),
+    \]
+    then for every \(x\in X\),
+    \[
+        Y(fx,gx)=\top=Y(gx,fx).
+    \]
+    Hence \(f(x)=g(x)\) for all \(x\), and therefore \(f=g\).
+\end{proof}
+
+The enriched evaluation functor specializes to an evaluation \(\Lambda\)-functor \cite[Section~2.2, formula~(2.17)]{Kelly1982BasicConcepts}
+\[
+    \operatorname{ev}:[X,Y]\otimes X\to Y,
+    \qquad
+    \operatorname{ev}(f,x):=f(x).
+\]
+
+\begin{proposition}[Tensor--hom adjunction]
+\label{prop:tensor-hom-adjunction}
+    For fuzzy preorders \(X,Y,Z\), there is a natural bijection
+    \[
+        \Pre_\Lambda(Z\otimes X,Y)
+        \cong
+        \Pre_\Lambda(Z,[X,Y]).
+    \]
+    Consequently, the ordinary category \(\Pre_\Lambda\) is symmetric monoidal closed.
+\end{proposition}
+
+\begin{proof}
+    This is Proposition~\ref{prop:v-tensor-hom-adjunction} specialized to the posetal fuzzy cosmos determined by \(\Lambda\). Explicitly, a \(\Lambda\)-functor
+    \[
+        h:Z\otimes X\to Y
+    \]
+    is sent to
+    \[
+        \widetilde h:Z\to [X,Y],
+        \qquad
+        \widetilde h(z)(x):=h(z,x),
+    \]
+    and a \(\Lambda\)-functor
+    \[
+        k:Z\to [X,Y]
+    \]
+    is sent to
+    \[
+        \check k:Z\otimes X\to Y,
+        \qquad
+        \check k(z,x):=k(z)(x).
+    \]
+    The enriched proof shows that these are mutually inverse and natural; in the posetal case the required inequalities are precisely the pointwise functoriality inequalities induced by Definition~\ref{def:internal-hom}.
+\end{proof}
+
+\begin{corollary}
+\label{cor:fuzzy-orders-monoidal-closed}
+    The symmetric monoidal closed structure on \(\Pre_\Lambda\) restricts to a symmetric monoidal closed structure on the full subcategory
+    \[
+        \Ord_\Lambda\subseteq \Pre_\Lambda .
+    \]
+\end{corollary}
+
+\begin{proof}
+    The unit \(1\) is separated. If \(X\) and \(Y\) are separated, then \(X\otimes Y\) is separated because integrality gives \(a\otimes b\leq a\) and \(a\otimes b\leq b\). Hence equality to \(\top\) in both directions forces equality in both coordinates. Finally, if \(Y\) is separated, then \([X,Y]\) is separated by Proposition~\ref{prop:internal-hom-is-fuzzy-preorder}. Since \(\Ord_\Lambda\) is full, the tensor--hom adjunction restricts.
+\end{proof}
+
+\begin{corollary}[Predicate transposition]
+\label{cor:predicate-transposition}
+    For all fuzzy preorders \(S\) and \(X\), there is a natural bijection
+    \[
+        \Pre_\Lambda\bigl(S,[X^{\mathrm{op}},\Lambda]\bigr)
+        \cong
+        \Pre_\Lambda(S\otimes X^{\mathrm{op}},\Lambda).
+    \]
+\end{corollary}
+
+\begin{proof}
+    This is the special case of the enriched tensor--hom adjunction \cite[Section~2.3, formula~(2.20)]{Kelly1982BasicConcepts} with \(Y=\Lambda\) and \(X\) replaced by \(X^{\mathrm{op}}\).
+\end{proof}
+
+Under this bijection, a \(\Lambda\)-functor
+\[
+    \Phi:S\to [X^{\mathrm{op}},\Lambda]
+\]
+corresponds to its uncurried form
+\[
+    \widehat{\Phi}:S\otimes X^{\mathrm{op}}\to\Lambda,
+    \qquad
+    \widehat{\Phi}(s,x):=\Phi(s)(x).
+\]
+Equivalently, \(\widehat{\Phi}\) is the composite
+\[
+    \begin{tikzcd}[column sep=large,row sep=large]
+        S\otimes X^{\mathrm{op}}
+            \arrow[r,"\Phi\otimes 1_{X^{\mathrm{op}}}"]
+        &
+        \left[X^{\mathrm{op}},\Lambda\right]\otimes X^{\mathrm{op}}
+            \arrow[r,"\operatorname{ev}"]
+        &
+        \Lambda .
+    \end{tikzcd}
+\]
+
+\begin{remark}
+\label{rem:dual-covariant-construction}
+    Dually, one may consider the covariant internal hom
+    \[
+        [X,\Lambda].
+    \]
+    We shall not need that construction in what follows, so we now turn to the contravariant object
+    \[
+        [X^{\mathrm{op}},\Lambda].
+    \]
+\end{remark}
+
+\section{Fuzzy presheaves, fuzzy predicates, and predicate algebras}
+\label{sec:fuzzy-presheaves-and-fuzzy-predicate-algebras}
+
+We now specialize the internal-hom construction to contravariant truth-valued functors.
+
+\subsection{Fuzzy presheaves in a fuzzy cosmos}
+\label{subsec:fuzzy-presheaves-in-a-fuzzy-cosmos}
+
+Let
+\[
+    (\mathbb V,\otimes,I,[-,-])
+\]
+be a fuzzy cosmos, and let \(X\) be a small \(\mathbb V\)-category.
+
+In this subsection we use the same functor-category notation when the domain is small and the codomain is possibly large. Thus, if \(X\) is small and \(Y\) is a locally small possibly large \(\mathbb V\)-category, the \(\mathbb V\)-category \([X,Y]\) has as objects the \(\mathbb V\)-functors \(X\to Y\), with hom-objects computed by the small end
+\[
+    [X,Y](F,G)
+    =
+    \int_{x\in X}Y(Fx,Gx).
+\]
+This convention applies in particular to functor categories whose codomain is the self-enriched truth-value object \(\underline{\mathbb V}\) or the small-presheaf category \(\mathcal P(\underline{\mathbb V})\).
+
+\begin{definition}[Fuzzy presheaf]
+\label{def:fuzzy-presheaf-cosmos}
+    A \textbf{fuzzy presheaf} on \(X\) is a fuzzy-functor
+    \[
+        \Phi:X^{\mathrm{op}}\to \underline{\mathbb V}.
+    \]
+    We write
+    \[
+        \Psh_{\mathbb V}(X)
+        :=
+        [X^{\mathrm{op}},\underline{\mathbb V}]
+    \]
+    for the possibly large \(\mathbb V\)-category of fuzzy presheaves on
+    \(X\).
+\end{definition}
+
+This is the usual enriched presheaf construction, expressed using the self-enrichment of the base \(\mathbb V\) \cite[Sections~1.6 and~1.9]{Kelly1982BasicConcepts}. Since \(X\) is small, every \(\mathbb V\)-presheaf
+\[
+    X^{\mathrm{op}}\to \underline{\mathbb V}
+\]
+is small in the sense of the set-theoretic conventions of Section~\ref{sec:truth-values-and-fuzzy-preorders}. Indeed, by the enriched co-Yoneda formula every presheaf
+\[
+    \Phi:X^{\mathrm{op}}\to\underline{\mathbb V}
+\]
+is canonically a small weighted colimit of representables:
+\[
+    \Phi
+    \cong
+    \int^{x\in X} \Phi x\otimes y_X(x).
+\]
+Since \(X\) is small, this is a small colimit. Thus this notation is compatible with the earlier small-presheaf convention.
+
+Unpacked, a fuzzy presheaf \(\Phi\) assigns to each \(x\in X\) an object
+\[
+    \Phi x\in\mathbb V,
+\]
+together with action morphisms
+\[
+    X(x',x)\otimes \Phi x
+    \longrightarrow
+    \Phi x'
+\]
+satisfying the evident unit and associativity axioms. Thus fuzzy presheaves are contravariant \(\mathbb V\)-valued functors.
+
+\begin{proposition}[Presheaf hom-objects]
+\label{prop:fuzzy-presheaf-hom-objects}
+    For fuzzy presheaves \(\Phi,\Psi\in \Psh_{\mathbb V}(X)\), the hom-object in \(\Psh_{\mathbb V}(X)\) is
+    \[
+        \Psh_{\mathbb V}(X)(\Phi,\Psi)
+        =
+        \int_{x\in X}
+        [\Phi x,\Psi x].
+    \]
+\end{proposition}
+
+\begin{proof}
+    This is the enriched functor-category hom formula \cite[Section~2.2, formula~(2.10)]{Kelly1982BasicConcepts}, applied to
+    \[
+        \Psh_{\mathbb V}(X)
+        =
+        [X^{\mathrm{op}},\underline{\mathbb V}],
+    \]
+    together with the identity
+    \[
+        \underline{\mathbb V}(\Phi x,\Psi x)=[\Phi x,\Psi x].
+    \]
+    The end is small because \(X\) is small.
+\end{proof}
+
+\begin{definition}[Representable fuzzy presheaves]
+\label{def:representable-fuzzy-presheaves}
+    For each \(x\in X\), the \textbf{representable fuzzy presheaf} at \(x\) is the \(\mathbb V\)-functor
+    \[
+        y_X(x):X^{\mathrm{op}}\to \underline{\mathbb V}
+    \]
+    defined by
+    \[
+        y_X(x)(z):=X(z,x).
+    \]
+    These assemble into a \(\mathbb V\)-functor
+    \[
+        y_X:X\to \Psh_{\mathbb V}(X),
+    \]
+    called the \textbf{Yoneda embedding}.
+\end{definition}
+
+This is the enriched Yoneda embedding for the self-enriched base \(\underline{\mathbb V}\) \cite[Section~1.9]{Kelly1982BasicConcepts}. The presheaf structure on \(y_X(x)\) is induced by composition in \(X\):
+\[
+    X(z',z)\otimes X(z,x)
+    \longrightarrow
+    X(z',x).
+\]
+
+\begin{proposition}[Enriched Yoneda formula]
+\label{prop:enriched-yoneda-formula}
+    For every small \(\mathbb V\)-category \(X\), every \(x\in X\), and every fuzzy presheaf
+    \[
+        \Phi:X^{\mathrm{op}}\to \underline{\mathbb V},
+    \]
+    there is a canonical isomorphism in \(\mathbb V\)
+    \[
+        \Psh_{\mathbb V}(X)\bigl(y_X(x),\Phi\bigr)
+        \cong
+        \Phi x.
+    \]
+\end{proposition}
+
+\begin{proof}
+    By Proposition~\ref{prop:fuzzy-presheaf-hom-objects},
+    \[
+        \Psh_{\mathbb V}(X)\bigl(y_X(x),\Phi\bigr)
+        =
+        \int_{z\in X}
+        [X(z,x),\Phi z].
+    \]
+    This end is the usual enriched object of natural transformations from the representable \(X(-,x)\) to \(\Phi\). The enriched Yoneda lemma identifies it canonically with \(\Phi x\) \cite[Section~1.9]{Kelly1982BasicConcepts}.
+\end{proof}
+
+\begin{corollary}[Yoneda embedding]
+\label{cor:enriched-yoneda-embedding}
+    The Yoneda embedding
+    \[
+        y_X:X\to \Psh_{\mathbb V}(X)
+    \]
+    is fully faithful. Equivalently, for all \(x,x'\in X\), there is a canonical isomorphism
+    \[
+        X(x,x')
+        \cong
+        \Psh_{\mathbb V}(X)\bigl(y_X(x),y_X(x')\bigr).
+    \]
+\end{corollary}
+
+\begin{proof}
+    Apply Proposition~\ref{prop:enriched-yoneda-formula} to the representable fuzzy presheaf
+    \[
+        \Phi=y_X(x').
+    \]
+    Then
+    \[
+        \Psh_{\mathbb V}(X)\bigl(y_X(x),y_X(x')\bigr)
+        \cong
+        y_X(x')(x)
+        =
+        X(x,x').
+    \]
+\end{proof}
+
+The fuzzy predicate theory below is the posetal, truth-valued specialization of this enriched presheaf picture.
+
+\subsection{Fuzzy predicates}
+\label{subsec:fuzzy-predicates}
+
+Let \(\Lambda\) be a fuzzy truth-value object, regarded as a posetal fuzzy cosmos, and let \(X\) be a fuzzy preorder over~\(\Lambda\). Then a fuzzy predicate
+\[
+    X^{\mathrm{op}}\to \Lambda
+\]
+is exactly a \(\Lambda\)-valued contravariant predicate on \(X\). This is the posetal, quantale-enriched specialization of the enriched presheaf construction above \cite[Definition~2.2]{stubbe-2014-quantaloid-enriched}; closely related \(L\)-valued and \(GL\)-monoid-valued presheaf constructions occur in \cite{Hohle1995PresheavesGLMonoids,Hohle1998GLQuantales,HohleKubiak2011QuantaleSets}.
+
+\begin{definition}[Fuzzy predicate]
+\label{def:fuzzy-predicate}
+    Let \(X\) be a fuzzy preorder over \(\Lambda\). A \textbf{fuzzy predicate} on \(X\) is a \(\Lambda\)-functor
+    \[
+        \phi:X^{\mathrm{op}}\to \Lambda.
+    \]
+    Equivalently, by Lemma~\ref{lem:fuzzy-predicate-pointwise-characterization} below, it is a map
+    \[
+        \phi:X\to L
+    \]
+    satisfying
+    \begin{equation}
+    \label{eq:fuzzy-predicate-law}
+        X(x',x)\otimes \phi(x)\leq \phi(x')
+    \end{equation}
+    for all \(x,x'\in X\).
+
+    We write
+    \[
+        \Pred_\Lambda(X):=[X^{\mathrm{op}},\Lambda]
+    \]
+    for the fuzzy preorder of fuzzy predicates on \(X\).
+\end{definition}
+
+\begin{lemma}[Pointwise characterization of fuzzy predicates]
+\label{lem:fuzzy-predicate-pointwise-characterization}
+    Let \(X\) be a fuzzy preorder over \(\Lambda\), and let \(\phi:X\to L\) be a map. Then \(\phi\) defines a \(\Lambda\)-functor
+    \[
+        X^{\mathrm{op}}\to \Lambda
+    \]
+    if and only if, for all \(x,x'\in X\),
+    \[
+        X(x',x)\otimes \phi(x)\leq \phi(x').
+    \]
+\end{lemma}
+
+\begin{proof}
+    A map \(\phi:X\to L\) is a \(\Lambda\)-functor \(X^{\mathrm{op}}\to \Lambda\) if and only if for all \(x,x'\in X\),
+    \[
+        X^{\mathrm{op}}(x,x')
+        \leq
+        \Lambda\bigl(\phi(x),\phi(x')\bigr).
+    \]
+    Since
+    \[
+        X^{\mathrm{op}}(x,x')=X(x',x)
+        \qquad\text{and}\qquad
+        \Lambda\bigl(\phi(x),\phi(x')\bigr)
+        =
+        \phi(x)\multimap \phi(x'),
+    \]
+    this is equivalent, by residuation, to
+    \[
+        X(x',x)\otimes \phi(x)\leq \phi(x').
+    \]
+\end{proof}
+
+\begin{proposition}
+\label{prop:predicates-form-fuzzy-order}
+    For every fuzzy preorder \(X\), the collection \(\Pred_\Lambda(X)\) of fuzzy predicates on \(X\) carries a natural separated fuzzy preorder, with hom-values
+    \[
+        \Pred_\Lambda(X)(\phi,\psi)
+        :=
+        \bigwedge_{x\in X}\bigl(\phi(x)\multimap \psi(x)\bigr).
+    \]
+    Its induced crisp order is the pointwise order:
+    \[
+        \phi\leq \psi
+        \quad:\Longleftrightarrow\quad
+        (\forall x\in X)\ \phi(x)\leq \psi(x).
+    \]
+\end{proposition}
+
+\begin{proof}
+    This is the posetal instance of the enriched functor-category hom formula \cite[Section~2.2, formula~(2.10)]{Kelly1982BasicConcepts}, together with Proposition~\ref{prop:fuzzy-presheaf-hom-objects} and Proposition~\ref{prop:truth-value-object-is-fuzzy-preorder}. The enriched end becomes the small meet
+    \[
+        \bigwedge_{x\in X}
+        \Lambda\bigl(\phi(x),\psi(x)\bigr)
+        =
+        \bigwedge_{x\in X}
+        \bigl(\phi(x)\multimap \psi(x)\bigr).
+    \]
+
+    The description of the induced crisp order follows because
+    \[
+        \top\leq \phi(x)\multimap\psi(x)
+        \quad\Longleftrightarrow\quad
+        \phi(x)\leq\psi(x).
+    \]
+    Since the truth-value fuzzy preorder \(\Lambda\) is separated, Proposition~\ref{prop:internal-hom-is-fuzzy-preorder} implies that \(\Pred_\Lambda(X)=[X^{\mathrm{op}},\Lambda]\) is separated.
+\end{proof}
+
+Thus the crisp order underlying \(\Pred_\Lambda(X)\) is simply the order inherited pointwise from \(L\), even though the fuzzy hom-value between predicates records the stronger degree
+\[
+    \bigwedge_{x\in X}\bigl(\phi(x)\multimap\psi(x)\bigr).
+\]
+
+\begin{proposition}[Representable fuzzy predicates]
+\label{prop:representable-fuzzy-predicates}
+    For each \(x\in X\), the map
+    \[
+        y_X(x):X\to L,
+        \qquad
+        y_X(x)(z):=X(z,x),
+    \]
+    is a fuzzy predicate on \(X\). Thus there is a canonical \(\Lambda\)-functor
+    \[
+        y_X:X\to \Pred_\Lambda(X),
+        \qquad
+        x\mapsto y_X(x).
+    \]
+\end{proposition}
+
+\begin{proof}
+    This is the posetal instance of the enriched representable presheaf and Yoneda embedding \cite[Section~1.9]{Kelly1982BasicConcepts}. Directly,
+    \[
+        X(z',z)\otimes y_X(x)(z)
+        =
+        X(z',z)\otimes X(z,x)
+        \leq X(z',x)
+        =
+        y_X(x)(z')
+    \]
+    by transitivity in \(X\). Hence \(y_X(x)\) is a fuzzy predicate.
+
+    The fact that \(y_X:X\to\Pred_\Lambda(X)\) is a \(\Lambda\)-functor follows by applying transitivity:
+    \[
+        X(x,x')\otimes X(z,x)\leq X(z,x')
+    \]
+    for every \(z\), then transposing by residuation and taking the meet over \(z\).
+\end{proof}
+
+\begin{proposition}[Yoneda formula for fuzzy predicates]
+\label{prop:yoneda-formula-for-fuzzy-predicates}
+    For every fuzzy preorder \(X\), every \(x\in X\), and every \(\phi\in \Pred_\Lambda(X)\),
+    \[
+        \Pred_\Lambda(X)\bigl(y_X(x),\phi\bigr)=\phi(x).
+    \]
+\end{proposition}
+
+\begin{proof}
+    This is the posetal form of the enriched Yoneda lemma \cite[Section~1.9]{Kelly1982BasicConcepts}. Directly,
+    \[
+        \Pred_\Lambda(X)\bigl(y_X(x),\phi\bigr)
+        =
+        \bigwedge_{z\in X}\bigl(X(z,x)\multimap \phi(z)\bigr).
+    \]
+    The \(z=x\) term gives the inequality
+    \[
+        \Pred_\Lambda(X)\bigl(y_X(x),\phi\bigr)\leq\phi(x).
+    \]
+    Conversely, since \(\phi\) is a fuzzy predicate,
+    \[
+        X(z,x)\otimes \phi(x)\leq \phi(z),
+    \]
+    so residuation gives
+    \[
+        \phi(x)\leq X(z,x)\multimap \phi(z)
+    \]
+    for every \(z\). Taking the meet over \(z\) gives the reverse inequality.
+\end{proof}
+
+\begin{corollary}[Yoneda embedding]
+\label{cor:yoneda-embedding-fully-faithful}
+    For every fuzzy preorder \(X\), the map
+    \[
+        y_X:X\to \Pred_\Lambda(X)
+    \]
+    is fully faithful, that is,
+    \[
+        X(x,x')
+        =
+        \Pred_\Lambda(X)\bigl(y_X(x),y_X(x')\bigr)
+        \qquad
+        \text{for all }x,x'\in X.
+    \]
+    In particular, if \(X\) is separated, then \(y_X\) is injective.
+\end{corollary}
+
+\begin{proof}
+    Apply Proposition~\ref{prop:yoneda-formula-for-fuzzy-predicates} to the representable fuzzy predicate
+    \[
+        \phi=y_X(x').
+    \]
+    If \(X\) is separated and \(y_X(x)=y_X(x')\), then
+    \[
+        \top\leq X(x,x')
+        \qquad\text{and}\qquad
+        \top\leq X(x',x),
+    \]
+    so \(x=x'\).
+\end{proof}
+
+\subsection{Fuzzy predicate algebras}
+\label{subsec:fuzzy-predicate-algebras}
+
+We now use the additional order-theoretic structure present in the posetal case. The fuzzy predicate object \(\Pred_\Lambda(X)\) carries more structure than its defining fuzzy preorder. Its induced crisp order is complete, finite meets distribute over small joins, and the truth-value object acts on it by pointwise scalar operations. Related algebraic treatments of fuzzy-valued sets, \(GL\)-monoids, and quantale-valued sets appear in \cite{Hohle1992MValuedSetsSheaves,Hohle1995PresheavesGLMonoids,Hohle1998GLQuantales,HohleKubiak2011QuantaleSets}.
+
+\begin{proposition}
+\label{prop:predicate-completeness}
+    Let \(X\) be a fuzzy preorder over \(\Lambda\), and let \((\phi_i)_{i\in I}\) be a small family of fuzzy predicates on \(X\). Define maps
+    \[
+        \Big(\bigvee_{i\in I}\phi_i\Big)(x)
+        :=
+        \bigvee_{i\in I}\phi_i(x),
+        \qquad
+        \Big(\bigwedge_{i\in I}\phi_i\Big)(x)
+        :=
+        \bigwedge_{i\in I}\phi_i(x)
+    \]
+    for each \(x\in X\). Then both
+    \[
+        \bigvee_{i\in I}\phi_i
+        \qquad\text{and}\qquad
+        \bigwedge_{i\in I}\phi_i
+    \]
+    are fuzzy predicates on \(X\). Consequently, the induced crisp order of \(\Pred_\Lambda(X)\) is a complete lattice, with small joins and small meets computed pointwise.
+\end{proposition}
+
+\begin{proof}
+    For joins, Proposition~\ref{prop:tensor-preserves-joins} gives
+    \[
+        X(x',x)\otimes
+        \Big(\bigvee_{i\in I}\phi_i(x)\Big)
+        =
+        \bigvee_{i\in I}
+        \bigl(X(x',x)\otimes \phi_i(x)\bigr)
+        \leq
+        \bigvee_{i\in I}\phi_i(x').
+    \]
+
+    For meets, the empty meet is the constant predicate with value \(\top\). If \(I\neq\varnothing\), then for each \(j\in I\),
+    \[
+        X(x',x)\otimes
+        \Big(\bigwedge_{i\in I}\phi_i(x)\Big)
+        \leq
+        X(x',x)\otimes \phi_j(x)
+        \leq
+        \phi_j(x').
+    \]
+    Hence the left-hand side is bounded above by \(\bigwedge_i\phi_i(x')\). Thus joins and meets are computed pointwise.
+\end{proof}
+
+\begin{proposition}
+\label{prop:predicate-frame}
+    For every fuzzy preorder \(X\), the induced crisp order of \(\Pred_\Lambda(X)\) is a frame.
+\end{proposition}
+
+\begin{proof}
+    By Proposition~\ref{prop:predicate-completeness}, small joins and meets in \(\Pred_\Lambda(X)\) are computed pointwise. Since \(L\) is completely distributive, it is in particular a frame, and finite meets distribute over small joins pointwise.
+\end{proof}
+
+This frame structure is a structure on the induced crisp order; it is not the same datum as the \(\Lambda\)-valued hom of the fuzzy preorder \(\Pred_\Lambda(X)\).
+
+\begin{definition}[Pointwise scalar operations]
+\label{def:pointwise-scalar-operations}
+    Let \(X\) be a fuzzy preorder over \(\Lambda\), let \(a\in L\), and let \(\phi\in \Pred_\Lambda(X)\). Define maps
+    \[
+        (a\odot \phi)(x):=a\otimes \phi(x),
+        \qquad
+        (a\Rightarrow \phi)(x):=a\multimap \phi(x)
+    \]
+    for each \(x\in X\).
+\end{definition}
+
+\begin{proposition}
+\label{prop:scalar-operations-preserve-predicates}
+    For every \(a\in L\) and every fuzzy predicate \(\phi\) on \(X\), the maps
+    \[
+        a\odot \phi
+        \qquad\text{and}\qquad
+        a\Rightarrow \phi
+    \]
+    of Definition~\ref{def:pointwise-scalar-operations} are again fuzzy predicates.
+\end{proposition}
+
+\begin{proof}
+    For \(a\odot \phi\), associativity, commutativity, and the predicate law for \(\phi\) give
+    \[
+        X(x',x)\otimes (a\odot \phi)(x)
+        =
+        a\otimes \bigl(X(x',x)\otimes \phi(x)\bigr)
+        \leq
+        a\otimes \phi(x')
+        =
+        (a\odot \phi)(x').
+    \]
+
+    For \(a\Rightarrow \phi\), by residuation it suffices to prove
+    \[
+        a\otimes
+        \Bigl(X(x',x)\otimes (a\Rightarrow \phi)(x)\Bigr)
+        \leq
+        \phi(x').
+    \]
+    The left-hand side is
+    \[
+        X(x',x)\otimes
+        \Bigl(a\otimes (a\Rightarrow \phi)(x)\Bigr)
+        \leq
+        X(x',x)\otimes\phi(x)
+        \leq
+        \phi(x'),
+    \]
+    so \(a\Rightarrow\phi\) is a fuzzy predicate.
+\end{proof}
+
+\begin{proposition}
+\label{prop:scalar-adjunction}
+    Let \(X\) be a fuzzy preorder over \(\Lambda\). For every \(a\in L\) and all \(\phi,\psi\in \Pred_\Lambda(X)\),
+    \[
+        a\odot \phi\leq \psi
+        \quad\Longleftrightarrow\quad
+        \phi\leq a\Rightarrow \psi.
+    \]
+\end{proposition}
+
+\begin{proof}
+    By Proposition~\ref{prop:predicates-form-fuzzy-order}, the order on \(\Pred_\Lambda(X)\) is pointwise. Therefore the result is exactly the pointwise residuation law in \(L\).
+\end{proof}
+
+Thus, for each \(a\in L\), there is an adjunction on the crisp order underlying \(\Pred_\Lambda(X)\):
+\[
+    \begin{tikzcd}[column sep=large]
+        \Pred_\Lambda(X)
+            \arrow[r,shift left=1.1ex,"a\odot -"]
+        &
+        \Pred_\Lambda(X)
+            \arrow[l,shift left=1.1ex,"a\Rightarrow -"']
+    \end{tikzcd}
+    \qquad
+    a\odot -\dashv a\Rightarrow - .
+\]
+
+\begin{corollary}
+\label{cor:scalar-action-preserves-joins}
+    For every \(a\in L\), the operation
+    \[
+        a\odot(-):\Pred_\Lambda(X)\to \Pred_\Lambda(X)
+    \]
+    preserves small joins, and the operation
+    \[
+        a\Rightarrow(-):\Pred_\Lambda(X)\to \Pred_\Lambda(X)
+    \]
+    preserves small meets.
+\end{corollary}
+
+\begin{proof}
+    This is immediate from Proposition~\ref{prop:scalar-adjunction}, since left adjoints preserve joins and right adjoints preserve meets.
+\end{proof}
+
+\begin{proposition}
+\label{prop:predicate-scalar-laws}
+    Let \(X\) be a fuzzy preorder over \(\Lambda\). For all \(a,b\in L\) and all \(\phi\in \Pred_\Lambda(X)\),
+    \[
+        \top\odot \phi=\phi,
+        \qquad
+        (a\otimes b)\odot \phi=a\odot (b\odot \phi).
+    \]
+    Moreover, for every small family \((\phi_i)_{i\in I}\) in \(\Pred_\Lambda(X)\),
+    \[
+        a\odot \Big(\bigvee_{i\in I}\phi_i\Big)
+        =
+        \bigvee_{i\in I}(a\odot \phi_i).
+    \]
+\end{proposition}
+
+\begin{proof}
+    All three identities are pointwise consequences of the corresponding laws in \(L\). For the last identity, use Proposition~\ref{prop:tensor-preserves-joins}.
+\end{proof}
+
+\begin{proposition}[Constant fuzzy predicates]
+\label{prop:constant-fuzzy-predicates}
+    Let \(X\) be a fuzzy preorder over \(\Lambda\). For every \(a\in L\), the constant map
+    \[
+        \underline a:X\to L,
+        \qquad
+        \underline a(x):=a,
+    \]
+    is a fuzzy predicate.
+\end{proposition}
+
+\begin{proof}
+    For all \(x,x'\in X\), since \(X(x',x)\leq \top\) and \(\otimes\) is monotone,
+    \[
+        X(x',x)\otimes a
+        \leq
+        \top\otimes a
+        =
+        a.
+    \]
+\end{proof}
+
+\begin{definition}[Fuzzy predicate algebra]
+\label{def:fuzzy-predicate-algebra}
+    Let \(X\) be a fuzzy preorder over \(\Lambda\). The \textbf{fuzzy predicate algebra} of \(X\) is the structure carried by \(\Pred_\Lambda(X)\) consisting of:
+    \begin{enumerate}
+        \item its frame structure from Proposition~\ref{prop:predicate-frame};
+
+        \item the family of pointwise scalar actions
+        \[
+            a\odot(-):\Pred_\Lambda(X)\to \Pred_\Lambda(X)
+            \qquad
+            (a\in L);
+        \]
+
+        \item the family of pointwise scalar residuals
+        \[
+            a\Rightarrow(-):\Pred_\Lambda(X)\to \Pred_\Lambda(X)
+            \qquad
+            (a\in L).
+        \]
+    \end{enumerate}
+\end{definition}
+
+\subsection{Principal examples}
+\label{subsec:principal-examples}
+
+We now specialize the preceding constructions to several representative truth-value objects. In each case the abstract predicate object
+\[
+    \Pred_\Lambda(X)=[X^{\mathrm{op}},\Lambda]
+\]
+admits a concrete description, and the pointwise scalar operations induced by the base become explicit. The examples below include the ordinary crisp case, the standard chain-valued bases of mathematical fuzzy logic, and the Lawvere metric base \cite{Goguen1967LFuzzySets,Lawvere1973MetricSpaces} \cite[Example~2.4]{stubbe-2014-quantaloid-enriched}\cite[Sections~1, 2, and~7]{sep-logic-fuzzy}.
+
+\begin{proposition}[Discrete predicate object]
+\label{prop:discrete-predicate-object}
+    Let \(X\) be a discrete fuzzy preorder over \(\Lambda\). Then every map
+    \[
+        \phi:X\to L
+    \]
+    is a fuzzy predicate. Hence
+    \[
+        \Pred_\Lambda(X)\cong L^X
+    \]
+    as sets. Under this identification, the induced crisp order, small joins, small meets, and scalar operations
+    \[
+        a\odot(-),
+        \qquad
+        a\Rightarrow(-)
+    \]
+    are all computed pointwise.
+\end{proposition}
+
+\begin{proof}
+    If \(x'=x\), then \(X(x,x)=\top\), so the predicate condition is immediate. If \(x'\neq x\), then \(X(x',x)=\bot\), and tensor preserves the empty join, so
+    \[
+        \bot\otimes \phi(x)=\bot\leq \phi(x').
+    \]
+    Thus every map \(X\to L\) is a fuzzy predicate. The final statement follows from the general pointwise descriptions above.
+\end{proof}
+
+In the quantale-valued setting, such full \(L\)-valued function objects are the basic powerset-like objects; compare the quantale-valued powerset perspective in \cite{ShenZhao2024PowersetMonad}.
+
+\subsubsection{The crisp case}
+
+The two-valued case is the ordinary posetal specialization of enriched presheaves and the Yoneda embedding \cite[Section~1.9]{Kelly1982BasicConcepts}. Let
+\[
+    \Lambda=\{0<1\},
+    \qquad
+    a\otimes b=a\wedge b.
+\]
+If \(X\) is a fuzzy preorder over this base, then \(X\) is just an ordinary preorder. A fuzzy predicate on \(X\) is a map
+\[
+    \phi:X\to \{0,1\}
+\]
+such that
+\[
+    X(x',x)\wedge \phi(x)\leq \phi(x')
+    \qquad
+    \text{for all }x,x'\in X.
+\]
+
+\begin{proposition}
+\label{prop:crisp-predicate-algebra}
+    For a preorder \(X\), the assignment
+    \[
+        \phi\longmapsto A_\phi:=\{x\in X\mid \phi(x)=1\}
+    \]
+    identifies \(\Pred_\Lambda(X)\) with the set of lower sets of~\(X\). Under this identification, the order on \(\Pred_\Lambda(X)\) is inclusion, small joins are unions, small meets are intersections, and the representable fuzzy predicate \(y_X(x)\) corresponds to the principal lower set
+    \[
+        \downarrow x=\{z\in X\mid z\preceq x\}.
+    \]
+\end{proposition}
+
+\begin{proof}
+    The fuzzy predicate condition says precisely that
+    \[
+        x'\preceq x
+        \ \text{and}\
+        x\in A_\phi
+        \quad\Longrightarrow\quad
+        x'\in A_\phi.
+    \]
+    Hence fuzzy predicates are exactly lower sets. The order, joins, meets, and representables are then identified pointwise.
+\end{proof}
+
+\begin{corollary}
+\label{cor:crisp-discrete-predicate-algebra}
+    If \(X\) is a discrete preorder, then
+    \[
+        \Pred_\Lambda(X)\cong 2^X,
+    \]
+    the ordinary powerset Boolean algebra. Under this identification, joins are unions, meets are intersections, and \(y_X(x)\) corresponds to the singleton \(\{x\}\).
+\end{corollary}
+
+\begin{proof}
+    In a discrete preorder, every subset is lower, and \(\downarrow x=\{x\}\).
+\end{proof}
+
+\subsubsection{The G\"odel case}
+
+The G\"odel base is the quantale associated to the minimum \(t\)-norm, one of the standard chain-valued bases in mathematical fuzzy logic \cite[Example~2.4]{stubbe-2014-quantaloid-enriched} \cite[Sections~1, 2, and~7]{sep-logic-fuzzy}. Let \(\Lambda=[0,1]\) with the G\"odel operations
+\[
+    a\otimes b=a\wedge b,
+    \qquad
+    a\multimap_G b=
+    \begin{cases}
+        1,&a\leq b,\\
+        b,&a>b.
+    \end{cases}
+\]
+Then a fuzzy predicate on a fuzzy preorder \(X\) is a map \(\phi:X\to [0,1]\) such that
+\[
+    X(x',x)\wedge \phi(x)\leq \phi(x')
+    \qquad
+    \text{for all }x,x'\in X.
+\]
+
+\begin{proposition}
+\label{prop:godel-predicate-algebra}
+    For every fuzzy preorder \(X\) over the G\"odel base, the induced crisp order on \(\Pred_\Lambda(X)\) is a frame, hence a complete Heyting algebra. Moreover, for every \(a\in [0,1]\), the constant map
+    \[
+        \underline{a}(x):=a
+    \]
+    is a fuzzy predicate, and the scalar operations
+    \[
+        (a\odot \phi)(x):=a\wedge \phi(x),
+        \qquad
+        (a\Rightarrow \phi)(x):=a\multimap_G \phi(x)
+    \]
+    are again fuzzy predicates. They satisfy
+    \[
+        a\wedge \phi\leq \psi
+        \quad\Longleftrightarrow\quad
+        \phi\leq a\Rightarrow \psi.
+    \]
+\end{proposition}
+
+\begin{proof}
+    This is the G\"odel instance of Propositions~\ref{prop:predicate-frame}, \ref{prop:constant-fuzzy-predicates}, \ref{prop:scalar-operations-preserve-predicates}, and \ref{prop:scalar-adjunction}.
+\end{proof}
+
+\begin{corollary}
+\label{cor:godel-discrete-predicate-algebra}
+    If \(X\) is discrete, then
+    \[
+        \Pred_\Lambda(X)\cong [0,1]^X
+    \]
+    with pointwise order and pointwise G\"odel operations
+    \[
+        (\phi\wedge\psi)(x):=\min\{\phi(x),\psi(x)\},
+        \qquad
+        (\phi\vee\psi)(x):=\max\{\phi(x),\psi(x)\},
+    \]
+    \[
+        (\phi\to_G\psi)(x):=\phi(x)\multimap_G\psi(x).
+    \]
+    Under these operations \(\Pred_\Lambda(X)\) is a complete G\"odel algebra, hence in particular a complete BL-algebra.
+\end{corollary}
+
+\begin{proof}
+    This follows from Proposition~\ref{prop:discrete-predicate-object}, since every pointwise operation on maps \(X\to[0,1]\) remains a fuzzy predicate when \(X\) is discrete.
+\end{proof}
+
+The natural structure here is therefore a frame equipped with an external G\"odel action. In the discrete case, one recovers the familiar complete G\"odel algebra of all \([0,1]\)-valued functions on~\(X\). What fails in general is closure under the pointwise G\"odel implication inherited from the base algebra.
+
+\begin{proposition}
+\label{prop:godel-pointwise-implication-not-closed}
+    There exists a fuzzy preorder \(X\) over the G\"odel base and fuzzy predicates \(\phi,\psi\in \Pred_\Lambda(X)\) such that the pointwise G\"odel implication
+    \[
+        (\phi\to_G \psi)(x):=\phi(x)\multimap_G \psi(x)
+    \]
+    is not a fuzzy predicate. Consequently, \(\Pred_\Lambda(X)\) is not, in general, closed under pointwise G\"odel implication.
+\end{proposition}
+
+\begin{proof}
+    Let \(X=\{x',x\}\) with hom-values
+    \[
+        X(x,x)=X(x',x')=1,
+        \qquad
+        X(x',x)=\tfrac12,
+        \qquad
+        X(x,x')=0.
+    \]
+    This is a fuzzy preorder. Define fuzzy predicates
+    \[
+        \phi(x)=0,
+        \qquad
+        \phi(x')=\tfrac12,
+    \]
+    and
+    \[
+        \psi(x)=0,
+        \qquad
+        \psi(x')=0.
+    \]
+    Both satisfy the predicate law. But
+    \[
+        (\phi\to_G \psi)(x)=1,
+        \qquad
+        (\phi\to_G \psi)(x')=0.
+    \]
+    The predicate law would require
+    \[
+        \tfrac12\wedge 1\leq 0,
+    \]
+    which is false.
+\end{proof}
+
+\begin{remark}
+\label{rem:godel-frame-vs-pointwise-implication}
+    This does not contradict Proposition~\ref{prop:predicate-frame}. Since \(\Pred_\Lambda(X)\) is a frame, it has an internal Heyting implication. What fails here is not the existence of implication in the frame-theoretic sense, but closure under the \textbf{pointwise} G\"odel residual inherited from the base algebra \([0,1]\). In general, these two operations do not coincide.
+\end{remark}
+
+\subsubsection{The {\L}ukasiewicz case}
+
+The {\L}ukasiewicz base is the quantale associated to the standard {\L}ukasiewicz \(t\)-norm and residual implication, and underlies the algebraic semantics of {\L}ukasiewicz and MV-valued fuzzy logic \cite[Example~2.4]{stubbe-2014-quantaloid-enriched} \cite{cintula-hajek-noguera-2011-hmfl1}. Let \(\Lambda=[0,1]\) with the {\L}ukasiewicz operations
+\[
+    a\otimes b=\max\{0,a+b-1\},
+    \qquad
+    a\multimap_{\Luk} b=\min\{1,1-a+b\}.
+\]
+Then a fuzzy predicate on a fuzzy preorder \(X\) is a map \(\phi:X\to [0,1]\) such that
+\[
+    \max\{0,\,X(x',x)+\phi(x)-1\}\leq \phi(x')
+    \qquad
+    \text{for all }x,x'\in X.
+\]
+
+\begin{proposition}
+\label{prop:lukasiewicz-predicate-algebra}
+    For every fuzzy preorder \(X\) over the {\L}ukasiewicz base, the induced crisp order on \(\Pred_\Lambda(X)\) is a frame. Moreover, for every \(a\in [0,1]\), the constant map
+    \[
+        \underline{a}(x):=a
+    \]
+    is a fuzzy predicate, and the scalar operations
+    \[
+        (a\odot \phi)(x):=\max\{0,a+\phi(x)-1\},
+        \qquad
+        (a\Rightarrow \phi)(x):=\min\{1,1-a+\phi(x)\}
+    \]
+    are again fuzzy predicates. If one defines
+    \[
+        (a\oplus \phi)(x):=\min\{1,a+\phi(x)\},
+    \]
+    equivalently
+    \[
+        a\oplus \phi=(1-a)\Rightarrow \phi,
+    \]
+    then
+    \[
+        a\odot \phi\leq \psi
+        \quad\Longleftrightarrow\quad
+        \phi\leq a\Rightarrow \psi.
+    \]
+\end{proposition}
+
+\begin{proof}
+    This is the {\L}ukasiewicz instance of Propositions~\ref{prop:predicate-frame}, \ref{prop:constant-fuzzy-predicates}, \ref{prop:scalar-operations-preserve-predicates}, and \ref{prop:scalar-adjunction}. The formula for \(a\oplus\phi\) follows from
+    \[
+        (1-a)\multimap_{\Luk} u=\min\{1,a+u\}.
+    \]
+\end{proof}
+
+\begin{corollary}
+\label{cor:lukasiewicz-discrete-predicate-algebra}
+    If \(X\) is discrete, then
+    \[
+        \Pred_\Lambda(X)\cong [0,1]^X
+    \]
+    with the pointwise {\L}ukasiewicz operations
+    \[
+        (\phi\odot\psi)(x):=\max\{0,\phi(x)+\psi(x)-1\},
+        \qquad
+        (\phi\oplus\psi)(x):=\min\{1,\phi(x)+\psi(x)\},
+    \]
+    \[
+        (\neg\phi)(x):=1-\phi(x),
+        \qquad
+        (\phi\multimap_{\Luk}\psi)(x)
+        :=
+        \min\{1,1-\phi(x)+\psi(x)\}.
+    \]
+    Under these operations \(\Pred_\Lambda(X)\) is a complete MV-algebra.
+\end{corollary}
+
+\begin{proof}
+    This follows from Proposition~\ref{prop:discrete-predicate-object}, since every pointwise operation on maps \(X\to[0,1]\) remains a fuzzy predicate when \(X\) is discrete.
+\end{proof}
+
+\begin{remark}
+\label{rem:lukasiewicz-frame-vs-pointwise-negation}
+    Again, this does not contradict the fact that \(\Pred_\Lambda(X)\) is a frame. The frame \(\Pred_\Lambda(X)\) has its own internal Heyting negation, whereas the operation considered above is the \textbf{pointwise} {\L}ukasiewicz negation inherited from the base algebra \([0,1]\). In general these are different operations, and only the former is automatically available on every frame.
+\end{remark}
+
+\begin{proposition}
+\label{prop:lukasiewicz-pointwise-negation-not-closed}
+    There exists a fuzzy preorder \(X\) over the {\L}ukasiewicz base and a fuzzy predicate \(\phi\in \Pred_\Lambda(X)\) such that the pointwise {\L}ukasiewicz negation
+    \[
+        (\neg \phi)(x):=\phi(x)\multimap_{\Luk} 0=1-\phi(x)
+    \]
+    is not a fuzzy predicate. Consequently, \(\Pred_\Lambda(X)\) is not, in general, closed under pointwise {\L}ukasiewicz negation.
+\end{proposition}
+
+\begin{proof}
+    Let \(X=\{x',x\}\) with hom-values
+    \[
+        X(x,x)=X(x',x')=1,
+        \qquad
+        X(x',x)=\tfrac12,
+        \qquad
+        X(x,x')=0.
+    \]
+    Define
+    \[
+        \phi(x)=0,
+        \qquad
+        \phi(x')=\tfrac34.
+    \]
+    Then \(\phi\) is a fuzzy predicate, since
+    \[
+        \max\{0,\tfrac12+0-1\}=0\leq \tfrac34.
+    \]
+    Its pointwise negation is
+    \[
+        (\neg \phi)(x)=1,
+        \qquad
+        (\neg \phi)(x')=\tfrac14.
+    \]
+    The predicate law would require
+    \[
+        \max\{0,\tfrac12+1-1\}\leq \tfrac14,
+    \]
+    which is false.
+\end{proof}
+
+\subsubsection{The Lawvere case}
+
+The Lawvere base is the quantale-enriched presentation of generalized metric spaces \cite{Lawvere1973MetricSpaces} \cite[Example~2.3]{stubbe-2014-quantaloid-enriched}. Let \(\Lambda=[0,\infty]\) with the reverse of the usual order and operations
+\[
+    a\otimes b=a+b,
+    \qquad
+    a\multimap c=c\ominus a.
+\]
+If \(X\) is a fuzzy preorder over this base, we write \(d(x,y):=X(x,y)\). Then a fuzzy predicate on \(X\) is a map \(\phi:X\to [0,\infty]\) such that
+\[
+    \phi(x')\leq d(x',x)+\phi(x)
+\]
+in the usual order. Thus fuzzy predicates are precisely Lawvere weights, i.e. contravariant modules into the Lawvere base in this enriched sense \cite{Lawvere1973MetricSpaces} \cite[Example~2.3]{stubbe-2014-quantaloid-enriched}. The terminology ``predicate'' reflects that they are contravariant maps into the chosen truth-value object.
+
+\begin{proposition}
+\label{prop:lawvere-predicate-algebra}
+    For every Lawvere metric space \(X\), equivalently every extended quasi-pseudometric space \(X\), the induced crisp order on \(\Pred_\Lambda(X)\) is a frame. In the usual order on \([0,\infty]\), this amounts to reverse pointwise order:
+    \[
+        \phi\leq \psi
+        \quad:\Longleftrightarrow\quad
+        \phi(x)\geq \psi(x)
+        \ \text{for all }x\in X.
+    \]
+    Accordingly, joins in \(\Pred_\Lambda(X)\) are pointwise infima in the usual order, and meets are pointwise suprema.
+
+    Moreover, for every \(a\in [0,\infty]\), the constant map
+    \[
+        \underline{a}(x):=a
+    \]
+    is a fuzzy predicate, and the scalar operations
+    \[
+        (a\odot \phi)(x):=a+\phi(x),
+        \qquad
+        (a\Rightarrow \phi)(x):=\phi(x)\ominus a
+    \]
+    are again fuzzy predicates. They satisfy
+    \[
+        a\odot \phi\leq \psi
+        \quad\Longleftrightarrow\quad
+        \phi\leq a\Rightarrow \psi,
+    \]
+    where \(\leq\) denotes the crisp order on \(\Pred_\Lambda(X)\). Equivalently, in the usual pointwise order on \([0,\infty]\), this says
+    \[
+        a+\phi(x)\geq \psi(x)
+        \ \text{for all }x\in X
+        \quad\Longleftrightarrow\quad
+        \phi(x)\geq \psi(x)\ominus a
+        \ \text{for all }x\in X.
+    \]
+\end{proposition}
+
+\begin{proof}
+    This is the Lawvere instance of the general predicate-frame, constant-predicate, scalar-closure, and scalar-adjunction results, translated through the reversed order on \([0,\infty]\).
+\end{proof}
+
+\begin{corollary}
+\label{cor:lawvere-discrete-predicate-algebra}
+    If \(X\) is discrete, then
+    \[
+        \Pred_\Lambda(X)\cong [0,\infty]^X
+    \]
+    with reverse pointwise order and pointwise operations
+    \[
+        (\phi+\psi)(x):=\phi(x)+\psi(x),
+        \qquad
+        (\psi\ominus\phi)(x):=\psi(x)\ominus \phi(x).
+    \]
+    In particular, with reverse pointwise order and pointwise addition, \(\Pred_\Lambda(X)\) is the usual commutative unital Lawvere quantale of extended cost functions on \(X\).
+\end{corollary}
+
+\begin{proof}
+    This follows from Proposition~\ref{prop:discrete-predicate-object}.
+\end{proof}
+
+\begin{proposition}
+\label{prop:lawvere-pointwise-addition-not-closed}
+    There exists a Lawvere metric space \(X\) and fuzzy predicates \(\phi,\psi\in \Pred_\Lambda(X)\) such that the pointwise sum
+    \[
+        (\phi+\psi)(x):=\phi(x)+\psi(x)
+    \]
+    is not a fuzzy predicate.
+\end{proposition}
+
+\begin{proof}
+    Let \(X=\{x',x\}\) with
+    \[
+        d(x,x)=d(x',x')=0,
+        \qquad
+        d(x',x)=1,
+        \qquad
+        d(x,x')=\infty.
+    \]
+    Define
+    \[
+        \phi(x)=0,
+        \qquad
+        \phi(x')=1,
+    \]
+    and let \(\psi=\phi\). Then \(\phi\) and \(\psi\) are fuzzy predicates, since
+    \[
+        \phi(x')=1\leq d(x',x)+\phi(x)=1+0.
+    \]
+    But
+    \[
+        (\phi+\psi)(x)=0,
+        \qquad
+        (\phi+\psi)(x')=2,
+    \]
+    and the predicate law would require
+    \[
+        2\leq d(x',x)+0=1,
+    \]
+    which is false.
+\end{proof}
+
+\section{Fuzzy power objects and generic fuzzy predicates}
+\label{sec:fuzzy-power-objects-and-generic-fuzzy-predicates}
+
+We now regard the presheaf object as the \textbf{fuzzy power object} of \(X\):
+\[
+    P_{\mathbb V}(X):=\Psh_{\mathbb V}(X).
+\]
+The term ``power object'' is used here in the enriched classifying sense: \(P_{\mathbb V}(X)\) classifies indexed fuzzy presheaves by the tensor--hom adjunction. It is not asserted to be a subobject-classifier power object in an ambient topos.
+
+\subsection{Fuzzy power objects in a fuzzy cosmos}
+\label{subsec:power-objects-in-a-fuzzy-cosmos}
+
+Let
+\[
+    (\mathbb V,\otimes,I,[-,-])
+\]
+be a fuzzy cosmos, and let \(X\) be a small \(\mathbb V\)-category.
+
+\begin{definition}[Fuzzy power object in a fuzzy cosmos]
+\label{def:enriched-power-object}
+    The \textbf{fuzzy power object} of \(X\) is the possibly large \(\mathbb V\)-category
+    \[
+        P_{\mathbb V}(X)
+        :=
+        \Psh_{\mathbb V}(X)
+        =
+        [X^{\mathrm{op}},\underline{\mathbb V}].
+    \]
+    Thus an object of \(P_{\mathbb V}(X)\) is a fuzzy presheaf
+    \[
+        \Phi:X^{\mathrm{op}}\to \underline{\mathbb V}.
+    \]
+\end{definition}
+
+Unpacked, an object \(\Phi\in P_{\mathbb V}(X)\) assigns an object
+\[
+    \Phi x\in\mathbb V
+\]
+to each \(x\in X\), together with action morphisms
+\[
+    X(x',x)\otimes \Phi x
+    \longrightarrow
+    \Phi x'
+\]
+satisfying the usual unit and associativity axioms. By Proposition~\ref{prop:fuzzy-presheaf-hom-objects}, the hom-object between two fuzzy presheaves is
+\[
+    P_{\mathbb V}(X)(\Phi,\Psi)
+    =
+    \int_{x\in X}[\Phi x,\Psi x].
+\]
+
+The fuzzy power-object construction is contravariantly functorial by reindexing.
+
+\begin{proposition}[Reindexing of fuzzy presheaves]
+\label{prop:enriched-power-object-functor}
+    For every \(\mathbb V\)-functor
+    \[
+        F:X\to Y,
+    \]
+    precomposition with \(F^{\mathrm{op}}\) defines a \(\mathbb V\)-functor
+    \[
+        P_{\mathbb V}(F):P_{\mathbb V}(Y)\to P_{\mathbb V}(X),
+        \qquad
+        P_{\mathbb V}(F)(\Psi):=\Psi\circ F^{\mathrm{op}}.
+    \]
+    Hence \(P_{\mathbb V}\) is contravariantly functorial on the ordinary category of small \(\mathbb V\)-categories.
+\end{proposition}
+
+\begin{proof}
+    This is the standard functoriality of enriched functor categories under precomposition \cite[Section~2.2]{Kelly1982BasicConcepts}. On hom-objects, precomposition is induced by the universal property of the end:
+    \[
+        \int_{y\in Y}[\Phi y,\Psi y]
+        \longrightarrow
+        \int_{x\in X}[\Phi(Fx),\Psi(Fx)].
+    \]
+    The identity and composition laws follow from functoriality of precomposition.
+\end{proof}
+
+The truth-value object itself is recovered as the fuzzy power object of the enriched unit.
+
+\begin{proposition}[The fuzzy power object of the unit]
+\label{prop:enriched-power-of-unit}
+    There is a canonical isomorphism of \(\mathbb V\)-categories
+    \[
+        P_{\mathbb V}(\mathbf 1)\cong \underline{\mathbb V}.
+    \]
+\end{proposition}
+
+\begin{proof}
+    Since \(\mathbf 1^{\mathrm{op}}\cong \mathbf 1\), a \(\mathbb V\)-functor
+    \[
+        \mathbf 1^{\mathrm{op}}\to\underline{\mathbb V}
+    \]
+    is uniquely determined by the image of the unique object of \(\mathbf 1\). For objects \(A,B\in\mathbb V\), the hom-object is
+    \[
+        [\mathbf 1^{\mathrm{op}},\underline{\mathbb V}](A,B)
+        =
+        \int_{\ast\in\mathbf 1}\underline{\mathbb V}(A,B)
+        =
+        [A,B]
+        =
+        \underline{\mathbb V}(A,B).
+    \]
+\end{proof}
+
+\subsection{The generic fuzzy presheaf}
+\label{subsec:generic-fuzzy-presheaf}
+
+A \(\mathbb V\)-functor
+\[
+    \Phi:S\otimes X^{\mathrm{op}}\to\underline{\mathbb V}
+\]
+will be called an \textbf{\(S\)-indexed fuzzy presheaf on \(X\)}. The fuzzy power object \(P_{\mathbb V}(X)\) classifies such indexed fuzzy presheaves through a universal evaluation fuzzy presheaf.
+
+\begin{definition}[Generic fuzzy presheaf]
+\label{def:generic-fuzzy-presheaf}
+    Let \(X\) be a small \(\mathbb V\)-category. The \textbf{generic fuzzy presheaf} on \(X\) is the evaluation \(\mathbb V\)-functor
+    \[
+        \Gen_X:P_{\mathbb V}(X)\otimes X^{\mathrm{op}}
+        \longrightarrow
+        \underline{\mathbb V}.
+    \]
+    Equivalently, \(\Gen_X\) is the transpose of the identity
+    \[
+        1_{P_{\mathbb V}(X)}:P_{\mathbb V}(X)\to P_{\mathbb V}(X)
+    \]
+    under the universe-bounded tensor--hom adjunction.
+\end{definition}
+
+Thus \(\Gen_X\) is displayed as
+\[
+    \begin{tikzcd}[column sep=large]
+        P_{\mathbb V}(X)\otimes X^{\mathrm{op}}
+            \arrow[r,"\Gen_X=\operatorname{ev}"]
+        &
+        \underline{\mathbb V}.
+    \end{tikzcd}
+\]
+
+\begin{proposition}[Evaluation formula]
+\label{prop:generic-fuzzy-presheaf-is-evaluation}
+    For every small \(\mathbb V\)-category \(X\), every fuzzy presheaf
+    \[
+        \Phi\in P_{\mathbb V}(X),
+    \]
+    and every \(x\in X\), the generic fuzzy presheaf is given on objects by
+    \[
+        \Gen_X(\Phi,x)=\Phi x.
+    \]
+\end{proposition}
+
+\begin{proof}
+    This is the evaluation functor associated to the internal hom
+    \[
+        P_{\mathbb V}(X)=[X^{\mathrm{op}},\underline{\mathbb V}].
+    \]
+    Under the universe-bounded tensor--hom adjunction, the transpose of the identity on \(P_{\mathbb V}(X)\) evaluates a presheaf at an object.
+\end{proof}
+
+\begin{proposition}[Naturality of the generic fuzzy presheaf]
+\label{prop:enriched-naturality-generic-fuzzy-presheaf}
+    For every \(\mathbb V\)-functor \(F:X\to Y\), the diagram
+    \[
+        \begin{tikzcd}[column sep=huge,row sep=large]
+            P_{\mathbb V}(Y)\otimes X^{\mathrm{op}}
+                \arrow[r,"P_{\mathbb V}(F)\otimes 1_{X^{\mathrm{op}}}"]
+                \arrow[d,"1_{P_{\mathbb V}(Y)}\otimes F^{\mathrm{op}}"']
+            &
+            P_{\mathbb V}(X)\otimes X^{\mathrm{op}}
+                \arrow[d,"\Gen_X"]
+            \\
+            P_{\mathbb V}(Y)\otimes Y^{\mathrm{op}}
+                \arrow[r,"\Gen_Y"']
+            &
+            \underline{\mathbb V}
+        \end{tikzcd}
+    \]
+    commutes.
+\end{proposition}
+
+\begin{proof}
+    Both composites send an object \((\Psi,x)\) to
+    \[
+        \Psi(Fx).
+    \]
+    Equivalently, under the tensor--hom adjunction, both transpose to the reindexing functor \(P_{\mathbb V}(F)\).
+\end{proof}
+
+\begin{proposition}[Principal fuzzy presheaves]
+\label{prop:principal-fuzzy-presheaves-in-cosmos}
+    For every small \(\mathbb V\)-category \(X\), the Yoneda embedding
+    \[
+        y_X:X\to P_{\mathbb V}(X)
+    \]
+    satisfies
+    \[
+        \Gen_X(y_X(x),x')=X(x',x)
+    \]
+    on objects. Thus \(y_X(x)\) is the principal fuzzy presheaf generated by \(x\).
+\end{proposition}
+
+\begin{proof}
+    This follows from
+    \[
+        y_X(x)(x')=X(x',x)
+    \]
+    and the evaluation formula for \(\Gen_X\).
+\end{proof}
+
+\begin{theorem}[Universal property of the fuzzy power object]
+\label{thm:universal-property-enriched-power-object}
+    For all small \(\mathbb V\)-categories \(S\) and \(X\), composition with the generic fuzzy presheaf induces a natural bijection
+    \[
+        \mathbb V\text{-}\mathbf{CAT}
+        \bigl(S,P_{\mathbb V}(X)\bigr)
+        \cong
+        \mathbb V\text{-}\mathbf{CAT}
+        \bigl(S\otimes X^{\mathrm{op}},\underline{\mathbb V}\bigr),
+    \]
+    given by
+    \[
+        F\longmapsto \Gen_X\circ (F\otimes 1_{X^{\mathrm{op}}}).
+    \]
+    Equivalently, \(\mathbb V\)-functors
+    \[
+        S\to P_{\mathbb V}(X)
+    \]
+    are in natural bijection with \(S\)-indexed fuzzy presheaves on \(X\).
+\end{theorem}
+
+\begin{proof}
+    Since
+    \[
+        P_{\mathbb V}(X)=[X^{\mathrm{op}},\underline{\mathbb V}],
+    \]
+    this is exactly the universe-bounded tensor--hom adjunction for enriched functor categories. Explicitly, a functor
+    \[
+        F:S\to P_{\mathbb V}(X)
+    \]
+    corresponds to
+    \[
+        \widehat F:S\otimes X^{\mathrm{op}}\to\underline{\mathbb V},
+        \qquad
+        \widehat F(s,x)=F(s)(x),
+    \]
+    and the inverse sends \(H:S\otimes X^{\mathrm{op}}\to\underline{\mathbb V}\) to
+    \[
+        \widetilde H:S\to P_{\mathbb V}(X),
+        \qquad
+        \widetilde H(s)(x)=H(s,x).
+    \]
+\end{proof}
+
+\begin{remark}
+\label{rem:global-elements-of-enriched-power-object}
+    Taking \(S=\mathbf 1\) in Theorem~\ref{thm:universal-property-enriched-power-object} shows that global elements
+    \[
+        \mathbf 1\to P_{\mathbb V}(X)
+    \]
+    are precisely fuzzy presheaves on \(X\).
+\end{remark}
+
+\subsection{The fuzzy power object}
+\label{subsec:the-fuzzy-power-object}
+
+We now specialize the preceding construction to the posetal fuzzy cosmos determined by a fuzzy truth-value object~\(\Lambda\). Let \(X\) be a fuzzy preorder over~\(\Lambda\).
+
+\begin{definition}[Fuzzy power object]
+\label{def:fuzzy-power-object}
+    The \textbf{fuzzy power object} of \(X\) is
+    \[
+        P_\Lambda(X):=\Pred_\Lambda(X)=[X^{\mathrm{op}},\Lambda].
+    \]
+    Thus an element of \(P_\Lambda(X)\) is precisely a fuzzy predicate on \(X\), equivalently a map \(\phi:X\to L\) satisfying
+    \[
+        X(x',x)\otimes \phi(x)\leq \phi(x')
+        \qquad
+        \text{for all }x,x'\in X.
+    \]
+\end{definition}
+
+Again, the term ``power object'' is used in the enriched classifying sense: \(P_\Lambda(X)\) classifies indexed fuzzy predicates by the tensor--hom adjunction. It is not meant to identify \(P_\Lambda(X)\) with a topos-theoretic power object determined by an ambient subobject classifier.
+
+By Proposition~\ref{prop:predicates-form-fuzzy-order}, Proposition~\ref{prop:predicate-completeness}, and Proposition~\ref{prop:predicate-frame}, the object \(P_\Lambda(X)\) is a separated fuzzy preorder whose induced crisp order is the pointwise order, in fact a frame, and whose pointwise scalar operations are those of Definition~\ref{def:pointwise-scalar-operations}. We shall use this structure freely.
+
+\begin{proposition}
+\label{prop:fuzzy-power-object-functor}
+    For every \(\Lambda\)-functor \(f:X\to Y\), the assignment
+    \[
+        P_\Lambda(f):P_\Lambda(Y)\to P_\Lambda(X),
+        \qquad
+        P_\Lambda(f)(\psi):=\psi\circ f,
+    \]
+    defines a \(\Lambda\)-functor. Hence
+    \[
+        P_\Lambda:\Pre_\Lambda^{\mathrm{op}}\to \Ord_\Lambda
+    \]
+    is a contravariant functor.
+\end{proposition}
+
+\begin{proof}
+    This is the posetal instance of Proposition~\ref{prop:enriched-power-object-functor}. Directly, if \(\psi:Y^{\mathrm{op}}\to\Lambda\) is a fuzzy predicate, then \(\psi\circ f^{\mathrm{op}}\) is a fuzzy predicate on \(X\). For \(\phi,\psi\in P_\Lambda(Y)\), one has
+    \[
+        P_\Lambda(Y)(\phi,\psi)
+        =
+        \bigwedge_{y\in Y}\bigl(\phi(y)\multimap \psi(y)\bigr)
+        \leq
+        \bigwedge_{x\in X}
+        \bigl(\phi(fx)\multimap \psi(fx)\bigr),
+    \]
+    so \(P_\Lambda(f)\) is a \(\Lambda\)-functor. Functoriality is ordinary functoriality of precomposition.
+\end{proof}
+
+\begin{proposition}[Reindexing preserves fuzzy predicate algebra structure]
+\label{prop:reindexing-preserves-predicate-structure}
+    Let \(f:X\to Y\) be a \(\Lambda\)-functor. Then the reindexing map
+    \[
+        P_\Lambda(f):P_\Lambda(Y)\to P_\Lambda(X)
+    \]
+    preserves small joins, small meets, and commutes with the pointwise scalar operations. Explicitly, for every small family \((\psi_i)_{i\in I}\) in \(P_\Lambda(Y)\), every \(a\in L\), and every \(\psi\in P_\Lambda(Y)\),
+    \[
+        P_\Lambda(f)\Bigl(\bigvee_{i\in I}\psi_i\Bigr)
+        =
+        \bigvee_{i\in I}P_\Lambda(f)(\psi_i),
+        \qquad
+        P_\Lambda(f)\Bigl(\bigwedge_{i\in I}\psi_i\Bigr)
+        =
+        \bigwedge_{i\in I}P_\Lambda(f)(\psi_i),
+    \]
+    \[
+        P_\Lambda(f)(a\odot\psi)=a\odot P_\Lambda(f)(\psi),
+        \qquad
+        P_\Lambda(f)(a\Rightarrow\psi)=a\Rightarrow P_\Lambda(f)(\psi).
+    \]
+\end{proposition}
+
+\begin{proof}
+    All identities are pointwise after evaluating at \(x\in X\).
+\end{proof}
+
+\begin{proposition}[The fuzzy power object of the unit]
+\label{prop:power-of-unit}
+    There is a canonical isomorphism of fuzzy orders
+    \[
+        P_\Lambda(1)\cong \Lambda.
+    \]
+    Under this identification, a fuzzy predicate
+    \[
+        \phi:1^{\mathrm{op}}\to\Lambda
+    \]
+    corresponds to its unique value \(\phi(\ast)\in L\).
+\end{proposition}
+
+\begin{proof}
+    This is the posetal instance of Proposition~\ref{prop:enriched-power-of-unit}. A predicate on \(1\) is uniquely determined by its value \(a\in L\), and the hom-value between \(a\) and \(b\) is \(a\multimap b\).
+\end{proof}
+
+\begin{corollary}[Constant fuzzy predicates by reindexing]
+\label{cor:constant-predicates-by-reindexing}
+    Let
+    \[
+        !_X:X\to 1
+    \]
+    be the unique \(\Lambda\)-functor. Under the identification \(P_\Lambda(1)\cong\Lambda\), the reindexing map
+    \[
+        P_\Lambda(!_X):\Lambda\to P_\Lambda(X)
+    \]
+    sends \(a\in L\) to the constant fuzzy predicate \(\underline{a}\) on
+    \(X\).
+\end{corollary}
+
+\begin{proof}
+    It sends the unique-value predicate \(a:1^{\mathrm{op}}\to\Lambda\) to \(a\circ !_X\), the constant predicate with value \(a\).
+\end{proof}
+
+\subsection{The generic fuzzy predicate}
+\label{subsec:the-generic-fuzzy-predicate}
+
+A \(\Lambda\)-functor
+\[
+    \Phi:S\otimes X^{\mathrm{op}}\to \Lambda
+\]
+will be called an \textbf{\(S\)-indexed fuzzy predicate on \(X\)}. Equivalently, by transposition, it is a \(\Lambda\)-functor
+\[
+    S\to P_\Lambda(X),
+\]
+that is, an \(S\)-indexed compatible family of fuzzy predicates on \(X\). The fuzzy power object \(P_\Lambda(X)\) classifies such indexed fuzzy predicates through the posetal specialization of the generic fuzzy presheaf.
+
+\begin{definition}[Generic fuzzy predicate]
+\label{def:generic-fuzzy-predicate}
+    Let \(X\) be a fuzzy preorder over \(\Lambda\). The \textbf{generic fuzzy predicate} on \(X\) is the evaluation \(\Lambda\)-functor
+    \[
+        \Gen_X:P_\Lambda(X)\otimes X^{\mathrm{op}}\to \Lambda.
+    \]
+    Equivalently, \(\Gen_X\) is the transpose of the identity
+    \[
+        1_{P_\Lambda(X)}:P_\Lambda(X)\to P_\Lambda(X)
+    \]
+    under the tensor--hom adjunction.
+\end{definition}
+
+\begin{proposition}
+\label{prop:generic-fuzzy-predicate-is-evaluation}
+    For every fuzzy preorder \(X\), every \(\phi\in P_\Lambda(X)\), and every \(x\in X\),
+    \[
+        \Gen_X(\phi,x)=\phi(x).
+    \]
+    Thus \(\Gen_X\) is the ordinary evaluation map.
+\end{proposition}
+
+\begin{proof}
+    This is the posetal instance of Proposition~\ref{prop:generic-fuzzy-presheaf-is-evaluation}.
+\end{proof}
+
+\begin{remark}[Direct functoriality of evaluation]
+\label{rem:direct-functoriality-of-evaluation}
+    Directly, the evaluation map \(\Gen_X(\phi,x)=\phi(x)\) is a \(\Lambda\)-functor because, for fuzzy predicates \(\phi,\psi\in P_\Lambda(X)\) and elements \(x,x'\in X\),
+    \[
+        P_\Lambda(X)(\phi,\psi)
+        \otimes X^{\mathrm{op}}(x,x')\otimes \phi(x)
+        =
+        P_\Lambda(X)(\phi,\psi)
+        \otimes X(x',x)\otimes \phi(x).
+    \]
+    Since \(\phi\) is a fuzzy predicate,
+    \[
+        X(x',x)\otimes \phi(x)\leq \phi(x'),
+    \]
+    and since
+    \[
+        P_\Lambda(X)(\phi,\psi)\leq \phi(x')\multimap \psi(x'),
+    \]
+    we obtain
+    \[
+        P_\Lambda(X)(\phi,\psi)
+        \otimes X(x',x)\otimes \phi(x)
+        \leq
+        \psi(x').
+    \]
+    By residuation,
+    \[
+        P_\Lambda(X)(\phi,\psi)
+        \otimes X^{\mathrm{op}}(x,x')
+        \leq
+        \phi(x)\multimap\psi(x'),
+    \]
+    which is exactly the functoriality condition for
+    \[
+        \Gen_X:P_\Lambda(X)\otimes X^{\mathrm{op}}\to\Lambda.
+    \]
+\end{remark}
+
+\begin{proposition}[Naturality of the generic fuzzy predicate]
+\label{prop:naturality-generic-predicate}
+    For every \(\Lambda\)-functor \(f:X\to Y\), the diagram
+    \[
+        \begin{tikzcd}[column sep=huge,row sep=large]
+            P_\Lambda(Y)\otimes X^{\mathrm{op}}
+                \arrow[r,"P_\Lambda(f)\otimes 1_{X^{\mathrm{op}}}"]
+                \arrow[d,"1_{P_\Lambda(Y)}\otimes f^{\mathrm{op}}"']
+            &
+            P_\Lambda(X)\otimes X^{\mathrm{op}}
+                \arrow[d,"\Gen_X"]
+            \\
+            P_\Lambda(Y)\otimes Y^{\mathrm{op}}
+                \arrow[r,"\Gen_Y"']
+            &
+            \Lambda
+        \end{tikzcd}
+    \]
+    commutes. Equivalently, for every \(\psi\in P_\Lambda(Y)\) and every \(x\in X\),
+    \[
+        \Gen_X\bigl(P_\Lambda(f)(\psi),x\bigr)
+        =
+        \Gen_Y\bigl(\psi,f(x)\bigr).
+    \]
+\end{proposition}
+
+\begin{proof}
+    This is the posetal instance of Proposition~\ref{prop:enriched-naturality-generic-fuzzy-presheaf}; objectwise both sides are \(\psi(fx)\).
+\end{proof}
+
+\begin{proposition}[Principal fuzzy predicates]
+\label{prop:principal-fuzzy-predicates}
+    For every fuzzy preorder \(X\), the Yoneda map
+    \[
+        y_X:X\to P_\Lambda(X)
+    \]
+    satisfies
+    \[
+        \Gen_X\bigl(y_X(x),x'\bigr)=X(x',x)
+        \qquad
+        \text{for all }x,x'\in X.
+    \]
+    Thus \(y_X(x)\) is the principal fuzzy predicate generated by \(x\). If \(X\) is separated, then \(y_X\) is injective.
+\end{proposition}
+
+\begin{proof}
+    This is the posetal instance of Proposition~\ref{prop:principal-fuzzy-presheaves-in-cosmos}. Injectivity follows from Corollary~\ref{cor:yoneda-embedding-fully-faithful}.
+\end{proof}
+
+\begin{theorem}[Universal property of the fuzzy power object]
+\label{thm:universal-property-fuzzy-power-object}
+    For all fuzzy preorders \(S\) and \(X\), composition with the generic fuzzy predicate induces a natural bijection
+    \[
+        \Pre_\Lambda\bigl(S,P_\Lambda(X)\bigr)
+        \cong
+        \Pre_\Lambda\bigl(S\otimes X^{\mathrm{op}},\Lambda\bigr),
+    \]
+    given by
+    \[
+        f\longmapsto \Gen_X\circ (f\otimes 1_{X^{\mathrm{op}}}).
+    \]
+    Equivalently, \(\Lambda\)-functors \(S\to P_\Lambda(X)\) are in natural bijection with \(S\)-indexed fuzzy predicates on \(X\), with inverse assignment
+    \[
+        \Phi\longmapsto \widetilde{\Phi},
+        \qquad
+        \widetilde{\Phi}(s)(x):=\Phi(s,x).
+    \]
+\end{theorem}
+
+\begin{proof}
+    This is the posetal instance of Theorem~\ref{thm:universal-property-enriched-power-object}, equivalently Corollary~\ref{cor:predicate-transposition}. The displayed formulas are exactly the objectwise formulas for currying and evaluation.
+\end{proof}
+
+\begin{remark}
+\label{rem:global-elements-of-fuzzy-power-object}
+    Taking \(S=1\) in Theorem~\ref{thm:universal-property-fuzzy-power-object} shows that global elements
+    \[
+        1\to P_\Lambda(X)
+    \]
+    are the same thing as fuzzy predicates on \(X\).
+\end{remark}
+
+\subsection{Running examples}
+\label{subsec:running-examples-fuzzy-power-object}
+
+We now record the form taken by the fuzzy power object and the generic fuzzy predicate for the main bases considered so far.
+
+\begin{example}[The crisp power object]
+\label{ex:crisp-fuzzy-power-object}
+    Let \(\Lambda=\{0<1\}\), so that fuzzy preorders are ordinary preorders. By Proposition~\ref{prop:crisp-predicate-algebra},
+    \[
+        P_\Lambda(X)=\Pred_\Lambda(X)
+    \]
+    is the preorder of lower sets of \(X\), ordered by inclusion. For a lower set \(A\subseteq X\), the generic fuzzy predicate is ordinary membership:
+    \[
+        \Gen_X(A,x)=
+        \begin{cases}
+            1,&x\in A,\\
+            0,&x\notin A.
+        \end{cases}
+    \]
+    Thus monotone maps
+    \[
+        S\to P_\Lambda(X)
+    \]
+    are precisely \(S\)-indexed compatible families of lower sets of \(X\). If \(X\) is discrete, then \(P_\Lambda(X)\cong 2^X\), and \(\Gen_X\) is the ordinary element-of relation.
+\end{example}
+
+\begin{example}[The G\"odel power object]
+\label{ex:godel-fuzzy-power-object}
+    Let \(\Lambda=[0,1]\) with the G\"odel operations. Then
+    \[
+        P_\Lambda(X)=\Pred_\Lambda(X)
+    \]
+    consists of all maps \(\phi:X\to[0,1]\) satisfying
+    \[
+        X(x',x)\wedge \phi(x)\leq \phi(x')
+        \qquad
+        \text{for all }x,x'\in X.
+    \]
+    These are the lower fuzzy predicates on \(X\) in the G\"odel sense. The generic fuzzy predicate is evaluation:
+    \[
+        \Gen_X(\phi,x)=\phi(x).
+    \]
+    If \(X\) is discrete, then \(P_\Lambda(X)\cong [0,1]^X\).
+\end{example}
+
+\begin{example}[The {\L}ukasiewicz power object]
+\label{ex:lukasiewicz-fuzzy-power-object}
+    Let \(\Lambda=[0,1]\) with the {\L}ukasiewicz operations. Then
+    \[
+        P_\Lambda(X)=\Pred_\Lambda(X)
+    \]
+    consists of all maps \(\phi:X\to[0,1]\) satisfying
+    \[
+        \max\{0,\,X(x',x)+\phi(x)-1\}\leq \phi(x')
+        \qquad
+        \text{for all }x,x'\in X.
+    \]
+    These are the lower fuzzy predicates compatible with {\L}ukasiewicz transitivity. As before,
+    \[
+        \Gen_X(\phi,x)=\phi(x).
+    \]
+    If \(X\) is discrete, then \(P_\Lambda(X)\cong [0,1]^X\), now equipped with the pointwise {\L}ukasiewicz operations.
+\end{example}
+
+\begin{example}[The Lawvere power object]
+\label{ex:lawvere-fuzzy-power-object}
+    Let \(\Lambda=[0,\infty]\) with the reverse of the usual order, so that fuzzy preorders are Lawvere metric spaces. Writing \(d(x,y)=X(x,y)\), the fuzzy power object
+    \[
+        P_\Lambda(X)=\Pred_\Lambda(X)
+    \]
+    consists of all maps \(\phi:X\to[0,\infty]\) satisfying
+    \[
+        \phi(x')\leq d(x',x)+\phi(x)
+        \qquad
+        \text{in the usual order, for all }x,x'\in X.
+    \]
+    These are precisely the Lawvere weights on \(X\), read here as Lawvere-valued fuzzy predicates. The generic fuzzy predicate is again evaluation:
+    \[
+        \Gen_X(\phi,x)=\phi(x).
+    \]
+    If \(X\) is discrete, then \(P_\Lambda(X)\cong [0,\infty]^X\), the quantale of extended cost functions on \(X\) with reverse pointwise order.
+\end{example}
+
+\begin{example}[A non-chain coordinatewise power object]
+\label{ex:nonchain-coordinatewise-power-object}
+    Let
+    \[
+        \Lambda=[0,1]\times[0,1]
+    \]
+    with the coordinatewise {\L}ukasiewicz operations, ordered coordinatewise. If \(X\) is a fuzzy preorder over \(\Lambda\), write
+    \[
+        X(x,x')=\bigl(X_1(x,x'),X_2(x,x')\bigr).
+    \]
+    Then a fuzzy predicate
+    \[
+        \phi:X\to [0,1]\times[0,1]
+    \]
+    may be written as
+    \[
+        \phi(x)=\bigl(\phi_1(x),\phi_2(x)\bigr),
+    \]
+    and the fuzzy predicate condition is equivalent to the pair of coordinatewise conditions
+    \[
+        \max\{0,\,X_i(x',x)+\phi_i(x)-1\}\leq \phi_i(x')
+        \qquad
+        (i=1,2).
+    \]
+    Thus \(P_\Lambda(X)\) consists exactly of pairs of {\L}ukasiewicz fuzzy predicates, ordered and acted on coordinatewise, and the generic fuzzy predicate is
+    \[
+        \Gen_X\bigl((\phi_1,\phi_2),x\bigr)
+        =
+        \bigl(\phi_1(x),\phi_2(x)\bigr).
+    \]
+    This illustrates that the fuzzy power-object construction is not restricted to chain-valued bases.
+\end{example}
+
+\section{Cut subobjects and the representation theorem}
+\label{sec:fuzzy-subobjects-and-the-representation-theorem}
+
+In the preceding sections we defined the fuzzy power object of a small \(\mathbb V\)-category \(X\) by
+\[
+    P_{\mathbb V}(X)
+    =
+    [X^{\mathrm{op}},\underline{\mathbb V}],
+\]
+together with its generic fuzzy presheaf
+\[
+    \Gen_X:
+    P_{\mathbb V}(X)\otimes X^{\mathrm{op}}
+    \longrightarrow
+    \underline{\mathbb V}.
+\]
+We now show that this power object represents enriched cut subobjects.
+
+\subsection{The fuzzy cut classifier}
+\label{subsec:fuzzy-cut-classifier}
+
+Let
+\[
+    (\mathbb V,\otimes,I,[-,-])
+\]
+be a fuzzy cosmos, and let \(\underline{\mathbb V}\) be its self-enriched truth-value object. Thus the objects of \(\underline{\mathbb V}\) are the objects of \(\mathbb V\), and the hom-object from \(A\) to \(B\) is
+\[
+    \underline{\mathbb V}(A,B)=[A,B].
+\]
+
+\begin{definition}[Cut classifier]
+\label{def:cut-classifier}
+    The \textbf{cut classifier} is the self-enriched hom-functor
+    \[
+        \mathsf{Cut}_{\mathbb V}:
+        \underline{\mathbb V}^{\mathrm{op}}
+        \otimes
+        \underline{\mathbb V}
+        \longrightarrow
+        \underline{\mathbb V}
+    \]
+    defined on objects by
+    \[
+        \mathsf{Cut}_{\mathbb V}(A,B):=[A,B].
+    \]
+\end{definition}
+
+Equivalently, \(\mathsf{Cut}_{\mathbb V}\) is the Yoneda probe of the truth value \(B\) by the level \(A\).
+
+\begin{proposition}
+\label{prop:intrinsic-cut-classifier-is-functor}
+    The assignment
+    \[
+        (A,B)\longmapsto [A,B]
+    \]
+    defines a \(\mathbb V\)-functor
+    \[
+        \mathsf{Cut}_{\mathbb V}:
+        \underline{\mathbb V}^{\mathrm{op}}
+        \otimes
+        \underline{\mathbb V}
+        \longrightarrow
+        \underline{\mathbb V}.
+    \]
+\end{proposition}
+
+\begin{proof}
+    For objects \((A,B)\) and \((A',B')\), functoriality requires a morphism
+    \[
+        [A',A]\otimes [B,B']
+        \longrightarrow
+        [[A,B],[A',B']].
+    \]
+    By closedness, this is equivalently a morphism
+    \[
+        [A',A]\otimes [B,B']\otimes [A,B]\otimes A'
+        \longrightarrow
+        B'.
+    \]
+    Using symmetry and associativity, followed by the evaluation maps, we define it by the composite
+    \[
+        \begin{aligned}
+            [A',A]\otimes [B,B']\otimes [A,B]\otimes A'
+            &\longrightarrow
+            [B,B']\otimes [A,B]\otimes [A',A]\otimes A'
+            \\
+            &\longrightarrow
+            [B,B']\otimes [A,B]\otimes A
+            \\
+            &\longrightarrow
+            [B,B']\otimes B
+            \\
+            &\longrightarrow
+            B'.
+        \end{aligned}
+    \]
+    The identity and composition axioms are the unit and associativity axioms for the self-enrichment of \(\mathbb V\).
+\end{proof}
+
+\subsection{Fuzzy cut profiles and cut nerves}
+\label{subsec:raw-enriched-cut-profiles-and-cut-nerves}
+
+Let \(X\) be a small \(\mathbb V\)-category. Let
+\[
+    \mathcal P(\underline{\mathbb V})
+\]
+denote the \(\mathbb V\)-category of small presheaves on the possibly large \(\mathbb V\)-category \(\underline{\mathbb V}\). The Yoneda embedding is
+\[
+    Y:
+    \underline{\mathbb V}
+    \longrightarrow
+    \mathcal P(\underline{\mathbb V}),
+    \qquad
+    B\longmapsto \underline{\mathbb V}(-,B)=[-,B].
+\]
+
+\begin{definition}[Cut profile]
+\label{def:cut-profile}
+    A \textbf{cut profile} on \(X\) is a \(\mathbb V\)-functor
+    \[
+        C:X^{\mathrm{op}}\longrightarrow
+        \mathcal P(\underline{\mathbb V}).
+    \]
+    We write
+    \[
+        \FCut_{\mathbb V}(X)
+        :=
+        [
+            X^{\mathrm{op}},
+            \mathcal P(\underline{\mathbb V})
+        ]
+    \]
+    for the \(\mathbb V\)-category of raw enriched cut profiles on \(X\).
+\end{definition}
+
+Equivalently, a cut profile may be written in uncurried form as a \(\mathbb V\)-functor
+\[
+    C:
+    \underline{\mathbb V}^{\mathrm{op}}
+    \otimes
+    X^{\mathrm{op}}
+    \longrightarrow
+    \underline{\mathbb V}
+\]
+such that, for every \(x\in X\), the level profile
+\[
+    C(-,x):
+    \underline{\mathbb V}^{\mathrm{op}}
+    \longrightarrow
+    \underline{\mathbb V}
+\]
+is a small presheaf.
+
+The hom-objects in \(\FCut_{\mathbb V}(X)\) are computed by the small end over \(X\):
+\[
+    \FCut_{\mathbb V}(X)(C,D)
+    =
+    \int_{x\in X}
+    \mathcal P(\underline{\mathbb V})(C x,D x).
+\]
+
+\begin{definition}[Cut nerve]
+\label{def:cut-nerve}
+    Let
+    \[
+        \Phi:X^{\mathrm{op}}\to\underline{\mathbb V}
+    \]
+    be a fuzzy presheaf on \(X\). Its \textbf{cut nerve} is the cut profile
+    \[
+        N_X(\Phi):X^{\mathrm{op}}\to
+        \mathcal P(\underline{\mathbb V})
+    \]
+    defined by
+    \[
+        N_X(\Phi)(x):=Y(\Phi x).
+    \]
+    Equivalently, in uncurried notation,
+    \[
+        N_X(\Phi)(A,x)
+        =
+        [A,\Phi x].
+    \]
+\end{definition}
+
+Thus \(N_X(\Phi)\) is obtained by substituting \(\Phi\) into the cut classifier. Since \(N_X\) is induced by postcomposition with the Yoneda embedding \(Y\), it defines a
+\(\mathbb V\)-functor
+\[
+    N_X:
+    P_{\mathbb V}(X)
+    \longrightarrow
+    \FCut_{\mathbb V}(X).
+\]
+
+\begin{definition}[Generic cut]
+\label{def:generic-cut}
+    Let
+    \[
+        \Gen_X:
+        P_{\mathbb V}(X)\otimes X^{\mathrm{op}}
+        \longrightarrow
+        \underline{\mathbb V}
+    \]
+    be the generic fuzzy presheaf on \(X\). The
+    \textbf{generic cut} is the composite
+    \[
+        \begin{tikzcd}[column sep=large,row sep=large]
+            \underline{\mathbb V}^{\mathrm{op}}
+            \otimes
+            P_{\mathbb V}(X)
+            \otimes
+            X^{\mathrm{op}}
+            \arrow[r,"1\otimes \Gen_X"]
+            \arrow[rr,bend right=18,"\GCut_X"']
+            &
+            \underline{\mathbb V}^{\mathrm{op}}
+            \otimes
+            \underline{\mathbb V}
+            \arrow[r,"\mathsf{Cut}_{\mathbb V}"]
+            &
+            \underline{\mathbb V}.
+        \end{tikzcd}
+    \]
+    Thus
+    \[
+        \GCut_X(A,\Phi,x)=[A,\Phi x].
+    \]
+\end{definition}
+
+\begin{proposition}[Universality of the generic cut]
+\label{prop:generic-cut-universal}
+    Let
+    \[
+        F:S\to P_{\mathbb V}(X)
+    \]
+    classify an \(S\)-indexed fuzzy presheaf
+    \[
+        \widehat F:
+        S\otimes X^{\mathrm{op}}
+        \longrightarrow
+        \underline{\mathbb V}.
+    \]
+    Then the associated \(S\)-indexed cut profile is obtained from the generic cut by substitution:
+    \[
+        \begin{tikzcd}[column sep=large,row sep=large]
+            \underline{\mathbb V}^{\mathrm{op}}
+            \otimes
+            S
+            \otimes
+            X^{\mathrm{op}}
+            \arrow[r,"1\otimes F\otimes 1"]
+            \arrow[rr,bend right=18,"N_{S,X}(\widehat F)"']
+            &
+            \underline{\mathbb V}^{\mathrm{op}}
+            \otimes
+            P_{\mathbb V}(X)
+            \otimes
+            X^{\mathrm{op}}
+            \arrow[r,"\GCut_X"]
+            &
+            \underline{\mathbb V}.
+        \end{tikzcd}
+    \]
+    Objectwise,
+    \[
+        N_{S,X}(\widehat F)(A,s,x)
+        =
+        [A,\widehat F(s,x)]
+        =
+        [A,F(s)(x)].
+    \]
+\end{proposition}
+
+\begin{proof}
+    Since \(F\) classifies \(\widehat F\), one has
+    \[
+        \widehat F(s,x)=F(s)(x).
+    \]
+    Substitution into the cut classifier gives
+    \[
+        \mathsf{Cut}_{\mathbb V}(A,\widehat F(s,x))
+        =
+        [A,\widehat F(s,x)]
+        =
+        [A,F(s)(x)].
+    \]
+\end{proof}
+
+\subsection{Realization and closed cut profiles}
+\label{subsec:realization-and-closed-enriched-cut-profiles}
+
+The Yoneda embedding
+\[
+    Y:\underline{\mathbb V}\to\mathcal P(\underline{\mathbb V})
+\]
+has a left adjoint
+\[
+    \Sup_{\mathbb V}:
+    \mathcal P(\underline{\mathbb V})
+    \longrightarrow
+    \underline{\mathbb V},
+\]
+given by the canonical weighted colimit
+\[
+    \Sup_{\mathbb V}(F)
+    =
+    \int^{A\in\underline{\mathbb V}}
+    F(A)\otimes A.
+\]
+This notation denotes the weighted colimit of the identity functor on \(\underline{\mathbb V}\) by the small presheaf \(F\). Thus
+\[
+    \Sup_{\mathbb V}\dashv Y.
+\]
+The counit of this adjunction is the enriched co-Yoneda isomorphism
+\[
+    \int^{A\in\underline{\mathbb V}}[A,B]\otimes A
+    \cong
+    B
+\]
+\cite[Section~1.9]{Kelly1982BasicConcepts}.
+
+\begin{definition}[Realization of a cut profile]
+\label{def:realization-cut-profile}
+    Let
+    \[
+        C:X^{\mathrm{op}}\to\mathcal P(\underline{\mathbb V})
+    \]
+    be a cut profile. Its \textbf{realization} is the fuzzy presheaf
+    \[
+        R_X(C):X^{\mathrm{op}}\to\underline{\mathbb V}
+    \]
+    defined pointwise by
+    \[
+        R_X(C)(x)
+        :=
+        \Sup_{\mathbb V}(C x).
+    \]
+    Equivalently,
+    \[
+        R_X(C)(x)
+        =
+        \int^{A\in\underline{\mathbb V}}
+        Cx(A)\otimes A.
+    \]
+\end{definition}
+
+Since \(R_X(C)=\Sup_{\mathbb V}\circ C\), functoriality of \(R_X(C)\) follows from functoriality of \(C\) and of \(\Sup_{\mathbb V}\). Therefore realization defines a \(\mathbb V\)-functor
+\[
+    R_X:
+    \FCut_{\mathbb V}(X)
+    \longrightarrow
+    P_{\mathbb V}(X).
+\]
+
+\begin{proposition}[Realization--nerve adjunction]
+\label{prop:realization-nerve-adjunction-intrinsic}
+    For every small \(\mathbb V\)-category \(X\), there is an adjunction of \(\mathbb V\)-categories
+    \[
+        R_X
+        \dashv
+        N_X:
+        \FCut_{\mathbb V}(X)
+        \rightleftarrows
+        P_{\mathbb V}(X).
+    \]
+    Equivalently, for every cut profile \(C\) and every fuzzy presheaf \(\Phi\), there is a natural isomorphism
+    \[
+        P_{\mathbb V}(X)\bigl(R_X(C),\Phi\bigr)
+        \cong
+        \FCut_{\mathbb V}(X)\bigl(C,N_X(\Phi)\bigr).
+    \]
+\end{proposition}
+
+\begin{proof}
+    This is the pointwise adjunction induced by
+    \[
+        \Sup_{\mathbb V}\dashv Y.
+    \]
+    Using the enriched functor-category hom formula over the small category \(X\), we compute
+    \begin{align*}
+        P_{\mathbb V}(X)\bigl(R_X(C),\Phi\bigr)
+        &=
+        \int_{x\in X}
+        \underline{\mathbb V}
+        \bigl(\Sup_{\mathbb V}(C x),\Phi x\bigr)
+        \\
+        &\cong
+        \int_{x\in X}
+        \mathcal P(\underline{\mathbb V})
+        \bigl(C x,Y(\Phi x)\bigr)
+        \\
+        &=
+        \FCut_{\mathbb V}(X)\bigl(C,N_X(\Phi)\bigr).
+    \end{align*}
+\end{proof}
+
+\begin{proposition}[Co-Yoneda counit]
+\label{prop:intrinsic-coyoneda-counit}
+    For every fuzzy presheaf
+    \[
+        \Phi:X^{\mathrm{op}}\to\underline{\mathbb V},
+    \]
+    the counit of the adjunction
+    \[
+        \varepsilon_\Phi:
+        R_XN_X(\Phi)\longrightarrow \Phi
+    \]
+    is an isomorphism.
+\end{proposition}
+
+\begin{proof}
+    Evaluating at \(x\in X\), we have
+    \[
+        R_XN_X(\Phi)(x)
+        =
+        \Sup_{\mathbb V}(Y(\Phi x))
+        =
+        \int^{A\in\underline{\mathbb V}}
+        [A,\Phi x]\otimes A.
+    \]
+    By the enriched co-Yoneda lemma, this coend is canonically isomorphic to \(\Phi x\). These isomorphisms are natural in \(x\).
+\end{proof}
+
+\begin{corollary}
+\label{cor:intrinsic-cut-nerve-fully-faithful}
+    The intrinsic cut nerve functor
+    \[
+        N_X:
+        P_{\mathbb V}(X)
+        \longrightarrow
+        \FCut_{\mathbb V}(X)
+    \]
+    is fully faithful.
+\end{corollary}
+
+\begin{proof}
+    In an adjunction \(R_X\dashv N_X\), the right adjoint \(N_X\) is fully faithful precisely when the counit \(R_XN_X\to 1\) is an isomorphism. This is Proposition~\ref{prop:intrinsic-coyoneda-counit}.
+\end{proof}
+
+\begin{definition}[Closed cut profile]
+\label{def:closed-cut-profile}
+    A cut profile
+    \[
+        C:X^{\mathrm{op}}\to\mathcal P(\underline{\mathbb V})
+    \]
+    is called \textbf{closed} if the unit of the adjunction
+    \[
+        \eta_C:C\longrightarrow N_XR_X(C)
+    \]
+    is an isomorphism.
+\end{definition}
+
+Objectwise, the unit is the canonical map
+\[
+    \eta_{C,x}:
+    Cx\longrightarrow
+    Y(\Sup_{\mathbb V}(Cx)).
+\]
+Equivalently, in uncurried notation it is the map
+\[
+    \eta_{C,A,x}:
+    C(A,x)
+    \longrightarrow
+    [A,R_X(C)(x)]
+    =
+    \left[
+        A,
+        \int^{B\in\underline{\mathbb V}}C(B,x)\otimes B
+    \right],
+\]
+obtained by transposing the canonical cowedge map
+\[
+    C(A,x)\otimes A
+    \longrightarrow
+    \int^{B\in\underline{\mathbb V}}C(B,x)\otimes B.
+\]
+Thus \(C\) is closed precisely when, for every \(x\in X\), the small level profile
+\[
+    C(-,x)
+\]
+is represented by its realization
+\[
+    R_X(C)(x).
+\]
+
+\begin{definition}[Cut subobjects]
+\label{def:enriched-cut-subobjects}
+    The \(\mathbb V\)-category of \textbf{enriched cut subobjects} of \(X\) is the full \(\mathbb V\)-subcategory
+    \[
+        \CutSub_{\mathbb V}(X)
+        \subseteq
+        \FCut_{\mathbb V}(X)
+    \]
+    spanned by the closed cut profiles.
+\end{definition}
+
+\begin{theorem}[Enriched cut representation theorem]
+\label{thm:cut-representation-theorem}
+    For every small \(\mathbb V\)-category \(X\), the cut nerve and realization restrict to an equivalence of \(\mathbb V\)-categories
+    \[
+        P_{\mathbb V}(X)
+        \simeq
+        \CutSub_{\mathbb V}(X).
+    \]
+    More explicitly, the functors
+    \[
+        N_X:
+        P_{\mathbb V}(X)
+        \longrightarrow
+        \CutSub_{\mathbb V}(X)
+    \]
+    and
+    \[
+        R_X:
+        \CutSub_{\mathbb V}(X)
+        \longrightarrow
+        P_{\mathbb V}(X)
+    \]
+    are inverse up to the unit and counit isomorphisms of the adjunction
+    \[
+        R_X\dashv N_X.
+    \]
+\end{theorem}
+
+\begin{proof}
+    By Proposition~\ref{prop:intrinsic-coyoneda-counit}, for every fuzzy presheaf \(\Phi\), the counit
+    \[
+        R_XN_X(\Phi)\longrightarrow \Phi
+    \]
+    is an isomorphism. Hence \(N_X\) is fully faithful.
+
+    The essential image of a fully faithful right adjoint consists precisely of those objects for which the unit is an isomorphism. In the present case, these are exactly the closed cut profiles. Restricting \(N_X\) and \(R_X\) gives the claimed equivalence.
+\end{proof}
+
+\subsection{Top-support cuts in the posetal case}
+\label{subsec:top-support-cuts-posetal-case}
+
+We now specialize the above construction to the posetal fuzzy cosmos determined by a fuzzy truth-value object
+\[
+    \Lambda=(L,\leq,\wedge,\vee,\otimes,\multimap,\bot,\top).
+\]
+Write \(\underline{\Lambda}\) for the associated \(\Lambda\)-preorder of truth values, with object set \(L\) and hom-values
+\[
+    \underline{\Lambda}(a,b)=a\multimap b.
+\]
+
+The cut classifier becomes the residual:
+\[
+    \mathsf{Cut}_\Lambda(a,b)=a\multimap b.
+\]
+Its top support recovers the underlying order relation on truth values.
+
+\begin{proposition}
+\label{prop:top-support-residual-classifier}
+    For all \(a,b\in L\),
+    \[
+        \top\leq a\multimap b
+        \quad\Longleftrightarrow\quad
+        a\leq b.
+    \]
+\end{proposition}
+
+\begin{proof}
+    By residuation,
+    \[
+        \top\leq a\multimap b
+        \quad\Longleftrightarrow\quad
+        a\otimes\top\leq b.
+    \]
+    Since \(\Lambda\) is integral, \(a\otimes\top=a\).
+\end{proof}
+
+\begin{definition}[Principal upper cut classifiers]
+\label{def:principal-upper-cut-classifiers}
+    For \(a\in L\), let
+    \[
+        \uparrow a:=\{b\in L\mid a\leq b\},
+    \]
+    regarded as the induced full subpreorder of \(\underline{\Lambda}\), and let
+    \[
+        j_a:\uparrow a\hookrightarrow\underline{\Lambda}
+    \]
+    be the inclusion.
+\end{definition}
+
+The inclusion \(j_a\) is the top-support shadow of the enriched probe
+\[
+    b\longmapsto a\multimap b.
+\]
+Indeed,
+\[
+    b\in\uparrow a
+    \quad\Longleftrightarrow\quad
+    a\leq b
+    \quad\Longleftrightarrow\quad
+    \top\leq a\multimap b.
+\]
+
+\subsection{Level cuts of fuzzy predicates}
+\label{subsec:level-cuts-of-fuzzy-predicates}
+
+Let \(X\) be a fuzzy preorder over \(\Lambda\).
+
+\begin{definition}[Level cuts]
+\label{def:principal-upper-sets-and-level-cuts}
+    Let
+    \[
+        \phi:X^{\mathrm{op}}\to\underline{\Lambda}
+    \]
+    be a fuzzy predicate on \(X\). For \(a\in L\), the \textbf{\(a\)-cut} of \(\phi\) is the induced fuzzy subpreorder
+    \[
+        X_{\phi,a}\hookrightarrow X
+    \]
+    on the underlying subset
+    \[
+        |X_{\phi,a}|
+        :=
+        \{x\in X\mid a\leq\phi(x)\}
+        =
+        \phi^{-1}(\uparrow a).
+    \]
+    We write
+    \[
+        m_{\phi,a}:X_{\phi,a}\hookrightarrow X
+    \]
+    for the inclusion.
+\end{definition}
+
+When working with induced fuzzy subpreorders of \(X\), we identify them with their underlying subsets whenever no confusion can arise.
+
+\begin{proposition}[Level cuts as classifier pullbacks]
+\label{prop:level-cuts-as-classifier-pullbacks}
+    Let
+    \[
+        \phi:X^{\mathrm{op}}\to\underline{\Lambda}
+    \]
+    be a fuzzy predicate. For each \(a\in L\), the \(a\)-cut
+    \[
+        m_{\phi,a}:X_{\phi,a}\hookrightarrow X
+    \]
+    is classified by
+    \[
+        j_a:\uparrow a\hookrightarrow\underline{\Lambda}
+    \]
+    through the pullback square
+    \[
+        \begin{tikzcd}[column sep=large,row sep=large]
+            X_{\phi,a}^{\mathrm{op}}
+            \arrow[r,"\phi_a"]
+            \arrow[d,hook,"m_{\phi,a}^{\mathrm{op}}"']
+            &
+            \uparrow a
+            \arrow[d,hook,"j_a"]
+            \\
+            X^{\mathrm{op}}
+            \arrow[r,"\phi"']
+            &
+            \underline{\Lambda}.
+        \end{tikzcd}
+    \]
+\end{proposition}
+
+\begin{proof}
+    We use the conical pullbacks in \(\Pre_\Lambda\) described in Lemma~\ref{lem:pullbacks-in-prelambda}. The pullback of \(j_a\) along \(\phi\) has underlying set
+    \[
+        \{x\in X\mid \phi(x)\in\uparrow a\}
+        =
+        \{x\in X\mid a\leq\phi(x)\}.
+    \]
+    For \(x,y\in X_{\phi,a}\), the hom-value in the pullback is
+    \[
+        X^{\mathrm{op}}(x,y)
+        \wedge
+        \underline{\Lambda}(\phi x,\phi y)
+        =
+        X(y,x)\wedge(\phi(x)\multimap\phi(y)).
+    \]
+    Since \(\phi:X^{\mathrm{op}}\to\underline{\Lambda}\) is a \(\Lambda\)-functor,
+    \[
+        X^{\mathrm{op}}(x,y)
+        \leq
+        \phi(x)\multimap\phi(y).
+    \]
+    Therefore the meet is just \(X^{\mathrm{op}}(x,y)\), so the pullback carries exactly the induced full fuzzy subpreorder on the displayed subset.
+\end{proof}
+
+\begin{proposition}[Basic properties of level cuts]
+\label{prop:basic-properties-cut-family}
+    Let
+    \[
+        \phi:X^{\mathrm{op}}\to\underline{\Lambda}
+    \]
+    be a fuzzy predicate. Then:
+    \begin{enumerate}[label=\textup{(F\arabic*)}]
+        \item \(X_{\phi,\bot}=X\);
+
+        \item if \(a\leq b\), then
+        \[
+            X_{\phi,b}\subseteq X_{\phi,a};
+        \]
+
+        \item for every small family \((a_i)_{i\in I}\) in \(L\),
+        \[
+            X_{\phi,\bigvee_{i\in I}a_i}
+            =
+            \bigcap_{i\in I}X_{\phi,a_i}
+        \]
+        as induced fuzzy subpreorders of \(X\);
+
+        \item if \(x\in X_{\phi,a}\), then for every \(x'\in X\),
+        \[
+            x'\in X_{\phi,\,X(x',x)\otimes a}.
+        \]
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    The first three statements follow immediately from the definition of the cuts and the lattice order on \(L\). For the fourth, if \(x\in X_{\phi,a}\), then \(a\leq\phi(x)\). Since \(\phi\) is a fuzzy predicate,
+    \[
+        X(x',x)\otimes\phi(x)\leq\phi(x').
+    \]
+    Hence
+    \[
+        X(x',x)\otimes a\leq\phi(x'),
+    \]
+    which is exactly the asserted membership.
+\end{proof}
+
+\begin{proposition}[Recovery from level cuts]
+\label{prop:recovery-classifying-predicate}
+    Let
+    \[
+        \phi:X^{\mathrm{op}}\to\underline{\Lambda}
+    \]
+    be a fuzzy predicate. Then for every \(x\in X\),
+    \[
+        \phi(x)=\bigvee\{a\in L\mid x\in X_{\phi,a}\}.
+    \]
+\end{proposition}
+
+\begin{proof}
+    By definition,
+    \[
+        x\in X_{\phi,a}
+        \quad\Longleftrightarrow\quad
+        a\leq\phi(x).
+    \]
+    Therefore the displayed join is the join of all elements below \(\phi(x)\), hence is \(\phi(x)\).
+\end{proof}
+
+\subsection{Fuzzy cut subobjects and classifying predicates}
+\label{subsec:fuzzy-subobjects-and-classifying-predicates}
+
+The preceding properties motivate the intrinsic posetal definition. In the posetal case we now pass from enriched closed cut profiles to their top-support presentation. Thus the notation
+\[
+    \CutSub_\Lambda(X)
+\]
+below denotes the levelwise cut-family presentation of the closed enriched cut profiles, not the raw \(\Lambda\)-enriched presheaf profiles themselves. These are cut-theoretic subobjects classified by fuzzy predicates; they should not be confused with arbitrary categorical subobjects of \(X\) in \(\Pre_\Lambda\).
+
+\begin{definition}[Fuzzy cut subobject]
+\label{def:fuzzy-subobject}
+    A \textbf{fuzzy cut subobject} of \(X\), or simply a \textbf{fuzzy cut subobject} in this section, is a family
+    \[
+        A=\bigl(m_{A,a}:A_a\hookrightarrow X\bigr)_{a\in L}
+    \]
+    of induced fuzzy subpreorders of \(X\) such that:
+    \begin{enumerate}[label=\textup{(F\arabic*)}]
+        \item \(A_\bot=X\);
+
+        \item if \(a\leq b\), then
+        \[
+            A_b\subseteq A_a;
+        \]
+
+        \item for every small family \((a_i)_{i\in I}\) in \(L\),
+        \[
+            A_{\bigvee_{i\in I}a_i}
+            =
+            \bigcap_{i\in I}A_{a_i}
+        \]
+        as induced fuzzy subpreorders of \(X\);
+
+        \item if \(x\in A_a\), then for every \(x'\in X\),
+        \[
+            x'\in A_{X(x',x)\otimes a}.
+        \]
+    \end{enumerate}
+    We write
+    \[
+        \CutSub_\Lambda(X)
+    \]
+    for the collection of all fuzzy cut subobjects of \(X\).
+\end{definition}
+
+\begin{definition}[Classifying fuzzy predicate]
+\label{def:classifying-predicate}
+    Let
+    \[
+        A=\bigl(m_{A,a}:A_a\hookrightarrow X\bigr)_{a\in L}
+        \in\CutSub_\Lambda(X).
+    \]
+    Define
+    \[
+        \chi_A:X\to L,
+        \qquad
+        \chi_A(x):=\bigvee\{a\in L\mid x\in A_a\}.
+    \]
+    We call \(\chi_A\) the \textbf{classifying fuzzy predicate} of \(A\).
+\end{definition}
+
+This formula is the top-support shadow of the enriched co-Yoneda reconstruction. The enriched nerve of a fuzzy predicate \(\phi\) is
+\[
+    N_X(\phi)(a,x)=a\multimap\phi(x).
+\]
+Passing to top support retains precisely the levels satisfying
+\[
+    \top\leq a\multimap\phi(x),
+\]
+equivalently
+\[
+    a\leq\phi(x).
+\]
+The reconstructed truth value is the join of the retained levels.
+
+\begin{proposition}
+\label{prop:coherent-cut-family-gives-predicate}
+    For every fuzzy cut subobject \(A\in\CutSub_\Lambda(X)\), the map
+    \[
+        \chi_A:X^{\mathrm{op}}\to\underline{\Lambda}
+    \]
+    is a fuzzy predicate.
+\end{proposition}
+
+\begin{proof}
+    Let \(x,x'\in X\), and set
+    \[
+        S_x:=\{a\in L\mid x\in A_a\}.
+    \]
+    Then
+    \[
+        \chi_A(x)=\bigvee S_x.
+    \]
+    If \(a\in S_x\), then \(x\in A_a\), so by Definition~\ref{def:fuzzy-subobject}\textup{(F4)}
+    \[
+        x'\in A_{X(x',x)\otimes a}.
+    \]
+    Hence
+    \[
+        X(x',x)\otimes a\leq\chi_A(x').
+    \]
+    Taking the join over all \(a\in S_x\), and using preservation of joins by \(X(x',x)\otimes-\), gives
+    \[
+        X(x',x)\otimes\chi_A(x)
+        =
+        \bigvee_{a\in S_x}\bigl(X(x',x)\otimes a\bigr)
+        \leq
+        \chi_A(x').
+    \]
+\end{proof}
+
+\begin{proposition}
+\label{prop:recover-cuts-from-classifying-predicate}
+    Let
+    \[
+        A=\bigl(m_{A,a}:A_a\hookrightarrow X\bigr)_{a\in L}
+        \in\CutSub_\Lambda(X).
+    \]
+    Then for every \(a\in L\),
+    \[
+        A_a
+        =
+        \{x\in X\mid a\leq\chi_A(x)\}
+    \]
+    as induced fuzzy subpreorders of \(X\). Equivalently,
+    \[
+        A_a=X_{\chi_A,a}.
+    \]
+    In particular, every fuzzy cut subobject is uniquely determined by its classifying fuzzy predicate.
+\end{proposition}
+
+\begin{proof}
+    Fix \(a\in L\) and \(x\in X\).
+
+    If \(x\in A_a\), then \(a\) belongs to the set whose join defines \(\chi_A(x)\), so \(a\leq\chi_A(x)\).
+
+    Conversely, suppose \(a\leq\chi_A(x)\). Let
+    \[
+        S_x:=\{b\in L\mid x\in A_b\}.
+    \]
+    Since \(A_\bot=X\), the set \(S_x\) is nonempty. By definition,
+    \[
+        \chi_A(x)=\bigvee S_x.
+    \]
+    By Definition~\ref{def:fuzzy-subobject}\textup{(F3)},
+    \[
+        A_{\chi_A(x)}
+        =
+        A_{\bigvee S_x}
+        =
+        \bigcap_{b\in S_x}A_b.
+    \]
+    Since \(x\in A_b\) for every \(b\in S_x\), we have \(x\in A_{\chi_A(x)}\). Now \(a\leq\chi_A(x)\), so Definition~\ref{def:fuzzy-subobject}\textup{(F2)} gives
+    \[
+        A_{\chi_A(x)}\subseteq A_a.
+    \]
+    Hence \(x\in A_a\). Since all subpreorders are induced from \(X\), equality of underlying subsets gives equality as induced fuzzy subpreorders.
+\end{proof}
+
+\subsection{The fuzzy preorder of fuzzy cut subobjects}
+\label{subsec:fuzzy-preorder-of-fuzzy-cut-subobjects}
+
+We next put a fuzzy preorder structure on \(\CutSub_\Lambda(X)\). Instead of merely transporting the hom-values from \(P_\Lambda(X)\) by the classifying predicate, we define the hom value directly in terms of cut containment.
+
+\begin{definition}[Fuzzy hom between cut subobjects]
+\label{def:fuzzy-preorder-on-subobjects}
+    For \(A,B\in\CutSub_\Lambda(X)\), define
+    \[
+        \CutSub_\Lambda(X)(A,B)
+        :=
+        \bigvee
+        \left\{
+            r\in L
+            \ \middle|\
+            \forall a\in L,\
+            A_a\subseteq B_{r\otimes a}
+        \right\}.
+    \]
+\end{definition}
+
+Thus the degree to which \(A\) is contained in \(B\) is the greatest truth value \(r\) such that every \(a\)-cut of \(A\) is contained in the \((r\otimes a)\)-cut of \(B\).
+
+\begin{lemma}[Cut-containment hom formula]
+\label{lem:subobject-hom-equals-classifier-hom}
+    For all \(A,B\in\CutSub_\Lambda(X)\),
+    \[
+        \CutSub_\Lambda(X)(A,B)
+        =
+        \bigwedge_{x\in X}
+        \bigl(\chi_A(x)\multimap\chi_B(x)\bigr).
+    \]
+\end{lemma}
+
+\begin{proof}
+    Let
+    \[
+        q:=
+        \bigwedge_{x\in X}
+        \bigl(\chi_A(x)\multimap\chi_B(x)\bigr).
+    \]
+    We show that, for \(r\in L\),
+    \[
+        r\leq q
+    \]
+    if and only if
+    \[
+        \forall a\in L,\quad A_a\subseteq B_{r\otimes a}.
+    \]
+
+    By residuation, \(r\leq q\) is equivalent to
+    \[
+        r\otimes\chi_A(x)\leq\chi_B(x)
+        \qquad
+        \text{for every }x\in X.
+    \]
+    Since
+    \[
+        \chi_A(x)=\bigvee\{a\in L\mid x\in A_a\}
+    \]
+    and \(r\otimes-\) preserves joins, this is equivalent to requiring that whenever \(x\in A_a\), one has
+    \[
+        r\otimes a\leq\chi_B(x).
+    \]
+    By Proposition~\ref{prop:recover-cuts-from-classifying-predicate} applied to \(B\), this is equivalent to
+    \[
+        x\in B_{r\otimes a}.
+    \]
+    Thus \(r\leq q\) is equivalent to the displayed containment condition. Therefore the set whose join defines \(\CutSub_\Lambda(X)(A,B)\) is the principal downset of \(q\), and its join is \(q\).
+\end{proof}
+
+\begin{proposition}
+\label{prop:subobjects-form-fuzzy-preorder}
+    The hom-values of Definition~\ref{def:fuzzy-preorder-on-subobjects} make \(\CutSub_\Lambda(X)\) into a fuzzy preorder. Moreover, the classifying-predicate assignment
+    \[
+        \mathsf{Cl}_X:
+        \CutSub_\Lambda(X)\longrightarrow P_\Lambda(X),
+        \qquad
+        A\longmapsto\chi_A
+    \]
+    is fully faithful.
+\end{proposition}
+
+\begin{proof}
+    By Lemma~\ref{lem:subobject-hom-equals-classifier-hom},
+    \[
+        \CutSub_\Lambda(X)(A,B)
+        =
+        \bigwedge_{x\in X}
+        \bigl(\chi_A(x)\multimap\chi_B(x)\bigr)
+        =
+        P_\Lambda(X)(\chi_A,\chi_B).
+    \]
+    Since \(P_\Lambda(X)\) is a fuzzy preorder, the displayed equality implies the fuzzy preorder axioms for \(\CutSub_\Lambda(X)\). It also says exactly that \(\mathsf{Cl}_X\) is fully faithful.
+\end{proof}
+
+\subsection{The fuzzy cut-subobject representation theorem}
+\label{subsec:representation-theorem-and-classification}
+
+For \(\phi\in P_\Lambda(X)\), regarded as a fuzzy predicate on \(X\), write
+\[
+    X_\phi
+    :=
+    \bigl(m_{\phi,a}:X_{\phi,a}\hookrightarrow X\bigr)_{a\in L}
+\]
+for its cut family.
+
+There are two canonical assignments:
+\[
+    \Cut_X:P_\Lambda(X)\longrightarrow\CutSub_\Lambda(X),
+    \qquad
+    \phi\longmapsto X_\phi,
+\]
+and
+\[
+    \mathsf{Cl}_X:\CutSub_\Lambda(X)\longrightarrow P_\Lambda(X),
+    \qquad
+    A\longmapsto\chi_A.
+\]
+
+\begin{theorem}[Fuzzy cut-subobject representation theorem]
+\label{thm:representation-theorem}
+    For every fuzzy preorder \(X\), the assignments
+    \[
+        \Cut_X:P_\Lambda(X)\longrightarrow\CutSub_\Lambda(X),
+        \qquad
+        \mathsf{Cl}_X:\CutSub_\Lambda(X)\longrightarrow P_\Lambda(X)
+    \]
+    are mutually inverse isomorphisms of fuzzy preorders:
+    \[
+        \mathsf{Cl}_X\circ\Cut_X=1_{P_\Lambda(X)},
+        \qquad
+        \Cut_X\circ\mathsf{Cl}_X=1_{\CutSub_\Lambda(X)}.
+    \]
+    Hence
+    \[
+        P_\Lambda(X)\cong\CutSub_\Lambda(X)
+    \]
+    as fuzzy preorders.
+\end{theorem}
+
+\begin{proof}
+    Let \(\phi\in P_\Lambda(X)\). By Proposition~\ref{prop:basic-properties-cut-family}, the cut family \(X_\phi\) is a fuzzy cut subobject of \(X\), so \(\Cut_X\) is well-defined on objects.
+
+    Conversely, if \(A\in\CutSub_\Lambda(X)\), then Proposition~\ref{prop:coherent-cut-family-gives-predicate} shows that
+    \[
+        \chi_A\in P_\Lambda(X),
+    \]
+    so \(\mathsf{Cl}_X\) is well-defined on objects.
+
+    For \(\phi\in P_\Lambda(X)\), Proposition~\ref{prop:recovery-classifying-predicate} gives
+    \[
+        \chi_{X_\phi}(x)=\phi(x)
+    \]
+    for every \(x\in X\). Hence
+    \[
+        \mathsf{Cl}_X(\Cut_X(\phi))=\phi.
+    \]
+
+    For \(A\in\CutSub_\Lambda(X)\), Proposition~\ref{prop:recover-cuts-from-classifying-predicate} gives
+    \[
+        (X_{\chi_A})_a=A_a
+    \]
+    for every \(a\in L\). Hence
+    \[
+        \Cut_X(\mathsf{Cl}_X(A))=A.
+    \]
+
+    Finally, Proposition~\ref{prop:subobjects-form-fuzzy-preorder} gives
+    \[
+        \CutSub_\Lambda(X)(A,B)
+        =
+        P_\Lambda(X)(\chi_A,\chi_B)
+    \]
+    for all \(A,B\in\CutSub_\Lambda(X)\). Thus \(\mathsf{Cl}_X\) is fully faithful. Since \(\Cut_X\) and \(\mathsf{Cl}_X\) are inverse on objects, they are mutually inverse isomorphisms of fuzzy preorders.
+\end{proof}
+
+\subsection{Examples of the cut-subobject representation theorem}
+\label{subsec:examples-cut-subobject-representation}
+
+We finish by spelling out the representation theorem in the principal examples. In each case, the word ``subobject'' refers to the coherent cut-subobjects of Definition~\ref{def:fuzzy-subobject}, not to arbitrary monomorphism subobjects of \(X\) in \(\Pre_\Lambda\). Thus the theorem says that fuzzy predicates on \(X\) are equivalently coherent systems of levelwise induced subpreorders of \(X\).
+
+\begin{example}[The crisp case]
+\label{ex:cut-subobjects-crisp}
+    Let
+    \[
+        \Lambda=2=\{0<1\}
+    \]
+    with tensor product \(a\otimes b=a\wedge b\). A fuzzy preorder over \(\Lambda\) is an ordinary preorder. A fuzzy predicate
+    \[
+        \phi:X^{\mathrm{op}}\to 2
+    \]
+    is exactly a lower subset of \(X\). Indeed, if
+    \[
+        U:=\{x\in X\mid \phi(x)=1\},
+    \]
+    then the predicate law says that whenever \(x\in U\) and \(x'\leq x\), one has \(x'\in U\).
+
+    The cut family of \(\phi\) has only two levels:
+    \[
+        X_{\phi,0}=X,
+        \qquad
+        X_{\phi,1}=U.
+    \]
+    Conversely, a fuzzy cut subobject
+    \[
+        A=(A_0,A_1)
+    \]
+    is determined by \(A_1\), since axiom \textup{(F1)} gives
+    \[
+        A_0=X.
+    \]
+    Axiom \textup{(F4)} says exactly that \(A_1\) is lower: if \(x\in A_1\) and \(x'\leq x\), then \(x'\in A_1\). Hence the classifying predicate is simply the characteristic map
+    \[
+        \chi_A(x)=
+        \begin{cases}
+            1, & x\in A_1,\\
+            0, & x\notin A_1.
+        \end{cases}
+    \]
+
+    The fuzzy hom between cut subobjects also reduces to ordinary inclusion. Indeed,
+    \[
+        \CutSub_2(X)(A,B)=1
+        \quad\Longleftrightarrow\quad
+        A_1\subseteq B_1.
+    \]
+    Thus Theorem~\ref{thm:representation-theorem} specializes to the usual correspondence between lower subsets of a preorder and their characteristic maps. If \(X\) is discrete, this is the ordinary correspondence between subsets and characteristic functions.
+\end{example}
+
+\begin{example}[The G\"odel case]
+\label{ex:cut-subobjects-godel}
+    Let
+    \[
+        \Lambda=([0,1],\leq,\wedge,\vee,\otimes,\multimap,0,1)
+    \]
+    be the G\"odel truth-value object, with
+    \[
+        a\otimes b=a\wedge b,
+        \qquad
+        a\multimap b=
+        \begin{cases}
+            1, & a\leq b,\\
+            b, & a>b.
+        \end{cases}
+    \]
+    A fuzzy predicate
+    \[
+        \phi:X^{\mathrm{op}}\to\underline{\Lambda}
+    \]
+    is a map \(\phi:X\to[0,1]\) satisfying
+    \[
+        X(x',x)\wedge \phi(x)\leq \phi(x')
+    \]
+    for all \(x,x'\in X\).
+
+    Its \(a\)-cut is
+    \[
+        X_{\phi,a}
+        =
+        \{x\in X\mid a\leq \phi(x)\}.
+    \]
+    Thus a fuzzy cut subobject is a decreasing family
+    \[
+        (A_a)_{a\in[0,1]}
+    \]
+    of induced fuzzy subpreorders satisfying
+    \[
+        A_{\bigvee_i a_i}=\bigcap_i A_{a_i}
+    \]
+    and the G\"odel stability condition
+    \[
+        x\in A_a
+        \quad\Longrightarrow\quad
+        x'\in A_{\,X(x',x)\wedge a}.
+    \]
+    The classifying predicate is recovered by
+    \[
+        \chi_A(x)=\sup\{a\in[0,1]\mid x\in A_a\}.
+    \]
+
+    For \(A,B\in\CutSub_\Lambda(X)\), the hom-value is
+    \[
+        \CutSub_\Lambda(X)(A,B)
+        =
+        \sup
+        \left\{
+            r\in[0,1]
+            \ \middle|\
+            \forall a\in[0,1],\,
+            A_a\subseteq B_{r\wedge a}
+        \right\}.
+    \]
+    Equivalently, by Lemma~\ref{lem:subobject-hom-equals-classifier-hom},
+    \[
+        \CutSub_\Lambda(X)(A,B)
+        =
+        \inf_{x\in X}
+        \bigl(\chi_A(x)\multimap\chi_B(x)\bigr).
+    \]
+    Thus \(A\) is contained in \(B\) to degree \(r\) precisely when every \(a\)-level of \(A\) is contained in the \((r\wedge a)\)-level of \(B\). In particular, containment to degree \(1\) is ordinary pointwise containment of classifying predicates:
+    \[
+        \CutSub_\Lambda(X)(A,B)=1
+        \quad\Longleftrightarrow\quad
+        \chi_A\leq\chi_B
+        \quad\Longleftrightarrow\quad
+        A_a\subseteq B_a
+        \text{ for all }a.
+    \]
+\end{example}
+
+\begin{example}[The {\L}ukasiewicz case]
+\label{ex:cut-subobjects-lukasiewicz}
+    Let
+    \[
+        \Lambda=([0,1],\leq,\wedge,\vee,\otimes,\multimap,0,1)
+    \]
+    be the {\L}ukasiewicz truth-value object, with
+    \[
+        a\otimes b=\max\{0,a+b-1\},
+        \qquad
+        a\multimap b=\min\{1,1-a+b\}.
+    \]
+    A fuzzy predicate
+    \[
+        \phi:X^{\mathrm{op}}\to\underline{\Lambda}
+    \]
+    is a map \(\phi:X\to[0,1]\) satisfying
+    \[
+        \max\{0,X(x',x)+\phi(x)-1\}\leq \phi(x')
+    \]
+    for all \(x,x'\in X\).
+
+    The \(a\)-cut is again
+    \[
+        X_{\phi,a}
+        =
+        \{x\in X\mid a\leq\phi(x)\}.
+    \]
+    A fuzzy cut subobject is therefore a decreasing, join-continuous family
+    \[
+        (A_a)_{a\in[0,1]}
+    \]
+    of induced fuzzy subpreorders satisfying the {\L}ukasiewicz stability condition
+    \[
+        x\in A_a
+        \quad\Longrightarrow\quad
+        x'\in A_{\max\{0,X(x',x)+a-1\}}.
+    \]
+    The classifying predicate is recovered by
+    \[
+        \chi_A(x)=\sup\{a\in[0,1]\mid x\in A_a\}.
+    \]
+
+    For \(A,B\in\CutSub_\Lambda(X)\), the cut-containment hom is
+    \[
+        \CutSub_\Lambda(X)(A,B)
+        =
+        \sup
+        \left\{
+            r\in[0,1]
+            \ \middle|\
+            \forall a\in[0,1],\,
+            A_a\subseteq B_{\max\{0,r+a-1\}}
+        \right\}.
+    \]
+    Equivalently,
+    \[
+        \CutSub_\Lambda(X)(A,B)
+        =
+        \inf_{x\in X}
+        \min\{1,1-\chi_A(x)+\chi_B(x)\}.
+    \]
+    Thus containment to degree \(r\) permits a uniform loss of \(1-r\) in the level parameter: an \(a\)-level point of \(A\) is required to lie in \(B\) only at level
+    \[
+        \max\{0,a-(1-r)\}.
+    \]
+    In particular, the hom-value can be written as
+    \[
+        \CutSub_\Lambda(X)(A,B)
+        =
+        1-
+        \sup_{x\in X}
+        \max\{0,\chi_A(x)-\chi_B(x)\}.
+    \]
+    Hence the {\L}ukasiewicz hom records the worst pointwise deficit of \(\chi_B\) below \(\chi_A\).
+\end{example}
+
+\begin{example}[The Lawvere case]
+\label{ex:cut-subobjects-lawvere}
+    Let
+    \[
+        \Lambda=([0,\infty],\leq_L,\wedge,\vee,+,\multimap,\infty,0)
+    \]
+    be the Lawvere truth-value object, where
+    \[
+        a\leq_L b
+        \quad\Longleftrightarrow\quad
+        a\geq b
+        \text{ in the usual order}.
+    \]
+    Thus the top element is \(0\), the bottom element is \(\infty\), and the tensor product is addition.
+
+    A fuzzy preorder over this base is a Lawvere metric space, or extended quasi-pseudometric space. Writing
+    \[
+        d(x,y):=X(x,y),
+    \]
+    the preorder axioms become
+    \[
+        d(x,x)=0,
+        \qquad
+        d(x,z)\leq d(x,y)+d(y,z)
+    \]
+    in the usual order on \([0,\infty]\).
+
+    A fuzzy predicate
+    \[
+        \phi:X^{\mathrm{op}}\to\underline{\Lambda}
+    \]
+    is a map \(\phi:X\to[0,\infty]\) satisfying
+    \[
+        d(x',x)+\phi(x)\geq \phi(x')
+    \]
+    in the usual order. Equivalently,
+    \[
+        \phi(x')\leq \phi(x)+d(x',x).
+    \]
+    Thus \(\phi\) is a one-sided nonexpansive potential.
+
+    Because the order on \(L\) is reversed, the \(a\)-cut is the usual sublevel set
+    \[
+        X_{\phi,a}
+        =
+        \{x\in X\mid a\leq_L \phi(x)\}
+        =
+        \{x\in X\mid \phi(x)\leq a\}.
+    \]
+    A fuzzy cut subobject is therefore a family of induced fuzzy subpreorders
+    \[
+        (A_a)_{a\in[0,\infty]}
+    \]
+    satisfying
+    \[
+        A_\infty=X,
+    \]
+    monotonicity in the usual threshold parameter,
+    \[
+        b\leq a
+        \quad\Longrightarrow\quad
+        A_b\subseteq A_a,
+    \]
+    and the closure condition
+    \[
+        A_{\inf_i a_i}
+        =
+        \bigcap_i A_{a_i}.
+    \]
+    The stability axiom becomes the metric expansion condition
+    \[
+        x\in A_a
+        \quad\Longrightarrow\quad
+        x'\in A_{d(x',x)+a}.
+    \]
+    Thus a point within cost \(a\) forces every point \(x'\) to lie within cost \(a+d(x',x)\).
+
+    The classifying predicate of a cut family is
+    \[
+        \chi_A(x)
+        =
+        \bigvee\nolimits_L\{a\in[0,\infty]\mid x\in A_a\}.
+    \]
+    Since \(\bigvee_L\) is infimum in the usual order, this says
+    \[
+        \chi_A(x)
+        =
+        \inf\{a\in[0,\infty]\mid x\in A_a\}.
+    \]
+    So \(\chi_A(x)\) is the least usual threshold at which \(x\) enters the filtration.
+
+    Finally, for \(A,B\in\CutSub_\Lambda(X)\), the hom-value is
+    \[
+        \CutSub_\Lambda(X)(A,B)
+        =
+        \bigvee\nolimits_L
+        \left\{
+            r\in[0,\infty]
+            \ \middle|\
+            \forall a\in[0,\infty],\,
+            A_a\subseteq B_{r+a}
+        \right\}.
+    \]
+    Since joins in \(\Lambda\) are infima in the usual order, this is the least usual cost \(r\) such that every \(a\)-sublevel of \(A\) lies inside the \((a+r)\)-sublevel of \(B\). Equivalently, written in the usual order on \([0,\infty]\),
+    \[
+        \CutSub_\Lambda(X)(A,B)
+        =
+        \sup_{x\in X}
+        \max\{0,\chi_B(x)-\chi_A(x)\}.
+    \]
+    Thus the Lawvere hom is the directed pointwise excess of \(\chi_B\) over \(\chi_A\): it is the least additive shift \(r\) for which
+    \[
+        \chi_B(x)\leq \chi_A(x)+r
+    \]
+    for all \(x\in X\).
+\end{example}

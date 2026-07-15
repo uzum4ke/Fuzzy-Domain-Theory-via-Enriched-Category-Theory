@@ -1,0 +1,3990 @@
+\chapter{The Fuzzy Ideal Monad, Fuzzy Domains, and Fuzzy Scott Opens}
+\label{ch:fuzzy-ideal-monad-domains-scott}
+
+In the previous chapters we developed fuzzy predicates as enriched presheaves and
+then localized their predicate frames to obtain fuzzy frames and fuzzy locales.  We
+now apply the same predicate construction to \(X^{\op}\).  Thus the upper fuzzy
+predicate object of a small \(\mathbb V\)-category \(X\) is
+\[
+    P_{\mathbb V}(X^{\op})
+    =
+    [X,\underline{\mathbb V}],
+\]
+and, in the posetal specialization determined by
+\[
+    \Lambda=(L,\leq,\meet,\join,\tensor,\multimap,\bot_L,\top_L),
+\]
+it is
+\[
+    P_\Lambda(X^{\op})
+    =
+    [X,\Lambda].
+\]
+Its elements are upper fuzzy predicates on \(X\).
+
+The central construction of this chapter is the character adjunction
+\[
+    \mathcal P_{\mathbb V}^{\uparrow}
+    \dashv
+    \operatorname{Char}_{\mathbb V}.
+\]
+Here \(\mathcal P_{\mathbb V}^{\uparrow}X\) is the upper fuzzy Alexandrov locale
+whose frame of opens is \([X,\underline{\mathbb V}]\), while
+\(\operatorname{Char}_{\mathbb V}\) sends a fuzzy locale to its
+\(\mathbb V\)-category of fuzzy-frame morphisms into the truth-value fuzzy frame
+\(\underline{\mathbb V}\).  Thus characters do not target the fuzzy Sierpiński
+frame.  The fuzzy Sierpiński frame classifies fuzzy opens; the truth-value frame
+receives fuzzy characters.
+
+The induced monad on fuzzy preorders is the fuzzy ideal monad:
+\[
+    T_{\mathbb V}X
+    \simeq
+    \operatorname{Idl}_{\mathbb V}(X),
+\]
+where \(\operatorname{Idl}_{\mathbb V}(X)\) is the \(\mathbb V\)-category of
+finite-flat weights
+\[
+    X^{\op}\to\underline{\mathbb V}.
+\]
+In the posetal specialization,
+\[
+    T_\Lambda X
+    \cong
+    \operatorname{Idl}_\Lambda(X),
+\]
+whose elements are fuzzy ideals of \(X\).
+
+A weak fuzzy domain is a fuzzy preorder equipped with a chosen operation
+\[
+    \alpha:\operatorname{Idl}_\Lambda(X)\to X
+\]
+assigning candidate joins to fuzzy ideals.  A fuzzy domain is a strict algebra for
+the fuzzy ideal monad.  In the crisp case \(\Lambda=2\), this recovers the ordinary
+ideal-completion monad, and strict algebras on separated preorders are precisely
+dcpos.
+
+The same monad also contains the algebraic and continuous layers of domain theory.
+Free fuzzy domains
+\[
+    \operatorname{Idl}_\Lambda(B)
+\]
+are the presented fuzzy algebraic domains.  Fuzzy continuous domains are fuzzy
+domains for which the ideal-join map
+\[
+    \alpha:\operatorname{Idl}_\Lambda(X)\to X
+\]
+admits an enriched left adjoint
+\[
+    \beta:X\to\operatorname{Idl}_\Lambda(X).
+\]
+In the crisp case, \(\beta(x)\) is the ideal of elements way-below \(x\).
+
+Finally, fuzzy Scott opens are upper fuzzy predicates preserving fuzzy ideal joins.
+For a weak fuzzy domain
+\[
+    \alpha:\operatorname{Idl}_\Lambda(X)\to X,
+\]
+a fuzzy Scott open is an upper fuzzy predicate
+\[
+    U:X\to L
+\]
+satisfying
+\[
+    U(\alpha(I))
+    =
+    \bigjoin_{x\in X} I(x)\tensor U(x)
+\]
+for every fuzzy ideal \(I\).
+
+\begin{remark}[Universe and doctrine conventions]
+\label{rem:ideal-monad-universe-and-doctrine-convention}
+We use the same universe convention as in the preceding chapters.  If
+\(\mathcal A\) is not small, then
+\[
+    [\mathcal A,\underline{\mathbb V}]
+    \qquad\text{and}\qquad
+    \operatorname{Char}_{\mathbb V}(\mathcal A)
+\]
+are understood in the appropriate larger universe.  In particular, for small
+\(X\), the category
+\[
+    T_{\mathbb V}X
+    =
+    \operatorname{Char}_{\mathbb V}(P_{\mathbb V}(X^{\op}))
+\]
+is taken in the universe where the corresponding category of finite-flat weights
+exists.
+
+At the categorical-cosmos level, \(T_{\mathbb V}\) is therefore a
+universe-relative monad on the chosen \(\mathbb V\)-CAT of locally small
+\(\mathbb V\)-categories for which the finite-flat-weight category exists in the
+ambient universe.  In the small posetal specialization it restricts to an honest
+monad
+\[
+    T_\Lambda:\Pre_\Lambda\to\Pre_\Lambda.
+\]
+
+Throughout the chapter, ``finite-flat'' means flat with respect to the chosen
+finite-limit doctrine used in the definition of categorical fuzzy frames.  In the
+posetal scalar-frame specialization, this doctrine consists of the terminal element
+and binary meets.  Thus finite-flatness specializes to preservation of top and
+binary meets.
+\end{remark}
+
+\begin{remark}[Strictification of the ideal monad]
+\label{rem:strictification-ideal-monad}
+The enriched character construction gives
+\[
+    T_{\mathbb V}X
+    =
+    \operatorname{Char}_{\mathbb V}(P_{\mathbb V}(X^{\op}))
+    \simeq
+    \operatorname{Idl}_{\mathbb V}(X).
+\]
+After the finite-flat-weight representation is established, we freely replace this
+monad by the transported equivalent monad whose value on \(X\) is
+\(\operatorname{Idl}_{\mathbb V}(X)\), with unit and multiplication given by the
+Yoneda and flattening formulas below.  In the posetal specialization this
+identification is an isomorphism of fuzzy preorders.
+\end{remark}
+
+\section{Upper fuzzy predicates and upper fuzzy Alexandrov locales}
+\label{sec:upper-fuzzy-predicates}
+
+\subsection{The enriched construction}
+\label{subsec:upper-predicates-enriched}
+
+\begin{definition}[Upper fuzzy predicates]
+\label{def:upper-fuzzy-predicates-enriched}
+Let \(X\) be a small \(\mathbb V\)-category.  The \textbf{upper fuzzy predicate
+category} of \(X\) is
+\[
+    P_{\mathbb V}(X^{\op})
+    =
+    [X,\underline{\mathbb V}].
+\]
+Its objects are \(\mathbb V\)-functors
+\[
+    U:X\to\underline{\mathbb V}.
+\]
+\end{definition}
+
+\begin{definition}[Upper fuzzy Alexandrov locale]
+\label{def:upper-fuzzy-alexandrov-locale}
+The \textbf{upper fuzzy Alexandrov locale} associated to \(X\) is the fuzzy locale
+\[
+    \mathcal P_{\mathbb V}^{\uparrow}X
+\]
+whose fuzzy frame of opens is
+\[
+    \operatorname{Opens}_{\mathbb V}(\mathcal P_{\mathbb V}^{\uparrow}X)
+    =
+    P_{\mathbb V}(X^{\op})
+    =
+    [X,\underline{\mathbb V}].
+\]
+Since \(P_{\mathbb V}(X^{\op})\) is itself a fuzzy presheaf category, it is a
+categorical fuzzy frame via the identity left-exact localization
+\[
+    1\dashv 1:
+    P_{\mathbb V}(X^{\op})
+    \rightleftarrows
+    P_{\mathbb V}(X^{\op}).
+\]
+Thus it defines a fuzzy locale by duality.
+\end{definition}
+
+\begin{proposition}[Functoriality of upper fuzzy predicates]
+\label{prop:upper-fuzzy-predicates-functorial}
+Let
+\[
+    f:X\to Y
+\]
+be a \(\mathbb V\)-functor.  Precomposition defines a fuzzy-frame morphism
+\[
+    f^\ast:
+    P_{\mathbb V}(Y^{\op})
+    =
+    [Y,\underline{\mathbb V}]
+    \longrightarrow
+    [X,\underline{\mathbb V}]
+    =
+    P_{\mathbb V}(X^{\op}),
+    \qquad
+    f^\ast(V)=Vf.
+\]
+Consequently there is a fuzzy-locale map
+\[
+    \mathcal P_{\mathbb V}^{\uparrow}X
+    \longrightarrow
+    \mathcal P_{\mathbb V}^{\uparrow}Y,
+\]
+and hence a covariant functor
+\[
+    \mathcal P_{\mathbb V}^{\uparrow}:
+    \mathbb V\text{-}\mathbf{Cat}
+    \longrightarrow
+    \mathbf{FLoc}_{\mathbb V}.
+\]
+\end{proposition}
+
+\begin{proof}
+All fuzzy-frame operations in the predicate frame are computed pointwise.
+Precomposition preserves them.  Passing to frame opposites gives the displayed
+locale map.
+\end{proof}
+
+\subsection{The posetal specialization}
+\label{subsec:upper-predicates-posetal}
+
+\begin{definition}[Upper fuzzy predicate over \(\Lambda\)]
+\label{def:upper-fuzzy-predicate-posetal}
+Let \(X\) be a fuzzy preorder over \(\Lambda\).  An \textbf{upper fuzzy predicate}
+on \(X\) is a map
+\[
+    U:X\to L
+\]
+satisfying
+\[
+    X(x,x')\tensor U(x)\leq U(x')
+\]
+for all \(x,x'\in X\).
+\end{definition}
+
+\begin{proposition}[The upper Alexandrov fuzzy frame]
+\label{prop:upper-alexandrov-fuzzy-frame}
+The upper fuzzy predicates on \(X\) form the fuzzy frame
+\[
+    P_\Lambda(X^{\op})
+    =
+    [X,\Lambda].
+\]
+Its hom-values are
+\[
+    P_\Lambda(X^{\op})(U,V)
+    =
+    \bigmeet_{x\in X}
+    \bigl(U(x)\multimap V(x)\bigr),
+\]
+and its induced crisp order is pointwise.  Joins, meets, and scalar multiplication
+are also computed pointwise:
+\[
+    \left(\bigjoin_i U_i\right)(x)=\bigjoin_i U_i(x),
+    \qquad
+    \left(\bigmeet_i U_i\right)(x)=\bigmeet_i U_i(x),
+    \qquad
+    (r\tensor U)(x)=r\tensor U(x).
+\]
+\end{proposition}
+
+\begin{proof}
+This is the predicate-frame construction from the previous chapters applied to
+\(X^{\op}\).
+\end{proof}
+
+\begin{example}[The crisp case]
+\label{ex:upper-predicates-crisp}
+For \(\Lambda=2\), a fuzzy preorder is an ordinary preorder and
+\[
+    P_2(X^{\op})
+    \cong
+    \operatorname{Up}(X).
+\]
+Indeed, the upper-predicate law becomes
+\[
+    x\leq x'
+    \quad\text{and}\quad
+    U(x)
+    \quad\Longrightarrow\quad
+    U(x').
+\]
+Later, Theorem~\ref{thm:scott-opens-free-fuzzy-domain} identifies this frame with
+the Scott frame of the free dcpo \(\operatorname{Idl}(X)\).
+\end{example}
+
+\begin{example}[Standard truth-value objects]
+\label{ex:standard-upper-fuzzy-predicates}
+For the G\"odel tensor \(r\tensor s=r\meet s\), an upper fuzzy predicate satisfies
+\[
+    X(x,x')\meet U(x)\leq U(x').
+\]
+For the {\L}ukasiewicz tensor \(r\tensor s=\max(0,r+s-1)\), it satisfies
+\[
+    \max(0,X(x,x')+U(x)-1)\leq U(x').
+\]
+For the product tensor \(r\tensor s=rs\), it satisfies
+\[
+    X(x,x')\,U(x)\leq U(x').
+\]
+For the Lawvere quantale \([0,\infty]\), with the Lawvere order
+\(a\leq_\Lambda b\) iff \(a\geq b\) in the usual order, tensor \(+\), top \(0\),
+and bottom \(\infty\), the upper-predicate law becomes
+\[
+    U(x')\leq d(x,x')+U(x)
+\]
+in the usual numerical order.
+\end{example}
+
+\section{Fuzzy characters}
+\label{sec:fuzzy-characters}
+
+\subsection{The enriched construction}
+\label{subsec:fuzzy-characters-enriched}
+
+The truth-value object \(\underline{\mathbb V}\) is itself a categorical fuzzy
+frame.  Indeed, if \(\mathbf 1\) denotes the terminal small \(\mathbb V\)-category,
+then
+\[
+    P_{\mathbb V}(\mathbf 1)
+    =
+    [\mathbf 1^{\op},\underline{\mathbb V}]
+    \simeq
+    \underline{\mathbb V}.
+\]
+Thus \(\underline{\mathbb V}\) is the presheaf fuzzy frame on \(\mathbf 1\).
+
+\begin{definition}[Fuzzy character]
+\label{def:fuzzy-character-enriched}
+Let \(\mathcal A\) be a categorical fuzzy frame.  Its \textbf{fuzzy character
+category} is the full \(\mathbb V\)-subcategory
+\[
+    \operatorname{Char}_{\mathbb V}(\mathcal A)
+    \subseteq
+    [\mathcal A,\underline{\mathbb V}]
+\]
+spanned by those \(\mathbb V\)-functors
+\[
+    \chi:\mathcal A\to\underline{\mathbb V}
+\]
+that are fuzzy-frame morphisms, that is, that preserve colimits, the chosen finite
+limits, and scalars.
+\end{definition}
+
+\begin{definition}[Characters of a fuzzy locale]
+\label{def:fuzzy-characters-locale}
+If \(\mathcal X\) is a fuzzy locale, define
+\[
+    \operatorname{Char}_{\mathbb V}(\mathcal X)
+    \coloneqq
+    \operatorname{Char}_{\mathbb V}
+    (\operatorname{Opens}_{\mathbb V}(\mathcal X)).
+\]
+\end{definition}
+
+\begin{remark}[Presentation-wise characters]
+\label{rem:character-universe-convention}
+If a fuzzy frame is presented as a reflective localization
+\[
+    a\dashv i:
+    P_{\mathbb V}(X)\rightleftarrows\mathcal A,
+\]
+then characters of \(\mathcal A\) may be described as characters of
+\(P_{\mathbb V}(X)\) satisfying the descent condition imposed by the localization.
+For upper predicate frames, this descent-free case becomes the finite-flat-weight
+description of Section~\ref{sec:fuzzy-ideals-flat-weights}.
+\end{remark}
+
+\subsection{The posetal specialization}
+\label{subsec:fuzzy-characters-posetal}
+
+\begin{definition}[Fuzzy character over \(\Lambda\)]
+\label{def:fuzzy-character-posetal}
+Let \(A\in\FFrm_\Lambda\).  Its \textbf{fuzzy character preorder}
+\[
+    \operatorname{Char}_\Lambda(A)
+\]
+is the full fuzzy subpreorder of \([A,\Lambda]\) spanned by the scalar-frame
+homomorphisms
+\[
+    \chi:A\to\Lambda.
+\]
+Equivalently, its underlying set is
+\[
+    |\operatorname{Char}_\Lambda(A)|
+    =
+    \FFrm_\Lambda(A,\Lambda).
+\]
+Thus an element of \(\operatorname{Char}_\Lambda(A)\) is a map preserving arbitrary
+joins, finite meets, and scalar multiplication:
+\[
+    \chi(r\tensor_A a)=r\tensor\chi(a).
+\]
+\end{definition}
+
+\begin{proposition}[The fuzzy preorder of characters]
+\label{prop:fuzzy-character-preorder}
+The fuzzy preorder on \(\operatorname{Char}_\Lambda(A)\) is inherited from the
+pointwise functor preorder:
+\[
+    \operatorname{Char}_\Lambda(A)(\chi,\psi)
+    =
+    \bigmeet_{a\in A}
+    \bigl(\chi(a)\multimap\psi(a)\bigr).
+\]
+Its induced crisp order is pointwise.
+\end{proposition}
+
+\begin{proof}
+The character preorder is a full fuzzy subpreorder of \([A,\Lambda]\).
+\end{proof}
+
+\begin{definition}[Characters of a fuzzy locale over \(\Lambda\)]
+\label{def:fuzzy-character-locale-posetal}
+For a fuzzy locale \(\mathcal X\), define
+\[
+    \operatorname{Char}_\Lambda(\mathcal X)
+    \coloneqq
+    \operatorname{Char}_\Lambda(\Opens_\Lambda(\mathcal X)).
+\]
+\end{definition}
+
+\begin{proposition}[Characters of the truth-value frame]
+\label{prop:characters-truth-value-frame}
+There is exactly one scalar-frame character
+\[
+    \Lambda\to\Lambda,
+\]
+namely the identity.  Hence
+\[
+    \operatorname{Char}_\Lambda(\Lambda)
+\]
+is the terminal fuzzy preorder.
+\end{proposition}
+
+\begin{proof}
+Let \(\chi:\Lambda\to\Lambda\) be a scalar-frame homomorphism.  Since \(\chi\)
+preserves top,
+\[
+    \chi(\top_L)=\top_L.
+\]
+For every \(r\in L\),
+\[
+    \chi(r)
+    =
+    \chi(r\tensor\top_L)
+    =
+    r\tensor\chi(\top_L)
+    =
+    r\tensor\top_L
+    =
+    r.
+\]
+Thus \(\chi=1_\Lambda\).
+\end{proof}
+
+\begin{example}[The crisp case]
+\label{ex:fuzzy-characters-crisp}
+For \(\Lambda=2\), a character of a frame \(A\) is a frame homomorphism
+\[
+    A\to 2,
+\]
+equivalently a completely prime filter of \(A\).  Thus, in the crisp localic case,
+characters are points.
+\end{example}
+
+\section{The upper fuzzy character adjunction}
+\label{sec:upper-fuzzy-character-adjunction}
+
+\subsection{The enriched adjunction}
+\label{subsec:upper-character-adjunction-enriched}
+
+\begin{theorem}[Upper fuzzy character adjunction]
+\label{thm:upper-fuzzy-character-adjunction-enriched}
+Let \(X\) be a small \(\mathbb V\)-category and let \(\mathcal X\) be a fuzzy
+locale.  There is a natural equivalence
+\[
+    \mathbf{FLoc}_{\mathbb V}
+    (\mathcal P_{\mathbb V}^{\uparrow}X,\mathcal X)
+    \simeq
+    \mathbb V\text{-}\mathbf{Cat}
+    \bigl(
+        X,
+        \operatorname{Char}_{\mathbb V}(\mathcal X)
+    \bigr).
+\]
+Equivalently, writing
+\[
+    A=\operatorname{Opens}_{\mathbb V}(\mathcal X),
+\]
+there is a natural equivalence
+\[
+    \mathbf{FFrm}_{\mathbb V}
+    \bigl(
+        A,
+        P_{\mathbb V}(X^{\op})
+    \bigr)
+    \simeq
+    \mathbb V\text{-}\mathbf{Cat}
+    \bigl(
+        X,
+        \operatorname{Char}_{\mathbb V}(A)
+    \bigr).
+\]
+\end{theorem}
+
+\begin{proof}
+A fuzzy-locale map
+\[
+    \mathcal P_{\mathbb V}^{\uparrow}X\to\mathcal X
+\]
+is frame-dually a fuzzy-frame morphism
+\[
+    h:A\to [X,\underline{\mathbb V}].
+\]
+By the enriched tensor--hom adjunction and the symmetry of \(\tensor\), this is
+equivalently a \(\mathbb V\)-functor
+\[
+    \widehat h:X\to [A,\underline{\mathbb V}],
+    \qquad
+    \widehat h(x)(a)=h(a)(x).
+\]
+Explicitly, this is the composite transposition
+\[
+    \mathbb V\text{-}\mathbf{CAT}(A,[X,\underline{\mathbb V}])
+    \cong
+    \mathbb V\text{-}\mathbf{CAT}(A\tensor X,\underline{\mathbb V})
+    \cong
+    \mathbb V\text{-}\mathbf{CAT}(X,[A,\underline{\mathbb V}]).
+\]
+
+Since evaluation at \(x\) preserves the pointwise fuzzy-frame structure on
+\([X,\underline{\mathbb V}]\), each
+\[
+    \widehat h(x):A\to\underline{\mathbb V}
+\]
+is a fuzzy character of \(A\).  Hence \(\widehat h\) factors through
+\[
+    \operatorname{Char}_{\mathbb V}(A)
+    \subseteq
+    [A,\underline{\mathbb V}].
+\]
+
+Conversely, a \(\mathbb V\)-functor
+\[
+    k:X\to\operatorname{Char}_{\mathbb V}(A)
+\]
+defines
+\[
+    \widetilde k:A\to[X,\underline{\mathbb V}],
+    \qquad
+    \widetilde k(a)(x)=k(x)(a).
+\]
+For each \(a\), this is an upper predicate on \(X\); for each \(x\), the map
+\(a\mapsto k(x)(a)\) preserves the fuzzy-frame structure.  Therefore
+\(\widetilde k\) is a fuzzy-frame morphism.  The two constructions are inverse by
+the enriched tensor--hom adjunction, and naturality is inherited from the
+naturality of that adjunction.
+\end{proof}
+
+\subsection{The posetal specialization}
+\label{subsec:upper-character-adjunction-posetal}
+
+\begin{theorem}[Posetal upper fuzzy character adjunction]
+\label{thm:upper-fuzzy-character-adjunction-posetal}
+Let \(X\) be a fuzzy preorder and let \(A\in\FFrm_\Lambda\).  There is a natural
+isomorphism
+\[
+    \FFrm_\Lambda(A,P_\Lambda(X^{\op}))
+    \cong
+    \Pre_\Lambda(X,\operatorname{Char}_\Lambda(A)).
+\]
+\end{theorem}
+
+\begin{proof}
+For a fuzzy-frame homomorphism
+\[
+    h:A\to P_\Lambda(X^{\op}),
+\]
+define
+\[
+    \widehat h(x)(a)=h(a)(x).
+\]
+Each \(\widehat h(x)\) is a character because evaluation at \(x\) preserves the
+pointwise scalar-frame structure.  Moreover, for all \(x,x'\in X\) and \(a\in A\),
+the upper-predicate law for \(h(a)\) gives
+\[
+    X(x,x')\tensor h(a)(x)\leq h(a)(x'),
+\]
+or equivalently
+\[
+    X(x,x')\leq h(a)(x)\multimap h(a)(x').
+\]
+Taking the meet over \(a\) shows that
+\[
+    X(x,x')
+    \leq
+    \operatorname{Char}_\Lambda(A)(\widehat h(x),\widehat h(x')).
+\]
+Thus \(\widehat h\) is a \(\Lambda\)-functor.
+
+Conversely, a \(\Lambda\)-functor
+\[
+    k:X\to\operatorname{Char}_\Lambda(A)
+\]
+defines
+\[
+    \widetilde k(a)(x)=k(x)(a).
+\]
+Functoriality of \(k\) gives the upper-predicate law in \(x\), while the character
+condition on each \(k(x)\) gives preservation of joins, finite meets, and scalars
+in \(a\).  Hence \(\widetilde k\) is a fuzzy-frame homomorphism.  The two
+assignments are inverse.
+\end{proof}
+
+\begin{example}[The crisp case]
+\label{ex:upper-character-adjunction-crisp}
+For \(\Lambda=2\), the adjunction becomes
+\[
+    \Frm(A,\operatorname{Up}(X))
+    \cong
+    \Pre(X,\operatorname{Char}_2(A)).
+\]
+Thus frame maps into an upper Alexandrov frame are the same as monotone
+point-valued families indexed by \(X\).
+\end{example}
+
+\begin{example}[Discrete fuzzy preorders]
+\label{ex:upper-character-adjunction-discrete}
+If \(X\) is discrete, then
+\[
+    P_\Lambda(X^{\op})\cong L^X.
+\]
+A fuzzy-frame homomorphism
+\[
+    A\to L^X
+\]
+is precisely an \(X\)-indexed family of characters \(A\to\Lambda\).
+\end{example}
+
+\section{Fuzzy ideals as finite-flat weights}
+\label{sec:fuzzy-ideals-flat-weights}
+
+\subsection{The enriched construction}
+\label{subsec:fuzzy-ideals-enriched}
+
+\begin{definition}[Finite-flat weight]
+\label{def:finite-flat-weight}
+Let \(X\) be a small \(\mathbb V\)-category.  A \textbf{finite-flat weight} on
+\(X\) is a weight
+\[
+    I:X^{\op}\to\underline{\mathbb V}
+\]
+such that the weighted-colimit functional
+\[
+    \chi_I:[X,\underline{\mathbb V}]\to\underline{\mathbb V},
+    \qquad
+    \chi_I(U)=\int^{x\in X} I(x)\tensor U(x),
+\]
+preserves the chosen finite limits of the fuzzy-frame doctrine.  Equivalently,
+\(I\)-weighted colimits in \(\underline{\mathbb V}\) commute with those finite
+limits.
+\end{definition}
+
+\begin{definition}[Fuzzy ideal]
+\label{def:fuzzy-ideal-enriched}
+A \textbf{fuzzy ideal} of a small \(\mathbb V\)-category \(X\) is a finite-flat
+weight
+\[
+    I:X^{\op}\to\underline{\mathbb V}.
+\]
+We write
+\[
+    \operatorname{Idl}_{\mathbb V}(X)
+\]
+for the full \(\mathbb V\)-subcategory of
+\[
+    [X^{\op},\underline{\mathbb V}]
+\]
+spanned by the finite-flat weights.
+\end{definition}
+
+\begin{proposition}[Flat-weight representation of cocontinuous functionals]
+\label{prop:flat-weight-representation-of-characters}
+Let \(X\) be small.  Cocontinuous \(\mathbb V\)-functors
+\[
+    [X,\underline{\mathbb V}]\to\underline{\mathbb V}
+\]
+are, up to canonical isomorphism, precisely the weighted-colimit functionals
+\[
+    U\longmapsto \int^{x\in X} I(x)\tensor U(x)
+\]
+for weights
+\[
+    I:X^{\op}\to\underline{\mathbb V}.
+\]
+Such a functional preserves the chosen finite limits precisely when \(I\) is
+finite-flat.
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    \chi:[X,\underline{\mathbb V}]\to\underline{\mathbb V}
+\]
+be cocontinuous.  Define
+\[
+    I_\chi(x)=\chi(X(x,-)).
+\]
+The assignment
+\[
+    x\longmapsto X(x,-)
+\]
+is the Yoneda embedding of \(X^{\op}\) into \([X,\underline{\mathbb V}]\).  Since
+\(\chi\) is a \(\mathbb V\)-functor, \(I_\chi\) is a weight
+\[
+    I_\chi:X^{\op}\to\underline{\mathbb V}.
+\]
+
+For every
+\[
+    U:X\to\underline{\mathbb V},
+\]
+the enriched co-Yoneda formula in the copresheaf category
+\([X,\underline{\mathbb V}]\) gives
+\[
+    U
+    \cong
+    \int^{x\in X} U(x)\tensor X(x,-).
+\]
+Applying the cocontinuous functor \(\chi\), we obtain
+\[
+\begin{aligned}
+    \chi(U)
+    &\cong
+    \chi\left(\int^{x\in X} U(x)\tensor X(x,-)\right)\\
+    &\cong
+    \int^{x\in X} U(x)\tensor\chi(X(x,-))\\
+    &=
+    \int^{x\in X} U(x)\tensor I_\chi(x)\\
+    &\cong
+    \int^{x\in X} I_\chi(x)\tensor U(x).
+\end{aligned}
+\]
+Thus \(\chi\) is represented by \(I_\chi\).
+
+Conversely, every weight \(I:X^{\op}\to\underline{\mathbb V}\) determines the
+weighted-colimit functional
+\[
+    \chi_I(U)=\int^{x\in X}I(x)\tensor U(x).
+\]
+This functional is cocontinuous because it is built from tensors and small
+colimits in \(\underline{\mathbb V}\), and tensors preserve colimits in each
+variable.  The two constructions are inverse by the same co-Yoneda calculation,
+since
+\[
+    \chi_I(X(x,-))
+    \cong
+    \int^{y\in X}I(y)\tensor X(x,y)
+    \cong
+    I(x).
+\]
+
+Finally, preservation of the chosen finite limits by \(\chi_I\) is exactly the
+definition of finite-flatness of the weight \(I\).
+\end{proof}
+
+\begin{theorem}[Characters of upper predicate frames]
+\label{thm:characters-upper-predicate-frames-flat}
+For every small \(\mathbb V\)-category \(X\), there is a canonical equivalence
+\[
+    \operatorname{Char}_{\mathbb V}(P_{\mathbb V}(X^{\op}))
+    \simeq
+    \operatorname{Idl}_{\mathbb V}(X).
+\]
+Under this equivalence, a fuzzy ideal
+\[
+    I:X^{\op}\to\underline{\mathbb V}
+\]
+corresponds to the character
+\[
+    \chi_I(U)
+    =
+    \int^{x\in X}I(x)\tensor U(x).
+\]
+\end{theorem}
+
+\begin{proof}
+Since
+\[
+    P_{\mathbb V}(X^{\op})=[X,\underline{\mathbb V}],
+\]
+a character is a cocontinuous, finite-limit-preserving, scalar-preserving
+\(\mathbb V\)-functor
+\[
+    [X,\underline{\mathbb V}]\to\underline{\mathbb V}.
+\]
+By Proposition~\ref{prop:flat-weight-representation-of-characters}, the
+cocontinuous finite-limit-preserving functors are exactly the finite-flat
+weighted-colimit functionals
+\[
+    U\longmapsto\int^{x\in X}I(x)\tensor U(x).
+\]
+Scalar preservation is automatic for these functionals because tensoring
+distributes over the coends defining the weighted colimits:
+\[
+\begin{aligned}
+    \chi_I(r\tensor U)
+    &=
+    \int^{x\in X} I(x)\tensor r\tensor U(x)\\
+    &\cong
+    r\tensor
+    \int^{x\in X}I(x)\tensor U(x)\\
+    &=
+    r\tensor\chi_I(U).
+\end{aligned}
+\]
+Thus characters of the upper predicate frame are precisely finite-flat weights on
+\(X\).
+\end{proof}
+
+\subsection{The posetal specialization}
+\label{subsec:fuzzy-ideals-posetal}
+
+\begin{definition}[Fuzzy ideal over \(\Lambda\)]
+\label{def:fuzzy-ideal-posetal}
+Let \(X\) be a fuzzy preorder over \(\Lambda\).  A \textbf{fuzzy ideal} of \(X\) is
+a lower fuzzy predicate
+\[
+    I:X^{\op}\to\Lambda
+\]
+such that
+\[
+    \chi_I(U)
+    =
+    \bigjoin_{x\in X} I(x)\tensor U(x)
+\]
+preserves top and binary meets as a map
+\[
+    P_\Lambda(X^{\op})\to\Lambda.
+\]
+Equivalently, \(I\) satisfies the lower-predicate law
+\[
+    X(x',x)\tensor I(x)\leq I(x')
+\]
+and the finite-flatness equations
+\[
+    \bigjoin_{x\in X}I(x)=\top_L
+\]
+and
+\[
+    \bigjoin_{x\in X}I(x)\tensor\bigl(U(x)\meet V(x)\bigr)
+    =
+    \left(\bigjoin_{x\in X}I(x)\tensor U(x)\right)
+    \meet
+    \left(\bigjoin_{x\in X}I(x)\tensor V(x)\right)
+\]
+for all upper fuzzy predicates \(U,V\).
+\end{definition}
+
+\begin{definition}[The fuzzy preorder of fuzzy ideals]
+\label{def:fuzzy-ideal-preorder-posetal}
+For a fuzzy preorder \(X\), define
+\[
+    \operatorname{Idl}_\Lambda(X)
+\]
+to be the full fuzzy subpreorder of \(P_\Lambda(X)\) spanned by the fuzzy ideals.
+Thus, for fuzzy ideals \(I,J\),
+\[
+    \operatorname{Idl}_\Lambda(X)(I,J)
+    =
+    \bigmeet_{x\in X}
+    \bigl(I(x)\multimap J(x)\bigr).
+\]
+\end{definition}
+
+\begin{theorem}[Characters of upper fuzzy Alexandrov frames]
+\label{thm:characters-upper-alexandrov-fuzzy-ideals}
+For every fuzzy preorder \(X\), there is an isomorphism of fuzzy preorders
+\[
+    \operatorname{Char}_\Lambda(P_\Lambda(X^{\op}))
+    \cong
+    \operatorname{Idl}_\Lambda(X).
+\]
+Under this isomorphism, a fuzzy ideal \(I\) corresponds to the character
+\[
+    \chi_I(U)
+    =
+    \bigjoin_{x\in X}I(x)\tensor U(x).
+\]
+\end{theorem}
+
+\begin{proof}
+The coend formula in
+Theorem~\ref{thm:characters-upper-predicate-frames-flat} specializes to the
+displayed join formula, and finite-flatness specializes to preservation of top and
+binary meets.
+
+It remains to identify hom-values.  If
+\[
+    r\leq \bigmeet_x (I(x)\multimap J(x)),
+\]
+then \(r\tensor I(x)\leq J(x)\) for every \(x\), and therefore
+\[
+    r\tensor \chi_I(U)
+    =
+    r\tensor \bigjoin_x I(x)\tensor U(x)
+    \leq
+    \bigjoin_x J(x)\tensor U(x)
+    =
+    \chi_J(U)
+\]
+for every upper predicate \(U\).  Hence
+\[
+    r\leq
+    \bigmeet_U(\chi_I(U)\multimap\chi_J(U)).
+\]
+
+Conversely, evaluate at the upper representable \(X(x,-)\).  The enriched Yoneda
+calculation gives
+\[
+    \chi_I(X(x,-))
+    =
+    \bigjoin_y I(y)\tensor X(x,y)
+    =
+    I(x),
+\]
+and similarly for \(J\).  Hence the character hom is bounded above by
+\[
+    \bigmeet_x(I(x)\multimap J(x)).
+\]
+Thus the hom-values agree.
+\end{proof}
+
+\begin{example}[The crisp case]
+\label{ex:fuzzy-ideals-crisp}
+For \(\Lambda=2\), a fuzzy ideal is an ordinary ideal
+\[
+    I\subseteq X.
+\]
+Thus \(I\) is a lower set, is inhabited, and is directed.  Therefore
+\[
+    \operatorname{Char}_2(\operatorname{Up}(X))
+    \cong
+    \operatorname{Idl}(X).
+\]
+\end{example}
+
+\begin{example}[Standard truth-value objects]
+\label{ex:standard-fuzzy-ideals}
+For G\"odel truth values,
+\[
+    \chi_I(U)=\bigjoin_x \min(I(x),U(x)).
+\]
+For {\L}ukasiewicz truth values,
+\[
+    \chi_I(U)
+    =
+    \bigjoin_x \max(0,I(x)+U(x)-1).
+\]
+For product truth values,
+\[
+    \chi_I(U)=\bigjoin_x I(x)U(x).
+\]
+For the Lawvere quantale, joins in \(\Lambda\) are usual infima and tensor is
+addition, so
+\[
+    \chi_I(U)
+    =
+    \inf_x\bigl(I(x)+U(x)\bigr).
+\]
+\end{example}
+
+\section{The fuzzy ideal monad}
+\label{sec:fuzzy-ideal-monad}
+
+\subsection{The enriched monad}
+\label{subsec:fuzzy-ideal-monad-enriched}
+
+\begin{definition}[Fuzzy ideal monad]
+\label{def:fuzzy-ideal-monad-enriched}
+The \textbf{fuzzy ideal monad} is the monad
+\[
+    T_{\mathbb V}
+    =
+    \operatorname{Char}_{\mathbb V}\mathcal P_{\mathbb V}^{\uparrow}
+\]
+induced by the adjunction
+\[
+    \mathcal P_{\mathbb V}^{\uparrow}
+    \dashv
+    \operatorname{Char}_{\mathbb V}.
+\]
+Thus
+\[
+    T_{\mathbb V}X
+    =
+    \operatorname{Char}_{\mathbb V}(P_{\mathbb V}(X^{\op}))
+    \simeq
+    \operatorname{Idl}_{\mathbb V}(X).
+\]
+After the strictification convention of
+Remark~\ref{rem:strictification-ideal-monad}, we write simply
+\[
+    T_{\mathbb V}X=\operatorname{Idl}_{\mathbb V}(X).
+\]
+\end{definition}
+
+\begin{proposition}[Unit and multiplication]
+\label{prop:fuzzy-ideal-monad-unit-multiplication-enriched}
+Under the finite-flat-weight description, the unit
+\[
+    \eta_X:X\to\operatorname{Idl}_{\mathbb V}(X)
+\]
+is the Yoneda embedding into finite-flat weights:
+\[
+    \eta_X(x)=X(-,x).
+\]
+The multiplication
+\[
+    \mu_X:
+    \operatorname{Idl}_{\mathbb V}(\operatorname{Idl}_{\mathbb V}(X))
+    \to
+    \operatorname{Idl}_{\mathbb V}(X)
+\]
+is flattening:
+\[
+    \mu_X(\mathcal I)(x)
+    =
+    \int^{I\in\operatorname{Idl}_{\mathbb V}(X)}
+    \mathcal I(I)\tensor I(x).
+\]
+\end{proposition}
+
+\begin{proof}
+The unit of the character adjunction sends \(x\) to evaluation at \(x\):
+\[
+    U\longmapsto U(x).
+\]
+The corresponding weight evaluates covariant representables by
+\[
+    X(y,-)(x)=X(y,x),
+\]
+so \(\eta_X(x)=X(-,x)\).  The multiplication is the monad multiplication induced by
+the adjunction, transported through the finite-flat-weight representation; it is
+the weighted colimit of an ideal of ideals.
+\end{proof}
+
+\subsection{The posetal specialization}
+\label{subsec:fuzzy-ideal-monad-posetal}
+
+\begin{definition}[The posetal fuzzy ideal monad]
+\label{def:fuzzy-ideal-monad-posetal}
+In the posetal specialization,
+\[
+    T_\Lambda(X)=\operatorname{Idl}_\Lambda(X).
+\]
+The unit is
+\[
+    \eta_X:X\to\operatorname{Idl}_\Lambda(X),
+    \qquad
+    \eta_X(x)(y)=X(y,x),
+\]
+and the multiplication is
+\[
+    \mu_X:
+    \operatorname{Idl}_\Lambda(\operatorname{Idl}_\Lambda(X))
+    \to
+    \operatorname{Idl}_\Lambda(X),
+\]
+where
+\[
+    \mu_X(\mathcal I)(x)
+    =
+    \bigjoin_{I\in\operatorname{Idl}_\Lambda(X)}
+    \mathcal I(I)\tensor I(x).
+\]
+\end{definition}
+
+\begin{proposition}[Functorial action of the fuzzy ideal monad]
+\label{prop:fuzzy-ideal-monad-functorial-action}
+Let
+\[
+    f:X\to Y
+\]
+be a \(\Lambda\)-functor.  Then
+\[
+    T_\Lambda(f):
+    \operatorname{Idl}_\Lambda(X)\to\operatorname{Idl}_\Lambda(Y)
+\]
+is given by
+\[
+    T_\Lambda(f)(I)(y)
+    =
+    \bigjoin_{x\in X}I(x)\tensor Y(y,f(x)).
+\]
+This is the fuzzy lower closure of the direct image of \(I\) along \(f\).
+\end{proposition}
+
+\begin{proof}
+This is the posetal specialization of enriched left Kan extension of a weight
+along \(f\).  Since it is the functorial action of the monad induced by the
+character adjunction, it preserves fuzzy ideals and is functorial in \(f\).
+\end{proof}
+
+\begin{example}[The crisp ideal monad]
+\label{ex:crisp-ideal-monad}
+For \(\Lambda=2\),
+\[
+    T_2(X)=\operatorname{Idl}(X).
+\]
+The unit sends
+\[
+    x\longmapsto\downarrow x,
+\]
+multiplication sends an ideal of ideals to its union,
+\[
+    \mu_X(\mathcal I)=\bigcup_{I\in\mathcal I}I,
+\]
+and for a monotone map \(f:X\to Y\),
+\[
+    T_2(f)(I)=\downarrow f[I].
+\]
+Thus \(T_2\) is the ordinary ideal-completion monad.
+\end{example}
+
+\begin{example}[Standard direct-image formulas]
+\label{ex:standard-ideal-direct-image}
+For G\"odel truth values,
+\[
+    T_\Lambda(f)(I)(y)
+    =
+    \bigjoin_x \min(I(x),Y(y,f(x))).
+\]
+For {\L}ukasiewicz truth values,
+\[
+    T_\Lambda(f)(I)(y)
+    =
+    \bigjoin_x \max(0,I(x)+Y(y,f(x))-1).
+\]
+For product truth values,
+\[
+    T_\Lambda(f)(I)(y)
+    =
+    \bigjoin_x I(x)Y(y,f(x)).
+\]
+For the Lawvere quantale,
+\[
+    T_\Lambda(f)(I)(y)
+    =
+    \inf_x\bigl(I(x)+d_Y(y,f(x))\bigr).
+\]
+\end{example}
+
+\section{Weak fuzzy domains and fuzzy domains}
+\label{sec:weak-fuzzy-domains-fuzzy-domains}
+
+\subsection{The enriched notion}
+\label{subsec:weak-fuzzy-domains-enriched}
+
+\begin{definition}[Weak fuzzy domain]
+\label{def:weak-fuzzy-domain-enriched}
+A \textbf{weak fuzzy domain} is a small \(\mathbb V\)-category \(X\) equipped with
+a chosen \(\mathbb V\)-functor
+\[
+    \alpha:T_{\mathbb V}X\to X.
+\]
+Using
+\[
+    T_{\mathbb V}X=\operatorname{Idl}_{\mathbb V}(X),
+\]
+we regard \(\alpha\) as assigning to each fuzzy ideal
+\[
+    I:X^{\op}\to\underline{\mathbb V}
+\]
+a chosen candidate fuzzy ideal-join
+\[
+    \alpha(I)\in X.
+\]
+\end{definition}
+
+\begin{definition}[Fuzzy domain]
+\label{def:fuzzy-domain-enriched}
+A \textbf{fuzzy domain} is a weak fuzzy domain whose structure map
+\[
+    \alpha:T_{\mathbb V}X\to X
+\]
+is a strict algebra for the fuzzy ideal monad:
+\[
+    \alpha\eta_X=1_X,
+    \qquad
+    \alpha\mu_X=\alpha T_{\mathbb V}(\alpha).
+\]
+\end{definition}
+
+\begin{remark}
+Weak fuzzy domains carry chosen candidate ideal-joins.  Strict fuzzy domains are
+those for which these choices are coherent with principal ideals and iterated
+fuzzy ideals.
+\end{remark}
+
+\subsection{The posetal specialization}
+\label{subsec:weak-fuzzy-domains-posetal}
+
+\begin{definition}[Weak fuzzy domain over \(\Lambda\)]
+\label{def:weak-fuzzy-domain-posetal}
+A \textbf{weak fuzzy domain over \(\Lambda\)} is a fuzzy preorder \(X\) equipped
+with a \(\Lambda\)-functor
+\[
+    \alpha:\operatorname{Idl}_\Lambda(X)\to X.
+\]
+\end{definition}
+
+\begin{definition}[Fuzzy domain over \(\Lambda\)]
+\label{def:fuzzy-domain-posetal}
+A \textbf{fuzzy domain over \(\Lambda\)} is a weak fuzzy domain satisfying
+\[
+    \alpha(\eta_X x)=x
+\]
+and
+\[
+    \alpha(\mu_X\mathcal I)=\alpha(T_\Lambda\alpha(\mathcal I)).
+\]
+Equivalently,
+\[
+    \alpha(X(-,x))=x
+\]
+and
+\[
+\alpha\left(
+    x\longmapsto
+    \bigjoin_{I\in\operatorname{Idl}_\Lambda(X)}
+    \mathcal I(I)\tensor I(x)
+\right)
+=
+\alpha\left(
+    x\longmapsto
+    \bigjoin_{I\in\operatorname{Idl}_\Lambda(X)}
+    \mathcal I(I)\tensor X(x,\alpha(I))
+\right).
+\]
+\end{definition}
+
+\begin{theorem}[Crisp algebras are dcpos]
+\label{thm:crisp-algebras-are-dcpos}
+For \(\Lambda=2\), strict algebras for the ideal monad on separated preorders are
+precisely dcpos, where dcpos are understood to have suprema of nonempty directed
+subsets.
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+    \alpha:\operatorname{Idl}(X)\to X
+\]
+be a strict algebra.  The unit law says
+\[
+    \alpha(\downarrow x)=x.
+\]
+If \(I\in\operatorname{Idl}(X)\) and \(x\in I\), then
+\[
+    \downarrow x\subseteq I,
+\]
+so by monotonicity
+\[
+    x=\alpha(\downarrow x)\leq \alpha(I).
+\]
+Thus \(\alpha(I)\) is an upper bound of \(I\).  If \(y\) is any upper bound of
+\(I\), then
+\[
+    I\subseteq\downarrow y,
+\]
+and again by monotonicity,
+\[
+    \alpha(I)\leq\alpha(\downarrow y)=y.
+\]
+Hence \(\alpha(I)=\bigjoin I\).  Every nonempty directed subset generates an ideal
+with the same supremum, so \(X\) is a dcpo when separated.
+
+Conversely, if \(X\) is a dcpo, define
+\[
+    \alpha(I)=\bigjoin I.
+\]
+The unit law is immediate, and the multiplication law says that the supremum of a
+directed family of directed suprema is the supremum of its union.  Thus \(X\) is a
+strict algebra.
+\end{proof}
+
+\begin{example}[G\"odel, product, and Lawvere weak fuzzy domains]
+\label{ex:weak-fuzzy-domain-standard}
+A G\"odel-valued weak fuzzy domain assigns candidate joins to finite-flat lower
+weights governed by the minimum tensor.  A product-valued weak fuzzy domain assigns
+candidate joins to finite-flat lower weights with multiplicative membership.  For
+the Lawvere quantale, a weak fuzzy domain assigns colimits to finite-flat Lawvere
+weights, giving a metric-enriched domain-like completion structure.
+\end{example}
+
+\section{The category of fuzzy domains}
+\label{sec:category-fuzzy-domains}
+
+We now record the categorical structure carried by fuzzy domains.  The point is
+not to add extra structure to a fuzzy domain, but to observe that the
+finite-flat doctrine already used to define fuzzy ideals also determines the
+colimits, morphisms, tensor products, and internal homs of fuzzy domains.
+
+Throughout this section, finite-flatness is understood relative to the
+finite-limit doctrine fixed at the beginning of the chapter.  Thus, in each
+predicate category \([X,\underline{\mathbb V}]\), the specified finite limits are
+computed pointwise.  In the posetal scalar-frame specialization, this means
+preservation of the terminal predicate and binary meets.
+
+\begin{definition}[The category of fuzzy domains]
+\label{def:category-fuzzy-domains}
+A morphism of fuzzy domains
+\[
+    f:(X,\alpha_X)\longrightarrow (Y,\alpha_Y)
+\]
+is a \(\mathbb V\)-functor
+\[
+    f:X\to Y
+\]
+such that
+\[
+    f\alpha_X=\alpha_YT_{\mathbb V}(f).
+\]
+The ordinary category of fuzzy domains and fuzzy-domain morphisms is denoted
+\[
+    \mathbf{FDom}_{\mathbb V}.
+\]
+\end{definition}
+
+Thus \(\mathbf{FDom}_{\mathbb V}\) is the Eilenberg--Moore category of strict
+algebras for the fuzzy ideal monad.  The rest of this section identifies these
+strict algebras as finite-flat-cocomplete \(\mathbb V\)-categories and then applies
+Kelly's tensor-product theorem for saturated commutative classes of weights.
+
+\subsection{Finite-flat colimits in fuzzy domains}
+\label{subsec:finite-flat-colimits-fdom}
+
+\begin{lemma}[Representables are finite-flat]
+\label{lem:representables-finite-flat-fdom}
+Let \(X\) be a small \(\mathbb V\)-category.  For every \(x\in X\), the
+representable weight
+\[
+    X(-,x):X^{\op}\to\underline{\mathbb V}
+\]
+is finite-flat.
+\end{lemma}
+
+\begin{proof}
+The colimit functional associated to \(X(-,x)\) is
+\[
+    \chi_{X(-,x)}(U)
+    =
+    \int^{y\in X}X(y,x)\tensor U(y).
+\]
+By enriched co-Yoneda,
+\[
+    \chi_{X(-,x)}(U)\cong U(x).
+\]
+Thus \(\chi_{X(-,x)}\) is evaluation at \(x\).  Since the specified finite
+limits in \([X,\underline{\mathbb V}]\) are computed pointwise, evaluation at
+\(x\) preserves them.  Hence \(X(-,x)\) is finite-flat.
+\end{proof}
+
+\begin{lemma}[Finite-flat direct images]
+\label{lem:finite-flat-direct-images-fdom}
+Let
+\[
+    D:K\to X
+\]
+be a \(\mathbb V\)-functor, and let
+\[
+    W:K^{\op}\to\underline{\mathbb V}
+\]
+be finite-flat.  Define the lower direct image
+\[
+    D_!W:X^{\op}\to\underline{\mathbb V}
+\]
+by
+\[
+    (D_!W)(x)
+    =
+    \int^{k\in K}W(k)\tensor X(x,Dk).
+\]
+Then \(D_!W\) is finite-flat.
+\end{lemma}
+
+\begin{proof}
+Let
+\[
+    U:X\to\underline{\mathbb V}
+\]
+be an upper predicate on \(X\).  Then
+\[
+\begin{aligned}
+    \chi_{D_!W}(U)
+    &=
+    \int^{x\in X}(D_!W)(x)\tensor U(x)
+    \\
+    &=
+    \int^{x\in X}
+        \left(
+            \int^{k\in K}W(k)\tensor X(x,Dk)
+        \right)\tensor U(x)
+    \\
+    &\cong
+    \int^{k\in K}
+        W(k)\tensor
+        \left(
+            \int^{x\in X}X(x,Dk)\tensor U(x)
+        \right)
+    \\
+    &\cong
+    \int^{k\in K}W(k)\tensor U(Dk)
+    \\
+    &=
+    \chi_W(UD).
+\end{aligned}
+\]
+The first isomorphism is Fubini for coends, and the second is enriched
+co-Yoneda.
+
+Precomposition
+\[
+    D^*:[X,\underline{\mathbb V}]\to[K,\underline{\mathbb V}],
+    \qquad
+    U\longmapsto UD,
+\]
+preserves the specified finite limits because they are computed pointwise.
+Since \(W\) is finite-flat, \(\chi_W\) preserves those finite limits.  Hence
+\[
+    \chi_{D_!W}\cong \chi_WD^*
+\]
+preserves them, so \(D_!W\) is finite-flat.
+\end{proof}
+
+\begin{proposition}[Finite-flat saturation]
+\label{prop:finite-flat-saturation-fdom}
+Finite-flat weights are closed under finite-flat weighted colimits in presheaf
+categories.
+
+Explicitly, let
+\[
+    W:K^{\op}\to\underline{\mathbb V}
+\]
+be finite-flat, and let
+\[
+    H:K\to\operatorname{Idl}_{\mathbb V}(X)
+\]
+be a \(\mathbb V\)-functor.  Define
+\[
+    J:X^{\op}\to\underline{\mathbb V}
+\]
+pointwise by
+\[
+    J(x)
+    =
+    \int^{k\in K}W(k)\tensor Hk(x).
+\]
+Then \(J\) is finite-flat.
+\end{proposition}
+
+\begin{proof}
+For every upper predicate
+\[
+    U:X\to\underline{\mathbb V},
+\]
+we have
+\[
+\begin{aligned}
+    \chi_J(U)
+    &=
+    \int^{x\in X}J(x)\tensor U(x)
+    \\
+    &=
+    \int^{x\in X}
+        \left(
+            \int^{k\in K}W(k)\tensor Hk(x)
+        \right)\tensor U(x)
+    \\
+    &\cong
+    \int^{k\in K}
+        W(k)\tensor
+        \left(
+            \int^{x\in X}Hk(x)\tensor U(x)
+        \right)
+    \\
+    &=
+    \int^{k\in K}W(k)\tensor \chi_{Hk}(U).
+\end{aligned}
+\]
+Thus
+\[
+    \chi_J(U)\cong\chi_W(\overline H(U)),
+\]
+where
+\[
+    \overline H:[X,\underline{\mathbb V}]\to[K,\underline{\mathbb V}]
+\]
+is defined by
+\[
+    \overline H(U)(k)=\chi_{Hk}(U).
+\]
+
+We first check that \(\overline H(U)\) is an upper predicate on \(K\).  Since
+\(H\) is a \(\mathbb V\)-functor, for every \(k,k'\in K\) there is a morphism
+\[
+    K(k,k')\longrightarrow
+    \operatorname{Idl}_{\mathbb V}(X)(Hk,Hk').
+\]
+Functoriality of the coend construction gives, naturally in \(U\),
+\[
+    \operatorname{Idl}_{\mathbb V}(X)(Hk,Hk')
+    \longrightarrow
+    \underline{\mathbb V}(\chi_{Hk}(U),\chi_{Hk'}(U)).
+\]
+Composing these maps gives
+\[
+    K(k,k')\longrightarrow
+    \underline{\mathbb V}(\overline H(U)(k),\overline H(U)(k')),
+\]
+so \(\overline H(U)\) is indeed a \(\mathbb V\)-functor
+\[
+    K\to\underline{\mathbb V}.
+\]
+
+Now let \((U_i)\) be a finite diagram of upper predicates whose specified limit
+exists in the finite-limit doctrine.  Since each \(Hk\) is finite-flat,
+\[
+    \chi_{Hk}(\lim_i U_i)
+    \cong
+    \lim_i\chi_{Hk}(U_i).
+\]
+Since specified finite limits in \([K,\underline{\mathbb V}]\) are computed
+pointwise, this gives
+\[
+    \overline H(\lim_i U_i)\cong \lim_i\overline H(U_i).
+\]
+Thus \(\overline H\) preserves the specified finite limits.  Since \(W\) is
+finite-flat, \(\chi_W\) preserves them.  Hence
+\[
+    \chi_J\cong\chi_W\overline H
+\]
+preserves the specified finite limits, so \(J\) is finite-flat.
+\end{proof}
+
+\begin{corollary}[Flattening is finite-flat]
+\label{cor:flattening-finite-flat-fdom}
+If
+\[
+    \mathcal I:
+    \operatorname{Idl}_{\mathbb V}(X)^{\op}\to\underline{\mathbb V}
+\]
+is finite-flat, then the flattened weight
+\[
+    \mu_X(\mathcal I)(x)
+    =
+    \int^{I\in\operatorname{Idl}_{\mathbb V}(X)}
+        \mathcal I(I)\tensor I(x)
+\]
+is finite-flat.
+\end{corollary}
+
+\begin{proof}
+Apply Proposition~\ref{prop:finite-flat-saturation-fdom} to the identity diagram
+\[
+    1_{\operatorname{Idl}_{\mathbb V}(X)}:
+    \operatorname{Idl}_{\mathbb V}(X)\to\operatorname{Idl}_{\mathbb V}(X).
+\]
+\end{proof}
+
+\begin{proposition}[The KZ comparison for the ideal monad]
+\label{prop:ideal-monad-kz-fdom}
+For every small \(\mathbb V\)-category \(X\), there is an enriched natural
+transformation
+\[
+    T_{\mathbb V}\eta_X\Longrightarrow \eta_{T_{\mathbb V}X}.
+\]
+Equivalently, for every finite-flat weight
+\[
+    I:X^{\op}\to\underline{\mathbb V},
+\]
+there is a canonical morphism of weights
+\[
+    (T_{\mathbb V}\eta_X)(I)
+    \longrightarrow
+    \operatorname{Idl}_{\mathbb V}(X)(-,I).
+\]
+Together with the monad unit and multiplication, these comparisons make the ideal
+monad a KZ, or lax-idempotent, monad.
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    I,J\in\operatorname{Idl}_{\mathbb V}(X).
+\]
+The value of \((T_{\mathbb V}\eta_X)(I)\) at \(J\) is
+\[
+    (T_{\mathbb V}\eta_X)(I)(J)
+    =
+    \int^{x\in X}
+        I(x)\tensor
+        \operatorname{Idl}_{\mathbb V}(X)(J,X(-,x)).
+\]
+By enriched Yoneda,
+\[
+    I(x)
+    \cong
+    [X^{\op},\underline{\mathbb V}](X(-,x),I).
+\]
+Composition in the presheaf category gives morphisms
+\[
+    \operatorname{Idl}_{\mathbb V}(X)(J,X(-,x))
+    \tensor
+    [X^{\op},\underline{\mathbb V}](X(-,x),I)
+    \longrightarrow
+    \operatorname{Idl}_{\mathbb V}(X)(J,I).
+\]
+Tensoring with the Yoneda identification and integrating over \(x\) gives
+\[
+    (T_{\mathbb V}\eta_X)(I)(J)
+    \longrightarrow
+    \operatorname{Idl}_{\mathbb V}(X)(J,I).
+\]
+This is natural in \(J\), and therefore defines a morphism of weights
+\[
+    (T_{\mathbb V}\eta_X)(I)
+    \longrightarrow
+    \operatorname{Idl}_{\mathbb V}(X)(-,I).
+\]
+It is also enriched-natural in \(I\), since it is induced by composition in
+\([X^{\op},\underline{\mathbb V}]\).
+
+We now record the KZ consequences explicitly.  The monad laws give
+\[
+    \mu_X\,T_{\mathbb V}\eta_X=1_{T_{\mathbb V}X},
+    \qquad
+    \mu_X\,\eta_{T_{\mathbb V}X}=1_{T_{\mathbb V}X}.
+\]
+The comparison just constructed gives
+\[
+    T_{\mathbb V}\eta_X\Longrightarrow \eta_{T_{\mathbb V}X}.
+\]
+Composing with \(\mu_X\) and using the first monad law gives the identity on
+\(T_{\mathbb V}X\).  Equivalently, the comparison exhibits
+\[
+    \mu_X\dashv \eta_{T_{\mathbb V}X}
+\]
+in the enriched order of endomorphisms.  The remaining triangle inequality is the
+statement that every finite-flat ideal of finite-flat ideals is contained in the
+principal ideal generated by its flattening:
+\[
+    1_{T_{\mathbb V}T_{\mathbb V}X}
+    \Longrightarrow
+    \eta_{T_{\mathbb V}X}\mu_X.
+\]
+On a finite-flat weight
+\[
+    \mathcal I:
+    \operatorname{Idl}_{\mathbb V}(X)^{\op}\to\underline{\mathbb V},
+\]
+this is the morphism
+\[
+    \mathcal I(J)
+    \longrightarrow
+    \operatorname{Idl}_{\mathbb V}(X)(J,\mu_X\mathcal I)
+\]
+obtained by composing
+\[
+    \mathcal I(J)\tensor J(x)
+    \longrightarrow
+    \int^{I}\mathcal I(I)\tensor I(x)
+    =
+    \mu_X(\mathcal I)(x)
+\]
+and transposing in the presheaf hom.  Naturality and the triangle identities are
+the associativity and unitality of composition in
+\([X^{\op},\underline{\mathbb V}]\), together with Fubini for the coends defining
+flattening.  Hence the ideal monad is KZ.
+\end{proof}
+
+\begin{theorem}[The algebra map is left adjoint to Yoneda]
+\label{thm:algebra-map-left-adjoint-y-fdom}
+Let
+\[
+    \alpha:\operatorname{Idl}_{\mathbb V}(X)\to X
+\]
+be a strict algebra structure for the fuzzy ideal monad.  Then
+\[
+    \alpha\dashv \eta_X
+\]
+with identity counit
+\[
+    \alpha\eta_X=1_X.
+\]
+Consequently, enriched-naturally in
+\(I\in\operatorname{Idl}_{\mathbb V}(X)\) and \(x\in X\), there is an isomorphism
+\[
+    X(\alpha I,x)
+    \cong
+    \operatorname{Idl}_{\mathbb V}(X)(I,X(-,x)).
+\]
+\end{theorem}
+
+\begin{proof}
+The algebra unit law gives
+\[
+    \alpha\eta_X=1_X,
+\]
+so the counit of the desired adjunction is the identity.
+
+It remains to construct the unit
+\[
+    1_{\operatorname{Idl}_{\mathbb V}(X)}
+    \longrightarrow
+    \eta_X\alpha.
+\]
+By Proposition~\ref{prop:ideal-monad-kz-fdom}, we have
+\[
+    T_{\mathbb V}\eta_X\Longrightarrow \eta_{T_{\mathbb V}X}.
+\]
+Applying \(T_{\mathbb V}\alpha\) gives
+\[
+    T_{\mathbb V}\alpha\;T_{\mathbb V}\eta_X
+    \longrightarrow
+    T_{\mathbb V}\alpha\;\eta_{T_{\mathbb V}X}.
+\]
+The left-hand side is
+\[
+    T_{\mathbb V}(\alpha\eta_X)=T_{\mathbb V}(1_X)=1_{\operatorname{Idl}_{\mathbb V}(X)}.
+\]
+By naturality of \(\eta\), the right-hand side is
+\[
+    \eta_X\alpha.
+\]
+Thus we obtain
+\[
+    1_{\operatorname{Idl}_{\mathbb V}(X)}
+    \longrightarrow
+    \eta_X\alpha.
+\]
+The KZ coherence supplies the triangle identities.  Therefore
+\[
+    \alpha\dashv\eta_X.
+\]
+The displayed hom-isomorphism is the enriched hom-form of this adjunction.
+\end{proof}
+
+\begin{theorem}[Fuzzy domains and finite-flat colimits]
+\label{thm:fuzzy-domains-ff-colimits}
+Let \(X\) be a small \(\mathbb V\)-category.  To give \(X\) the structure of a
+fuzzy domain is equivalently to give a strict coherent choice of all finite-flat
+weighted colimits in \(X\).
+
+Under this equivalence, the algebra map
+\[
+    \alpha_X:\operatorname{Idl}_{\mathbb V}(X)\to X
+\]
+sends a finite-flat weight \(I:X^{\op}\to\underline{\mathbb V}\) to the
+\(I\)-weighted colimit of the identity diagram:
+\[
+    \alpha_X(I)=I*1_X.
+\]
+More generally, if
+\[
+    D:K\to X
+\]
+is a diagram and
+\[
+    W:K^{\op}\to\underline{\mathbb V}
+\]
+is finite-flat, then
+\[
+    W*D=\alpha_X(D_!W),
+\]
+where
+\[
+    (D_!W)(x)
+    =
+    \int^{k\in K}W(k)\tensor X(x,Dk).
+\]
+
+A \(\mathbb V\)-functor between fuzzy domains is a fuzzy-domain morphism if and
+only if it preserves finite-flat weighted colimits.
+\end{theorem}
+
+\begin{proof}
+Suppose first that
+\[
+    \alpha_X:\operatorname{Idl}_{\mathbb V}(X)\to X
+\]
+is a strict algebra.  By
+Theorem~\ref{thm:algebra-map-left-adjoint-y-fdom},
+\[
+    \alpha_X\dashv\eta_X.
+\]
+Hence, for every finite-flat weight \(I\) and every \(x\in X\),
+\[
+\begin{aligned}
+    X(\alpha_XI,x)
+    &\cong
+    \operatorname{Idl}_{\mathbb V}(X)(I,\eta_Xx)
+    \\
+    &=
+    [X^{\op},\underline{\mathbb V}](I,X(-,x)).
+\end{aligned}
+\]
+This is the universal property of the \(I\)-weighted colimit of the identity
+diagram.  Thus
+\[
+    \alpha_X(I)=I*1_X.
+\]
+
+Now let \(D:K\to X\), and let \(W:K^{\op}\to\underline{\mathbb V}\) be
+finite-flat.  By Lemma~\ref{lem:finite-flat-direct-images-fdom}, \(D_!W\) is
+finite-flat.  For every \(x\in X\),
+\[
+\begin{aligned}
+    X(\alpha_X(D_!W),x)
+    &\cong
+    [X^{\op},\underline{\mathbb V}](D_!W,X(-,x))
+    \\
+    &\cong
+    [K^{\op},\underline{\mathbb V}](W,X(D-,x)).
+\end{aligned}
+\]
+The second isomorphism is the weighted left-Kan-extension adjunction defining
+\(D_!W\).  This is the universal property of the weighted colimit \(W*D\).
+Therefore
+\[
+    W*D=\alpha_X(D_!W)
+\]
+under the strictification convention.
+
+Conversely, suppose \(X\) is equipped with a strict coherent choice of all
+finite-flat weighted colimits.  Define
+\[
+    \alpha_X(I)=I*1_X.
+\]
+The representing isomorphisms
+\[
+    X(\alpha_XI,x)
+    \cong
+    [X^{\op},\underline{\mathbb V}](I,X(-,x))
+\]
+are enriched-natural in \(I\) and \(x\).  Hence \(I\mapsto \alpha_XI\) extends
+uniquely to a \(\mathbb V\)-functor
+\[
+    \alpha_X:\operatorname{Idl}_{\mathbb V}(X)\to X
+\]
+left adjoint to the Yoneda embedding.
+
+For a representable weight,
+\[
+    X(-,x)*1_X=x,
+\]
+so
+\[
+    \alpha_X\eta_X=1_X.
+\]
+For a finite-flat weight
+\[
+    \mathcal I:
+    \operatorname{Idl}_{\mathbb V}(X)^{\op}\to\underline{\mathbb V},
+\]
+the left-hand side of the multiplication law is
+\[
+    \alpha_X\mu_X(\mathcal I)=\mu_X(\mathcal I)*1_X.
+\]
+The right-hand side is
+\[
+    \alpha_XT_{\mathbb V}(\alpha_X)(\mathcal I)
+    =
+    (T_{\mathbb V}\alpha_X)(\mathcal I)*1_X.
+\]
+The weight \(T_{\mathbb V}(\alpha_X)(\mathcal I)\) is the lower direct image of
+\(\mathcal I\) along
+\[
+    \alpha_X:\operatorname{Idl}_{\mathbb V}(X)\to X.
+\]
+Hence its colimit against \(1_X\) is the same weighted colimit as
+\(\mathcal I\) against the diagram \(\alpha_X\):
+\[
+    (T_{\mathbb V}\alpha_X)(\mathcal I)*1_X
+    \cong
+    \mathcal I*\alpha_X.
+\]
+On the other hand,
+\[
+    \mu_X(\mathcal I)(x)
+    =
+    \int^{I}\mathcal I(I)\tensor I(x)
+\]
+is the flattened weight computing the same iterated finite-flat colimit.
+Strict coherence of the chosen finite-flat colimits gives
+\[
+    \mu_X(\mathcal I)*1_X
+    =
+    \mathcal I*(I\mapsto I*1_X)
+    =
+    \mathcal I*\alpha_X.
+\]
+Therefore
+\[
+    \alpha_X\mu_X=\alpha_XT_{\mathbb V}(\alpha_X),
+\]
+so \(\alpha_X\) is a strict algebra.
+
+Finally, let
+\[
+    f:(X,\alpha_X)\to(Y,\alpha_Y)
+\]
+be a \(\mathbb V\)-functor.  If \(f\) is a fuzzy-domain morphism, then for every
+finite-flat \(I:X^{\op}\to\underline{\mathbb V}\),
+\[
+    f(I*1_X)
+    =
+    f\alpha_X(I)
+    =
+    \alpha_YT_{\mathbb V}(f)(I)
+    =
+    T_{\mathbb V}(f)(I)*1_Y.
+\]
+Thus \(f\) preserves finite-flat colimits of identity diagrams, and hence, by
+the direct-image formula, all finite-flat weighted colimits.
+
+Conversely, if \(f\) preserves finite-flat weighted colimits, then for every
+finite-flat \(I\),
+\[
+    f\alpha_X(I)
+    =
+    f(I*1_X)
+    =
+    T_{\mathbb V}(f)(I)*1_Y
+    =
+    \alpha_YT_{\mathbb V}(f)(I).
+\]
+Therefore
+\[
+    f\alpha_X=\alpha_YT_{\mathbb V}(f),
+\]
+so \(f\) is a fuzzy-domain morphism.
+\end{proof}
+
+\subsection{Free fuzzy domains and limits}
+\label{subsec:free-fuzzy-domains-limits}
+
+\begin{theorem}[Free fuzzy domains]
+\label{thm:free-fuzzy-domains}
+The forgetful functor
+\[
+    U:\mathbf{FDom}_{\mathbb V}\to \mathbb V\text{-}\mathbf{Cat}
+\]
+has a left adjoint
+\[
+    F:\mathbb V\text{-}\mathbf{Cat}\to\mathbf{FDom}_{\mathbb V},
+    \qquad
+    F(X)=\operatorname{Idl}_{\mathbb V}(X),
+\]
+where \(F(X)\) has algebra structure
+\[
+    \mu_X:
+    \operatorname{Idl}_{\mathbb V}(\operatorname{Idl}_{\mathbb V}(X))
+    \to
+    \operatorname{Idl}_{\mathbb V}(X).
+\]
+Thus, for every small \(\mathbb V\)-category \(X\) and every fuzzy domain \(A\),
+there is a natural bijection
+\[
+    \mathbf{FDom}_{\mathbb V}(\operatorname{Idl}_{\mathbb V}(X),A)
+    \cong
+    \mathbb V\text{-}\mathbf{Cat}(X,UA).
+\]
+\end{theorem}
+
+\begin{proof}
+This is the free-algebra adjunction of the monad \(T_{\mathbb V}\).  Explicitly,
+if
+\[
+    f:X\to UA
+\]
+is a \(\mathbb V\)-functor and
+\[
+    \alpha_A:\operatorname{Idl}_{\mathbb V}(A)\to A
+\]
+is the algebra map of \(A\), define
+\[
+    \overline f:
+    \operatorname{Idl}_{\mathbb V}(X)\to A
+\]
+by
+\[
+    \overline f(I)
+    =
+    \alpha_A(T_{\mathbb V}f(I)).
+\]
+Equivalently,
+\[
+    \overline f(I)=I*f.
+\]
+By Theorem~\ref{thm:fuzzy-domains-ff-colimits}, \(\overline f\) preserves
+finite-flat weighted colimits, so it is a fuzzy-domain morphism.  Moreover,
+\[
+    \overline f(\eta_Xx)
+    =
+    \alpha_A(\eta_A(fx))
+    =
+    fx.
+\]
+Thus
+\[
+    \overline f\eta_X=f.
+\]
+
+Conversely, if
+\[
+    g:\operatorname{Idl}_{\mathbb V}(X)\to A
+\]
+is a fuzzy-domain morphism, then \(g\) preserves finite-flat weighted colimits.
+For every finite-flat weight \(I:X^{\op}\to\underline{\mathbb V}\), the object
+\(I\in\operatorname{Idl}_{\mathbb V}(X)\) is the \(I\)-weighted colimit of the
+Yoneda diagram:
+\[
+    I\cong I*\eta_X.
+\]
+Therefore
+\[
+    g(I)
+    \cong
+    g(I*\eta_X)
+    \cong
+    I*(g\eta_X).
+\]
+Hence
+\[
+    g=\overline{g\eta_X}
+\]
+under the strictification convention.  The two constructions are inverse and
+natural.
+\end{proof}
+
+\begin{corollary}[Monadicity]
+\label{cor:fdom-monadicity}
+The forgetful functor
+\[
+    U:\mathbf{FDom}_{\mathbb V}\to \mathbb V\text{-}\mathbf{Cat}
+\]
+is monadic, and the induced monad is the fuzzy ideal monad
+\[
+    T_{\mathbb V}.
+\]
+Thus
+\[
+    \mathbf{FDom}_{\mathbb V}=(\mathbb V\text{-}\mathbf{Cat})^{T_{\mathbb V}}.
+\]
+\end{corollary}
+
+\begin{proof}
+By definition, \(\mathbf{FDom}_{\mathbb V}\) is the Eilenberg--Moore category of
+strict algebras for \(T_{\mathbb V}\).  The adjunction of
+Theorem~\ref{thm:free-fuzzy-domains} has underlying monad \(T_{\mathbb V}\), with
+Yoneda unit and flattening multiplication.
+\end{proof}
+
+\begin{theorem}[Small conical limits]
+\label{thm:fdom-limits}
+The category \(\mathbf{FDom}_{\mathbb V}\) has all small conical limits whose
+underlying limits exist in
+\[
+    \mathbb V\text{-}\mathbf{Cat}.
+\]
+These limits are created by the forgetful functor
+\[
+    U:\mathbf{FDom}_{\mathbb V}\to \mathbb V\text{-}\mathbf{Cat}.
+\]
+\end{theorem}
+
+\begin{proof}
+Eilenberg--Moore categories have all limits that exist in the base category, and
+the forgetful functor creates them.
+
+Explicitly, let
+\[
+    D:J\to\mathbf{FDom}_{\mathbb V}
+\]
+be a small diagram, and suppose that
+\[
+    L=\lim_{j\in J}UD_j
+\]
+exists in \(\mathbb V\text{-}\mathbf{Cat}\), with projections
+\[
+    p_j:L\to UD_j.
+\]
+There is a unique algebra structure
+\[
+    \alpha_L:T_{\mathbb V}L\to L
+\]
+such that
+\[
+    p_j\alpha_L=\alpha_jT_{\mathbb V}(p_j)
+\]
+for every \(j\).  With this algebra structure, \(L\) satisfies the universal
+property of the limit in \(\mathbf{FDom}_{\mathbb V}\).
+\end{proof}
+
+\subsection{Tensor products and internal homs}
+\label{subsec:tensor-products-internal-homs-fdom}
+
+\begin{definition}[External product of weights]
+\label{def:external-product-weights-fdom}
+Let
+\[
+    W:K^{\op}\to\underline{\mathbb V},
+    \qquad
+    Q:J^{\op}\to\underline{\mathbb V}
+\]
+be weights.  Their external product is the weight
+\[
+    W\boxtimes Q:(K\tensor J)^{\op}\to\underline{\mathbb V}
+\]
+defined by
+\[
+    (W\boxtimes Q)(k,j)=W(k)\tensor Q(j).
+\]
+\end{definition}
+
+\begin{proposition}[External products of finite-flat weights]
+\label{prop:external-products-finite-flat-fdom}
+If \(W\) and \(Q\) are finite-flat, then
+\[
+    W\boxtimes Q
+\]
+is finite-flat.
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    E:K\tensor J\to\underline{\mathbb V}
+\]
+be an upper predicate.  Then
+\[
+\begin{aligned}
+    \chi_{W\boxtimes Q}(E)
+    &=
+    \int^{(k,j)\in K\tensor J}
+        W(k)\tensor Q(j)\tensor E(k,j)
+    \\
+    &\cong
+    \int^{k\in K}
+        W(k)\tensor
+        \left(
+            \int^{j\in J}Q(j)\tensor E(k,j)
+        \right).
+\end{aligned}
+\]
+For each \(k\), the inner expression is
+\[
+    \chi_Q(E(k,-)).
+\]
+
+Since \(E:K\tensor J\to\underline{\mathbb V}\) is a \(\mathbb V\)-functor, the
+assignment
+\[
+    k\longmapsto E(k,-)
+\]
+defines a \(\mathbb V\)-functor
+\[
+    K\to[J,\underline{\mathbb V}].
+\]
+Composing with
+\[
+    \chi_Q:[J,\underline{\mathbb V}]\to\underline{\mathbb V}
+\]
+gives an upper predicate
+\[
+    k\longmapsto \chi_Q(E(k,-))
+\]
+on \(K\).  Since \(Q\) is finite-flat, this construction preserves the specified
+finite limits in the \(J\)-variable.  Since \(W\) is finite-flat, applying
+\(\chi_W\) preserves the specified finite limits in the remaining \(K\)-variable.
+Hence \(\chi_{W\boxtimes Q}\) preserves the specified finite limits, so
+\(W\boxtimes Q\) is finite-flat.
+\end{proof}
+
+\begin{proposition}[Finite-flat Fubini]
+\label{prop:finite-flat-fubini-fdom}
+Let
+\[
+    W:K^{\op}\to\underline{\mathbb V},
+    \qquad
+    Q:J^{\op}\to\underline{\mathbb V}
+\]
+be finite-flat.  For every diagram
+\[
+    E:K\tensor J\to C
+\]
+in a fuzzy domain \(C\), there are canonical isomorphisms
+\[
+    W*\bigl(k\mapsto Q*(j\mapsto E(k,j))\bigr)
+    \cong
+    (W\boxtimes Q)*E
+    \cong
+    Q*\bigl(j\mapsto W*(k\mapsto E(k,j))\bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+These are the Fubini isomorphisms for enriched weighted colimits.  By
+Proposition~\ref{prop:external-products-finite-flat-fdom}, the external product
+\(W\boxtimes Q\) is finite-flat.  Since \(C\) is a fuzzy domain, all three
+finite-flat weighted colimits appearing above exist.
+\end{proof}
+
+\begin{definition}[Internal hom fuzzy domain]
+\label{def:internal-hom-fdom}
+For fuzzy domains \(B\) and \(C\), define
+\[
+    [B,C]_{\mathrm{ff}}
+\]
+to be the full \(\mathbb V\)-subcategory of the enriched functor category
+\([B,C]\) spanned by the finite-flat-colimit-preserving \(\mathbb V\)-functors
+\[
+    B\to C.
+\]
+\end{definition}
+
+\begin{proposition}[Internal homs are fuzzy domains]
+\label{prop:internal-homs-fdom}
+For fuzzy domains \(B\) and \(C\), the \(\mathbb V\)-category
+\[
+    [B,C]_{\mathrm{ff}}
+\]
+is a fuzzy domain.  Its finite-flat weighted colimits are computed pointwise in
+\(C\).
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    W:K^{\op}\to\underline{\mathbb V}
+\]
+be finite-flat, and let
+\[
+    H:K\to[B,C]_{\mathrm{ff}}
+\]
+be a diagram.  Since \(C\) is a fuzzy domain, the pointwise formula
+\[
+    (W*H)(b)=W*(k\mapsto Hk(b))
+\]
+defines the \(W\)-weighted colimit of \(H\) in the ambient functor category
+\([B,C]\).
+
+It remains to show that \(W*H\) preserves finite-flat weighted colimits in
+\(B\).  Let
+\[
+    Q:J^{\op}\to\underline{\mathbb V}
+\]
+be finite-flat, and let
+\[
+    D:J\to B
+\]
+be a diagram.  Then
+\[
+\begin{aligned}
+    (W*H)(Q*D)
+    &\cong
+    W*\bigl(k\mapsto Hk(Q*D)\bigr)
+    \\
+    &\cong
+    W*\bigl(k\mapsto Q*(j\mapsto Hk(Dj))\bigr)
+    \\
+    &\cong
+    Q*\bigl(j\mapsto W*(k\mapsto Hk(Dj))\bigr)
+    \\
+    &\cong
+    Q*((W*H)D).
+\end{aligned}
+\]
+The second isomorphism uses that each \(Hk:B\to C\) preserves finite-flat
+weighted colimits.  The third isomorphism is
+Proposition~\ref{prop:finite-flat-fubini-fdom}.  Hence \(W*H\) preserves
+finite-flat weighted colimits in \(B\).
+
+Therefore \([B,C]_{\mathrm{ff}}\) is closed under finite-flat weighted colimits
+inside \([B,C]\).  Since \([B,C]_{\mathrm{ff}}\) is full in \([B,C]\), the
+ambient weighted-colimit universal property restricts to
+\([B,C]_{\mathrm{ff}}\).  By
+Theorem~\ref{thm:fuzzy-domains-ff-colimits},
+\([B,C]_{\mathrm{ff}}\) is a fuzzy domain.
+\end{proof}
+
+\begin{definition}[Finite-flat bimorphism]
+\label{def:finite-flat-bimorphism-fdom}
+Let \(A,B,C\) be fuzzy domains.  A finite-flat bimorphism
+\[
+    M:A\tensor B\to C
+\]
+is a \(\mathbb V\)-functor such that:
+\begin{enumerate}
+    \item for each \(a\in A\), the partial functor
+    \[
+        M(a,-):B\to C
+    \]
+    preserves finite-flat weighted colimits;
+    \item for each \(b\in B\), the partial functor
+    \[
+        M(-,b):A\to C
+    \]
+    preserves finite-flat weighted colimits.
+\end{enumerate}
+We write
+\[
+    \operatorname{Bimor}_{\mathrm{ff}}(A,B;C)
+\]
+for the set of finite-flat bimorphisms from \(A,B\) to \(C\).
+\end{definition}
+
+\begin{proposition}[Currying finite-flat bimorphisms]
+\label{prop:currying-bimorphisms-fdom}
+For fuzzy domains \(A,B,C\), there is a natural bijection
+\[
+    \operatorname{Bimor}_{\mathrm{ff}}(A,B;C)
+    \cong
+    \mathbf{FDom}_{\mathbb V}(A,[B,C]_{\mathrm{ff}}).
+\]
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    M:A\tensor B\to C
+\]
+be a finite-flat bimorphism.  By enriched currying, \(M\) corresponds to a
+\(\mathbb V\)-functor
+\[
+    \widehat M:A\to[B,C],
+    \qquad
+    \widehat M(a)(b)=M(a,b).
+\]
+Since \(M\) preserves finite-flat weighted colimits in the \(B\)-variable, each
+\[
+    \widehat M(a):B\to C
+\]
+lies in \([B,C]_{\mathrm{ff}}\).  Thus \(\widehat M\) factors through
+\[
+    [B,C]_{\mathrm{ff}}\subseteq[B,C].
+\]
+Since \(M\) preserves finite-flat weighted colimits in the \(A\)-variable and
+finite-flat colimits in \([B,C]_{\mathrm{ff}}\) are computed pointwise,
+\[
+    \widehat M:A\to[B,C]_{\mathrm{ff}}
+\]
+preserves finite-flat weighted colimits.  Hence \(\widehat M\) is a
+fuzzy-domain morphism.
+
+Conversely, let
+\[
+    H:A\to[B,C]_{\mathrm{ff}}
+\]
+be a fuzzy-domain morphism.  Uncurrying gives
+\[
+    \widetilde H:A\tensor B\to C,
+    \qquad
+    \widetilde H(a,b)=H(a)(b).
+\]
+For each \(a\), the partial functor
+\[
+    \widetilde H(a,-)=H(a)
+\]
+preserves finite-flat weighted colimits because \(H(a)\) is an object of
+\([B,C]_{\mathrm{ff}}\).  For each \(b\), the partial functor
+\[
+    \widetilde H(-,b):A\to C
+\]
+preserves finite-flat weighted colimits because \(H\) does and colimits in
+\([B,C]_{\mathrm{ff}}\) are computed pointwise.  Hence \(\widetilde H\) is a
+finite-flat bimorphism.
+
+The two constructions are inverse by the enriched tensor--hom adjunction.
+\end{proof}
+
+\begin{theorem}[Kelly tensor product for fuzzy domains]
+\label{thm:kelly-tensor-product-fdom}
+For fuzzy domains \(A\) and \(B\), there is a fuzzy domain
+\[
+    A\boxtimes_{\mathrm{ff}}B
+\]
+and a finite-flat bimorphism
+\[
+    \kappa_{A,B}:A\tensor B\to A\boxtimes_{\mathrm{ff}}B
+\]
+such that, for every fuzzy domain \(C\), composition with \(\kappa_{A,B}\)
+induces a natural bijection
+\[
+    \mathbf{FDom}_{\mathbb V}(A\boxtimes_{\mathrm{ff}}B,C)
+    \cong
+    \operatorname{Bimor}_{\mathrm{ff}}(A,B;C).
+\]
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{lem:representables-finite-flat-fdom},
+Lemma~\ref{lem:finite-flat-direct-images-fdom}, and
+Proposition~\ref{prop:finite-flat-saturation-fdom}, the assignment
+\[
+    X\longmapsto \operatorname{Idl}_{\mathbb V}(X)
+\]
+contains the representables, is stable under lower direct image along
+\(\mathbb V\)-functors, and is closed under finite-flat weighted colimits in
+presheaf categories.  Hence the finite-flat weights form a saturated doctrine.
+
+Moreover, Proposition~\ref{prop:external-products-finite-flat-fdom} and
+Proposition~\ref{prop:finite-flat-fubini-fdom} show that the finite-flat
+doctrine is commutative: finite-flat weighted colimits commute with finite-flat
+weighted colimits.
+
+Kelly's tensor-product theorem for categories equipped with a saturated
+commutative class of specified weighted colimits therefore applies to the
+finite-flat doctrine.  The representing object for separately
+finite-flat-colimit-preserving \(\mathbb V\)-functors
+\[
+    A\tensor B\to C
+\]
+is denoted
+\[
+    A\boxtimes_{\mathrm{ff}}B.
+\]
+Its universal map
+\[
+    \kappa_{A,B}:A\tensor B\to A\boxtimes_{\mathrm{ff}}B
+\]
+is a finite-flat bimorphism, and the displayed bijection is exactly the
+representing universal property.
+\end{proof}
+
+\begin{corollary}[Tensor product of free fuzzy domains]
+\label{cor:tensor-free-fdom}
+For small \(\mathbb V\)-categories \(X\) and \(Y\), there is a canonical
+equivalence
+\[
+    \operatorname{Idl}_{\mathbb V}(X)
+    \boxtimes_{\mathrm{ff}}
+    \operatorname{Idl}_{\mathbb V}(Y)
+    \simeq
+    \operatorname{Idl}_{\mathbb V}(X\tensor Y).
+\]
+\end{corollary}
+
+\begin{proof}
+For every fuzzy domain \(C\), there are natural bijections
+\[
+\begin{aligned}
+\mathbf{FDom}_{\mathbb V}
+\bigl(
+    \operatorname{Idl}_{\mathbb V}(X)
+    \boxtimes_{\mathrm{ff}}
+    \operatorname{Idl}_{\mathbb V}(Y),
+    C
+\bigr)
+&\cong
+\operatorname{Bimor}_{\mathrm{ff}}
+\bigl(
+    \operatorname{Idl}_{\mathbb V}(X),
+    \operatorname{Idl}_{\mathbb V}(Y);
+    C
+\bigr)
+\\
+&\cong
+\mathbb V\text{-}\mathbf{Cat}(X\tensor Y,UC)
+\\
+&\cong
+\mathbf{FDom}_{\mathbb V}
+\bigl(
+    \operatorname{Idl}_{\mathbb V}(X\tensor Y),
+    C
+\bigr).
+\end{aligned}
+\]
+The middle bijection sends a bimorphism to its restriction along
+\[
+    \eta_X\tensor\eta_Y:
+    X\tensor Y\to
+    \operatorname{Idl}_{\mathbb V}(X)\tensor\operatorname{Idl}_{\mathbb V}(Y).
+\]
+Conversely, a \(\mathbb V\)-functor
+\[
+    m:X\tensor Y\to UC
+\]
+extends uniquely to the finite-flat bimorphism
+\[
+    \widetilde m:
+    \operatorname{Idl}_{\mathbb V}(X)\tensor\operatorname{Idl}_{\mathbb V}(Y)\to C
+\]
+defined by
+\[
+    \widetilde m(I,J)
+    =
+    I*\bigl(x\mapsto J*(y\mapsto m(x,y))\bigr).
+\]
+By Proposition~\ref{prop:external-products-finite-flat-fdom} and
+Proposition~\ref{prop:finite-flat-fubini-fdom}, this is equivalently
+\[
+    \widetilde m(I,J)\cong (I\boxtimes J)*m.
+\]
+Thus \(\widetilde m\) preserves finite-flat weighted colimits separately in
+\(I\) and \(J\), and it is the unique such extension of \(m\).  By
+representability, the displayed equivalence follows.
+\end{proof}
+
+\begin{corollary}[Tensor unit]
+\label{cor:tensor-unit-fdom}
+Let
+\[
+    \mathbf 1
+\]
+be the terminal small \(\mathbb V\)-category.  The tensor unit for fuzzy domains is
+\[
+    \operatorname{Idl}_{\mathbb V}(\mathbf 1).
+\]
+\end{corollary}
+
+\begin{proof}
+For every fuzzy domain \(C\),
+\[
+\begin{aligned}
+    \mathbf{FDom}_{\mathbb V}
+    \bigl(
+        \operatorname{Idl}_{\mathbb V}(\mathbf 1)
+        \boxtimes_{\mathrm{ff}}A,
+        C
+    \bigr)
+    &\cong
+    \operatorname{Bimor}_{\mathrm{ff}}
+    \bigl(
+        \operatorname{Idl}_{\mathbb V}(\mathbf 1),
+        A;
+        C
+    \bigr)
+    \\
+    &\cong
+    \mathbf{FDom}_{\mathbb V}(A,C).
+\end{aligned}
+\]
+The second bijection uses that \(\operatorname{Idl}_{\mathbb V}(\mathbf 1)\) is
+freely generated as a fuzzy domain by the unique object of \(\mathbf 1\).  Hence
+\[
+    \operatorname{Idl}_{\mathbb V}(\mathbf 1)\boxtimes_{\mathrm{ff}}A
+    \simeq
+    A.
+\]
+The right unit law is analogous.
+\end{proof}
+
+\begin{theorem}[Symmetric monoidal closure of fuzzy domains]
+\label{thm:fdom-smc}
+The category
+\[
+    \mathbf{FDom}_{\mathbb V}
+\]
+is symmetric monoidal closed.  Its tensor product is
+\[
+    A\boxtimes_{\mathrm{ff}}B,
+\]
+its tensor unit is
+\[
+    \operatorname{Idl}_{\mathbb V}(\mathbf 1),
+\]
+and its internal hom is
+\[
+    [B,C]_{\mathrm{ff}}.
+\]
+The closed structure is the natural bijection
+\[
+    \mathbf{FDom}_{\mathbb V}(A\boxtimes_{\mathrm{ff}}B,C)
+    \cong
+    \mathbf{FDom}_{\mathbb V}(A,[B,C]_{\mathrm{ff}}).
+\]
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:kelly-tensor-product-fdom},
+\[
+    \mathbf{FDom}_{\mathbb V}(A\boxtimes_{\mathrm{ff}}B,C)
+    \cong
+    \operatorname{Bimor}_{\mathrm{ff}}(A,B;C).
+\]
+By Proposition~\ref{prop:currying-bimorphisms-fdom},
+\[
+    \operatorname{Bimor}_{\mathrm{ff}}(A,B;C)
+    \cong
+    \mathbf{FDom}_{\mathbb V}(A,[B,C]_{\mathrm{ff}}).
+\]
+Composing these bijections gives the closed structure.
+
+The symmetry of \(\boxtimes_{\mathrm{ff}}\) follows from the symmetry of
+\[
+    A\tensor B\cong B\tensor A
+\]
+and from the symmetric nature of the condition of preserving finite-flat
+weighted colimits separately in the two variables.
+
+Associativity follows by representability.  For every fuzzy domain \(D\), both
+\[
+    (A\boxtimes_{\mathrm{ff}}B)\boxtimes_{\mathrm{ff}}C
+\]
+and
+\[
+    A\boxtimes_{\mathrm{ff}}(B\boxtimes_{\mathrm{ff}}C)
+\]
+represent trilinear \(\mathbb V\)-functors
+\[
+    A\tensor B\tensor C\to D
+\]
+that preserve finite-flat weighted colimits separately in each variable.  Hence
+they are canonically equivalent.
+
+The tensor unit is \(\operatorname{Idl}_{\mathbb V}(\mathbf 1)\) by
+Corollary~\ref{cor:tensor-unit-fdom}.  Therefore \(\mathbf{FDom}_{\mathbb V}\) is
+symmetric monoidal closed.
+\end{proof}
+
+\begin{corollary}[Evaluation]
+\label{cor:evaluation-fdom}
+For fuzzy domains \(B\) and \(C\), there is an evaluation morphism
+\[
+    [B,C]_{\mathrm{ff}}\boxtimes_{\mathrm{ff}}B
+    \longrightarrow
+    C.
+\]
+On generators it is given by
+\[
+    (f,b)\longmapsto f(b).
+\]
+\end{corollary}
+
+\begin{proof}
+The ordinary enriched evaluation
+\[
+    [B,C]\tensor B\to C
+\]
+restricts to a finite-flat bimorphism
+\[
+    [B,C]_{\mathrm{ff}}\tensor B\to C.
+\]
+It is finite-flat-colimit-preserving in the \(B\)-variable because every object
+of \([B,C]_{\mathrm{ff}}\) preserves finite-flat weighted colimits.  It is
+finite-flat-colimit-preserving in the \([B,C]_{\mathrm{ff}}\)-variable because
+finite-flat colimits there are computed pointwise in \(C\).  By the universal
+property of \(\boxtimes_{\mathrm{ff}}\), this bimorphism induces the displayed
+fuzzy-domain morphism.
+\end{proof}
+
+\subsection{Posetal and crisp specializations}
+\label{subsec:posetal-crisp-fdom-category}
+
+In the posetal specialization, a fuzzy domain over \(\Lambda\) is a fuzzy
+preorder \(X\) equipped with a strict algebra
+\[
+    \alpha_X:\operatorname{Idl}_{\Lambda}(X)\to X.
+\]
+The map \(\alpha_X\) sends a fuzzy ideal \(I\) to its fuzzy ideal-join.
+
+If
+\[
+    D:K\to X
+\]
+is a \(\Lambda\)-functor and
+\[
+    W:K^{\op}\to\Lambda
+\]
+is a fuzzy ideal of \(K\), that is, a finite-flat lower fuzzy predicate on
+\(K\), then
+\[
+    W*D=\alpha_X(D_!W),
+\]
+where
+\[
+    (D_!W)(x)
+    =
+    \bigjoin_{k\in K}W(k)\tensor X(x,Dk).
+\]
+A morphism of fuzzy domains
+\[
+    f:X\to Y
+\]
+is a \(\Lambda\)-functor satisfying
+\[
+    f\alpha_X=\alpha_YT_{\Lambda}(f).
+\]
+Equivalently, for every fuzzy ideal \(I\) of \(X\),
+\[
+    f(\alpha_X(I))
+    =
+    \alpha_Y(T_{\Lambda}f(I)).
+\]
+Here the direct image \(T_{\Lambda}f(I)\) is given by
+\[
+    (T_{\Lambda}f)(I)(y)
+    =
+    \bigjoin_{x\in X}I(x)\tensor Y(y,fx).
+\]
+
+For fuzzy domains \(B\) and \(C\), the internal hom
+\[
+    [B,C]_{\mathrm{ff}}
+\]
+has as objects the fuzzy-domain morphisms
+\[
+    B\to C.
+\]
+Its hom-values are inherited from the enriched functor preorder:
+\[
+    [B,C]_{\mathrm{ff}}(f,g)
+    =
+    \bigmeet_{b\in B}C(fb,gb).
+\]
+Finite-flat joins in \([B,C]_{\mathrm{ff}}\) are computed pointwise in \(C\).
+
+For \(\Lambda=2\), finite-flat weights are ordinary ideals.  On separated
+preorders, fuzzy domains are precisely dcpos, and fuzzy-domain morphisms are
+precisely Scott-continuous maps.  Hence
+\[
+    \mathbf{FDom}_{2}^{\mathrm{sep}}
+    \simeq
+    \mathbf{DCPO},
+\]
+where \(\mathbf{DCPO}\) denotes the category of dcpos and Scott-continuous maps,
+small in the chosen universe.
+
+In this crisp separated case, finite-flat bimorphisms are monotone maps
+\[
+    A\times B\to C
+\]
+between dcpos that are Scott-continuous in each variable separately.  Such maps
+are Scott-continuous for the product dcpo.  Indeed, let
+\[
+    D\subseteq A\times B
+\]
+be nonempty and directed.  Then \(\pi_A D\) and \(\pi_BD\) are nonempty directed
+subsets, and
+\[
+    \bigjoin D
+    =
+    \left(
+        \bigjoin\pi_A D,
+        \bigjoin\pi_BD
+    \right).
+\]
+If
+\[
+    f:A\times B\to C
+\]
+is separately Scott-continuous, then
+\[
+\begin{aligned}
+    f\left(\bigjoin D\right)
+    &=
+    f\left(
+        \bigjoin\pi_A D,
+        \bigjoin\pi_B D
+    \right)
+    \\
+    &=
+    \bigjoin_{a\in\pi_A D}
+        f\left(a,\bigjoin\pi_BD\right)
+    \\
+    &=
+    \bigjoin_{a\in\pi_A D}
+        \bigjoin_{b\in\pi_BD}
+            f(a,b).
+\end{aligned}
+\]
+Since \(D\) is directed, every pair
+\[
+    (a,b)\in\pi_A D\times\pi_BD
+\]
+is bounded above by some element of \(D\).  By monotonicity,
+\[
+    \bigjoin_{a\in\pi_A D,\;b\in\pi_BD}f(a,b)
+    =
+    \bigjoin_{(a,b)\in D}f(a,b).
+\]
+Hence
+\[
+    f\left(\bigjoin D\right)
+    =
+    \bigjoin_{(a,b)\in D}f(a,b).
+\]
+Thus \(f\) is Scott-continuous on the product dcpo.
+
+Consequently, in the separated crisp specialization, the Kelly tensor product
+\(\boxtimes_{\mathrm{ff}}\) agrees with the cartesian product of dcpos, and the
+internal hom agrees with the dcpo of Scott-continuous maps ordered pointwise.
+Hence, under the equivalence
+\[
+    \mathbf{FDom}_{2}^{\mathrm{sep}}
+    \simeq
+    \mathbf{DCPO},
+\]
+the symmetric monoidal closed structure constructed above specializes to the
+standard cartesian closed structure on the category of dcpos and Scott-continuous
+maps.
+
+\section{The Kleisli category and fuzzy approximable maps}
+\label{sec:kleisli-fuzzy-ideal-monad}
+
+\subsection{The enriched Kleisli category}
+\label{subsec:kleisli-enriched}
+
+\begin{definition}[Fuzzy Kleisli morphism]
+\label{def:fuzzy-kleisli-morphism-enriched}
+A \textbf{fuzzy Kleisli morphism}
+\[
+    X\rightsquigarrow Y
+\]
+is a \(\mathbb V\)-functor
+\[
+    X\to T_{\mathbb V}Y
+    =
+    \operatorname{Idl}_{\mathbb V}(Y).
+\]
+Equivalently, it is a profunctor-like object
+\[
+    R:X\otimes Y^{\op}\to\underline{\mathbb V}
+\]
+whose fibre
+\[
+    R(x,-):Y^{\op}\to\underline{\mathbb V}
+\]
+is a fuzzy ideal of \(Y\), functorially in \(x\).
+\end{definition}
+
+\begin{proposition}[Kleisli composition]
+\label{prop:kleisli-composition-enriched}
+If
+\[
+    R:X\rightsquigarrow Y
+    \qquad\text{and}\qquad
+    S:Y\rightsquigarrow Z
+\]
+are fuzzy Kleisli morphisms, their composite is
+\[
+    (S\circ R)(x,z)
+    =
+    \int^{y\in Y}R(x,y)\tensor S(y,z).
+\]
+The identity Kleisli morphism on \(X\) is
+\[
+    1_X(x,y)=X(y,x).
+\]
+\end{proposition}
+
+\begin{proof}
+This is Kleisli composition for the monad \(T_{\mathbb V}\), written under the
+finite-flat-weight representation.  The identity is the unit
+\(\eta_X(x)=X(-,x)\).
+\end{proof}
+
+\begin{proposition}[Extension to free fuzzy domains]
+\label{prop:kleisli-extension-free-domain}
+A fuzzy Kleisli morphism
+\[
+    R:X\rightsquigarrow Y
+\]
+extends to a morphism between free fuzzy domains
+\[
+    \overline R:
+    \operatorname{Idl}_{\mathbb V}(X)
+    \to
+    \operatorname{Idl}_{\mathbb V}(Y)
+\]
+given by
+\[
+    \overline R(I)(y)
+    =
+    \int^{x\in X} I(x)\tensor R(x,y).
+\]
+\end{proposition}
+
+\begin{proof}
+This is the Kleisli extension
+\[
+    T_{\mathbb V}X
+    \xrightarrow{T_{\mathbb V}R}
+    T_{\mathbb V}T_{\mathbb V}Y
+    \xrightarrow{\mu_Y}
+    T_{\mathbb V}Y.
+\]
+The displayed formula is the resulting convolution.
+\end{proof}
+
+\subsection{The posetal specialization}
+\label{subsec:kleisli-posetal}
+
+\begin{definition}[Fuzzy approximable map]
+\label{def:fuzzy-approximable-map}
+For fuzzy preorders \(X,Y\), a \textbf{fuzzy approximable map}
+\[
+    R:X\rightsquigarrow Y
+\]
+is a map
+\[
+    R:X\times Y\to L
+\]
+such that each fibre
+\[
+    R(x,-):Y^{\op}\to\Lambda
+\]
+is a fuzzy ideal of \(Y\), and the assignment
+\[
+    x\longmapsto R(x,-)
+\]
+is a \(\Lambda\)-functor
+\[
+    X\to\operatorname{Idl}_\Lambda(Y).
+\]
+\end{definition}
+
+\begin{proposition}[Posetal Kleisli formulas]
+\label{prop:posetal-kleisli-formulas}
+For fuzzy approximable maps
+\[
+    R:X\rightsquigarrow Y,
+    \qquad
+    S:Y\rightsquigarrow Z,
+\]
+composition is
+\[
+    (S\circ R)(x,z)
+    =
+    \bigjoin_{y\in Y}R(x,y)\tensor S(y,z).
+\]
+The identity is
+\[
+    1_X(x,y)=X(y,x).
+\]
+The extension of \(R\) to free fuzzy domains is
+\[
+    \overline R(I)(y)
+    =
+    \bigjoin_{x\in X}I(x)\tensor R(x,y).
+\]
+\end{proposition}
+
+\begin{proof}
+These are the posetal specializations of
+Propositions~\ref{prop:kleisli-composition-enriched} and
+\ref{prop:kleisli-extension-free-domain}.
+\end{proof}
+
+\begin{example}[The crisp Kleisli category]
+\label{ex:crisp-kleisli}
+For \(\Lambda=2\), a Kleisli morphism
+\[
+    X\rightsquigarrow Y
+\]
+is a monotone map
+\[
+    X\to\operatorname{Idl}(Y).
+\]
+Equivalently, it is an ideal-valued relation
+\[
+    R\subseteq X\times Y
+\]
+such that each fibre
+\[
+    R[x]=\{y\in Y\mid xRy\}
+\]
+is an ideal of \(Y\), and
+\[
+    x\leq x'
+    \quad\Longrightarrow\quad
+    R[x]\subseteq R[x'].
+\]
+Composition is
+\[
+    (S\circ R)[x]
+    =
+    \bigcup_{y\in R[x]}S[y],
+\]
+and the Kleisli extension is
+\[
+    \overline r(I)=\bigcup_{x\in I}r(x).
+\]
+These are the classical approximable maps between bases.
+\end{example}
+
+\begin{example}[Lawvere Kleisli morphisms]
+\label{ex:lawvere-kleisli}
+For the Lawvere quantale, Kleisli morphisms are flat-weight-valued metric
+relations.  Composition is infimal convolution:
+\[
+    (S\circ R)(x,z)
+    =
+    \inf_{y\in Y}\bigl(R(x,y)+S(y,z)\bigr).
+\]
+\end{example}
+
+\section{Fuzzy algebraic and fuzzy continuous domains}
+\label{sec:fuzzy-algebraic-continuous-domains}
+
+\subsection{Fuzzy algebraic domains}
+\label{subsec:fuzzy-algebraic-domains}
+
+\begin{definition}[Presented fuzzy algebraic domain]
+\label{def:presented-fuzzy-algebraic-domain}
+A \textbf{presented fuzzy algebraic domain} is a free fuzzy domain
+\[
+    \operatorname{Idl}_{\mathbb V}(B)
+\]
+for a small \(\mathbb V\)-category \(B\).  The objects of \(B\) are regarded as
+basic elements, and the principal ideals
+\[
+    \eta_B(b)=B(-,b)
+\]
+are their basic compact approximants.
+\end{definition}
+
+\begin{proposition}[Algebra structure on a free fuzzy domain]
+\label{prop:free-fuzzy-domain-algebra-structure}
+The algebra structure on
+\[
+    \operatorname{Idl}_{\mathbb V}(B)
+\]
+is the monad multiplication
+\[
+    \mu_B:
+    \operatorname{Idl}_{\mathbb V}(\operatorname{Idl}_{\mathbb V}(B))
+    \to
+    \operatorname{Idl}_{\mathbb V}(B).
+\]
+In the posetal case,
+\[
+    \mu_B(\mathcal I)(b)
+    =
+    \bigjoin_{I\in\operatorname{Idl}_\Lambda(B)}
+    \mathcal I(I)\tensor I(b).
+\]
+\end{proposition}
+
+\begin{proof}
+This is the free-algebra construction for a monad, with multiplication given by
+flattening.
+\end{proof}
+
+\begin{example}[Crisp algebraic domains]
+\label{ex:crisp-algebraic-domains}
+For \(\Lambda=2\),
+\[
+    \operatorname{Idl}(B)
+\]
+is an algebraic dcpo with compact elements the principal ideals
+\[
+    \downarrow b.
+\]
+Every ideal is the directed supremum of its principal subideals:
+\[
+    I=\bigjoin_{b\in I}\downarrow b.
+\]
+Thus free algebras for the crisp ideal monad are algebraic dcpos equipped with a
+chosen basis of compact generators.
+\end{example}
+
+\subsection{Fuzzy continuous domains}
+\label{subsec:fuzzy-continuous-domains}
+
+\begin{definition}[Fuzzy continuous domain]
+\label{def:fuzzy-continuous-domain-enriched}
+Let \(X\) be a fuzzy domain with algebra structure
+\[
+    \alpha:\operatorname{Idl}_{\mathbb V}(X)\to X.
+\]
+We say that \(X\) is a \textbf{fuzzy continuous domain} if \(\alpha\) admits an
+enriched left adjoint
+\[
+    \beta:X\to\operatorname{Idl}_{\mathbb V}(X),
+    \qquad
+    \beta\dashv\alpha.
+\]
+Thus
+\[
+    \operatorname{Idl}_{\mathbb V}(X)(\beta x,I)
+    \cong
+    X(x,\alpha I).
+\]
+The object \(\beta(x)\) is the fuzzy ideal of approximants to \(x\).
+\end{definition}
+
+\begin{definition}[Fuzzy way-below degree]
+\label{def:fuzzy-way-below-degree}
+In the posetal specialization, the associated \textbf{fuzzy way-below degree} is
+\[
+    \operatorname{wb}_X(y,x)
+    =
+    \beta(x)(y).
+\]
+\end{definition}
+
+\begin{proposition}[Adjunction and approximation]
+\label{prop:fuzzy-continuity-adjunction}
+Let \(X\) be a separated fuzzy domain over \(\Lambda\), with algebra map
+\[
+    \alpha:\operatorname{Idl}_\Lambda(X)\to X.
+\]
+If
+\[
+    \beta:X\to\operatorname{Idl}_\Lambda(X)
+\]
+satisfies
+\[
+    \beta\dashv\alpha,
+\]
+then
+\[
+    \alpha\beta=1_X
+\]
+in the induced crisp order.  Hence every element is recovered as the fuzzy join of
+its approximants.
+\end{proposition}
+
+\begin{proof}
+The unit of the adjunction gives
+\[
+    1_X\leq \alpha\beta.
+\]
+The counit gives
+\[
+    \beta\alpha\leq 1_{\operatorname{Idl}_\Lambda(X)}.
+\]
+Apply the counit inequality to the principal ideal \(\eta_X(x)\).  Since
+\[
+    \alpha\eta_X(x)=x,
+\]
+we obtain
+\[
+    \beta(x)\leq\eta_X(x).
+\]
+Applying \(\alpha\) gives
+\[
+    \alpha\beta(x)\leq\alpha\eta_X(x)=x.
+\]
+Together with \(x\leq\alpha\beta(x)\), this gives equality in the induced crisp
+order.  Since \(X\) is separated, this is equality of objects.
+\end{proof}
+
+\begin{example}[Crisp continuous domains]
+\label{ex:crisp-continuous-domains}
+Let \(D\) be a dcpo with ideal-supremum map
+\[
+    \bigjoin:\operatorname{Idl}(D)\to D.
+\]
+Then \(D\) is continuous precisely when this map has a left adjoint
+\[
+    \beta:D\to\operatorname{Idl}(D).
+\]
+The left adjoint is
+\[
+    \beta(x)=\{y\in D\mid y\ll x\},
+\]
+and the adjunction says
+\[
+    \beta(x)\subseteq I
+    \quad\Longleftrightarrow\quad
+    x\leq \bigjoin I.
+\]
+\end{example}
+
+\begin{example}[Split Kleisli idempotents]
+\label{ex:split-kleisli-idempotents-continuous}
+In the crisp case, the map
+\[
+    \beta:D\to\operatorname{Idl}(D),
+    \qquad
+    \beta(x)=\{y\mid y\ll x\},
+\]
+is a Kleisli endomorphism
+\[
+    D\rightsquigarrow D.
+\]
+Interpolation of the way-below relation gives
+\[
+    \beta\circ_{\operatorname{Kl}}\beta=\beta.
+\]
+Thus continuous dcpos appear as splittings of Kleisli idempotents, equivalently as
+retracts of algebraic dcpos.
+\end{example}
+
+\begin{example}[Lawvere-valued approximation]
+\label{ex:lawvere-fuzzy-continuous}
+For the Lawvere quantale, a fuzzy continuity structure assigns to each point \(x\)
+a finite-flat weight
+\[
+    \beta(x):X^{\op}\to[0,\infty].
+\]
+The value \(\beta(x)(y)\) is the cost by which \(y\) approximates \(x\).  The
+adjunction
+\[
+    \beta\dashv\alpha
+\]
+says that approximation into \(x\) is controlled exactly by comparison with
+finite-flat-weight colimits.
+\end{example}
+
+\section{Fuzzy Scott opens and fuzzy Scott locales}
+\label{sec:fuzzy-scott-opens}
+
+\subsection{The enriched construction}
+\label{subsec:fuzzy-scott-opens-enriched}
+
+\begin{definition}[Fuzzy Scott open]
+\label{def:fuzzy-scott-open-enriched}
+Let \(X\) be a weak fuzzy domain with structure map
+\[
+    \alpha:T_{\mathbb V}X\to X.
+\]
+A \textbf{fuzzy Scott open} on \(X\) is an upper fuzzy predicate
+\[
+    U:X\to\underline{\mathbb V}
+\]
+such that, for every fuzzy ideal \(I\),
+\[
+    U(\alpha(I))
+    \cong
+    \int^{x\in X} I(x)\tensor U(x).
+\]
+\end{definition}
+
+\begin{definition}[Enriched fuzzy Scott frame]
+\label{def:enriched-fuzzy-scott-frame}
+When the required equalizer exists in categorical fuzzy frames, define
+\[
+    \operatorname{Scott}_{\mathbb V}(X)
+\]
+to be the equalizer
+\[
+\begin{tikzcd}[column sep=large]
+\operatorname{Scott}_{\mathbb V}(X)
+    \arrow[r, hook]
+&
+P_{\mathbb V}(X^{\op})
+    \arrow[r, shift left=.8ex, "{U\mapsto U\alpha}"]
+    \arrow[r, shift right=.8ex, "{U\mapsto (I\mapsto \int^x I(x)\tensor U(x))}"']
+&
+P_{\mathbb V}(\operatorname{Idl}_{\mathbb V}(X)^{\op}).
+\end{tikzcd}
+\]
+The second map is a fuzzy-frame morphism because, for each finite-flat weight \(I\),
+the functional
+\[
+    U\longmapsto I*U
+\]
+is a character, and functoriality in \(I\) gives an upper predicate on
+\(\operatorname{Idl}_{\mathbb V}(X)\).
+\end{definition}
+
+\begin{definition}[Fuzzy Scott locale]
+\label{def:fuzzy-scott-locale-enriched}
+The \textbf{fuzzy Scott locale} of \(X\) is the fuzzy locale
+\[
+    \operatorname{ScottLoc}_{\mathbb V}(X)
+\]
+whose frame of opens is
+\[
+    \operatorname{Opens}_{\mathbb V}(\operatorname{ScottLoc}_{\mathbb V}(X))
+    =
+    \operatorname{Scott}_{\mathbb V}(X).
+\]
+The inclusion
+\[
+    \operatorname{Scott}_{\mathbb V}(X)
+    \hookrightarrow
+    P_{\mathbb V}(X^{\op})
+\]
+defines a fuzzy-locale map
+\[
+    \mathcal P_{\mathbb V}^{\uparrow}X
+    \longrightarrow
+    \operatorname{ScottLoc}_{\mathbb V}(X).
+\]
+\end{definition}
+
+\subsection{The posetal specialization}
+\label{subsec:fuzzy-scott-opens-posetal}
+
+\begin{definition}[Fuzzy Scott open over \(\Lambda\)]
+\label{def:fuzzy-scott-open-posetal}
+Let \(X\) be a weak fuzzy domain over \(\Lambda\), with structure map
+\[
+    \alpha:\operatorname{Idl}_\Lambda(X)\to X.
+\]
+A \textbf{fuzzy Scott open} is an upper fuzzy predicate
+\[
+    U:X\to L
+\]
+satisfying
+\[
+    U(\alpha(I))
+    =
+    \bigjoin_{x\in X} I(x)\tensor U(x)
+\]
+for every fuzzy ideal \(I\).
+\end{definition}
+
+\begin{definition}[The fuzzy Scott frame]
+\label{def:fuzzy-scott-frame-posetal}
+The \textbf{fuzzy Scott frame} of \(X\) is the full fuzzy subpreorder
+\[
+    \operatorname{Scott}_\Lambda(X)
+    \hookrightarrow
+    P_\Lambda(X^{\op})
+\]
+spanned by the fuzzy Scott opens.  Equivalently, it is the equalizer
+\[
+\begin{tikzcd}[column sep=large]
+\operatorname{Scott}_\Lambda(X)
+    \arrow[r, hook]
+&
+P_\Lambda(X^{\op})
+    \arrow[r, shift left=.8ex, "{U\mapsto U\alpha}"]
+    \arrow[r, shift right=.8ex, "{\Theta}"']
+&
+P_\Lambda(\operatorname{Idl}_\Lambda(X)^{\op}),
+\end{tikzcd}
+\]
+where
+\[
+    \Theta(U)(I)
+    =
+    \bigjoin_{x\in X} I(x)\tensor U(x).
+\]
+\end{definition}
+
+\begin{proposition}[Fuzzy Scott opens form a fuzzy frame]
+\label{prop:fuzzy-scott-opens-frame}
+Let \(X\) be a weak fuzzy domain over \(\Lambda\).  Then
+\[
+    \operatorname{Scott}_\Lambda(X)
+\]
+is a fuzzy frame, and the inclusion
+\[
+    \operatorname{Scott}_\Lambda(X)\hookrightarrow P_\Lambda(X^{\op})
+\]
+is a fuzzy-frame homomorphism.
+\end{proposition}
+
+\begin{proof}
+First, \(\Theta(U)\) is an upper fuzzy predicate on
+\(\operatorname{Idl}_\Lambda(X)\).  If
+\[
+    r\leq \operatorname{Idl}_\Lambda(X)(I,J),
+\]
+then \(r\tensor I(x)\leq J(x)\) for every \(x\), and hence
+\[
+    r\tensor \Theta(U)(I)
+    =
+    r\tensor \bigjoin_x I(x)\tensor U(x)
+    \leq
+    \bigjoin_x J(x)\tensor U(x)
+    =
+    \Theta(U)(J).
+\]
+Thus
+\[
+    \Theta(U)\in
+    P_\Lambda(\operatorname{Idl}_\Lambda(X)^{\op}).
+\]
+
+For each fuzzy ideal \(I\), the map
+\[
+    U\longmapsto \Theta(U)(I)
+\]
+is the character \(\chi_I\), so it preserves arbitrary joins, finite meets, and
+scalars.  Since fuzzy-frame structure in
+\[
+    P_\Lambda(\operatorname{Idl}_\Lambda(X)^{\op})
+\]
+is computed pointwise in \(I\), the map
+\[
+    \Theta:
+    P_\Lambda(X^{\op})
+    \to
+    P_\Lambda(\operatorname{Idl}_\Lambda(X)^{\op})
+\]
+preserves arbitrary joins, finite meets, and scalars.  The map
+\(U\mapsto U\alpha\) is precomposition by \(\alpha\), so it preserves the same
+structure.  Therefore their equalizer is closed under arbitrary joins, finite
+meets, and scalars, and the inclusion is a fuzzy-frame homomorphism.
+\end{proof}
+
+\begin{definition}[Fuzzy Scott locale over \(\Lambda\)]
+\label{def:fuzzy-scott-locale-posetal}
+For a weak fuzzy domain \(X\), the \textbf{fuzzy Scott locale} of \(X\) is the
+fuzzy locale
+\[
+    \operatorname{ScottLoc}_\Lambda(X)
+\]
+whose frame of opens is
+\[
+    \Opens_\Lambda(\operatorname{ScottLoc}_\Lambda(X))
+    =
+    \operatorname{Scott}_\Lambda(X).
+\]
+The inclusion
+\[
+    \operatorname{Scott}_\Lambda(X)\hookrightarrow P_\Lambda(X^{\op})
+\]
+gives a fuzzy-locale map
+\[
+    \mathcal P_\Lambda^\uparrow X
+    \longrightarrow
+    \operatorname{ScottLoc}_\Lambda(X).
+\]
+\end{definition}
+
+\begin{theorem}[Scott opens of a free fuzzy domain]
+\label{thm:scott-opens-free-fuzzy-domain}
+For every fuzzy preorder \(B\), there is a canonical isomorphism of fuzzy frames
+\[
+    P_\Lambda(B^{\op})
+    \cong
+    \operatorname{Scott}_\Lambda(\operatorname{Idl}_\Lambda(B)).
+\]
+An upper fuzzy predicate
+\[
+    U:B\to L
+\]
+corresponds to the fuzzy Scott open
+\[
+    \widehat U:\operatorname{Idl}_\Lambda(B)\to L
+\]
+defined by
+\[
+    \widehat U(I)
+    =
+    \bigjoin_{b\in B}I(b)\tensor U(b).
+\]
+\end{theorem}
+
+\begin{proof}
+Let \(U\in P_\Lambda(B^{\op})\).  Define
+\[
+    \widehat U(I)
+    =
+    \bigjoin_b I(b)\tensor U(b).
+\]
+The calculation in Proposition~\ref{prop:fuzzy-scott-opens-frame} shows that
+\(\widehat U\) is an upper fuzzy predicate on
+\(\operatorname{Idl}_\Lambda(B)\).
+
+For
+\[
+    \mathcal I\in
+    \operatorname{Idl}_\Lambda(\operatorname{Idl}_\Lambda(B)),
+\]
+we compute
+\[
+\begin{aligned}
+    \widehat U(\mu_B(\mathcal I))
+    &=
+    \bigjoin_b \mu_B(\mathcal I)(b)\tensor U(b)\\
+    &=
+    \bigjoin_b
+    \left(
+        \bigjoin_I \mathcal I(I)\tensor I(b)
+    \right)\tensor U(b)\\
+    &=
+    \bigjoin_I \mathcal I(I)\tensor
+    \left(
+        \bigjoin_b I(b)\tensor U(b)
+    \right)\\
+    &=
+    \bigjoin_I \mathcal I(I)\tensor \widehat U(I).
+\end{aligned}
+\]
+Thus \(\widehat U\) is Scott open.
+
+Conversely, let
+\[
+    W\in\operatorname{Scott}_\Lambda(\operatorname{Idl}_\Lambda(B)).
+\]
+Restrict along the unit and define
+\[
+    U_W(b)=W(\eta_B b).
+\]
+Then \(U_W\) is an upper fuzzy predicate on \(B\).  For \(U\), Yoneda gives
+\[
+    \widehat U(\eta_B b)
+    =
+    \bigjoin_c B(c,b)\tensor U(c)
+    =
+    U(b),
+\]
+so \(U_{\widehat U}=U\).
+
+It remains to show that \(\widehat{U_W}=W\).  For
+\(I\in\operatorname{Idl}_\Lambda(B)\), the upper-predicate law for \(W\) gives
+\[
+    \operatorname{Idl}_\Lambda(B)(\eta_B b,I)
+    \tensor W(\eta_B b)
+    \leq
+    W(I).
+\]
+By Yoneda,
+\[
+    \operatorname{Idl}_\Lambda(B)(\eta_B b,I)=I(b).
+\]
+Hence
+\[
+    \widehat{U_W}(I)
+    =
+    \bigjoin_b I(b)\tensor W(\eta_B b)
+    \leq
+    W(I).
+\]
+
+For the converse, use
+\[
+    \mu_B T_\Lambda(\eta_B)=1_{\operatorname{Idl}_\Lambda(B)}.
+\]
+Since \(W\) is Scott open,
+\[
+\begin{aligned}
+    W(I)
+    &=
+    W(\mu_B T_\Lambda(\eta_B)(I))\\
+    &=
+    \bigjoin_J T_\Lambda(\eta_B)(I)(J)\tensor W(J).
+\end{aligned}
+\]
+Moreover,
+\[
+    T_\Lambda(\eta_B)(I)(J)
+    =
+    \bigjoin_b I(b)\tensor
+    \operatorname{Idl}_\Lambda(B)(J,\eta_B b).
+\]
+Using the upper-predicate law for \(W\),
+\[
+    \operatorname{Idl}_\Lambda(B)(J,\eta_B b)\tensor W(J)
+    \leq
+    W(\eta_B b).
+\]
+Therefore
+\[
+\begin{aligned}
+    W(I)
+    &\leq
+    \bigjoin_J \bigjoin_b
+    I(b)\tensor
+    \operatorname{Idl}_\Lambda(B)(J,\eta_B b)\tensor W(J)\\
+    &\leq
+    \bigjoin_b I(b)\tensor W(\eta_B b)\\
+    &=
+    \widehat{U_W}(I).
+\end{aligned}
+\]
+Thus \(W=\widehat{U_W}\).  The two constructions are inverse and preserve the
+fuzzy-frame structure because all operations are computed pointwise and each
+evaluation functional is a character.
+\end{proof}
+
+\begin{example}[The crisp Scott condition]
+\label{ex:crisp-scott-opens}
+For \(\Lambda=2\), if \(X\) is a dcpo with algebra
+\[
+    \alpha:\operatorname{Idl}(X)\to X,
+    \qquad
+    I\mapsto\bigjoin I,
+\]
+then a fuzzy Scott open is an upper set \(U\subseteq X\) satisfying
+\[
+    \bigjoin I\in U
+    \quad\Longleftrightarrow\quad
+    I\cap U\neq\varnothing
+\]
+for every ideal \(I\).  This is the ordinary Scott-open condition expressed using
+ideals.
+\end{example}
+
+\begin{example}[Upper sets as Scott opens of ideal completions]
+\label{ex:upper-sets-as-scott-opens-ideal-completion}
+For a preorder \(B\),
+\[
+    \operatorname{Scott}(\operatorname{Idl}(B))
+    \cong
+    \operatorname{Up}(B).
+\]
+The correspondence sends an upper set \(U\subseteq B\) to
+\[
+    \widehat U
+    =
+    \{I\in\operatorname{Idl}(B)\mid I\cap U\neq\varnothing\}.
+\]
+Thus the upper Alexandrov frame of \(B\) is the Scott frame of the free dcpo
+generated by \(B\).
+\end{example}
+
+\begin{example}[Standard fuzzy Scott formulas]
+\label{ex:standard-fuzzy-scott-opens}
+For G\"odel truth values, the fuzzy Scott condition is
+\[
+    U(\alpha(I))
+    =
+    \bigjoin_x \min(I(x),U(x)).
+\]
+For {\L}ukasiewicz truth values, it is
+\[
+    U(\alpha(I))
+    =
+    \bigjoin_x \max(0,I(x)+U(x)-1).
+\]
+For product truth values, it is
+\[
+    U(\alpha(I))
+    =
+    \bigjoin_x I(x)U(x).
+\]
+For the Lawvere quantale, it becomes
+\[
+    U(\alpha(I))
+    =
+    \inf_x\bigl(I(x)+U(x)\bigr).
+\]
+\end{example}
+
+\section{The Alexandrov character comonad}
+\label{sec:alexandrov-character-comonad}
+
+\subsection{The enriched comonad}
+\label{subsec:alexandrov-character-comonad-enriched}
+
+\begin{definition}[Alexandrov character comonad]
+\label{def:alexandrov-character-comonad-enriched}
+The \textbf{Alexandrov character comonad} is the comonad
+\[
+    G_{\mathbb V}
+    =
+    \mathcal P_{\mathbb V}^{\uparrow}\operatorname{Char}_{\mathbb V}
+\]
+on fuzzy locales induced by
+\[
+    \mathcal P_{\mathbb V}^{\uparrow}
+    \dashv
+    \operatorname{Char}_{\mathbb V}.
+\]
+For a fuzzy locale \(\mathcal X\),
+\[
+    G_{\mathbb V}\mathcal X
+    =
+    \mathcal P_{\mathbb V}^{\uparrow}
+    \bigl(
+        \operatorname{Char}_{\mathbb V}(\mathcal X)
+    \bigr),
+\]
+so
+\[
+    \operatorname{Opens}_{\mathbb V}(G_{\mathbb V}\mathcal X)
+    =
+    P_{\mathbb V}
+    \bigl(
+        \operatorname{Char}_{\mathbb V}(\mathcal X)^{\op}
+    \bigr).
+\]
+\end{definition}
+
+\begin{proposition}[Counit of the character comonad]
+\label{prop:alexandrov-character-comonad-counit}
+The counit
+\[
+    G_{\mathbb V}\mathcal X\to\mathcal X
+\]
+is frame-dual to the evaluation fuzzy-frame morphism
+\[
+    \operatorname{Opens}_{\mathbb V}(\mathcal X)
+    \longrightarrow
+    P_{\mathbb V}
+    \bigl(
+        \operatorname{Char}_{\mathbb V}(\mathcal X)^{\op}
+    \bigr),
+\]
+given by
+\[
+    a\longmapsto \widehat a,
+    \qquad
+    \widehat a(\chi)=\chi(a).
+\]
+\end{proposition}
+
+\begin{proof}
+This is the counit of the adjunction, evaluated at \(\mathcal X\).  On frames it is
+the transpose of the identity functor on
+\(\operatorname{Char}_{\mathbb V}(\mathcal X)\), namely evaluation.
+\end{proof}
+
+\begin{definition}[Coalgebra for the Alexandrov character comonad]
+\label{def:alexandrov-character-coalgebra}
+A \textbf{\(G_{\mathbb V}\)-coalgebra} is a fuzzy locale \(\mathcal X\) equipped
+with a fuzzy-locale map
+\[
+    \mathcal X\to G_{\mathbb V}\mathcal X
+\]
+satisfying the usual comonad coalgebra laws.  Frame-dually, this says that
+\[
+    \operatorname{Opens}_{\mathbb V}(\mathcal X)
+\]
+is a comonad-coherent retract of the upper fuzzy predicate frame on its character
+object.
+\end{definition}
+
+\subsection{The posetal specialization}
+\label{subsec:alexandrov-character-comonad-posetal}
+
+\begin{proposition}[The posetal character comonad]
+\label{prop:posetal-character-comonad}
+For a fuzzy locale \(\mathcal X\),
+\[
+    \Opens_\Lambda(G_\Lambda\mathcal X)
+    =
+    P_\Lambda
+    \bigl(
+        \operatorname{Char}_\Lambda(\Opens_\Lambda(\mathcal X))^{\op}
+    \bigr).
+\]
+The counit is frame-dual to the evaluation map
+\[
+    a\longmapsto \widehat a,
+    \qquad
+    \widehat a(\chi)=\chi(a).
+\]
+A \(G_\Lambda\)-coalgebra is frame-dually a fuzzy-frame homomorphism
+\[
+    P_\Lambda
+    \bigl(
+        \operatorname{Char}_\Lambda(\Opens_\Lambda(\mathcal X))^{\op}
+    \bigr)
+    \to
+    \Opens_\Lambda(\mathcal X)
+\]
+compatible with the counit and comultiplication.
+\end{proposition}
+
+\begin{proof}
+This is the posetal specialization of the enriched comonad and its counit.
+\end{proof}
+
+\begin{example}[The crisp case]
+\label{ex:crisp-character-comonad}
+For \(\Lambda=2\), the character object of a locale is its preorder of points,
+ordered by specialization according to the convention
+\[
+    p\leq q
+    \quad\Longleftrightarrow\quad
+    \forall a,\;p(a)\leq q(a).
+\]
+Thus
+\[
+    G_2\mathcal X
+\]
+is the upper Alexandrov locale of the specialization preorder of points of
+\(\mathcal X\).  The counit is frame-dual to
+\[
+    \Opens(\mathcal X)
+    \to
+    \operatorname{Up}(\operatorname{Pt}(\mathcal X)),
+    \qquad
+    a\longmapsto \{p\mid p(a)=\top\}.
+\]
+\end{example}
+
+\begin{example}[Presheaf fuzzy locales]
+\label{ex:presheaf-fuzzy-locale-character-comonad}
+If
+\[
+    \mathcal X=\mathcal P_\Lambda^{\uparrow}X,
+\]
+then
+\[
+    \operatorname{Char}_\Lambda(\Opens_\Lambda(\mathcal X))
+    =
+    \operatorname{Char}_\Lambda(P_\Lambda(X^{\op}))
+    \cong
+    \operatorname{Idl}_\Lambda(X).
+\]
+Therefore
+\[
+    G_\Lambda(\mathcal P_\Lambda^{\uparrow}X)
+\]
+has opens given by upper fuzzy predicates on
+\(\operatorname{Idl}_\Lambda(X)\).
+\end{example}
+
+\section{The co-Kleisli category}
+\label{sec:cokleisli-character-comonad}
+
+\subsection{The enriched co-Kleisli category}
+\label{subsec:cokleisli-enriched}
+
+\begin{theorem}[Co-Kleisli morphisms]
+\label{thm:cokleisli-morphisms-enriched}
+For fuzzy locales \(\mathcal X,\mathcal Y\),
+\[
+    \operatorname{CoKl}(G_{\mathbb V})(\mathcal X,\mathcal Y)
+    =
+    \mathbf{FLoc}_{\mathbb V}(G_{\mathbb V}\mathcal X,\mathcal Y)
+\]
+is naturally equivalent to
+\[
+    \mathbb V\text{-}\mathbf{Cat}
+    \bigl(
+        \operatorname{Char}_{\mathbb V}(\mathcal X),
+        \operatorname{Char}_{\mathbb V}(\mathcal Y)
+    \bigr).
+\]
+Thus a co-Kleisli morphism
+\[
+    \mathcal X\to\mathcal Y
+\]
+is equivalently a \(\mathbb V\)-functor between the character objects.
+\end{theorem}
+
+\begin{proof}
+By definition,
+\[
+    G_{\mathbb V}\mathcal X
+    =
+    \mathcal P_{\mathbb V}^{\uparrow}
+    \operatorname{Char}_{\mathbb V}(\mathcal X).
+\]
+The upper fuzzy character adjunction gives
+\[
+\begin{aligned}
+    \mathbf{FLoc}_{\mathbb V}(G_{\mathbb V}\mathcal X,\mathcal Y)
+    &=
+    \mathbf{FLoc}_{\mathbb V}
+    \bigl(
+        \mathcal P_{\mathbb V}^{\uparrow}
+        \operatorname{Char}_{\mathbb V}(\mathcal X),
+        \mathcal Y
+    \bigr)\\
+    &\simeq
+    \mathbb V\text{-}\mathbf{Cat}
+    \bigl(
+        \operatorname{Char}_{\mathbb V}(\mathcal X),
+        \operatorname{Char}_{\mathbb V}(\mathcal Y)
+    \bigr).
+\end{aligned}
+\]
+\end{proof}
+
+\subsection{The posetal specialization}
+\label{subsec:cokleisli-posetal}
+
+\begin{corollary}[Posetal co-Kleisli morphisms]
+\label{cor:posetal-cokleisli-morphisms}
+In the posetal specialization, a co-Kleisli morphism
+\[
+    \mathcal X\to\mathcal Y
+\]
+is a \(\Lambda\)-functor
+\[
+    \operatorname{Char}_\Lambda(\Opens_\Lambda(\mathcal X))
+    \to
+    \operatorname{Char}_\Lambda(\Opens_\Lambda(\mathcal Y)).
+\]
+Such a map need not arise from a fuzzy-locale map
+\[
+    \mathcal X\to\mathcal Y.
+\]
+\end{corollary}
+
+\begin{proof}
+This is the posetal specialization of
+Theorem~\ref{thm:cokleisli-morphisms-enriched}.
+\end{proof}
+
+\begin{example}[The crisp case]
+\label{ex:crisp-cokleisli}
+For \(\Lambda=2\), co-Kleisli morphisms are monotone maps between the specialization
+preorders of points:
+\[
+    \operatorname{Pt}(\mathcal X)
+    \to
+    \operatorname{Pt}(\mathcal Y).
+\]
+These need not be continuous maps of locales or spaces.
+\end{example}
+
+\begin{example}[Presheaf fuzzy locales]
+\label{ex:presheaf-fuzzy-locale-cokleisli}
+Between upper presheaf fuzzy locales, co-Kleisli morphisms are fuzzy functors
+between fuzzy ideal completions:
+\[
+    \operatorname{Idl}_\Lambda(X)\to\operatorname{Idl}_\Lambda(Y).
+\]
+\end{example}
+
+\begin{example}[Lawvere co-Kleisli maps]
+\label{ex:lawvere-cokleisli}
+For the Lawvere quantale, co-Kleisli morphisms are nonexpansive maps between metric
+spaces of finite-flat weights.
+\end{example}
+
+\section{Summary}
+\label{sec:summary-fuzzy-ideal-monad-domains-scott}
+
+The upper fuzzy predicate frame of \(X\) is
+\[
+    P_{\mathbb V}(X^{\op})
+    =
+    [X,\underline{\mathbb V}],
+\]
+and in the posetal specialization it is
+\[
+    P_\Lambda(X^{\op})
+    =
+    [X,\Lambda].
+\]
+The character adjunction
+\[
+    \mathcal P_{\mathbb V}^{\uparrow}
+    \dashv
+    \operatorname{Char}_{\mathbb V}
+\]
+induces the fuzzy ideal monad
+\[
+    T_\Lambda(X)
+    =
+    \operatorname{Idl}_\Lambda(X),
+\]
+whose unit is the principal-ideal embedding and whose multiplication is fuzzy
+flattening.
+
+Weak fuzzy domains carry chosen candidate fuzzy ideal-joins, while fuzzy domains
+are strict algebras for this monad.  Free fuzzy domains
+\[
+    \operatorname{Idl}_\Lambda(B)
+\]
+are the presented fuzzy algebraic domains.  Fuzzy continuous domains are those for
+which
+\[
+    \alpha:\operatorname{Idl}_\Lambda(X)\to X
+\]
+has an enriched left adjoint
+\[
+    \beta:X\to\operatorname{Idl}_\Lambda(X),
+\]
+with fuzzy way-below degree
+\[
+    \operatorname{wb}_X(y,x)=\beta(x)(y).
+\]
+
+Kleisli morphisms for the fuzzy ideal monad are fuzzy ideal-valued maps
+\[
+    X\rightsquigarrow Y,
+\]
+or fuzzy approximable maps.  Fuzzy Scott opens of a weak fuzzy domain
+\[
+    \alpha:\operatorname{Idl}_\Lambda(X)\to X
+\]
+are exactly the upper fuzzy predicates \(U\) satisfying
+\[
+    U(\alpha(I))
+    =
+    \bigjoin_x I(x)\tensor U(x).
+\]
+For \(\Lambda=2\), these constructions recover ordinary ideals, ideal completion,
+dcpos, algebraic dcpos, continuous dcpos, approximable maps, and ordinary Scott
+opens.

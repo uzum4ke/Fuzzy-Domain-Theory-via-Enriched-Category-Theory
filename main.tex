@@ -1,0 +1,75 @@
+\documentclass[oneside]{book}
+
+% ---------- Core math ----------
+\usepackage{amsmath, amsthm, amsfonts, amssymb}
+\usepackage{slashed}
+\usepackage{graphicx}
+%\usepackage{mathabx}
+\usepackage{mathtools}
+%\usepackage{stmaryrd}
+\usepackage{bm}
+% ---------- Layout & tables ----------
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{booktabs}
+\usepackage{comment}
+\usepackage{enumitem}  % instead of enumerate
+\usepackage{longtable}
+
+% ---------- TikZ-cd (externalize diagrams) ----------
+\usepackage{tikz-cd}
+
+% ---------- Misc ----------
+\usepackage{cancel}
+\usepackage{epigraph}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{bbm}
+
+% ---------- Hyperref last ----------
+\usepackage[colorlinks=true, linkcolor=black, urlcolor=cyan, pdfpagemode=FullScreen]{hyperref}
+
+% ---------- Theorems ----------
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{judgement}{Judgement}[section]
+\newtheorem{construction}{Construction}[section]
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{notation}{Notation}[section]
+\newtheorem{data}{Data}[section]
+\newtheorem{axiomset}{Axiom Set}[section]
+\newtheorem{hypothesis}{Hypothesis}[section]
+\newtheorem{assumption}{Assumption}[section]
+\newtheorem{convention}{Convention}[section]
+\newtheorem{observation}{Observation}[section]
+\newtheorem{problem}{Problem}[section]
+
+% ---------- Bibliography ----------
+\usepackage[backend=biber]{biblatex}
+\addbibresource{references.bib}
+
+% ---------- Title / Author / Date ----------
+\title{Fuzzy Domain Theory via Enriched Category Theory}
+\author{Conor Sheridan}
+\date{\today}
+
+\begin{document}
+    \maketitle
+    \tableofcontents
+
+    \input{macros}
+
+    \part{Fuzzy Domain Theory}
+    \include{Fuzzy Predicates and Cut Subobjects}
+    %\include{Fuzzy Frames, Fuzzy Locales, and the Fuzzy Sierpiński Classifier}
+    %\include{The Fuzzy Ideal Monad, Fuzzy Domains, and Fuzzy Scott Opens}
+    %\include{The Fuzzy Distributor Equipment and the Fuzzy Way-Below Relation}
+    %\include{Recursive Fuzzy Domain Equations}
+
+    \printbibliography
+\end{document}
+

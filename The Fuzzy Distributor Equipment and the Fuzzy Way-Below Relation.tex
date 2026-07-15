@@ -1,0 +1,2987 @@
+\chapter{The Fuzzy Distributor Equipment and the Fuzzy Way-Below Relation}
+\label{ch:fuzzy-distributors-way-below}
+
+In the previous chapter we constructed the fuzzy ideal monad
+\[
+    T_{\mathbb V}X
+    =
+    \operatorname{Idl}_{\mathbb V}(X)
+\]
+from the upper fuzzy character adjunction. Its strict algebras were called fuzzy
+domains. Continuous fuzzy domains were defined by the existence of an enriched
+left adjoint
+\[
+    \beta_X:X\to \operatorname{Idl}_{\mathbb V}(X)
+\]
+to the ideal-algebra map
+\[
+    \alpha_X:\operatorname{Idl}_{\mathbb V}(X)\to X.
+\]
+Thus
+\[
+    \beta_X\dashv \alpha_X.
+\]
+
+The basic algebra and continuity data are summarized by the diagrams
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[r,"\eta_X"]
+    \ar[dr,"1_X"']
+&
+\operatorname{Idl}_{\mathbb V}(X)
+    \ar[d,"\alpha_X"]
+\\
+&
+X
+\end{tikzcd}
+\qquad
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[r,bend left=35,"\beta_X"]
+&
+\operatorname{Idl}_{\mathbb V}(X)
+    \ar[l,bend left=35,"\alpha_X"]
+\end{tikzcd}
+\]
+where the first triangle expresses the strict unit law
+\[
+    \alpha_X\eta_X=1_X.
+\]
+In the posetal specialization this gave the fuzzy way-below degree
+\[
+    \operatorname{wb}_X(a,b)=\beta_X(b)(a).
+\]
+
+The purpose of this chapter is to explain the equipment-theoretic origin of this
+formula. The way-below relation is not added as further structure. It is
+constructed from the ideal-algebra map and the principal-ideal embedding by a
+right lifting in the fuzzy distributor equipment.
+
+For a fuzzy domain \(X\), the available maps are
+\[
+    \eta_X:X\to \operatorname{Idl}_{\mathbb V}(X),
+    \qquad
+    \eta_X(x)=X(-,x),
+\]
+and
+\[
+    \alpha_X:\operatorname{Idl}_{\mathbb V}(X)\to X.
+\]
+The conjoint of \(\alpha_X\) and the companion of \(\eta_X\) are distributors
+with the same source and the same target,
+\[
+    X\nrightarrow \operatorname{Idl}_{\mathbb V}(X).
+\]
+They fit into the following equipment diagram:
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+&
+\operatorname{Idl}_{\mathbb V}(X)
+\\
+X
+    \ar[ur,dashed,bend left=13,"\alpha_X^\ast"]
+    \ar[ur,dashed,bend right=13,"{(\eta_X)_\ast}"']
+\end{tikzcd}
+\]
+where
+\[
+    \alpha_X^\ast(b,I)=X(b,\alpha_X I),
+    \qquad
+    (\eta_X)_\ast(a,I)
+    =
+    \operatorname{Idl}_{\mathbb V}(X)(\eta_X a,I).
+\]
+
+The fuzzy way-below distributor is defined by the right lifting
+\[
+    \ll_X
+    \coloneqq
+    [\alpha_X^\ast,(\eta_X)_\ast]
+    :
+    X\nrightarrow X.
+\]
+Equivalently, in the enriched distributor bicategory it represents the object of
+distributors \(\Theta:X\nrightarrow X\) equipped with a comparison
+\[
+    \alpha_X^\ast\circ\Theta\to(\eta_X)_\ast.
+\]
+In the locally posetal reflection, it is the largest distributor \(\Theta\) for
+which
+\[
+    \alpha_X^\ast\circ\Theta\leq(\eta_X)_\ast.
+\]
+
+Diagrammatically, a comparison
+\[
+    \alpha_X^\ast\circ\Theta\to(\eta_X)_\ast
+\]
+has the form
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[r,dashed,"\Theta"]
+    \ar[rr,bend right=18,dashed,"{(\eta_X)_\ast}"']
+&
+X
+    \ar[r,dashed,"\alpha_X^\ast"]
+&
+\operatorname{Idl}_{\mathbb V}(X)
+    \ar[phantom,from=1-2,to=1-3,"\Downarrow" description]
+\end{tikzcd}
+\]
+and the universal property of \(\ll_X\) says that such comparisons are
+represented by comparisons
+\[
+    \Theta\to \ll_X.
+\]
+
+Unwinding the right lifting gives
+\[
+    \ll_X(a,b)
+    \cong
+    \int_{I\in \operatorname{Idl}_{\mathbb V}(X)}
+    \left[
+        X(b,\alpha_X I),
+        \operatorname{Idl}_{\mathbb V}(X)(\eta_X a,I)
+    \right].
+\]
+By enriched Yoneda,
+\[
+    \operatorname{Idl}_{\mathbb V}(X)(\eta_X a,I)
+    \cong
+    I(a),
+\]
+and hence
+\[
+    \ll_X(a,b)
+    \cong
+    \int_{I\in \operatorname{Idl}_{\mathbb V}(X)}
+    \left[
+        X(b,\alpha_X I),
+        I(a)
+    \right].
+\]
+In the posetal reflection this becomes
+\[
+    \ll_X(a,b)
+    =
+    \bigmeet_{I\in\operatorname{Idl}_\Lambda(X)}
+    \left(
+        X(b,\alpha_X I)\multimap I(a)
+    \right).
+\]
+
+If \(X\) is continuous, with
+\[
+    \beta_X\dashv \alpha_X,
+\]
+then this right-lifted distributor is represented by the approximant map:
+\[
+    \ll_X(a,b)
+    \cong
+    \operatorname{Idl}_{\mathbb V}(X)(\eta_X a,\beta_X b)
+    \cong
+    \beta_X(b)(a).
+\]
+Thus the way-below degree of the previous chapter is the value of a right-lifted
+fuzzy distributor.
+
+Throughout this chapter
+\[
+    (\mathbb V,\tensor,I,[-,-])
+\]
+is the fuzzy cosmos fixed in the previous chapters. We write
+\[
+    \underline{\mathbb V}
+\]
+for its self-enriched category, and we use the same universe conventions as
+before: all ends and coends are formed in a universe in which their indexing
+fuzzy category is small and the corresponding limits or colimits in
+\(\mathbb V\) exist.
+
+All distributor categories below are understood in this universe-bounded sense.
+Thus, when \(\operatorname{Idl}_{\mathbb V}(X)\) is not small in the original
+universe, we regard it as small in the next universe and form the corresponding
+distributor homs, ends, and coends there.
+
+We write
+\[
+    \Phi:X\nrightarrow Y
+\]
+for a fuzzy distributor from \(X\) to \(Y\). The arrow \(\nrightarrow\) denotes a
+proarrow, not a negated function arrow.
+
+\section{Inherited data from the fuzzy ideal monad}
+\label{sec:inherited-data-from-ideal-monad}
+
+This section records the data from the previous chapter that will be used below.
+No new structure is imposed on fuzzy domains in this chapter.
+
+\subsection{The enriched construction}
+\label{subsec:inherited-data-enriched}
+
+For a small fuzzy category \(X\), the fuzzy ideal object is the full
+\(\mathbb V\)-subcategory
+\[
+    \operatorname{Idl}_{\mathbb V}(X)
+    \subseteq
+    [X^{\op},\underline{\mathbb V}]
+\]
+spanned by finite-flat weights. The unit of the fuzzy ideal monad is the
+principal-weight embedding
+\[
+    \eta_X:X\to \operatorname{Idl}_{\mathbb V}(X),
+    \qquad
+    \eta_X(x)=X(-,x).
+\]
+This is the restricted Yoneda embedding:
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[rr,"y_X"]
+    \ar[dr,swap,"\eta_X"]
+&&
+{[X^{\op},\underline{\mathbb V}]}
+\\
+&
+{\operatorname{Idl}_{\mathbb V}(X)}
+    \ar[from=2-2,to=1-3,hook,"i_X"']
+\end{tikzcd}
+\]
+
+The multiplication is flattening:
+\[
+    \mu_X:
+    \operatorname{Idl}_{\mathbb V}(\operatorname{Idl}_{\mathbb V}(X))
+    \to
+    \operatorname{Idl}_{\mathbb V}(X),
+\]
+with value
+\[
+    \mu_X(\mathcal I)(x)
+    =
+    \int^{I\in \operatorname{Idl}_{\mathbb V}(X)}
+        \mathcal I(I)\tensor I(x).
+\]
+
+The two unit laws are
+\[
+    \mu_X\eta_{\operatorname{Idl}_{\mathbb V}(X)}
+    =
+    1_{\operatorname{Idl}_{\mathbb V}(X)},
+    \qquad
+    \mu_X\operatorname{Idl}_{\mathbb V}(\eta_X)
+    =
+    1_{\operatorname{Idl}_{\mathbb V}(X)}.
+\]
+The first of these is displayed by
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+\operatorname{Idl}_{\mathbb V}(X)
+    \ar[r,"\eta_{\operatorname{Idl}_{\mathbb V}(X)}"]
+    \ar[dr,"1_{\operatorname{Idl}_{\mathbb V}(X)}"']
+&
+\operatorname{Idl}_{\mathbb V}(\operatorname{Idl}_{\mathbb V}(X))
+    \ar[d,"\mu_X"]
+\\
+&
+\operatorname{Idl}_{\mathbb V}(X).
+\end{tikzcd}
+\]
+The second is displayed by
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+\operatorname{Idl}_{\mathbb V}(X)
+    \ar[r,"\operatorname{Idl}_{\mathbb V}(\eta_X)"]
+    \ar[dr,"1_{\operatorname{Idl}_{\mathbb V}(X)}"']
+&
+\operatorname{Idl}_{\mathbb V}(\operatorname{Idl}_{\mathbb V}(X))
+    \ar[d,"\mu_X"]
+\\
+&
+\operatorname{Idl}_{\mathbb V}(X).
+\end{tikzcd}
+\]
+The associativity law is
+\[
+    \mu_X\operatorname{Idl}_{\mathbb V}(\mu_X)
+    =
+    \mu_X\mu_{\operatorname{Idl}_{\mathbb V}(X)},
+\]
+displayed by
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+\operatorname{Idl}_{\mathbb V}
+    (\operatorname{Idl}_{\mathbb V}
+    (\operatorname{Idl}_{\mathbb V}(X)))
+    \ar[r,"\operatorname{Idl}_{\mathbb V}(\mu_X)"]
+    \ar[d,"\mu_{\operatorname{Idl}_{\mathbb V}(X)}"']
+&
+\operatorname{Idl}_{\mathbb V}
+    (\operatorname{Idl}_{\mathbb V}(X))
+    \ar[d,"\mu_X"]
+\\
+\operatorname{Idl}_{\mathbb V}
+    (\operatorname{Idl}_{\mathbb V}(X))
+    \ar[r,"\mu_X"']
+&
+\operatorname{Idl}_{\mathbb V}(X).
+\end{tikzcd}
+\]
+
+A fuzzy domain is a strict algebra for this monad. Thus it is a small fuzzy
+category \(X\) equipped with a fuzzy functor
+\[
+    \alpha_X:
+    \operatorname{Idl}_{\mathbb V}(X)
+    \to
+    X
+\]
+such that
+\[
+    \alpha_X\eta_X=1_X
+\]
+and
+\[
+    \alpha_X\mu_X
+    =
+    \alpha_X\operatorname{Idl}_{\mathbb V}(\alpha_X).
+\]
+The algebra laws are encoded by the diagrams
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[r,"\eta_X"]
+    \ar[dr,"1_X"']
+&
+\operatorname{Idl}_{\mathbb V}(X)
+    \ar[d,"\alpha_X"]
+\\
+&
+X
+\end{tikzcd}
+\]
+and
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+\operatorname{Idl}_{\mathbb V}
+    (\operatorname{Idl}_{\mathbb V}(X))
+    \ar[r,"\mu_X"]
+    \ar[d,"\operatorname{Idl}_{\mathbb V}(\alpha_X)"']
+&
+\operatorname{Idl}_{\mathbb V}(X)
+    \ar[d,"\alpha_X"]
+\\
+\operatorname{Idl}_{\mathbb V}(X)
+    \ar[r,"\alpha_X"']
+&
+X.
+\end{tikzcd}
+\]
+The map \(\alpha_X\) evaluates a finite-flat weight by its chosen ideal colimit.
+
+A fuzzy domain \(X\) is continuous when
+\[
+    \alpha_X:
+    \operatorname{Idl}_{\mathbb V}(X)
+    \to
+    X
+\]
+has an enriched left adjoint
+\[
+    \beta_X:X\to \operatorname{Idl}_{\mathbb V}(X),
+    \qquad
+    \beta_X\dashv\alpha_X.
+\]
+The object \(\beta_X(b)\) is the finite-flat weight of approximants of \(b\). The
+adjunction supplies unit and counit maps
+\[
+    1_X\to \alpha_X\beta_X,
+    \qquad
+    \beta_X\alpha_X\to 1_{\operatorname{Idl}_{\mathbb V}(X)}.
+\]
+These may be represented by
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[r,"\beta_X"]
+    \ar[dr,"1_X"']
+&
+\operatorname{Idl}_{\mathbb V}(X)
+    \ar[d,"\alpha_X"]
+\\
+&
+X
+\ar[ul,phantom,"\scriptstyle\eta^{\beta\dashv\alpha}" description]
+\end{tikzcd}
+\qquad
+\begin{tikzcd}[column sep=huge,row sep=large]
+\operatorname{Idl}_{\mathbb V}(X)
+    \ar[r,"\alpha_X"]
+    \ar[dr,"1_{\operatorname{Idl}_{\mathbb V}(X)}"']
+&
+X
+    \ar[d,"\beta_X"]
+\\
+&
+\operatorname{Idl}_{\mathbb V}(X)
+\ar[ul,phantom,"\scriptstyle\varepsilon^{\beta\dashv\alpha}" description]
+\end{tikzcd}
+\]
+
+\subsection{The posetal reflection}
+\label{subsec:inherited-data-posetal}
+
+Let
+\[
+    \Lambda=(L,\leq,\meet,\join,\tensor,\multimap,\bot_L,\top_L)
+\]
+be a fuzzy truth-value object. For a fuzzy preorder \(X\), the object
+\[
+    \operatorname{Idl}_\Lambda(X)
+\]
+is a full subpreorder of
+\[
+    [X^{\op},\Lambda].
+\]
+Its elements are the finite-flat fuzzy ideals
+\[
+    I:X^{\op}\to \Lambda.
+\]
+The principal ideal at \(x\) is
+\[
+    \eta_X(x)(y)=X(y,x).
+\]
+A fuzzy domain over \(\Lambda\) has an algebra map
+\[
+    \alpha_X:
+    \operatorname{Idl}_\Lambda(X)
+    \to
+    X
+\]
+satisfying the strict algebra laws
+\[
+    \alpha_X\eta_X=1_X
+\]
+and
+\[
+    \alpha_X\mu_X
+    =
+    \alpha_X\operatorname{Idl}_\Lambda(\alpha_X).
+\]
+These are strict algebra laws for the transported ideal monad. In the posetal
+specialization they are literal equalities of \(\Lambda\)-functors, equivalently
+objectwise equalities compatible with the fuzzy preorder structure.
+
+If \(X\) is continuous, then there is a \(\Lambda\)-adjunction
+\[
+    \beta_X\dashv\alpha_X,
+\]
+and the previous chapter defined the fuzzy way-below degree by
+\[
+    \operatorname{wb}_X(a,b)=\beta_X(b)(a).
+\]
+The goal of the present chapter is to reconstruct this value as a right lifting.
+
+\subsection{Examples}
+\label{subsec:inherited-data-examples}
+
+\begin{example}[The crisp case]
+\label{ex:inherited-data-crisp}
+For
+\[
+    \Lambda=2,
+\]
+fuzzy preorders are ordinary preorders and fuzzy ideals are ordinary ideals,
+namely directed lower sets. The principal ideal embedding is
+\[
+    \eta_X(x)=\downarrow x,
+\]
+and a strict algebra
+\[
+    \alpha_X:\operatorname{Idl}(X)\to X
+\]
+assigns to each ideal its supremum:
+\[
+    \alpha_X(I)=\bigvee I.
+\]
+Thus separated strict algebras recover dcpos. If \(X\) is continuous, then
+\[
+    \beta_X(b)=\{a\in X\mid a\ll b\}.
+\]
+The crisp data fit the diagram
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[r,"x\mapsto\downarrow x"]
+    \ar[dr,"1_X"']
+&
+\operatorname{Idl}(X)
+    \ar[d,"I\mapsto\bigvee I"]
+\\
+&
+X.
+\end{tikzcd}
+\]
+\end{example}
+
+\begin{example}[G\"odel truth values]
+\label{ex:inherited-data-godel}
+For G\"odel truth values,
+\[
+    r\tensor s=r\meet s.
+\]
+A fuzzy ideal is a finite-flat lower predicate
+\[
+    I:X^{\op}\to [0,1],
+\]
+and \(\alpha_X(I)\) is the chosen G\"odel-valued ideal colimit of \(I\).
+\end{example}
+
+\begin{example}[{\L}ukasiewicz truth values]
+\label{ex:inherited-data-lukasiewicz}
+For {\L}ukasiewicz truth values,
+\[
+    r\tensor s=\max(0,r+s-1),
+    \qquad
+    r\multimap s=\min(1,1-r+s).
+\]
+Finite-flat fuzzy ideals are lower predicates whose flatness is computed using
+this bounded-additive tensor.
+\end{example}
+
+\begin{example}[Product truth values]
+\label{ex:inherited-data-product}
+For the product tensor,
+\[
+    r\tensor s=rs,
+\]
+and
+\[
+    r\multimap s
+    =
+    \begin{cases}
+    1,& r\leq s,\\
+    s/r,& r>s.
+    \end{cases}
+\]
+The ideal monad is the finite-flat completion for multiplicative fuzzy weights.
+\end{example}
+
+\begin{example}[Lawvere truth values]
+\label{ex:inherited-data-lawvere}
+For the Lawvere truth-value object, the order is
+\[
+    a\leq_L b
+    \quad\Longleftrightarrow\quad
+    a\geq b
+\]
+in the usual numerical order, the tensor is addition, the top element is \(0\),
+and the bottom element is \(\infty\). The residual is
+\[
+    a\multimap c=c\ominus a.
+\]
+Fuzzy ideals are finite-flat cost weights. The algebra map
+\[
+    \alpha_X:\operatorname{Idl}_\Lambda(X)\to X
+\]
+evaluates such weights by their Lawvere-enriched weighted colimits.
+\end{example}
+
+\section{Fuzzy distributors}
+\label{sec:fuzzy-distributors}
+
+We now construct the horizontal arrows of the fuzzy distributor equipment.
+
+\subsection{The enriched construction}
+\label{subsec:fuzzy-distributors-enriched}
+
+\begin{definition}[Fuzzy distributor]
+\label{def:fuzzy-distributor}
+Let \(X\) and \(Y\) be small fuzzy categories. A \textbf{fuzzy distributor}
+\[
+    \Phi:X\nrightarrow Y
+\]
+is a fuzzy functor
+\[
+    \Phi:X^{\op}\tensor Y\to \underline{\mathbb V}.
+\]
+We write its value at \((x,y)\) as
+\[
+    \Phi(x,y).
+\]
+\end{definition}
+
+Thus a fuzzy distributor is contravariant in its first variable and covariant in
+its second variable. This variance is indicated by the diagram
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+X^{\op}\tensor Y
+    \ar[rr,"\Phi"]
+&&
+\underline{\mathbb V}.
+\end{tikzcd}
+\]
+
+\begin{definition}[Composition of fuzzy distributors]
+\label{def:fuzzy-distributor-composition}
+Let
+\[
+    \Phi:X\nrightarrow Y,
+    \qquad
+    \Psi:Y\nrightarrow Z
+\]
+be fuzzy distributors. Their composite
+\[
+    \Psi\circ\Phi:X\nrightarrow Z
+\]
+is defined by
+\[
+    (\Psi\circ\Phi)(x,z)
+    =
+    \int^{y\in Y}
+    \Phi(x,y)\tensor \Psi(y,z).
+\]
+The identity distributor on \(X\) is
+\[
+    1_X:X\nrightarrow X,
+    \qquad
+    1_X(x,x')=X(x,x').
+\]
+\end{definition}
+
+The composite is represented by the coend-convolution diagram
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[r,dashed,"\Phi"]
+    \ar[rr,bend right=18,dashed,"\Psi\circ\Phi"']
+&
+Y
+    \ar[r,dashed,"\Psi"]
+&
+Z.
+\end{tikzcd}
+\]
+The identity distributor is the horizontal shadow of the hom-object:
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+X
+    \ar[r,dashed,"1_X"]
+&
+X.
+\end{tikzcd}
+\]
+
+\begin{proposition}[The fuzzy distributor bicategory]
+\label{prop:fuzzy-distributor-bicategory}
+Small fuzzy categories in a fixed universe, fuzzy distributors, and enriched
+distributor transformations form a bicategory
+\[
+    \operatorname{Dist}_{\mathbb V}.
+\]
+For small fuzzy categories \(X\) and \(Y\), the hom \(\mathbb V\)-category of
+distributors from \(X\) to \(Y\) is
+\[
+    \operatorname{Dist}_{\mathbb V}(X,Y)
+    =
+    [X^{\op}\tensor Y,\underline{\mathbb V}].
+\]
+Composition is the coend convolution of
+Definition~\ref{def:fuzzy-distributor-composition}, and identities are the
+hom-distributors.
+\end{proposition}
+
+\begin{proof}
+The coend formula defines a fuzzy functor
+\[
+    X^{\op}\tensor Z\to \underline{\mathbb V}
+\]
+by the functoriality of enriched coends and the functoriality of \(\tensor\).
+Associativity follows from Fubini for enriched coends together with associativity
+of the tensor product. In diagrammatic form, both routes below evaluate to the
+same iterated coend:
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[r,dashed,"\Phi"]
+    \ar[rr,bend left=22,dashed,"\Psi\circ\Phi"]
+    \ar[rrr,bend right=34,dashed,"{(\Xi\circ\Psi)\circ\Phi}"']
+    \ar[rrr,bend left=34,dashed,"{\Xi\circ(\Psi\circ\Phi)}"]
+&
+Y
+    \ar[r,dashed,"\Psi"]
+    \ar[rr,bend right=22,swap,dashed,"\Xi\circ\Psi"]
+&
+Z
+    \ar[r,dashed,"\Xi"]
+&
+W.
+\end{tikzcd}
+\]
+More explicitly,
+\[
+\begin{aligned}
+    \Xi\circ(\Psi\circ\Phi)
+    &\cong
+    \int^{z}
+    \left(
+        \int^{y}\Phi(-,y)\tensor\Psi(y,z)
+    \right)
+    \tensor \Xi(z,-)
+\\
+    &\cong
+    \int^{y,z}
+        \Phi(-,y)\tensor\Psi(y,z)\tensor\Xi(z,-)
+\\
+    &\cong
+    (\Xi\circ\Psi)\circ\Phi.
+\end{aligned}
+\]
+The unit laws are the enriched co-Yoneda formulas
+\[
+    \int^{y\in Y}
+        Y(y,y')\tensor \Phi(x,y)
+    \cong
+    \Phi(x,y')
+\]
+and
+\[
+    \int^{x'\in X}
+        X(x,x')\tensor \Phi(x',y)
+    \cong
+    \Phi(x,y).
+\]
+These are expressed by
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[r,dashed,"\Phi"]
+    \ar[rr,bend right=18,dashed,"\Phi"']
+&
+Y
+    \ar[r,dashed,"1_Y"]
+&
+Y
+\end{tikzcd}
+\qquad
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[r,dashed,"1_X"]
+    \ar[rr,bend right=18,dashed,"\Phi"']
+&
+X
+    \ar[r,dashed,"\Phi"]
+&
+Y.
+\end{tikzcd}
+\]
+\end{proof}
+
+Together with fuzzy functors as vertical arrows and the companion--conjoint
+assignments below, this bicategory underlies the fuzzy distributor equipment.
+
+A cell in the equipment
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[d,"f"']
+    \ar[r,dashed,"\Phi"]
+&
+Y
+    \ar[d,"g"]
+\\
+X'
+    \ar[r,dashed,"\Psi"']
+&
+Y'
+\ar[phantom,from=1-2,to=2-1,"\Downarrow" description]
+\end{tikzcd}
+\]
+is a distributor transformation
+\[
+    \Phi(x,y)\to \Psi(fx,gy),
+\]
+natural in \(x\in X\) and \(y\in Y\). In the locally posetal reflection, this is
+the pointwise inequality
+\[
+    \Phi(x,y)\leq \Psi(fx,gy).
+\]
+
+\subsection{The posetal reflection}
+\label{subsec:fuzzy-distributors-posetal}
+
+In the posetal specialization determined by
+\[
+    \Lambda=(L,\leq,\meet,\join,\tensor,\multimap,\bot_L,\top_L),
+\]
+a fuzzy distributor
+\[
+    \Phi:X\nrightarrow Y
+\]
+is a map
+\[
+    \Phi:X\times Y\to L
+\]
+satisfying
+\[
+    X(x',x)\tensor \Phi(x,y)\tensor Y(y,y')
+    \leq
+    \Phi(x',y')
+\]
+for all \(x,x'\in X\) and \(y,y'\in Y\). Thus \(\Phi\) is lower in the first
+variable and upper in the second variable.
+
+Composition is
+\[
+    (\Psi\circ\Phi)(x,z)
+    =
+    \bigjoin_{y\in Y}
+    \Phi(x,y)\tensor\Psi(y,z),
+\]
+and the identity distributor is
+\[
+    1_X(x,x')=X(x,x').
+\]
+
+\subsection{Examples}
+\label{subsec:fuzzy-distributors-examples}
+
+\begin{example}[The crisp case]
+\label{ex:fuzzy-distributors-crisp}
+For \(\Lambda=2\), fuzzy categories are preorders and a distributor
+\[
+    \Phi:X\nrightarrow Y
+\]
+is a relation
+\[
+    \Phi\subseteq X\times Y
+\]
+such that
+\[
+    x'\leq_X x,\quad \Phi(x,y),\quad y\leq_Y y'
+    \quad\Longrightarrow\quad
+    \Phi(x',y').
+\]
+Composition is ordinary relational composition:
+\[
+    (\Psi\circ\Phi)(x,z)
+    \Longleftrightarrow
+    \exists y\in Y,\; \Phi(x,y)\wedge \Psi(y,z).
+\]
+\end{example}
+
+\begin{example}[G\"odel-valued distributors]
+\label{ex:fuzzy-distributors-godel}
+For G\"odel truth values,
+\[
+    (\Psi\circ\Phi)(x,z)
+    =
+    \bigjoin_{y\in Y}
+    \min(\Phi(x,y),\Psi(y,z)).
+\]
+\end{example}
+
+\begin{example}[{\L}ukasiewicz-valued distributors]
+\label{ex:fuzzy-distributors-lukasiewicz}
+For {\L}ukasiewicz truth values,
+\[
+    (\Psi\circ\Phi)(x,z)
+    =
+    \bigjoin_{y\in Y}
+    \max(0,\Phi(x,y)+\Psi(y,z)-1).
+\]
+\end{example}
+
+\begin{example}[Product-valued distributors]
+\label{ex:fuzzy-distributors-product}
+For product truth values,
+\[
+    (\Psi\circ\Phi)(x,z)
+    =
+    \bigjoin_{y\in Y}
+    \Phi(x,y)\Psi(y,z).
+\]
+\end{example}
+
+\begin{example}[Lawvere-valued distributors]
+\label{ex:fuzzy-distributors-lawvere}
+For the Lawvere quantale, joins in the truth-value order are infima in the usual
+numerical order, and tensor is addition. Hence distributor composition is
+infimal convolution:
+\[
+    (\Psi\circ\Phi)(x,z)
+    =
+    \inf_{y\in Y}
+    \bigl(\Phi(x,y)+\Psi(y,z)\bigr).
+\]
+\end{example}
+
+\section{Companions and conjoints}
+\label{sec:companions-conjoints}
+
+Fuzzy functors determine distinguished fuzzy distributors. These are the
+companion and conjoint constructions. They place vertical arrows inside the
+horizontal distributor equipment.
+
+\subsection{The enriched construction}
+\label{subsec:companions-conjoints-enriched}
+
+\begin{definition}[Companion and conjoint]
+\label{def:companion-conjoint}
+Let
+\[
+    f:X\to Y
+\]
+be a fuzzy functor. Its \textbf{companion} is the distributor
+\[
+    f_\ast:X\nrightarrow Y
+\]
+defined by
+\[
+    f_\ast(x,y)=Y(fx,y).
+\]
+Its \textbf{conjoint} is the distributor
+\[
+    f^\ast:Y\nrightarrow X
+\]
+defined by
+\[
+    f^\ast(y,x)=Y(y,fx).
+\]
+\end{definition}
+
+The companion and conjoint sit on opposite sides of \(f\):
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[d,"f"']
+    \ar[r,dashed,"f_\ast"]
+&
+Y
+    \ar[d,"1_Y"]
+\\
+Y
+    \ar[r,dashed,"1_Y"']
+&
+Y
+\end{tikzcd}
+\qquad
+\begin{tikzcd}[column sep=huge,row sep=large]
+Y
+    \ar[d,"1_Y"']
+    \ar[r,dashed,"f^\ast"]
+&
+X
+    \ar[d,"f"]
+\\
+Y
+    \ar[r,dashed,"1_Y"']
+&
+Y.
+\end{tikzcd}
+\]
+Equivalently,
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[r,bend left=14,dashed,"f_\ast"]
+&
+Y
+    \ar[l,bend left=14,dashed,"f^\ast"]
+\end{tikzcd}
+\]
+is an adjoint pair in the distributor bicategory.
+
+\begin{proposition}[Companion--conjoint adjunction]
+\label{prop:companion-conjoint-adjunction}
+For every fuzzy functor
+\[
+    f:X\to Y,
+\]
+there is an adjunction in the distributor bicategory
+\[
+    f_\ast\dashv f^\ast.
+\]
+\end{proposition}
+
+\begin{proof}
+The unit is a distributor transformation
+\[
+    1_X\to f^\ast\circ f_\ast.
+\]
+At \((x,x')\), the target is
+\[
+    (f^\ast\circ f_\ast)(x,x')
+    =
+    \int^{y\in Y}
+        Y(fx,y)\tensor Y(y,fx').
+\]
+The required map is obtained by composing the functoriality map
+\[
+    X(x,x')\to Y(fx,fx')
+\]
+with the coend coprojection at \(y=fx'\):
+\[
+    Y(fx,fx')
+    \cong
+    Y(fx,fx')\tensor I
+    \to
+    Y(fx,fx')\tensor Y(fx',fx')
+    \to
+    \int^{y\in Y}
+        Y(fx,y)\tensor Y(y,fx').
+\]
+
+The counit is a distributor transformation
+\[
+    f_\ast\circ f^\ast\to 1_Y.
+\]
+At \((y,y')\), it is induced by composition in \(Y\):
+\[
+    \int^{x\in X}
+        Y(y,fx)\tensor Y(fx,y')
+    \to
+    Y(y,y').
+\]
+The triangle identities follow from associativity and unitality of composition in
+\(Y\), equivalently from the standard companion--conjoint construction in the
+enriched distributor equipment.
+\end{proof}
+
+\begin{proposition}[Functoriality of companions and conjoints]
+\label{prop:companion-conjoint-functoriality}
+For fuzzy functors
+\[
+    X\xrightarrow{f}Y\xrightarrow{g}Z,
+\]
+there are canonical isomorphisms of distributors
+\[
+    (gf)_\ast
+    \cong
+    g_\ast\circ f_\ast
+\]
+and
+\[
+    (gf)^\ast
+    \cong
+    f^\ast\circ g^\ast.
+\]
+Moreover,
+\[
+    (1_X)_\ast\cong 1_X,
+    \qquad
+    (1_X)^\ast\cong 1_X.
+\]
+\end{proposition}
+
+\begin{proof}
+For companions,
+\[
+\begin{aligned}
+    (g_\ast\circ f_\ast)(x,z)
+    &=
+    \int^{y\in Y}
+        Y(fx,y)\tensor Z(gy,z)
+\\
+    &\cong
+    Z(gfx,z)
+\\
+    &=
+    (gf)_\ast(x,z),
+\end{aligned}
+\]
+by enriched Yoneda. Diagrammatically:
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[r,dashed,"f_\ast"]
+    \ar[rr,bend right=18,dashed,"{(gf)_\ast}"']
+&
+Y
+    \ar[r,dashed,"g_\ast"]
+&
+Z.
+\end{tikzcd}
+\]
+For conjoints,
+\[
+\begin{aligned}
+    (f^\ast\circ g^\ast)(z,x)
+    &=
+    \int^{y\in Y}
+        Z(z,gy)\tensor Y(y,fx)
+\\
+    &\cong
+    Z(z,gfx)
+\\
+    &=
+    (gf)^\ast(z,x).
+\end{aligned}
+\]
+This is represented by the reverse diagram
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+Z
+    \ar[r,dashed,"g^\ast"]
+    \ar[rr,bend right=18,dashed,"{(gf)^\ast}"']
+&
+Y
+    \ar[r,dashed,"f^\ast"]
+&
+X.
+\end{tikzcd}
+\]
+The identity statements follow directly from the definitions.
+\end{proof}
+
+\subsection{The posetal reflection}
+\label{subsec:companions-conjoints-posetal}
+
+For a \(\Lambda\)-functor
+\[
+    f:X\to Y,
+\]
+the companion and conjoint are
+\[
+    f_\ast(x,y)=Y(fx,y)
+\]
+and
+\[
+    f^\ast(y,x)=Y(y,fx).
+\]
+The adjunction
+\[
+    f_\ast\dashv f^\ast
+\]
+amounts to the distributor inequalities
+\[
+    1_X\leq f^\ast\circ f_\ast
+\]
+and
+\[
+    f_\ast\circ f^\ast\leq 1_Y.
+\]
+The first inequality follows from functoriality of \(f\), and the second follows
+from transitivity in \(Y\).
+
+\subsection{Examples}
+\label{subsec:companions-conjoints-examples}
+
+\begin{example}[The crisp case]
+\label{ex:companions-crisp}
+For a monotone map
+\[
+    f:X\to Y
+\]
+between preorders,
+\[
+    f_\ast(x,y)
+    \Longleftrightarrow
+    f(x)\leq_Y y,
+\]
+and
+\[
+    f^\ast(y,x)
+    \Longleftrightarrow
+    y\leq_Y f(x).
+\]
+\end{example}
+
+\begin{example}[Standard fuzzy truth values]
+\label{ex:companions-standard}
+For G\"odel, {\L}ukasiewicz, and product truth values, the formulas remain
+\[
+    f_\ast(x,y)=Y(fx,y),
+    \qquad
+    f^\ast(y,x)=Y(y,fx).
+\]
+The tensor and residual of the chosen truth-value object determine the distributor
+composition and the adjunction inequalities.
+\end{example}
+
+\begin{example}[Lawvere truth values]
+\label{ex:companions-lawvere}
+For the Lawvere quantale, a fuzzy functor is a nonexpansive map. The companion
+and conjoint of
+\[
+    f:X\to Y
+\]
+are
+\[
+    f_\ast(x,y)=d_Y(fx,y),
+    \qquad
+    f^\ast(y,x)=d_Y(y,fx).
+\]
+Thus companions and conjoints record the forward and backward distance kernels
+induced by \(f\).
+\end{example}
+
+\section{Right liftings of fuzzy distributors}
+\label{sec:right-liftings-fuzzy-distributors}
+
+Right liftings are the categorical operation that will produce the fuzzy
+way-below distributor.
+
+\subsection{The enriched construction}
+\label{subsec:right-liftings-enriched}
+
+Let
+\[
+    \Phi:A\nrightarrow C,
+    \qquad
+    \Psi:B\nrightarrow C
+\]
+be fuzzy distributors with common target \(C\).
+
+\begin{definition}[Right lifting]
+\label{def:right-lifting}
+The \textbf{right lifting} of \(\Psi\) through \(\Phi\) is the fuzzy distributor
+\[
+    [\Phi,\Psi]:B\nrightarrow A
+\]
+defined by
+\[
+    [\Phi,\Psi](b,a)
+    =
+    \int_{c\in C}
+    [\Phi(a,c),\Psi(b,c)].
+\]
+\end{definition}
+
+The right lifting is characterized by the following universal diagram:
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+B
+    \ar[r,dashed,"\Theta"]
+    \ar[rr,bend right=18,dashed,"\Psi"']
+&
+A
+    \ar[r,dashed,"\Phi"]
+&
+C
+\ar[phantom,from=1-2,to=1-3,"\Downarrow" description]
+\end{tikzcd}
+\]
+where comparisons
+\[
+    \Theta\to[\Phi,\Psi]
+\]
+correspond to comparisons
+\[
+    \Phi\circ\Theta\to\Psi.
+\]
+In the locally posetal reflection, this says that \([\Phi,\Psi]\) is the largest
+\(\Theta\) satisfying
+\[
+    \Phi\circ\Theta\leq\Psi.
+\]
+
+\begin{proposition}[Universal property of right liftings]
+\label{prop:right-lifting-universal-property}
+For every fuzzy distributor
+\[
+    \Theta:B\nrightarrow A,
+\]
+there is a natural isomorphism
+\[
+    \operatorname{Dist}_{\mathbb V}(B,A)(\Theta,[\Phi,\Psi])
+    \cong
+    \operatorname{Dist}_{\mathbb V}(B,C)(\Phi\circ\Theta,\Psi).
+\]
+Equivalently, postcomposition by \(\Phi\) has right adjoint
+\[
+    [\Phi,-].
+\]
+\end{proposition}
+
+\begin{proof}
+Using the enriched hom-object in the distributor category, the left-hand side is
+\[
+\begin{aligned}
+\operatorname{Dist}_{\mathbb V}(B,A)(\Theta,[\Phi,\Psi])
+&=
+\int_{b,a}
+[
+    \Theta(b,a),
+    [\Phi,\Psi](b,a)
+]
+\\
+&=
+\int_{b,a}
+\left[
+    \Theta(b,a),
+    \int_c[\Phi(a,c),\Psi(b,c)]
+\right]
+\\
+&\cong
+\int_{b,a,c}
+[
+    \Theta(b,a),
+    [\Phi(a,c),\Psi(b,c)]
+]
+\\
+&\cong
+\int_{b,a,c}
+[
+    \Theta(b,a)\tensor\Phi(a,c),
+    \Psi(b,c)
+].
+\end{aligned}
+\]
+By the end--coend adjunction, this is isomorphic to
+\[
+    \int_{b,c}
+    \left[
+        \int^{a}
+        \Theta(b,a)\tensor\Phi(a,c),
+        \Psi(b,c)
+    \right].
+\]
+The coend is
+\[
+    (\Phi\circ\Theta)(b,c).
+\]
+Hence the displayed object is
+\[
+    \operatorname{Dist}_{\mathbb V}(B,C)(\Phi\circ\Theta,\Psi).
+\]
+\end{proof}
+
+\subsection{The posetal reflection}
+\label{subsec:right-liftings-posetal}
+
+In the posetal reflection, the right lifting is
+\[
+    [\Phi,\Psi](b,a)
+    =
+    \bigmeet_{c\in C}
+    \left(
+        \Phi(a,c)\multimap\Psi(b,c)
+    \right).
+\]
+Its universal property becomes
+\[
+    \Theta\leq[\Phi,\Psi]
+    \quad\Longleftrightarrow\quad
+    \Phi\circ\Theta\leq\Psi.
+\]
+Thus \([\Phi,\Psi](b,a)\) is the degree to which every instance of
+\(\Phi(a,c)\) entails the corresponding instance of \(\Psi(b,c)\).
+
+The posetal lifting adjunction can be displayed as
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+\operatorname{Dist}_{\Lambda}(B,A)
+    \ar[r,bend left=35,"{\Phi\circ -}"]
+&
+\operatorname{Dist}_{\Lambda}(B,C)
+    \ar[l,bend left=35,"{[\Phi,-]}"]
+\end{tikzcd}
+\]
+with order-enriched adjunction condition
+\[
+    \Phi\circ\Theta\leq\Psi
+    \quad\Longleftrightarrow\quad
+    \Theta\leq[\Phi,\Psi].
+\]
+
+\subsection{Examples}
+\label{subsec:right-liftings-examples}
+
+\begin{example}[The crisp case]
+\label{ex:right-lifting-crisp}
+For \(\Lambda=2\),
+\[
+    [\Phi,\Psi](b,a)
+\]
+holds precisely when
+\[
+    \forall c\in C,\;
+    \Phi(a,c)\Rightarrow \Psi(b,c).
+\]
+The universal property is
+\[
+    \Theta\subseteq[\Phi,\Psi]
+    \quad\Longleftrightarrow\quad
+    \Phi\circ\Theta\subseteq\Psi.
+\]
+\end{example}
+
+\begin{example}[G\"odel right liftings]
+\label{ex:right-lifting-godel}
+For G\"odel truth values,
+\[
+    [\Phi,\Psi](b,a)
+    =
+    \bigmeet_{c\in C}
+    \left(
+        \Phi(a,c)\multimap_{\mathrm G}\Psi(b,c)
+    \right),
+\]
+where
+\[
+    u\multimap_{\mathrm G}v
+    =
+    \begin{cases}
+    1,&u\leq v,\\
+    v,&u>v.
+    \end{cases}
+\]
+\end{example}
+
+\begin{example}[{\L}ukasiewicz right liftings]
+\label{ex:right-lifting-lukasiewicz}
+For {\L}ukasiewicz truth values,
+\[
+    [\Phi,\Psi](b,a)
+    =
+    \bigmeet_{c\in C}
+    \min(1,1-\Phi(a,c)+\Psi(b,c)).
+\]
+\end{example}
+
+\begin{example}[Product right liftings]
+\label{ex:right-lifting-product}
+For product truth values,
+\[
+    [\Phi,\Psi](b,a)
+    =
+    \bigmeet_{c\in C}
+    \left(
+        \Phi(a,c)\multimap_\Pi\Psi(b,c)
+    \right),
+\]
+where
+\[
+    u\multimap_\Pi v
+    =
+    \begin{cases}
+    1,&u\leq v,\\
+    v/u,&u>v.
+    \end{cases}
+\]
+\end{example}
+
+\begin{example}[Lawvere right liftings]
+\label{ex:right-lifting-lawvere}
+For the Lawvere quantale, the internal hom is truncated subtraction. Written in
+the usual numerical order,
+\[
+    [\Phi,\Psi](b,a)
+    =
+    \sup_{c\in C}
+    \bigl(\Psi(b,c)\ominus \Phi(a,c)\bigr),
+\]
+where
+\[
+    v\ominus u=\max(0,v-u)
+\]
+with the usual extended-value conventions. Thus a Lawvere right lifting measures
+the largest residual excess needed to transform \(\Phi(a,-)\) into
+\(\Psi(b,-)\).
+\end{example}
+
+\section{Ideals as distributors and approximable kernels}
+\label{sec:ideals-as-distributors}
+
+We next relate the ideal monad from the previous chapter to the distributor
+equipment.
+
+\subsection{The enriched construction}
+\label{subsec:ideals-as-distributors-enriched}
+
+A fuzzy ideal of \(X\) is a finite-flat weight
+\[
+    I:X^{\op}\to\underline{\mathbb V}.
+\]
+Equivalently, it is a fuzzy distributor
+\[
+    I:X\nrightarrow \mathbf 1,
+\]
+because
+\[
+    X^{\op}\tensor\mathbf 1
+    \cong
+    X^{\op}.
+\]
+Thus
+\[
+    \operatorname{Idl}_{\mathbb V}(X)
+\]
+is the full \(\mathbb V\)-subcategory of
+\[
+    \operatorname{Dist}_{\mathbb V}(X,\mathbf 1)
+    =
+    [X^{\op},\underline{\mathbb V}]
+\]
+spanned by finite-flat distributors. This inclusion is represented by
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+{\operatorname{Idl}_{\mathbb V}(X)}
+    \ar[r,hook,"i_X"]
+&
+{\operatorname{Dist}_{\mathbb V}(X,\mathbf{1})}
+    \ar[r,"\cong"]
+&
+{[X^{\op},\underline{\mathbb V}]}.
+\end{tikzcd}
+\]
+
+\begin{definition}[Fuzzy approximable map]
+\label{def:fuzzy-approximable-map-equipment}
+Let \(X\) and \(Y\) be small fuzzy categories. A \textbf{fuzzy approximable map}
+from \(X\) to \(Y\) is a Kleisli morphism for the fuzzy ideal monad:
+\[
+    R:X\to \operatorname{Idl}_{\mathbb V}(Y).
+\]
+Equivalently, it is a kernel
+\[
+    R:X\tensor Y^{\op}\to\underline{\mathbb V}
+\]
+such that, for every \(x\in X\), the fibre
+\[
+    R(x,-):Y^{\op}\to\underline{\mathbb V}
+\]
+is finite-flat.
+\end{definition}
+
+The distributor variance of this kernel is opposite to the variance of a
+distributor \(X\nrightarrow Y\). Under the convention
+\[
+    \Phi:A\nrightarrow B
+    \quad\text{means}\quad
+    \Phi:A^{\op}\tensor B\to\underline{\mathbb V},
+\]
+the kernel \(R\) corresponds to a distributor
+\[
+    R^\dagger:Y\nrightarrow X,
+    \qquad
+    R^\dagger(y,x)=R(x,y).
+\]
+The variance conversion is summarized by
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[r,"R"]
+&
+{\operatorname{Idl}_{\mathbb V}(Y)}
+    \ar[r,hook,"i_Y"]
+&
+{[Y^{\op},\underline{\mathbb V}]}
+\end{tikzcd}
+\qquad
+\begin{tikzcd}[column sep=huge,row sep=large]
+Y
+    \ar[r,dashed,"R^\dagger"]
+&
+X.
+\end{tikzcd}
+\]
+The upper row is vertical/Kleisli data, while the lower row is distributor data.
+
+\begin{proposition}[Kleisli extension as distributor convolution]
+\label{prop:kleisli-extension-convolution}
+Let
+\[
+    R:X\rightsquigarrow Y
+\]
+be a fuzzy approximable map. Its Kleisli extension
+\[
+    \overline R:
+    \operatorname{Idl}_{\mathbb V}(X)
+    \to
+    \operatorname{Idl}_{\mathbb V}(Y)
+\]
+is given by
+\[
+    \overline R(I)(y)
+    =
+    \int^{x\in X}
+    I(x)\tensor R(x,y).
+\]
+Equivalently, if
+\[
+    R^\dagger:Y\nrightarrow X
+\]
+is the associated oppositely oriented distributor, then
+\[
+    \overline R(I)
+    =
+    I\circ R^\dagger.
+\]
+\end{proposition}
+
+\begin{proof}
+The Kleisli extension is
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+\operatorname{Idl}_{\mathbb V}(X)
+    \ar[r,"\operatorname{Idl}_{\mathbb V}(R)"]
+&
+\operatorname{Idl}_{\mathbb V}
+    (\operatorname{Idl}_{\mathbb V}(Y))
+    \ar[r,"\mu_Y"]
+&
+\operatorname{Idl}_{\mathbb V}(Y).
+\end{tikzcd}
+\]
+The multiplication \(\mu_Y\) is flattening, so
+\[
+    \overline R(I)(y)
+    =
+    \int^{x\in X}
+    I(x)\tensor R(x,y).
+\]
+On the other hand,
+\[
+    (I\circ R^\dagger)(y)
+    =
+    \int^{x\in X}
+    R^\dagger(y,x)\tensor I(x)
+    =
+    \int^{x\in X}
+    R(x,y)\tensor I(x),
+\]
+which is canonically isomorphic to the same coend by symmetry of \(\tensor\).
+\end{proof}
+
+The convolution picture is
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+Y
+    \ar[r,dashed,"R^\dagger"]
+    \ar[rr,bend right=18,dashed,"I\circ R^\dagger"']
+&
+X
+    \ar[r,dashed,"I"]
+&
+\mathbf 1.
+\end{tikzcd}
+\]
+
+\subsection{The posetal reflection}
+\label{subsec:ideals-as-distributors-posetal}
+
+In the posetal specialization, a fuzzy approximable map
+\[
+    R:X\rightsquigarrow Y
+\]
+is a map
+\[
+    R:X\times Y\to L
+\]
+such that each fibre
+\[
+    R(x,-):Y^{\op}\to \Lambda
+\]
+is a fuzzy ideal of \(Y\), and such that the assignment
+\[
+    x\longmapsto R(x,-)
+\]
+is a \(\Lambda\)-functor
+\[
+    X\to \operatorname{Idl}_\Lambda(Y).
+\]
+Its extension is
+\[
+    \overline R(I)(y)
+    =
+    \bigjoin_{x\in X}
+    I(x)\tensor R(x,y).
+\]
+Kleisli composition is therefore
+\[
+    (S\circ R)(x,z)
+    =
+    \bigjoin_{y\in Y}
+    R(x,y)\tensor S(y,z).
+\]
+
+\subsection{Examples}
+\label{subsec:ideals-as-distributors-examples}
+
+\begin{example}[The crisp case]
+\label{ex:ideals-as-distributors-crisp}
+For \(\Lambda=2\), a fuzzy approximable map
+\[
+    R:X\rightsquigarrow Y
+\]
+is a monotone map
+\[
+    X\to\operatorname{Idl}(Y).
+\]
+Equivalently, it is a relation
+\[
+    R\subseteq X\times Y
+\]
+such that every fibre
+\[
+    R[x]=\{y\in Y\mid R(x,y)\}
+\]
+is an ideal of \(Y\), and
+\[
+    x\leq x'
+    \quad\Longrightarrow\quad
+    R[x]\subseteq R[x'].
+\]
+The extension formula becomes
+\[
+    \overline R(I)=\bigcup_{x\in I}R[x].
+\]
+\end{example}
+
+\begin{example}[G\"odel approximable maps]
+\label{ex:ideals-as-distributors-godel}
+For G\"odel truth values,
+\[
+    \overline R(I)(y)
+    =
+    \bigjoin_{x\in X}
+    \min(I(x),R(x,y)).
+\]
+\end{example}
+
+\begin{example}[{\L}ukasiewicz approximable maps]
+\label{ex:ideals-as-distributors-lukasiewicz}
+For {\L}ukasiewicz truth values,
+\[
+    \overline R(I)(y)
+    =
+    \bigjoin_{x\in X}
+    \max(0,I(x)+R(x,y)-1).
+\]
+\end{example}
+
+\begin{example}[Product approximable maps]
+\label{ex:ideals-as-distributors-product}
+For product truth values,
+\[
+    \overline R(I)(y)
+    =
+    \bigjoin_{x\in X}
+    I(x)R(x,y).
+\]
+\end{example}
+
+\begin{example}[Lawvere approximable maps]
+\label{ex:ideals-as-distributors-lawvere}
+For the Lawvere quantale, the extension formula is infimal convolution:
+\[
+    \overline R(I)(y)
+    =
+    \inf_{x\in X}
+    \bigl(I(x)+R(x,y)\bigr),
+\]
+written in the usual numerical order.
+\end{example}
+
+\section{The ideal algebra map inside the distributor equipment}
+\label{sec:ideal-algebra-map-equipment}
+
+We now place the ideal-algebra map and the principal-ideal embedding inside the
+distributor equipment.
+
+\subsection{The enriched construction}
+\label{subsec:ideal-algebra-map-equipment-enriched}
+
+Let \(X\) be a fuzzy domain. We have the algebra map
+\[
+    \alpha_X:\operatorname{Idl}_{\mathbb V}(X)\to X
+\]
+and the principal-ideal embedding
+\[
+    \eta_X:X\to\operatorname{Idl}_{\mathbb V}(X).
+\]
+
+The conjoint of \(\alpha_X\) is the distributor
+\[
+    \alpha_X^\ast:
+    X\nrightarrow \operatorname{Idl}_{\mathbb V}(X)
+\]
+given by
+\[
+    \alpha_X^\ast(b,I)
+    =
+    X(b,\alpha_X I).
+\]
+The companion of \(\eta_X\) is the distributor
+\[
+    (\eta_X)_\ast:
+    X\nrightarrow \operatorname{Idl}_{\mathbb V}(X)
+\]
+given by
+\[
+    (\eta_X)_\ast(a,I)
+    =
+    \operatorname{Idl}_{\mathbb V}(X)(\eta_X a,I).
+\]
+
+The two constructions arise from opposite sides of the algebra triangle:
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[r,"\eta_X"]
+    \ar[dr,"1_X"']
+&
+\operatorname{Idl}_{\mathbb V}(X)
+    \ar[d,"\alpha_X"]
+\\
+&
+X
+\end{tikzcd}
+\qquad
+\begin{tikzcd}[column sep=huge,row sep=large]
+&
+\operatorname{Idl}_{\mathbb V}(X)
+\\
+X
+    \ar[ur,dashed,bend left=14,"\alpha_X^\ast"]
+    \ar[ur,dashed,bend right=14,"{(\eta_X)_\ast}"']
+\end{tikzcd}
+\]
+
+Thus
+\[
+    \alpha_X^\ast
+    \qquad\text{and}\qquad
+    (\eta_X)_\ast
+\]
+are two fuzzy distributors with the same source and the same target:
+\[
+    X\nrightarrow \operatorname{Idl}_{\mathbb V}(X).
+\]
+Consequently, the right lifting
+\[
+    [\alpha_X^\ast,(\eta_X)_\ast]
+\]
+is a fuzzy distributor
+\[
+    X\nrightarrow X.
+\]
+This is the distributor that will be defined as the fuzzy way-below relation.
+
+\subsection{The posetal reflection}
+\label{subsec:ideal-algebra-map-equipment-posetal}
+
+For a fuzzy domain over \(\Lambda\), the two distributors are
+\[
+    \alpha_X^\ast(b,I)
+    =
+    X(b,\alpha_X I),
+\]
+and
+\[
+    (\eta_X)_\ast(a,I)
+    =
+    \operatorname{Idl}_\Lambda(X)(\eta_X a,I).
+\]
+By the enriched Yoneda lemma in the posetal setting,
+\[
+    \operatorname{Idl}_\Lambda(X)(\eta_X a,I)
+    =
+    I(a).
+\]
+Hence
+\[
+    (\eta_X)_\ast(a,I)=I(a).
+\]
+
+\subsection{Examples}
+\label{subsec:ideal-algebra-map-equipment-examples}
+
+\begin{example}[The crisp case]
+\label{ex:ideal-algebra-map-crisp}
+For \(\Lambda=2\),
+\[
+    \alpha_X^\ast(b,I)
+    \Longleftrightarrow
+    b\leq \bigvee I,
+\]
+and
+\[
+    (\eta_X)_\ast(a,I)
+    \Longleftrightarrow
+    \downarrow a\subseteq I.
+\]
+Since \(I\) is lower,
+\[
+    \downarrow a\subseteq I
+    \quad\Longleftrightarrow\quad
+    a\in I.
+\]
+Thus the right lifting expresses the ordinary implication
+\[
+    b\leq\bigvee I
+    \quad\Longrightarrow\quad
+    a\in I
+\]
+uniformly over all ideals \(I\).
+\end{example}
+
+\begin{example}[Standard fuzzy truth values]
+\label{ex:ideal-algebra-map-standard}
+For G\"odel, {\L}ukasiewicz, and product truth values, the formulas are
+\[
+    \alpha_X^\ast(b,I)=X(b,\alpha_X I),
+    \qquad
+    (\eta_X)_\ast(a,I)=I(a).
+\]
+The later right-lifting formula compares these two degrees using the residual
+appropriate to the chosen tensor.
+\end{example}
+
+\begin{example}[Lawvere truth values]
+\label{ex:ideal-algebra-map-lawvere}
+For the Lawvere quantale,
+\[
+    \alpha_X^\ast(b,I)=d_X(b,\alpha_X I)
+\]
+is the cost from \(b\) to the ideal colimit of \(I\), while
+\[
+    (\eta_X)_\ast(a,I)=I(a)
+\]
+is the cost-degree with which \(a\) belongs to the weight \(I\).
+\end{example}
+
+\section{The fuzzy way-below distributor}
+\label{sec:fuzzy-way-below-distributor}
+
+The fuzzy way-below relation is now obtained by applying the right-lifting
+construction to the two distributors built from \(\alpha_X\) and \(\eta_X\).
+
+\subsection{The enriched construction}
+\label{subsec:fuzzy-way-below-enriched}
+
+\begin{definition}[Fuzzy way-below distributor]
+\label{def:fuzzy-way-below-distributor}
+Let \(X\) be a fuzzy domain. The \textbf{fuzzy way-below distributor} of \(X\)
+is the right lifting
+\[
+    \ll_X
+    \coloneqq
+    [\alpha_X^\ast,(\eta_X)_\ast]
+    :
+    X\nrightarrow X.
+\]
+We write
+\[
+    \ll_X(a,b)
+\]
+for its value at \((a,b)\), where \(a\) is the approximant variable and \(b\) is
+the element being approximated.
+\end{definition}
+
+With the right-lifting convention
+\[
+    [\Phi,\Psi](b,a)=\int_c[\Phi(a,c),\Psi(b,c)],
+\]
+the first variable of \(\ll_X(a,b)\) comes from the source variable of
+\((\eta_X)_\ast\), while the second variable comes from the source variable of
+\(\alpha_X^\ast\). Thus
+\[
+    \ll_X(a,b)
+    =
+    [\alpha_X^\ast,(\eta_X)_\ast](a,b)
+    =
+    \int_I
+    [
+        \alpha_X^\ast(b,I),
+        (\eta_X)_\ast(a,I)
+    ].
+\]
+
+The universal right-lifting triangle is
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[r,dashed,"\ll_X"]
+    \ar[rr,bend right=18,dashed,"{(\eta_X)_\ast}"']
+&
+X
+    \ar[r,dashed,"\alpha_X^\ast"]
+&
+\operatorname{Idl}_{\mathbb V}(X)
+\ar[phantom,from=1-2,to=1-3,"\Downarrow" description]
+\end{tikzcd}
+\]
+and its universal property says that every compatible triangle factors through
+\(\ll_X\):
+\[
+    \operatorname{Dist}_{\mathbb V}(X,X)(\Theta,\ll_X)
+    \cong
+    \operatorname{Dist}_{\mathbb V}
+    \bigl(X,\operatorname{Idl}_{\mathbb V}(X)\bigr)
+    \bigl(\alpha_X^\ast\circ\Theta,(\eta_X)_\ast\bigr).
+\]
+Equivalently, a comparison
+\[
+    \alpha_X^\ast\circ\Theta\to(\eta_X)_\ast
+\]
+is the same as a comparison
+\[
+    \Theta\to\ll_X.
+\]
+
+\begin{proposition}[Formula for the fuzzy way-below distributor]
+\label{prop:fuzzy-way-below-formula}
+For every fuzzy domain \(X\),
+\[
+    \ll_X(a,b)
+    \cong
+    \int_{I\in \operatorname{Idl}_{\mathbb V}(X)}
+    \left[
+        X(b,\alpha_X I),
+        \operatorname{Idl}_{\mathbb V}(X)(\eta_X a,I)
+    \right].
+\]
+By enriched Yoneda, this is equivalently
+\[
+    \ll_X(a,b)
+    \cong
+    \int_{I\in \operatorname{Idl}_{\mathbb V}(X)}
+    \left[
+        X(b,\alpha_X I),
+        I(a)
+    \right].
+\]
+\end{proposition}
+
+\begin{proof}
+This is the right-lifting formula applied to
+\[
+    \Phi=\alpha_X^\ast,
+    \qquad
+    \Psi=(\eta_X)_\ast.
+\]
+Thus
+\[
+    \ll_X(a,b)
+    =
+    [\alpha_X^\ast,(\eta_X)_\ast](a,b)
+\]
+is
+\[
+    \int_{I\in \operatorname{Idl}_{\mathbb V}(X)}
+    [
+        \alpha_X^\ast(b,I),
+        (\eta_X)_\ast(a,I)
+    ].
+\]
+Using the definitions of \(\alpha_X^\ast\) and \((\eta_X)_\ast\), this becomes
+\[
+    \int_{I\in \operatorname{Idl}_{\mathbb V}(X)}
+    \left[
+        X(b,\alpha_X I),
+        \operatorname{Idl}_{\mathbb V}(X)(\eta_X a,I)
+    \right].
+\]
+Finally,
+\[
+    \operatorname{Idl}_{\mathbb V}(X)(\eta_X a,I)
+    \cong
+    I(a)
+\]
+by enriched Yoneda.
+\end{proof}
+
+\begin{proposition}[Universal property of way-below]
+\label{prop:way-below-universal-property}
+For every fuzzy distributor
+\[
+    \Theta:X\nrightarrow X,
+\]
+there is a natural isomorphism
+\[
+    \operatorname{Dist}_{\mathbb V}(X,X)(\Theta,\ll_X)
+    \cong
+    \operatorname{Dist}_{\mathbb V}
+    \bigl(X,\operatorname{Idl}_{\mathbb V}(X)\bigr)
+    \bigl(\alpha_X^\ast\circ\Theta,(\eta_X)_\ast\bigr).
+\]
+In the locally posetal reflection this becomes
+\[
+    \Theta\leq\ll_X
+    \quad\Longleftrightarrow\quad
+    \alpha_X^\ast\circ\Theta\leq(\eta_X)_\ast.
+\]
+\end{proposition}
+
+\begin{proof}
+This is the universal property of the right lifting
+\[
+    [\alpha_X^\ast,(\eta_X)_\ast].
+\]
+\end{proof}
+
+The universal property can be visualized as the adjunction
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+\operatorname{Dist}_{\mathbb V}(X,X)
+    \ar[r,bend left=35,"{\alpha_X^\ast\circ -}"]
+&
+\operatorname{Dist}_{\mathbb V}
+    \bigl(X,\operatorname{Idl}_{\mathbb V}(X)\bigr)
+    \ar[l,bend left=35,"{[\alpha_X^\ast,-]}"]
+\end{tikzcd}
+\]
+evaluated at \((\eta_X)_\ast\).
+
+\begin{proposition}[Way-below implies below]
+\label{prop:fuzzy-way-below-implies-below}
+For every fuzzy domain \(X\), there is a canonical comparison
+\[
+    \ll_X(a,b)\to X(a,b).
+\]
+In the posetal reflection this says
+\[
+    \ll_X(a,b)\leq X(a,b).
+\]
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:fuzzy-way-below-formula}, the end defining
+\(\ll_X(a,b)\) maps to its component at the principal ideal \(\eta_X b\):
+\[
+    \ll_X(a,b)
+    \to
+    \left[
+        X(b,\alpha_X\eta_X b),
+        \operatorname{Idl}_{\mathbb V}(X)(\eta_X a,\eta_X b)
+    \right].
+\]
+The strict algebra unit law gives
+\[
+    \alpha_X\eta_X b=b.
+\]
+The Yoneda embedding is fully faithful, so
+\[
+    \operatorname{Idl}_{\mathbb V}(X)(\eta_X a,\eta_X b)
+    \cong
+    X(a,b).
+\]
+Thus we have a map
+\[
+    \ll_X(a,b)
+    \to
+    [X(b,b),X(a,b)].
+\]
+The unit map
+\[
+    I\to X(b,b)
+\]
+induces, by contravariance of the first variable of the internal hom, a morphism
+\[
+    [X(b,b),X(a,b)]
+    \to
+    [I,X(a,b)]
+    \cong
+    X(a,b).
+\]
+The composite gives
+\[
+    \ll_X(a,b)\to X(a,b).
+\]
+\end{proof}
+
+The proof follows the diagram
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+{\ll_X(a,b)}
+    \ar[r]
+    \ar[rr,bend right=18]
+&
+{\left[
+    X(b,\alpha_X\eta_X b),
+    \operatorname{Idl}_{\mathbb V}(X)(\eta_X a,\eta_X b)
+\right]}
+    \ar[r,"{\alpha_X\eta_X b=b}"]
+&
+{\left[
+    X(b,b),
+    X(a,b)
+\right]}
+    \ar[r]
+&
+{X(a,b)}.
+\end{tikzcd}
+\]
+
+\subsection{The posetal reflection}
+\label{subsec:fuzzy-way-below-posetal}
+
+For a fuzzy domain over \(\Lambda\),
+\[
+    \ll_X(a,b)
+    =
+    \bigmeet_{I\in\operatorname{Idl}_\Lambda(X)}
+    \left(
+        X(b,\alpha_X I)\multimap I(a)
+    \right).
+\]
+The distributor law for
+\[
+    \ll_X:X\nrightarrow X
+\]
+gives fuzzy monotonicity:
+\[
+    X(a',a)\tensor \ll_X(a,b)\tensor X(b,b')
+    \leq
+    \ll_X(a',b').
+\]
+The comparison of Proposition~\ref{prop:fuzzy-way-below-implies-below} becomes
+\[
+    \ll_X(a,b)\leq X(a,b).
+\]
+Thus the way-below degree is always bounded above by the ordinary fuzzy comparison
+degree.
+
+In the Lawvere case this inequality is in the truth-value order. Since the
+truth-value order is the reverse of the usual numerical order, it reads
+numerically as
+\[
+    \ll_X(a,b)\geq d_X(a,b).
+\]
+
+\subsection{Examples}
+\label{subsec:fuzzy-way-below-examples}
+
+\begin{example}[The crisp case]
+\label{ex:fuzzy-way-below-crisp}
+For \(\Lambda=2\), the formula becomes
+\[
+    a\ll_X b
+    \quad\Longleftrightarrow\quad
+    \forall I\in\operatorname{Idl}(X),\;
+    b\leq \bigvee I\Rightarrow a\in I.
+\]
+This is the ordinary way-below relation on a dcpo.
+\end{example}
+
+\begin{example}[G\"odel way-below degrees]
+\label{ex:fuzzy-way-below-godel}
+For G\"odel truth values,
+\[
+    \ll_X(a,b)
+    =
+    \bigmeet_{I}
+    \left(
+        X(b,\alpha_X I)\multimap_{\mathrm G} I(a)
+    \right).
+\]
+This is the degree to which every ideal whose join lies above \(b\) contains
+\(a\).
+\end{example}
+
+\begin{example}[{\L}ukasiewicz way-below degrees]
+\label{ex:fuzzy-way-below-lukasiewicz}
+For {\L}ukasiewicz truth values,
+\[
+    \ll_X(a,b)
+    =
+    \bigmeet_{I}
+    \min(1,1-X(b,\alpha_X I)+I(a)).
+\]
+\end{example}
+
+\begin{example}[Product way-below degrees]
+\label{ex:fuzzy-way-below-product}
+For product truth values,
+\[
+    \ll_X(a,b)
+    =
+    \bigmeet_I
+    \left(
+        X(b,\alpha_X I)\multimap_\Pi I(a)
+    \right).
+\]
+\end{example}
+
+\begin{example}[Lawvere way-below costs]
+\label{ex:fuzzy-way-below-lawvere}
+For the Lawvere quantale, the meet in the truth-value order is a supremum in the
+usual numerical order. Hence
+\[
+    \ll_X(a,b)
+    =
+    \sup_{I\in\operatorname{Idl}_\Lambda(X)}
+    \bigl(I(a)\ominus X(b,\alpha_X I)\bigr),
+\]
+where
+\[
+    v\ominus u=\max(0,v-u)
+\]
+with the extended-value conventions. Thus \(\ll_X(a,b)\) measures the
+worst-case residual cost needed to turn evidence that \(b\) lies below an ideal
+colimit into evidence that \(a\) belongs to that ideal.
+\end{example}
+
+\section{Continuity as representability of way-below}
+\label{sec:continuity-representability-way-below}
+
+We now show that the previous chapter's way-below formula is precisely the
+representable form of the right-lifted distributor.
+
+\subsection{The enriched construction}
+\label{subsec:continuity-representability-enriched}
+
+\begin{definition}[Continuous fuzzy domain, recalled]
+\label{def:continuous-fuzzy-domain-recalled-equipment}
+A fuzzy domain \(X\) is \textbf{continuous} if its ideal-algebra map
+\[
+    \alpha_X:\operatorname{Idl}_{\mathbb V}(X)\to X
+\]
+has an enriched left adjoint
+\[
+    \beta_X:X\to\operatorname{Idl}_{\mathbb V}(X),
+    \qquad
+    \beta_X\dashv\alpha_X.
+\]
+\end{definition}
+
+The continuity data form the adjoint diagram
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[r,bend left=35,"\beta_X"]
+&
+\operatorname{Idl}_{\mathbb V}(X)
+    \ar[l,bend left=35,"\alpha_X"]
+\end{tikzcd}
+\]
+and hence give natural isomorphisms
+\[
+    X(b,\alpha_X I)
+    \cong
+    \operatorname{Idl}_{\mathbb V}(X)(\beta_X b,I).
+\]
+
+\begin{theorem}[Continuity represents the way-below distributor]
+\label{thm:continuity-represents-way-below}
+Let \(X\) be a continuous fuzzy domain. Then
+\[
+    \ll_X(a,b)
+    \cong
+    \operatorname{Idl}_{\mathbb V}(X)(\eta_X a,\beta_X b).
+\]
+Consequently,
+\[
+    \ll_X(a,b)\cong \beta_X(b)(a).
+\]
+Equivalently, as distributors,
+\[
+    \ll_X
+    \cong
+    \beta_X^\ast\circ(\eta_X)_\ast.
+\]
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{prop:fuzzy-way-below-formula},
+\[
+    \ll_X(a,b)
+    \cong
+    \int_I
+    \left[
+        X(b,\alpha_X I),
+        \operatorname{Idl}_{\mathbb V}(X)(\eta_X a,I)
+    \right].
+\]
+Since
+\[
+    \beta_X\dashv\alpha_X,
+\]
+we have
+\[
+    X(b,\alpha_X I)
+    \cong
+    \operatorname{Idl}_{\mathbb V}(X)(\beta_X b,I).
+\]
+Therefore
+\[
+    \ll_X(a,b)
+    \cong
+    \int_I
+    \left[
+        \operatorname{Idl}_{\mathbb V}(X)(\beta_X b,I),
+        \operatorname{Idl}_{\mathbb V}(X)(\eta_X a,I)
+    \right].
+\]
+By enriched Yoneda in \(\operatorname{Idl}_{\mathbb V}(X)\),
+\[
+    \int_I
+    \left[
+        \operatorname{Idl}_{\mathbb V}(X)(\beta_X b,I),
+        \operatorname{Idl}_{\mathbb V}(X)(\eta_X a,I)
+    \right]
+    \cong
+    \operatorname{Idl}_{\mathbb V}(X)(\eta_X a,\beta_X b).
+\]
+Applying Yoneda again to the ideal
+\[
+    \beta_X b:X^{\op}\to\underline{\mathbb V}
+\]
+gives
+\[
+    \operatorname{Idl}_{\mathbb V}(X)(\eta_X a,\beta_X b)
+    \cong
+    \beta_X(b)(a).
+\]
+
+For the distributor-level statement, compute
+\[
+\begin{aligned}
+(\beta_X^\ast\circ(\eta_X)_\ast)(a,b)
+&=
+\int^{I\in\operatorname{Idl}_{\mathbb V}(X)}
+\operatorname{Idl}_{\mathbb V}(X)(\eta_Xa,I)
+\tensor
+\operatorname{Idl}_{\mathbb V}(X)(I,\beta_Xb)
+\\
+&\cong
+\operatorname{Idl}_{\mathbb V}(X)(\eta_Xa,\beta_Xb)
+\\
+&\cong
+\ll_X(a,b),
+\end{aligned}
+\]
+by enriched co-Yoneda and the calculation above.
+\end{proof}
+
+Thus the approximant map
+\[
+    \beta_X:X\to\operatorname{Idl}_{\mathbb V}(X)
+\]
+represents the right-lifted way-below distributor.
+
+\subsection{The posetal reflection}
+\label{subsec:continuity-representability-posetal}
+
+For a continuous fuzzy domain over \(\Lambda\),
+\[
+    \ll_X(a,b)
+    =
+    \operatorname{Idl}_\Lambda(X)(\eta_X a,\beta_X b)
+    =
+    \beta_X(b)(a).
+\]
+Thus the way-below degree
+\[
+    \operatorname{wb}_X(a,b)=\beta_X(b)(a)
+\]
+from the previous chapter is exactly the value of the right-lifted distributor
+constructed in this chapter.
+
+If \(X\) is separated, then the reconstruction theorem from the previous chapter
+gives
+\[
+    \alpha_X\beta_X=1_X.
+\]
+For completeness, we recall the argument. The unit of
+\[
+    \beta_X\dashv\alpha_X
+\]
+gives
+\[
+    1_X\leq \alpha_X\beta_X.
+\]
+The counit gives
+\[
+    \beta_X\alpha_X\leq 1_{\operatorname{Idl}_\Lambda(X)}.
+\]
+Applying this to the principal ideal \(\eta_X b\), and using the algebra law
+\[
+    \alpha_X\eta_X b=b,
+\]
+gives
+\[
+    \beta_X b\leq \eta_X b.
+\]
+Applying \(\alpha_X\) gives
+\[
+    \alpha_X\beta_X b
+    \leq
+    \alpha_X\eta_X b
+    =
+    b.
+\]
+Together with
+\[
+    b\leq \alpha_X\beta_X b,
+\]
+this gives equality in the induced crisp preorder. Since \(X\) is separated,
+\[
+    \alpha_X\beta_X b=b.
+\]
+
+The reconstruction is captured by
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[r,"\beta_X"]
+    \ar[dr,"1_X"']
+&
+\operatorname{Idl}_\Lambda(X)
+    \ar[d,"\alpha_X"]
+\\
+&
+X
+\end{tikzcd}
+\]
+in the separated posetal reflection.
+
+Hence every object \(b\) of a separated continuous fuzzy domain is recovered as
+the fuzzy ideal colimit of its approximant ideal:
+\[
+    b=\alpha_X(\beta_X b).
+\]
+
+\subsection{Examples}
+\label{subsec:continuity-representability-examples}
+
+\begin{example}[The crisp case]
+\label{ex:continuity-representability-crisp}
+For \(\Lambda=2\), continuity means that
+\[
+    \alpha_X:\operatorname{Idl}(X)\to X
+\]
+has a left adjoint
+\[
+    \beta_X:X\to\operatorname{Idl}(X).
+\]
+Then
+\[
+    \beta_X(b)=\{a\in X\mid a\ll b\},
+\]
+and
+\[
+    a\ll b
+    \quad\Longleftrightarrow\quad
+    a\in \beta_X(b).
+\]
+The reconstruction equation
+\[
+    \alpha_X\beta_X(b)=b
+\]
+says that every element is the directed supremum of its way-below approximants.
+\end{example}
+
+\begin{example}[G\"odel continuous fuzzy domains]
+\label{ex:continuity-representability-godel}
+For G\"odel truth values,
+\[
+    \operatorname{wb}_X(a,b)
+    =
+    \beta_X(b)(a)
+\]
+is the G\"odel-valued degree to which \(a\) approximates \(b\).
+\end{example}
+
+\begin{example}[{\L}ukasiewicz continuous fuzzy domains]
+\label{ex:continuity-representability-lukasiewicz}
+For {\L}ukasiewicz truth values,
+\[
+    \operatorname{wb}_X(a,b)
+    =
+    \beta_X(b)(a)
+\]
+is an MV-valued approximation degree. The right-lifting formula computes it
+using the {\L}ukasiewicz residual.
+\end{example}
+
+\begin{example}[Product continuous fuzzy domains]
+\label{ex:continuity-representability-product}
+For product truth values,
+\[
+    \operatorname{wb}_X(a,b)
+    =
+    \beta_X(b)(a),
+\]
+and the comparison between ideal-colimit evidence and ideal-membership evidence
+is governed by the product residual.
+\end{example}
+
+\begin{example}[Lawvere continuous fuzzy domains]
+\label{ex:continuity-representability-lawvere}
+For the Lawvere quantale,
+\[
+    \beta_X(b)(a)
+\]
+is the cost with which \(a\) approximates \(b\). Continuity says that the
+right-lifted approximation cost is represented by the finite-flat weight
+\[
+    \beta_X(b).
+\]
+\end{example}
+
+\section{Scott opens through way-below approximants}
+\label{sec:scott-opens-through-way-below}
+
+The previous chapter defined fuzzy Scott opens as upper fuzzy predicates
+preserving fuzzy ideal joins. The way-below distributor reconstructs Scott opens
+from their values on approximants.
+
+\subsection{The enriched construction}
+\label{subsec:scott-opens-way-below-enriched}
+
+Let \(X\) be a weak fuzzy domain with structure map
+\[
+    \alpha_X:\operatorname{Idl}_{\mathbb V}(X)\to X.
+\]
+A fuzzy Scott open is an upper fuzzy predicate
+\[
+    U:X\to\underline{\mathbb V}
+\]
+satisfying
+\[
+    U(\alpha_X I)
+    \cong
+    \int^{x\in X}
+    I(x)\tensor U(x)
+\]
+for every fuzzy ideal \(I\).
+
+The right-hand side is the enriched pairing of the lower weight
+\[
+    I:X^{\op}\to\underline{\mathbb V}
+\]
+with the upper predicate
+\[
+    U:X\to\underline{\mathbb V}.
+\]
+Thus Scott openness says that \(U\) sends the chosen ideal colimit of \(I\) to
+the corresponding weighted colimit of its values. The pairing is represented by
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X^{\op}
+    \ar[r,"I"]
+&
+\underline{\mathbb V}
+&
+X
+    \ar[l,"U"']
+\\
+&
+\int^{x\in X} I(x)\tensor U(x)
+    \ar[u,dashed]
+\end{tikzcd}
+\]
+and the Scott condition by
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+\operatorname{Idl}_{\mathbb V}(X)
+    \ar[r,"\alpha_X"]
+    \ar[dr,"{I\mapsto\int^{x}I(x)\tensor U(x)}"']
+&
+X
+    \ar[d,"U"]
+\\
+&
+\underline{\mathbb V}.
+\end{tikzcd}
+\]
+
+If an enriched reconstruction equivalence
+\[
+    \alpha_X\beta_X\cong 1_X
+\]
+is available, then the Scott-open condition gives
+\[
+    U(b)
+    \cong
+    U(\alpha_X(\beta_X b))
+    \cong
+    \int^{a\in X}
+        \beta_X(b)(a)\tensor U(a)
+    \cong
+    \int^{a\in X}
+        \ll_X(a,b)\tensor U(a).
+\]
+In the posetal separated case, the reconstruction equality was obtained in the
+previous section, so the formula becomes an equality of truth values.
+
+The reconstruction path is
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[r,"\beta_X"]
+    \ar[rr,bend left=22,"1_X"]
+&
+\operatorname{Idl}_{\mathbb V}(X)
+    \ar[r,"\alpha_X"]
+    \ar[d,"{I\mapsto\int^{a}I(a)\tensor U(a)}"']
+&
+X
+    \ar[d,"U"]
+\\
+&
+\underline{\mathbb V}
+    \ar[r,equal]
+&
+\underline{\mathbb V}.
+\end{tikzcd}
+\]
+
+\subsection{The posetal reflection}
+\label{subsec:scott-opens-way-below-posetal}
+
+In the posetal specialization, a fuzzy Scott open is an upper fuzzy predicate
+\[
+    U:X\to L
+\]
+satisfying
+\[
+    U(\alpha_X I)
+    =
+    \bigjoin_{x\in X}
+    I(x)\tensor U(x)
+\]
+for every fuzzy ideal \(I\).
+
+\begin{proposition}[Scott opens are reconstructed from way-below approximants]
+\label{prop:scott-open-reconstruction-way-below}
+Let \(X\) be a separated continuous fuzzy domain over \(\Lambda\), and let
+\[
+    U:X\to L
+\]
+be a fuzzy Scott open. Then for every \(b\in X\),
+\[
+    U(b)
+    =
+    \bigjoin_{a\in X}
+    \ll_X(a,b)\tensor U(a).
+\]
+\end{proposition}
+
+\begin{proof}
+Since \(X\) is separated and continuous,
+\[
+    b=\alpha_X(\beta_X b).
+\]
+Since \(U\) is Scott open,
+\[
+    U(b)
+    =
+    U(\alpha_X(\beta_X b))
+    =
+    \bigjoin_{a\in X}
+    \beta_X(b)(a)\tensor U(a).
+\]
+By Theorem~\ref{thm:continuity-represents-way-below},
+\[
+    \beta_X(b)(a)=\ll_X(a,b).
+\]
+Substituting gives
+\[
+    U(b)
+    =
+    \bigjoin_{a\in X}
+    \ll_X(a,b)\tensor U(a).
+\]
+\end{proof}
+
+Equivalently,
+\[
+    U(b)
+    =
+    \bigjoin_{a\in X}
+    \beta_X(b)(a)\tensor U(a).
+\]
+
+\subsection{Examples}
+\label{subsec:scott-opens-way-below-examples}
+
+\begin{example}[The crisp case]
+\label{ex:scott-opens-way-below-crisp}
+For \(\Lambda=2\), if \(X\) is a continuous dcpo and \(U\subseteq X\) is Scott
+open, then
+\[
+    b\in U
+    \quad\Longleftrightarrow\quad
+    \exists a\in X,\; a\ll b\text{ and }a\in U.
+\]
+Thus Scott opens are determined by way-below approximants.
+\end{example}
+
+\begin{example}[G\"odel Scott opens]
+\label{ex:scott-opens-way-below-godel}
+For G\"odel truth values, the reconstruction formula is
+\[
+    U(b)
+    =
+    \bigjoin_{a\in X}
+    \min(\ll_X(a,b),U(a)).
+\]
+\end{example}
+
+\begin{example}[{\L}ukasiewicz Scott opens]
+\label{ex:scott-opens-way-below-lukasiewicz}
+For {\L}ukasiewicz truth values,
+\[
+    U(b)
+    =
+    \bigjoin_{a\in X}
+    \max(0,\ll_X(a,b)+U(a)-1).
+\]
+\end{example}
+
+\begin{example}[Product Scott opens]
+\label{ex:scott-opens-way-below-product}
+For product truth values,
+\[
+    U(b)
+    =
+    \bigjoin_{a\in X}
+    \ll_X(a,b)U(a).
+\]
+\end{example}
+
+\begin{example}[Lawvere Scott opens]
+\label{ex:scott-opens-way-below-lawvere}
+For the Lawvere quantale, the Scott reconstruction formula becomes
+\[
+    U(b)
+    =
+    \inf_{a\in X}
+    \bigl(\ll_X(a,b)+U(a)\bigr),
+\]
+written in the usual numerical order. Thus the cost of satisfying the Scott
+predicate at \(b\) is obtained by optimizing over approximants \(a\) of \(b\).
+\end{example}
+
+\section{Summary}
+\label{sec:summary-fuzzy-distributors-way-below}
+
+This chapter constructed the fuzzy distributor equipment and used it to explain
+the origin of the fuzzy way-below relation.
+
+The construction starts with the data already present in the fuzzy ideal monad:
+\[
+    \eta_X:X\to\operatorname{Idl}_{\mathbb V}(X),
+    \qquad
+    \alpha_X:\operatorname{Idl}_{\mathbb V}(X)\to X.
+\]
+The first is the principal-ideal embedding, and the second is the algebra map of a
+fuzzy domain. Their strict algebra interaction is
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[r,"\eta_X"]
+    \ar[dr,"1_X"']
+&
+\operatorname{Idl}_{\mathbb V}(X)
+    \ar[d,"\alpha_X"]
+\\
+&
+X.
+\end{tikzcd}
+\]
+
+Fuzzy distributors
+\[
+    \Phi:X\nrightarrow Y
+\]
+are enriched profunctors
+\[
+    X^{\op}\tensor Y\to\underline{\mathbb V}.
+\]
+They compose by coends, admit companions and conjoints for fuzzy functors, and
+have right liftings
+\[
+    [\Phi,\Psi](b,a)
+    =
+    \int_c
+    [\Phi(a,c),\Psi(b,c)].
+\]
+The distributor equipment has the schematic form
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[d,"f"']
+    \ar[r,dashed,"\Phi"]
+&
+Y
+    \ar[d,"g"]
+\\
+X'
+    \ar[r,dashed,"\Psi"']
+&
+Y'
+\ar[phantom,from=1-2,to=2-1,"\Downarrow" description]
+\end{tikzcd}
+\]
+where vertical arrows are fuzzy functors, horizontal arrows are fuzzy
+distributors, and cells are distributor transformations.
+
+For a fuzzy domain \(X\), the conjoint of \(\alpha_X\) and the companion of
+\(\eta_X\) are distributors
+\[
+    \alpha_X^\ast,
+    \qquad
+    (\eta_X)_\ast
+    :
+    X\nrightarrow \operatorname{Idl}_{\mathbb V}(X).
+\]
+Their right lifting defines the fuzzy way-below distributor:
+\[
+    \ll_X
+    =
+    [\alpha_X^\ast,(\eta_X)_\ast]
+    :
+    X\nrightarrow X.
+\]
+The defining triangle is
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+X
+    \ar[r,dashed,"\ll_X"]
+    \ar[rr,bend right=18,dashed,"{(\eta_X)_\ast}"']
+&
+X
+    \ar[r,dashed,"\alpha_X^\ast"]
+&
+\operatorname{Idl}_{\mathbb V}(X).
+\end{tikzcd}
+\]
+Its objectwise formula is
+\[
+    \ll_X(a,b)
+    \cong
+    \int_{I\in \operatorname{Idl}_{\mathbb V}(X)}
+    \left[
+        X(b,\alpha_X I),
+        I(a)
+    \right].
+\]
+In the posetal reflection this becomes
+\[
+    \ll_X(a,b)
+    =
+    \bigmeet_{I\in\operatorname{Idl}_\Lambda(X)}
+    \left(
+        X(b,\alpha_X I)\multimap I(a)
+    \right).
+\]
+
+Finally, if \(X\) is continuous, with
+\[
+    \beta_X\dashv\alpha_X,
+\]
+then the right-lifted way-below distributor is represented by \(\beta_X\):
+\[
+    \ll_X(a,b)
+    \cong
+    \operatorname{Idl}_{\mathbb V}(X)(\eta_X a,\beta_X b)
+    \cong
+    \beta_X(b)(a).
+\]
+Equivalently, as distributors,
+\[
+    \ll_X
+    \cong
+    \beta_X^\ast\circ(\eta_X)_\ast.
+\]
+Thus the way-below degree introduced in the previous chapter is not extra
+structure: it is the value of the right-lifted distributor represented by the
+approximant map of a continuous fuzzy domain.

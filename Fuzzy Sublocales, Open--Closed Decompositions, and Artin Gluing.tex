@@ -1,0 +1,2276 @@
+\chapter{Fuzzy Sublocales, Endpoint Quotients, and Open--Closed Gluing}
+\label{ch:fuzzy-sublocales-open-closed-gluing}
+
+The preceding chapters developed categorical fuzzy frames, fuzzy locales, and
+the fuzzy Sierpiński classifier.  We now use that structure to develop
+sublocales, endpoint quotients of fuzzy opens, generated open and
+closed-complement sublocales, attachment functors, and Artin gluing.
+
+There is one important structural distinction throughout this chapter.  The
+general scalar-compatible fuzzy theory is not the same as the ordinary
+underlying-frame theory.  In an ordinary frame, an element \(a\in L\) generates
+the two familiar nuclei
+\[
+    o_a(x)=a\Rightarrow x,
+    \qquad
+    c_a(x)=a\vee x.
+\]
+These formulas remain correct in the ordinary, idempotent, and crisp
+specializations.  They are not, however, the general scalar-compatible fuzzy
+formulas.  For non-idempotent bases such as Łukasiewicz or product truth values,
+the map \(a\Rightarrow-\) need not be compatible with scalar action and hence
+need not define a fuzzy nucleus.
+
+Accordingly, the general construction is expressed invariantly.  A fuzzy open
+\[
+    U\hookrightarrow 1_{\mathcal A}
+\]
+of a categorical fuzzy frame \(\mathcal A\) is classified by a fuzzy-frame
+morphism
+\[
+    \chi_U^\ast:\Omega_{\mathbb V}\to\mathcal A
+\]
+from the fuzzy Sierpiński frame.  The generated true and false endpoint
+quotients are obtained by base change along the two endpoint quotients of
+\(\Omega_{\mathbb V}\):
+\[
+    \mathcal A_U
+    =
+    \mathcal A\amalg_{\Omega_{\mathbb V}}\Omega_{\mathbb V}^{\top},
+    \qquad
+    \mathcal A_Z
+    =
+    \mathcal A\amalg_{\Omega_{\mathbb V}}\Omega_{\mathbb V}^{\bot}.
+\]
+In the posetal scalar-compatible reflection these are described by generated
+fuzzy nuclei.  The false endpoint has the explicit formula
+\[
+    x\longmapsto a\vee x.
+\]
+The true endpoint is the least scalar-compatible fuzzy nucleus forcing \(a\) to
+be top; in general it has no pointwise formula \(a\Rightarrow-\).
+
+The general fuzzy theory therefore provides a canonical gluing comparison
+\[
+    \mathcal A\longrightarrow \operatorname{Gl}(\Theta_U),
+\]
+where
+\[
+    \Theta_U=i_U^\ast(j_U)_\ast:
+    \mathcal A_U\to\mathcal A_Z.
+\]
+This comparison is not an equivalence in general.  It becomes an equivalence in
+the ordinary/idempotent/crisp specialization, where the classical
+open--closed Artin gluing theorem is recovered.
+
+\section{Fuzzy sublocales as left-exact reflective quotients}
+\label{sec:fuzzy-sublocales-as-lex-reflective-quotients}
+
+Let \(X\) be a fuzzy locale, and write
+\[
+    \mathcal O(X)=\mathcal A
+\]
+for its categorical fuzzy frame.
+
+\begin{definition}[Fuzzy sublocale]
+\label{def:fuzzy-sublocale}
+A \emph{fuzzy sublocale} of \(X\) is presented by a left-exact reflective
+quotient of categorical fuzzy frames
+\[
+    q\dashv r:
+    \mathcal A
+    \rightleftarrows
+    \mathcal B,
+\]
+where \(r:\mathcal B\to\mathcal A\) is fully faithful and \(q\) is a morphism
+of categorical fuzzy frames.
+
+The fuzzy frame of opens of the presented sublocale is
+\[
+    \mathcal O(S):=\mathcal B.
+\]
+The associated idempotent localization modality on \(\mathcal A\) is
+\[
+    J:=rq:\mathcal A\to\mathcal A.
+\]
+\end{definition}
+
+Thus a sublocale is a quotient in the frame direction and an inclusion in the
+localic direction.  If
+\[
+    \mathcal O(X)=\mathcal A
+    \qquad\text{and}\qquad
+    \mathcal O(S)=\mathcal B,
+\]
+then the inclusion
+\[
+    S\hookrightarrow X
+\]
+is represented contravariantly by
+\[
+    q:\mathcal A\to\mathcal B.
+\]
+
+\begin{proposition}[Reflective quotients are fuzzy frames]
+\label{prop:reflective-quotients-are-fuzzy-frames}
+Let
+\[
+    q\dashv r:
+    \mathcal A
+    \rightleftarrows
+    \mathcal B
+\]
+be a left-exact reflective quotient of a categorical fuzzy frame
+\(\mathcal A\).  Then \(\mathcal B\) is again a categorical fuzzy frame.
+\end{proposition}
+
+\begin{proof}
+Choose a presentation of \(\mathcal A\) as a categorical fuzzy frame
+\[
+    a\dashv i:
+    P_{\mathbb V}(X)
+    \rightleftarrows
+    \mathcal A,
+\]
+where \(i\) is fully faithful and \(a\) preserves the specified finite weighted
+limits.  Composing with the reflective quotient gives
+\[
+    qa:
+    P_{\mathbb V}(X)\to\mathcal B.
+\]
+Its right adjoint is
+\[
+    ir:\mathcal B\to P_{\mathbb V}(X).
+\]
+Since \(i\) and \(r\) are fully faithful, the composite \(ir\) is fully
+faithful.  Since \(a\) and \(q\) preserve the specified finite weighted limits,
+so does \(qa\).  Hence
+\[
+    qa\dashv ir:
+    P_{\mathbb V}(X)
+    \rightleftarrows
+    \mathcal B
+\]
+is a categorical fuzzy-frame presentation of \(\mathcal B\).
+\end{proof}
+
+\begin{definition}[Sublocale order]
+\label{def:fuzzy-sublocale-order}
+Let \(S\) and \(T\) be fuzzy sublocales of \(X\), presented by quotients
+\[
+    q_S:\mathcal A\to\mathcal B_S,
+    \qquad
+    q_T:\mathcal A\to\mathcal B_T.
+\]
+We write
+\[
+    S\leq T
+\]
+if \(q_S\) factors through \(q_T\) in the fuzzy-frame direction:
+\[
+    q_S\cong \bar q\, q_T
+\]
+for some fuzzy-frame morphism
+\[
+    \bar q:\mathcal B_T\to\mathcal B_S.
+\]
+Equivalently, the localic inclusion of \(S\) factors through the localic
+inclusion of \(T\).
+\end{definition}
+
+\section{The posetal reflection: scalar-compatible fuzzy nuclei}
+\label{sec:posetal-reflection-scalar-compatible-nuclei}
+
+Let
+\[
+    \Lambda=(L,\leq,\meet,\join,\tensor,\multimap,\bot,\top)
+\]
+be a fuzzy truth-value object, and let \(A\) be a fuzzy frame in the posetal
+reflection.
+
+We write the scalar action of \(\lambda\in\Lambda\) on \(x\in A\) as
+\[
+    \lambda\tensor x.
+\]
+
+\begin{definition}[Fuzzy nucleus]
+\label{def:fuzzy-nucleus}
+A \emph{fuzzy nucleus} on \(A\) is a monotone map
+\[
+    j:A\to A
+\]
+such that:
+
+\begin{enumerate}
+    \item \(j\) is inflationary:
+    \[
+        x\leq jx;
+    \]
+
+    \item \(j\) is idempotent:
+    \[
+        jjx=jx;
+    \]
+
+    \item \(j\) preserves the terminal object and binary meets:
+    \[
+        j(1)=1,
+        \qquad
+        j(x\wedge y)=jx\wedge jy;
+    \]
+
+    \item \(j\) is compatible with scalar action:
+    \[
+        j(\lambda\tensor jx)
+        =
+        j(\lambda\tensor x)
+    \]
+    for all \(\lambda\in\Lambda\) and \(x\in A\).
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}[Fuzzy nuclei and reflective quotients]
+\label{prop:fuzzy-nuclei-reflective-quotients}
+In the posetal reflection, fuzzy sublocales of a fuzzy locale with frame \(A\)
+are presented by fuzzy nuclei
+\[
+    j:A\to A.
+\]
+The corresponding fuzzy frame of opens is the fixed-point fuzzy frame
+\[
+    A_j=\{x\in A\mid jx=x\}.
+\]
+The quotient map is
+\[
+    q_j:A\to A_j,
+    \qquad
+    q_j(x)=jx,
+\]
+and the fully faithful right adjoint is the inclusion
+\[
+    i_j:A_j\hookrightarrow A.
+\]
+The scalar action on \(A_j\) is
+\[
+    \lambda\tensor_j x
+    :=
+    j(\lambda\tensor x).
+\]
+\end{proposition}
+
+\begin{proof}
+Let \(j\) be a fuzzy nucleus.  Since \(j\) is inflationary and idempotent, the
+fixed points form a reflective quotient of \(A\), with reflector \(q_j(x)=jx\)
+and fully faithful right adjoint the inclusion \(i_j\).
+
+Because \(j\) preserves the terminal object and binary meets, the quotient is
+left exact.  The scalar-compatibility equation
+\[
+    j(\lambda\tensor jx)=j(\lambda\tensor x)
+\]
+is exactly the condition that the displayed scalar action on fixed points is
+well defined and that \(q_j\) preserves scalar action.
+
+Conversely, any left-exact reflective quotient
+\[
+    q\dashv i:A\rightleftarrows B
+\]
+with \(i\) fully faithful determines the idempotent
+\[
+    j=iq:A\to A.
+\]
+Left exactness and scalar compatibility of the quotient give precisely the
+conditions in Definition~\ref{def:fuzzy-nucleus}.
+\end{proof}
+
+\begin{proposition}[Sublocale order and nuclei]
+\label{prop:sublocale-order-nuclei}
+For fuzzy nuclei \(j,k\) on \(A\),
+\[
+    X_j\leq X_k
+    \quad\Longleftrightarrow\quad
+    k\leq j
+\]
+pointwise.
+\end{proposition}
+
+\begin{proof}
+The sublocale order is factorization order on quotients.  The quotient
+\[
+    q_j:A\to A_j
+\]
+factors through
+\[
+    q_k:A\to A_k
+\]
+if and only if every \(k\)-closed element is sent consistently to a \(j\)-closed
+element.  Equivalently, the localization \(j\) is at least as strong as \(k\),
+that is,
+\[
+    kx\leq jx
+\]
+for all \(x\in A\).  Hence
+\[
+    X_j\leq X_k
+    \quad\Longleftrightarrow\quad
+    k\leq j.
+\]
+\end{proof}
+
+\begin{lemma}[Meets of fuzzy nuclei]
+\label{lem:meets-of-fuzzy-nuclei}
+Arbitrary pointwise meets of fuzzy nuclei are fuzzy nuclei.
+\end{lemma}
+
+\begin{proof}
+Let \((j_\alpha)_\alpha\) be a family of fuzzy nuclei, and define
+\[
+    jx:=\bigwedge_\alpha j_\alpha x.
+\]
+Inflationarity and monotonicity are immediate.
+
+For idempotence, first \(x\leq jx\) gives \(jx\leq jjx\).  Conversely, for each
+\(\alpha\),
+\[
+    jx\leq j_\alpha x.
+\]
+By monotonicity,
+\[
+    j_\alpha(jx)\leq j_\alpha(j_\alpha x)=j_\alpha x.
+\]
+Taking the meet over \(\alpha\) gives
+\[
+    jjx\leq jx.
+\]
+
+Preservation of finite meets follows from complete distributivity of the
+underlying fuzzy frame:
+\[
+\begin{aligned}
+    j(x\wedge y)
+    &=
+    \bigwedge_\alpha j_\alpha(x\wedge y)        \\
+    &=
+    \bigwedge_\alpha (j_\alpha x\wedge j_\alpha y)\\
+    &=
+    \left(\bigwedge_\alpha j_\alpha x\right)
+    \wedge
+    \left(\bigwedge_\alpha j_\alpha y\right)    \\
+    &=
+    jx\wedge jy.
+\end{aligned}
+\]
+The terminal object is preserved because each \(j_\alpha\) preserves it.
+
+For scalar compatibility,
+\[
+\begin{aligned}
+    j(\lambda\tensor jx)
+    &=
+    \bigwedge_\alpha
+    j_\alpha\!\left(\lambda\tensor\bigwedge_\beta j_\beta x\right).
+\end{aligned}
+\]
+Since
+\[
+    x\leq jx\leq j_\alpha x,
+\]
+we have
+\[
+    \lambda\tensor x
+    \leq
+    \lambda\tensor jx
+    \leq
+    \lambda\tensor j_\alpha x.
+\]
+Applying \(j_\alpha\) gives
+\[
+    j_\alpha(\lambda\tensor x)
+    \leq
+    j_\alpha(\lambda\tensor jx)
+    \leq
+    j_\alpha(\lambda\tensor j_\alpha x)
+    =
+    j_\alpha(\lambda\tensor x).
+\]
+Hence
+\[
+    j_\alpha(\lambda\tensor jx)
+    =
+    j_\alpha(\lambda\tensor x)
+\]
+for every \(\alpha\), and taking meets yields
+\[
+    j(\lambda\tensor jx)=j(\lambda\tensor x).
+\]
+Thus \(j\) is a fuzzy nucleus.
+\end{proof}
+
+\section{Endpoint quotients of the fuzzy Sierpiński frame}
+\label{sec:endpoint-quotients-fuzzy-sierpinski}
+
+The fuzzy Sierpiński frame
+\[
+    \Omega_{\mathbb V}
+\]
+classifies fuzzy opens.  It carries a generic fuzzy open
+\[
+    \sigma_{\mathbb V}\hookrightarrow 1_{\Omega_{\mathbb V}}.
+\]
+For every categorical fuzzy frame \(\mathcal A\), fuzzy opens
+\[
+    U\hookrightarrow1_{\mathcal A}
+\]
+are classified by fuzzy-frame morphisms
+\[
+    \chi_U^\ast:\Omega_{\mathbb V}\to\mathcal A.
+\]
+
+\begin{definition}[True endpoint quotient]
+\label{def:true-endpoint-quotient}
+The \emph{true endpoint quotient}
+\[
+    e_{\top}^{\ast}:
+    \Omega_{\mathbb V}\to\Omega_{\mathbb V}^{\top}
+\]
+is the universal left-exact fuzzy-frame quotient in which the generic open
+becomes terminal:
+\[
+    e_{\top}^{\ast}(\sigma_{\mathbb V})
+    \cong
+    1_{\Omega_{\mathbb V}^{\top}}.
+\]
+\end{definition}
+
+\begin{definition}[False endpoint quotient]
+\label{def:false-endpoint-quotient}
+The \emph{false endpoint quotient}
+\[
+    e_{\bot}^{\ast}:
+    \Omega_{\mathbb V}\to\Omega_{\mathbb V}^{\bot}
+\]
+is the universal left-exact fuzzy-frame quotient in which the generic open
+becomes initial in the quotient.
+\end{definition}
+
+\begin{proposition}[Existence of endpoint quotients]
+\label{prop:endpoint-quotients-exist}
+The endpoint quotients
+\[
+    \Omega_{\mathbb V}^{\top},
+    \qquad
+    \Omega_{\mathbb V}^{\bot}
+\]
+exist as categorical fuzzy frames.
+\end{proposition}
+
+\begin{proof}
+The fuzzy Sierpiński frame is presented by an enriched
+finite-limit-and-scalar sketch with one generic subterminal open.  The true
+endpoint quotient is obtained by adjoining the equation identifying this
+generic open with the terminal object.
+
+The false endpoint quotient is obtained by adjoining the equation that the
+generic open becomes the initial object in the quotient.  In the posetal
+reflection this condition is expressed by equality with the quotient bottom,
+not by an inflationary nucleus sending the original element literally below
+itself.
+
+Adding either endpoint equation gives another enriched
+finite-limit-and-scalar sketch localization.  Therefore the resulting
+quotients are categorical fuzzy frames.
+\end{proof}
+
+\section{Generated true and false endpoint sublocales}
+\label{sec:generated-endpoint-sublocales}
+
+Let \(\mathcal A\) be a categorical fuzzy frame, and let
+\[
+    U\hookrightarrow1_{\mathcal A}
+\]
+be a fuzzy open classified by
+\[
+    \chi_U^\ast:\Omega_{\mathbb V}\to\mathcal A.
+\]
+
+\begin{definition}[Generated true endpoint fuzzy frame]
+\label{def:generated-true-endpoint-frame}
+The \emph{generated true endpoint fuzzy frame} associated to \(U\) is the
+pushout
+\[
+    \mathcal A_U
+    :=
+    \mathcal A
+    \amalg_{\Omega_{\mathbb V}}
+    \Omega_{\mathbb V}^{\top}
+\]
+in the category of categorical fuzzy frames.  The canonical quotient map is
+denoted
+\[
+    j_U^\ast:\mathcal A\to\mathcal A_U.
+\]
+Contravariantly, this presents the generated true endpoint sublocale
+\[
+    j_U:U^{+}\to X.
+\]
+\end{definition}
+
+\begin{definition}[Generated false endpoint fuzzy frame]
+\label{def:generated-false-endpoint-frame}
+The \emph{generated false endpoint fuzzy frame} associated to \(U\) is the
+pushout
+\[
+    \mathcal A_Z
+    :=
+    \mathcal A
+    \amalg_{\Omega_{\mathbb V}}
+    \Omega_{\mathbb V}^{\bot}.
+\]
+The canonical quotient map is denoted
+\[
+    i_U^\ast:\mathcal A\to\mathcal A_Z.
+\]
+Contravariantly, this presents the generated false endpoint sublocale
+\[
+    i_U:Z_U\to X.
+\]
+\end{definition}
+
+\begin{proposition}[Generated endpoint parts are fuzzy sublocales]
+\label{prop:generated-endpoint-parts-are-sublocales}
+The maps
+\[
+    j_U^\ast:\mathcal A\to\mathcal A_U,
+    \qquad
+    i_U^\ast:\mathcal A\to\mathcal A_Z
+\]
+are left-exact reflective quotients.  Hence they present fuzzy sublocales of
+\(X\).
+\end{proposition}
+
+\begin{proof}
+The endpoint maps
+\[
+    e_{\top}^{\ast}:\Omega_{\mathbb V}\to\Omega_{\mathbb V}^{\top},
+    \qquad
+    e_{\bot}^{\ast}:\Omega_{\mathbb V}\to\Omega_{\mathbb V}^{\bot}
+\]
+are left-exact reflective quotients by construction.  Base change of an
+enriched finite-limit-and-scalar sketch quotient along
+\[
+    \chi_U^\ast:\Omega_{\mathbb V}\to\mathcal A
+\]
+is again an enriched finite-limit-and-scalar sketch quotient.  Therefore the
+pushout maps \(j_U^\ast\) and \(i_U^\ast\) are left-exact reflective quotients
+of \(\mathcal A\).
+\end{proof}
+
+\section{Generated endpoint nuclei in the posetal reflection}
+\label{sec:generated-endpoint-nuclei-posetal}
+
+Let \(A\) be a fuzzy frame in the posetal reflection, and let \(a\in A\) be the
+open classified by
+\[
+    \Omega_\Lambda\to A.
+\]
+
+\begin{definition}[Generated true endpoint nucleus]
+\label{def:generated-true-endpoint-nucleus}
+The \emph{generated true endpoint nucleus} of \(a\) is
+\[
+    J_a^+
+    :=
+    \bigwedge
+    \{\,j\mid j \text{ is a fuzzy nucleus on }A,\ j(a)=1\,\}.
+\]
+The generated true endpoint frame is
+\[
+    A_{J_a^+}.
+\]
+\end{definition}
+
+\begin{definition}[Generated false endpoint nucleus]
+\label{def:generated-false-endpoint-nucleus}
+The \emph{generated false endpoint nucleus} of \(a\) is
+\[
+    J_a^-
+    :=
+    \bigwedge
+    \{\,j\mid j \text{ is a fuzzy nucleus on }A,\ j(a)=j(0)\,\}.
+\]
+The generated false endpoint frame is
+\[
+    A_{J_a^-}.
+\]
+\end{definition}
+
+\begin{proposition}[Universal property of the true endpoint nucleus]
+\label{prop:true-endpoint-nucleus-universal}
+The quotient
+\[
+    q_{J_a^+}:A\to A_{J_a^+}
+\]
+is universal among scalar-compatible fuzzy-frame quotients of \(A\) in which
+\(a\) becomes top.
+\end{proposition}
+
+\begin{proof}
+By construction,
+\[
+    J_a^+(a)=1.
+\]
+Hence the quotient sends \(a\) to the top element of the fixed-point frame.
+
+Let
+\[
+    q:A\to B
+\]
+be any scalar-compatible left-exact reflective quotient sending \(a\) to top.
+Let \(j_q\) be its associated fuzzy nucleus.  Since \(q(a)=1_B\), the associated
+localization satisfies
+\[
+    j_q(a)=1.
+\]
+Thus \(j_q\) is one of the fuzzy nuclei appearing in the meet defining
+\(J_a^+\).  Therefore
+\[
+    J_a^+\leq j_q.
+\]
+By the reversed order between nuclei and sublocales, the quotient \(q\) factors
+through
+\[
+    q_{J_a^+}:A\to A_{J_a^+}.
+\]
+This proves the universal property.
+\end{proof}
+
+\begin{theorem}[The false endpoint nucleus]
+\label{thm:false-endpoint-nucleus-formula}
+For every \(a\in A\), the generated false endpoint nucleus is
+\[
+    J_a^-(x)=a\vee x.
+\]
+Consequently,
+\[
+    A_{J_a^-}\cong\uparrow a.
+\]
+\end{theorem}
+
+\begin{proof}
+Define
+\[
+    c_a(x):=a\vee x.
+\]
+Then \(c_a\) is inflationary and idempotent:
+\[
+    x\leq a\vee x,
+    \qquad
+    a\vee(a\vee x)=a\vee x.
+\]
+It preserves the terminal object and binary meets:
+\[
+    c_a(1)=1,
+\]
+and by distributivity,
+\[
+\begin{aligned}
+    c_a(x)\wedge c_a(y)
+    &=
+    (a\vee x)\wedge(a\vee y)\\
+    &=
+    a\vee(x\wedge y)\\
+    &=
+    c_a(x\wedge y).
+\end{aligned}
+\]
+
+It remains to check scalar compatibility.  Since the base is affine,
+\[
+    \lambda\leq 1,
+\]
+and hence
+\[
+    \lambda\tensor a\leq 1\tensor a=a.
+\]
+Therefore
+\[
+\begin{aligned}
+    c_a(\lambda\tensor c_a(x))
+    &=
+    a\vee \lambda\tensor(a\vee x)\\
+    &=
+    a\vee(\lambda\tensor a)\vee(\lambda\tensor x)\\
+    &=
+    a\vee(\lambda\tensor x)\\
+    &=
+    c_a(\lambda\tensor x).
+\end{aligned}
+\]
+Thus \(c_a\) is a fuzzy nucleus.
+
+Moreover,
+\[
+    c_a(a)=a=c_a(0),
+\]
+so \(c_a\) forces \(a\) to become bottom in the quotient.
+
+Now let \(j\) be any fuzzy nucleus satisfying
+\[
+    j(a)=j(0).
+\]
+Since \(0\leq x\), monotonicity gives
+\[
+    j(0)\leq j(x).
+\]
+Hence
+\[
+    a\leq j(a)=j(0)\leq j(x),
+\]
+and also
+\[
+    x\leq j(x).
+\]
+Therefore
+\[
+    a\vee x\leq j(x).
+\]
+Thus
+\[
+    c_a\leq j.
+\]
+So \(c_a\) is the least fuzzy nucleus forcing \(a\) to the quotient bottom:
+\[
+    J_a^-=c_a.
+\]
+The fixed points of \(c_a\) are precisely those \(x\) satisfying
+\[
+    a\vee x=x,
+\]
+equivalently
+\[
+    a\leq x.
+\]
+Thus
+\[
+    A_{J_a^-}\cong\uparrow a.
+\]
+\end{proof}
+
+\begin{remark}[No general formula \(J_a^+(x)=a\Rightarrow x\)]
+\label{rem:no-general-open-nucleus-formula}
+The true endpoint nucleus
+\[
+    J_a^+
+\]
+is not generally given by the ordinary frame formula
+\[
+    a\Rightarrow x.
+\]
+That formula is valid in the ordinary/idempotent specialization, but it need
+not be scalar-compatible for non-idempotent fuzzy truth-value objects.
+\end{remark}
+
+\begin{proposition}[Non-idempotent collapse phenomenon]
+\label{prop:non-idempotent-true-endpoint-collapse}
+Let \(A=\Lambda=[0,1]\) with the Łukasiewicz tensor
+\[
+    r\tensor s=\max(0,r+s-1).
+\]
+If \(0<a<1\), then the generated true endpoint nucleus \(J_a^+\) is the top
+nucleus
+\[
+    x\longmapsto 1.
+\]
+\end{proposition}
+
+\begin{proof}
+Let \(j\) be any fuzzy nucleus satisfying
+\[
+    j(a)=1.
+\]
+Scalar compatibility gives
+\[
+    j(r\tensor j(a))=j(r\tensor a).
+\]
+Since \(j(a)=1\), this becomes
+\[
+    j(r)=j(r\tensor a).
+\]
+Taking \(r=a\) yields
+\[
+    j(a)=j(a\tensor a).
+\]
+Iterating gives
+\[
+    j(a)=j(a^{\tensor n})
+\]
+for every \(n\geq1\).
+
+For Łukasiewicz tensor,
+\[
+    a^{\tensor n}=\max(0,na-(n-1)).
+\]
+Since \(a<1\), there exists \(n\) such that
+\[
+    a^{\tensor n}=0.
+\]
+Hence
+\[
+    j(0)=j(a)=1.
+\]
+By monotonicity, for every \(x\),
+\[
+    1=j(0)\leq j(x)\leq 1.
+\]
+Thus \(j(x)=1\) for all \(x\).  Since every fuzzy nucleus forcing \(a\) to top
+is the top nucleus, their meet is the top nucleus.
+\end{proof}
+
+\section{Generated open and closed sublocales}
+\label{sec:generated-open-closed-sublocales-corrected}
+
+The preceding endpoint construction gives principal true and false endpoint
+sublocales.  For the general fuzzy theory, it is useful to distinguish
+principal true endpoint sublocales from arbitrary generated open sublocales.
+
+\begin{definition}[Principal generated open sublocale]
+\label{def:principal-generated-open-sublocale}
+A \emph{principal generated open sublocale} of \(X\) is a sublocale obtained by
+forcing a single fuzzy open
+\[
+    U\hookrightarrow1_{\mathcal O(X)}
+\]
+to be true, equivalently a quotient of the form
+\[
+    j_U^\ast:\mathcal O(X)\to\mathcal O(X)_U.
+\]
+\end{definition}
+
+\begin{definition}[Generated open sublocale]
+\label{def:generated-open-sublocale}
+A \emph{generated open sublocale} of \(X\) is a join of principal generated
+open sublocales.
+
+The full subposet of generated open sublocales is denoted
+\[
+    \operatorname{OpenSub}(X)\subseteq\operatorname{SubLoc}(X).
+\]
+\end{definition}
+
+\begin{definition}[Generated closed-complement sublocale]
+\label{def:generated-closed-complement-sublocale}
+A \emph{generated closed-complement sublocale} of \(X\) is a sublocale obtained
+by forcing a single fuzzy open to be false.
+
+The full subposet of generated closed-complement sublocales is denoted
+\[
+    \operatorname{ClosedSub}(X)\subseteq\operatorname{SubLoc}(X).
+\]
+\end{definition}
+
+\begin{proposition}[Order of principal closed complements]
+\label{prop:order-principal-closed-complements}
+In the posetal reflection, for \(a,b\in A\),
+\[
+    a\leq b
+    \quad\Longleftrightarrow\quad
+    Z_b\leq Z_a.
+\]
+Consequently, principal closed-complement sublocales are ordered oppositely to
+their generating opens.
+\end{proposition}
+
+\begin{proof}
+The closed-complement sublocale \(Z_a\) is presented by the fuzzy nucleus
+\[
+    J_a^-(x)=a\vee x.
+\]
+By Proposition~\ref{prop:sublocale-order-nuclei},
+\[
+    Z_b\leq Z_a
+    \quad\Longleftrightarrow\quad
+    J_a^-\leq J_b^-.
+\]
+This means
+\[
+    a\vee x\leq b\vee x
+\]
+for all \(x\).  If \(a\leq b\), this is immediate.  Conversely, taking \(x=0\)
+gives
+\[
+    a\leq b.
+\]
+\end{proof}
+
+\section{Adjoint calculus and attachment}
+\label{sec:adjoint-calculus-and-attachment-corrected}
+
+Let
+\[
+    j_U^\ast:\mathcal A\to\mathcal A_U
+\]
+be the generated true endpoint quotient.  Since it is a reflective quotient,
+there is a fully faithful right adjoint
+\[
+    (j_U)_\ast:\mathcal A_U\to\mathcal A,
+\]
+with
+\[
+    j_U^\ast\dashv(j_U)_\ast.
+\]
+
+Similarly, for the generated false endpoint quotient
+\[
+    i_U^\ast:\mathcal A\to\mathcal A_Z,
+\]
+there is a fully faithful right adjoint
+\[
+    (i_U)_\ast:\mathcal A_Z\to\mathcal A,
+\]
+with
+\[
+    i_U^\ast\dashv(i_U)_\ast.
+\]
+
+\begin{definition}[Attachment functor]
+\label{def:fuzzy-attachment-functor}
+The \emph{attachment functor} of the generated endpoint pair is
+\[
+    \Theta_U:\mathcal A_U\to\mathcal A_Z
+\]
+defined by
+\[
+    \Theta_U:=i_U^\ast (j_U)_\ast.
+\]
+\end{definition}
+
+\begin{proposition}[Attachment is left exact]
+\label{prop:attachment-left-exact}
+The attachment functor
+\[
+    \Theta_U:\mathcal A_U\to\mathcal A_Z
+\]
+preserves the specified finite weighted limits.
+\end{proposition}
+
+\begin{proof}
+The right adjoint
+\[
+    (j_U)_\ast:\mathcal A_U\to\mathcal A
+\]
+preserves finite weighted limits.  The quotient
+\[
+    i_U^\ast:\mathcal A\to\mathcal A_Z
+\]
+is left exact by construction.  Therefore the composite
+\[
+    \Theta_U=i_U^\ast(j_U)_\ast
+\]
+preserves the specified finite weighted limits.
+\end{proof}
+
+\begin{proposition}[Attachment in the posetal reflection]
+\label{prop:attachment-posetal-general}
+In the posetal reflection, the attachment functor has the form
+\[
+    \Theta_a:A_{J_a^+}\to A_{J_a^-},
+    \qquad
+    \Theta_a(h)=a\vee h,
+\]
+where \(h\in A_{J_a^+}\subseteq A\).
+\end{proposition}
+
+\begin{proof}
+The right adjoint
+\[
+    (j_a)_\ast:A_{J_a^+}\hookrightarrow A
+\]
+is the inclusion of fixed points.  The quotient
+\[
+    i_a^\ast:A\to A_{J_a^-}
+\]
+is given by the false endpoint nucleus
+\[
+    J_a^-(x)=a\vee x.
+\]
+Therefore
+\[
+    \Theta_a(h)=i_a^\ast(h)=J_a^-(h)=a\vee h.
+\]
+\end{proof}
+
+\section{Artin gluing of categorical fuzzy frames}
+\label{sec:artin-gluing-categorical-fuzzy-frames-corrected}
+
+The attachment functor is left exact, but it need not be a fuzzy-frame morphism
+in the strong sense of preserving all small weighted colimits.  Artin gluing is
+therefore formulated for left-exact enriched functors.
+
+\begin{definition}[Artin gluing]
+\label{def:enriched-artin-gluing}
+Let
+\[
+    \Theta:\mathcal H\to\mathcal N
+\]
+be a left-exact \(\mathbb V\)-functor between categorical fuzzy frames.  The
+\emph{Artin gluing} of \(\Theta\) is the enriched comma fuzzy frame
+\[
+    \operatorname{Gl}(\Theta)
+    :=
+    (\id_{\mathcal N}\downarrow\Theta).
+\]
+Its objects are triples
+\[
+    (n,h,\alpha),
+\]
+where
+\[
+    n\in\mathcal N,
+    \qquad
+    h\in\mathcal H,
+    \qquad
+    \alpha:n\to\Theta(h)
+\]
+is a morphism in \(\mathcal N\).
+\end{definition}
+
+The projection functors are denoted
+\[
+    \pi_{\mathcal N}:\operatorname{Gl}(\Theta)\to\mathcal N,
+    \qquad
+    \pi_{\mathcal H}:\operatorname{Gl}(\Theta)\to\mathcal H.
+\]
+
+\begin{proposition}[Gluing is a categorical fuzzy frame]
+\label{prop:gluing-is-fuzzy-frame}
+If \(\mathcal H\) and \(\mathcal N\) are categorical fuzzy frames and
+\[
+    \Theta:\mathcal H\to\mathcal N
+\]
+preserves the specified finite weighted limits, then
+\[
+    \operatorname{Gl}(\Theta)
+\]
+is a categorical fuzzy frame.
+\end{proposition}
+
+\begin{proof}
+The enriched comma object exists because the relevant enriched limits exist in
+the ambient universe.
+
+Finite weighted limits are computed componentwise.  For a finite weighted
+diagram
+\[
+    k\longmapsto (n_k,h_k,\alpha_k),
+\]
+the limit has first two components
+\[
+    \lim n_k,
+    \qquad
+    \lim h_k.
+\]
+The structure map
+\[
+    \lim n_k\to \Theta(\lim h_k)
+\]
+is obtained from the cone
+\[
+    \lim n_k\to n_k\xrightarrow{\alpha_k}\Theta(h_k)
+\]
+together with the left-exactness isomorphism
+\[
+    \Theta(\lim h_k)\cong\lim\Theta(h_k).
+\]
+
+Small weighted colimits are also computed componentwise.  For a weighted
+diagram
+\[
+    k\longmapsto(n_k,h_k,\alpha_k)
+\]
+with weight \(W\), the colimit has first two components
+\[
+    W*n_k,
+    \qquad
+    W*h_k.
+\]
+The structure map
+\[
+    W*n_k\to\Theta(W*h_k)
+\]
+is induced by the weighted-colimit universal property from the composites
+\[
+    n_k
+    \xrightarrow{\alpha_k}
+    \Theta(h_k)
+    \longrightarrow
+    \Theta(W*h_k),
+\]
+where the final arrow is obtained by applying \(\Theta\) to the colimit cocone
+\[
+    h_k\to W*h_k.
+\]
+The universal property of the comma object then gives the universal property
+of the weighted colimit in \(\operatorname{Gl}(\Theta)\).
+
+Thus \(\operatorname{Gl}(\Theta)\) has the required small weighted colimits and
+specified finite weighted limits, and these are compatible with the enriched
+structure.  Hence it is a categorical fuzzy frame.
+\end{proof}
+
+\begin{proposition}[Posetal Artin gluing]
+\label{prop:posetal-artin-gluing}
+In the posetal reflection, a left-exact map
+\[
+    \theta:H\to N
+\]
+between fuzzy frames has Artin gluing
+\[
+    \operatorname{Gl}(\theta)
+    =
+    \{(n,h)\in N\times H\mid n\leq\theta(h)\}.
+\]
+Finite meets and arbitrary joins are computed componentwise.
+\end{proposition}
+
+\begin{proof}
+If
+\[
+    n\leq\theta(h),
+    \qquad
+    n'\leq\theta(h'),
+\]
+then left exactness gives
+\[
+    n\wedge n'
+    \leq
+    \theta(h)\wedge\theta(h')
+    =
+    \theta(h\wedge h').
+\]
+Thus componentwise finite meets remain in the gluing frame.
+
+For joins, suppose
+\[
+    n_i\leq\theta(h_i)
+\]
+for all \(i\).  The cocone maps
+\[
+    h_i\leq\bigvee_i h_i
+\]
+give
+\[
+    \theta(h_i)\leq\theta\left(\bigvee_i h_i\right).
+\]
+Therefore
+\[
+    n_i\leq\theta\left(\bigvee_i h_i\right)
+\]
+for all \(i\), and hence
+\[
+    \bigvee_i n_i
+    \leq
+    \theta\left(\bigvee_i h_i\right).
+\]
+Thus componentwise joins remain in the gluing frame.  The universal properties
+are inherited from the product order.
+\end{proof}
+
+\section{The canonical endpoint-gluing comparison}
+\label{sec:canonical-endpoint-gluing-comparison}
+
+Let
+\[
+    U\hookrightarrow1_{\mathcal A}
+\]
+be a fuzzy open, with generated endpoint quotients
+\[
+    j_U^\ast:\mathcal A\to\mathcal A_U,
+    \qquad
+    i_U^\ast:\mathcal A\to\mathcal A_Z.
+\]
+Let
+\[
+    \Theta_U=i_U^\ast(j_U)_\ast:
+    \mathcal A_U\to\mathcal A_Z
+\]
+be the attachment functor.
+
+\begin{construction}[The endpoint-gluing comparison]
+\label{con:endpoint-gluing-comparison}
+There is a canonical fuzzy-frame morphism
+\[
+    \Phi_U:\mathcal A\to\operatorname{Gl}(\Theta_U)
+\]
+defined on objects by
+\[
+    \Phi_U(X)
+    =
+    \left(
+        i_U^\ast X,\,
+        j_U^\ast X,\,
+        i_U^\ast X\to i_U^\ast(j_U)_\ast j_U^\ast X
+    \right).
+\]
+The structure map is obtained by applying \(i_U^\ast\) to the unit of the
+adjunction
+\[
+    j_U^\ast\dashv(j_U)_\ast:
+    \qquad
+    X\to(j_U)_\ast j_U^\ast X.
+\]
+\end{construction}
+
+\begin{proposition}[The endpoint-gluing comparison is canonical]
+\label{prop:endpoint-gluing-comparison-canonical}
+The construction above defines a canonical morphism of categorical fuzzy
+frames
+\[
+    \Phi_U:\mathcal A\to\operatorname{Gl}(\Theta_U).
+\]
+\end{proposition}
+
+\begin{proof}
+Both components
+\[
+    i_U^\ast:\mathcal A\to\mathcal A_Z,
+    \qquad
+    j_U^\ast:\mathcal A\to\mathcal A_U
+\]
+are fuzzy-frame morphisms.  The structure map is natural in \(X\) because it is
+obtained from the unit of an enriched adjunction.  Compatibility with the
+specified finite weighted limits follows from left exactness of \(i_U^\ast\) and
+\(j_U^\ast\).  Compatibility with small weighted colimits follows from the
+fact that the two endpoint quotient maps preserve such colimits and gluing
+colimits are computed componentwise.
+\end{proof}
+
+\begin{proposition}[Posetal form of the endpoint-gluing comparison]
+\label{prop:posetal-endpoint-gluing-comparison}
+In the posetal reflection, the endpoint-gluing comparison is
+\[
+    \Phi_a:A\to\operatorname{Gl}(\Theta_a),
+    \qquad
+    \Phi_a(x)=\bigl(J_a^-(x),J_a^+(x)\bigr).
+\]
+The gluing condition is
+\[
+    J_a^-(x)\leq J_a^-(J_a^+(x)).
+\]
+\end{proposition}
+
+\begin{proof}
+The first component is the false endpoint quotient
+\[
+    x\mapsto J_a^-(x),
+\]
+and the second component is the true endpoint quotient
+\[
+    x\mapsto J_a^+(x).
+\]
+The attachment map is
+\[
+    \Theta_a(h)=J_a^-(h).
+\]
+Since
+\[
+    x\leq J_a^+(x)
+\]
+and \(J_a^-\) is monotone,
+\[
+    J_a^-(x)\leq J_a^-(J_a^+(x)).
+\]
+Thus the displayed pair lies in the gluing frame.
+\end{proof}
+
+\begin{remark}[No general reconstruction theorem]
+\label{rem:no-general-reconstruction-theorem}
+The comparison
+\[
+    \Phi_U:\mathcal A\to\operatorname{Gl}(\Theta_U)
+\]
+is not generally an equivalence.  For non-idempotent bases, the true endpoint
+nucleus may collapse, as in Proposition~\ref{prop:non-idempotent-true-endpoint-collapse}.
+Thus the ordinary open--closed reconstruction theorem cannot hold in the full
+scalar-compatible fuzzy setting.
+\end{remark}
+
+\section{Interior and closure of fuzzy sublocales}
+\label{sec:fuzzy-interior-closure-corrected}
+
+Let \(X\) be a fuzzy locale.
+
+\begin{definition}[Interior]
+\label{def:fuzzy-sublocale-interior}
+Let
+\[
+    S\in\operatorname{SubLoc}(X).
+\]
+The \emph{interior} of \(S\) is the largest generated open sublocale contained
+in \(S\):
+\[
+    \operatorname{int}(S)
+    :=
+    \bigvee
+    \{\,U\in\operatorname{OpenSub}(X)\mid U\leq S\,\}.
+\]
+\end{definition}
+
+\begin{definition}[Closure]
+\label{def:fuzzy-sublocale-closure}
+Let
+\[
+    S\in\operatorname{SubLoc}(X).
+\]
+The \emph{closure} of \(S\) is the smallest generated closed-complement
+sublocale containing \(S\):
+\[
+    \operatorname{cl}(S)
+    :=
+    \bigwedge
+    \{\,Z\in\operatorname{ClosedSub}(X)\mid S\leq Z\,\}.
+\]
+\end{definition}
+
+Joins and meets of fuzzy sublocales are computed in the lattice of left-exact
+reflective quotients by combining the corresponding enriched
+finite-limit-and-scalar quotient data.
+
+\begin{proposition}[Interior adjunction]
+\label{prop:fuzzy-interior-adjunction}
+The inclusion
+\[
+    \iota_{\mathrm{open}}:
+    \operatorname{OpenSub}(X)
+    \hookrightarrow
+    \operatorname{SubLoc}(X)
+\]
+has right adjoint
+\[
+    \operatorname{int}.
+\]
+Thus
+\[
+    \iota_{\mathrm{open}}\dashv\operatorname{int}.
+\]
+\end{proposition}
+
+\begin{proof}
+By definition, \(\operatorname{int}(S)\) is the join of all generated open
+sublocales below \(S\).  Hence, for a generated open sublocale \(U\),
+\[
+    U\leq S
+    \quad\Longleftrightarrow\quad
+    U\leq\operatorname{int}(S).
+\]
+This is precisely the adjunction.
+\end{proof}
+
+\begin{proposition}[Closure adjunction]
+\label{prop:fuzzy-closure-adjunction}
+The inclusion
+\[
+    \iota_{\mathrm{closed}}:
+    \operatorname{ClosedSub}(X)
+    \hookrightarrow
+    \operatorname{SubLoc}(X)
+\]
+has left adjoint
+\[
+    \operatorname{cl}.
+\]
+Thus
+\[
+    \operatorname{cl}\dashv\iota_{\mathrm{closed}}.
+\]
+\end{proposition}
+
+\begin{proof}
+By definition, \(\operatorname{cl}(S)\) is the meet of all generated
+closed-complement sublocales above \(S\).  Hence, for a generated closed
+sublocale \(Z\),
+\[
+    \operatorname{cl}(S)\leq Z
+    \quad\Longleftrightarrow\quad
+    S\leq Z.
+\]
+This is precisely the adjunction.
+\end{proof}
+
+\begin{corollary}[Interior comonad and closure monad]
+\label{cor:fuzzy-interior-comonad-closure-monad}
+The composite
+\[
+    \mathbb I:=\iota_{\mathrm{open}}\operatorname{int}
+\]
+is an idempotent comonad on \(\operatorname{SubLoc}(X)\), and the composite
+\[
+    \mathbb C:=\iota_{\mathrm{closed}}\operatorname{cl}
+\]
+is an idempotent monad on \(\operatorname{SubLoc}(X)\).  Moreover,
+\[
+    \mathbb I(S)\leq S\leq\mathbb C(S)
+\]
+for every fuzzy sublocale \(S\).
+\end{corollary}
+
+\begin{proof}
+The first statement follows from
+\[
+    \iota_{\mathrm{open}}\dashv\operatorname{int}
+\]
+and full faithfulness of the inclusion of generated open sublocales.  The
+second follows from
+\[
+    \operatorname{cl}\dashv\iota_{\mathrm{closed}}
+\]
+and full faithfulness of the inclusion of generated closed-complement
+sublocales.  The displayed inequalities are the counit and unit inequalities of
+these two adjunctions.
+\end{proof}
+
+\begin{theorem}[Closure formula in the posetal reflection]
+\label{thm:posetal-closure-formula}
+Let \(X_\nu\) be a fuzzy sublocale presented by a fuzzy nucleus
+\[
+    \nu:A\to A.
+\]
+Then
+\[
+    \operatorname{cl}(X_\nu)=Z_{\nu(0)}.
+\]
+Equivalently, the closure is presented by the fuzzy nucleus
+\[
+    x\longmapsto\nu(0)\vee x.
+\]
+\end{theorem}
+
+\begin{proof}
+A generated closed-complement sublocale \(Z_a\) contains \(X_\nu\) precisely
+when
+\[
+    X_\nu\leq Z_a.
+\]
+By order reversal, this is equivalent to
+\[
+    J_a^-\leq\nu.
+\]
+Using the formula
+\[
+    J_a^-(x)=a\vee x,
+\]
+this means
+\[
+    a\vee x\leq\nu(x)
+\]
+for every \(x\in A\).  Taking \(x=0\) gives
+\[
+    a\leq\nu(0).
+\]
+
+Conversely, if \(a\leq\nu(0)\), then for every \(x\),
+\[
+    a\vee x
+    \leq
+    \nu(0)\vee x
+    \leq
+    \nu(x),
+\]
+using monotonicity and inflationarity of \(\nu\).  Thus
+\[
+    J_a^-\leq\nu.
+\]
+Therefore the smallest generated closed-complement sublocale containing
+\(X_\nu\) is
+\[
+    Z_{\nu(0)}.
+\]
+\end{proof}
+
+\section{The ordinary and idempotent specialization}
+\label{sec:ordinary-idempotent-specialization}
+
+We now recover the classical formulas under the idempotent/cartesian
+specialization.  In this section the scalar tensor acts as meet:
+\[
+    \lambda\tensor x=\lambda\wedge x.
+\]
+This includes the ordinary crisp case \(\Lambda=2\), and also the ordinary
+underlying-frame reflection where scalar compatibility is no additional
+restriction.
+
+\begin{theorem}[Idempotent true and false endpoint nuclei]
+\label{thm:idempotent-endpoint-nuclei}
+In the idempotent specialization, the generated endpoint nuclei of an open
+\(a\in A\) are
+\[
+    J_a^+(x)=a\Rightarrow x,
+    \qquad
+    J_a^-(x)=a\vee x.
+\]
+\end{theorem}
+
+\begin{proof}
+The formula for \(J_a^-\) is Theorem~\ref{thm:false-endpoint-nucleus-formula}.
+
+Define
+\[
+    o_a(x):=a\Rightarrow x.
+\]
+This is the usual open nucleus of the underlying frame.  It is inflationary
+because
+\[
+    a\wedge x\leq x.
+\]
+It preserves finite meets because it is right adjoint to
+\[
+    a\wedge-.
+\]
+It is idempotent since
+\[
+    a\Rightarrow(a\Rightarrow x)
+    =
+    (a\wedge a)\Rightarrow x
+    =
+    a\Rightarrow x.
+\]
+
+We check scalar compatibility.  Since the scalar tensor is meet,
+\[
+\begin{aligned}
+    o_a(\lambda\wedge o_a(x))
+    &=
+    a\Rightarrow(\lambda\wedge(a\Rightarrow x))\\
+    &=
+    (a\Rightarrow\lambda)\wedge(a\Rightarrow(a\Rightarrow x))\\
+    &=
+    (a\Rightarrow\lambda)\wedge(a\Rightarrow x)\\
+    &=
+    a\Rightarrow(\lambda\wedge x)\\
+    &=
+    o_a(\lambda\wedge x).
+\end{aligned}
+\]
+Thus \(o_a\) is a fuzzy nucleus in the idempotent specialization.
+
+Moreover,
+\[
+    o_a(a)=a\Rightarrow a=1.
+\]
+Let \(j\) be any fuzzy nucleus with \(j(a)=1\).  Since
+\[
+    a\wedge(a\Rightarrow x)\leq x,
+\]
+monotonicity gives
+\[
+    j(a\wedge(a\Rightarrow x))\leq j(x).
+\]
+Since \(j\) preserves binary meets,
+\[
+    j(a\wedge(a\Rightarrow x))
+    =
+    j(a)\wedge j(a\Rightarrow x)
+    =
+    1\wedge j(a\Rightarrow x)
+    =
+    j(a\Rightarrow x).
+\]
+By inflationarity,
+\[
+    a\Rightarrow x\leq j(a\Rightarrow x).
+\]
+Therefore
+\[
+    a\Rightarrow x\leq j(x).
+\]
+Thus
+\[
+    o_a\leq j
+\]
+for every fuzzy nucleus \(j\) forcing \(a\) to top.  Hence
+\[
+    J_a^+=o_a.
+\]
+\end{proof}
+
+\begin{proposition}[Generated open and closed frames in the idempotent case]
+\label{prop:idempotent-open-closed-frames}
+In the idempotent specialization,
+\[
+    A_{J_a^+}\cong\downarrow a,
+    \qquad
+    A_{J_a^-}\cong\uparrow a.
+\]
+The quotient maps are
+\[
+    j_a^\ast:A\to\downarrow a,
+    \qquad
+    j_a^\ast(x)=a\wedge x,
+\]
+and
+\[
+    i_a^\ast:A\to\uparrow a,
+    \qquad
+    i_a^\ast(x)=a\vee x.
+\]
+\end{proposition}
+
+\begin{proof}
+The fixed points of
+\[
+    J_a^-(x)=a\vee x
+\]
+are precisely the elements \(x\) satisfying \(a\leq x\), so
+\[
+    A_{J_a^-}\cong\uparrow a.
+\]
+
+For the open part, the fixed points of
+\[
+    J_a^+(x)=a\Rightarrow x
+\]
+are isomorphic to \(\downarrow a\).  The maps are
+\[
+    A_{J_a^+}\to\downarrow a,
+    \qquad
+    h\longmapsto a\wedge h,
+\]
+and
+\[
+    \downarrow a\to A_{J_a^+},
+    \qquad
+    u\longmapsto a\Rightarrow u.
+\]
+If \(u\leq a\), then
+\[
+    a\wedge(a\Rightarrow u)=u.
+\]
+If \(h=a\Rightarrow h\), then
+\[
+    a\Rightarrow(a\wedge h)
+    =
+    (a\Rightarrow a)\wedge(a\Rightarrow h)
+    =
+    h.
+\]
+Thus the two maps are inverse.
+
+Under this identification, the quotient
+\[
+    q_{J_a^+}:A\to A_{J_a^+}
+\]
+corresponds to
+\[
+    x\longmapsto a\wedge x.
+\]
+The false quotient is already
+\[
+    x\longmapsto a\vee x.
+\]
+\end{proof}
+
+\begin{proposition}[Open immersion adjoints in the idempotent case]
+\label{prop:idempotent-open-adjoints}
+The map
+\[
+    j_a^\ast:A\to\downarrow a,
+    \qquad
+    j_a^\ast(x)=a\wedge x,
+\]
+has both a left and a right adjoint:
+\[
+    (j_a)_!\dashv j_a^\ast\dashv(j_a)_\ast.
+\]
+They are
+\[
+    (j_a)_!(u)=u,
+    \qquad
+    (j_a)_\ast(u)=a\Rightarrow u.
+\]
+\end{proposition}
+
+\begin{proof}
+For \(u\leq a\) and \(x\in A\),
+\[
+    u\leq x
+    \quad\Longleftrightarrow\quad
+    u\leq a\wedge x.
+\]
+Thus
+\[
+    (j_a)_!\dashv j_a^\ast.
+\]
+Also,
+\[
+    a\wedge x\leq u
+    \quad\Longleftrightarrow\quad
+    x\leq a\Rightarrow u.
+\]
+Thus
+\[
+    j_a^\ast\dashv(j_a)_\ast.
+\]
+\end{proof}
+
+\begin{proposition}[Closed immersion adjoint in the idempotent case]
+\label{prop:idempotent-closed-adjoint}
+The generated closed-complement inverse image
+\[
+    i_a^\ast:A\to\uparrow a,
+    \qquad
+    i_a^\ast(x)=a\vee x,
+\]
+has right adjoint given by inclusion:
+\[
+    (i_a)_\ast:\uparrow a\hookrightarrow A.
+\]
+\end{proposition}
+
+\begin{proof}
+For \(x\in A\) and \(n\in\uparrow a\),
+\[
+    a\vee x\leq n
+    \quad\Longleftrightarrow\quad
+    x\leq n,
+\]
+because \(a\leq n\).  This is the adjunction
+\[
+    i_a^\ast\dashv(i_a)_\ast.
+\]
+\end{proof}
+
+\begin{proposition}[Attachment formula in the idempotent case]
+\label{prop:idempotent-attachment-formula}
+Under the identifications
+\[
+    A_{J_a^+}\cong\downarrow a,
+    \qquad
+    A_{J_a^-}\cong\uparrow a,
+\]
+the attachment map is
+\[
+    \theta_a:\downarrow a\to\uparrow a,
+    \qquad
+    \theta_a(u)=a\vee(a\Rightarrow u).
+\]
+\end{proposition}
+
+\begin{proof}
+In general,
+\[
+    \Theta_a(h)=a\vee h
+\]
+for \(h\in A_{J_a^+}\subseteq A\).  Under the isomorphism
+\[
+    \downarrow a\cong A_{J_a^+},
+\]
+an element \(u\leq a\) corresponds to
+\[
+    a\Rightarrow u.
+\]
+Therefore
+\[
+    \theta_a(u)=a\vee(a\Rightarrow u).
+\]
+\end{proof}
+
+\section{Open--closed complementarity in the idempotent case}
+\label{sec:idempotent-open-closed-complementarity}
+
+\begin{theorem}[Generated open and closed complement are complementary]
+\label{thm:idempotent-open-closed-complementary}
+In the idempotent specialization, the generated open sublocale \(U_a\) and its
+generated closed complement \(Z_a\) satisfy
+\[
+    U_a\vee Z_a=X,
+    \qquad
+    U_a\wedge Z_a=0.
+\]
+\end{theorem}
+
+\begin{proof}
+The open and closed sublocales are presented by the nuclei
+\[
+    O_a(x)=a\Rightarrow x,
+    \qquad
+    C_a(x)=a\vee x.
+\]
+
+The join of sublocales corresponds to the pointwise meet of nuclei.  For every
+\(x\),
+\[
+\begin{aligned}
+    O_a(x)\wedge C_a(x)
+    &=
+    (a\Rightarrow x)\wedge(a\vee x)\\
+    &=
+    \bigl(a\wedge(a\Rightarrow x)\bigr)
+    \vee
+    \bigl(x\wedge(a\Rightarrow x)\bigr)\\
+    &=
+    x.
+\end{aligned}
+\]
+Thus
+\[
+    O_a\wedge C_a=\id_A,
+\]
+and therefore
+\[
+    U_a\vee Z_a=X.
+\]
+
+For the meet, let \(\nu\) be any nucleus such that
+\[
+    O_a\leq\nu,
+    \qquad
+    C_a\leq\nu.
+\]
+Since
+\[
+    C_a(0)=a,
+\]
+we have
+\[
+    a\leq\nu(0).
+\]
+Therefore
+\[
+    O_a(\nu(0))=a\Rightarrow\nu(0)=1.
+\]
+Using \(O_a\leq\nu\) and idempotence of \(\nu\), we get
+\[
+    1=O_a(\nu(0))\leq\nu(\nu(0))=\nu(0).
+\]
+Thus
+\[
+    \nu(0)=1.
+\]
+A nucleus satisfying \(\nu(0)=1\) is the top nucleus.  Hence the meet of
+\(U_a\) and \(Z_a\) is the bottom sublocale:
+\[
+    U_a\wedge Z_a=0.
+\]
+\end{proof}
+
+\section{Open--closed Artin gluing reconstruction in the idempotent case}
+\label{sec:idempotent-open-closed-artin-gluing}
+
+Let \(A\) be a frame in the idempotent specialization, and let \(a\in A\).  The
+generated open and closed parts are
+\[
+    \downarrow a,
+    \qquad
+    \uparrow a,
+\]
+and the attachment map is
+\[
+    \theta_a(u)=a\vee(a\Rightarrow u).
+\]
+
+\begin{theorem}[Open--closed Artin gluing reconstruction]
+\label{thm:idempotent-open-closed-gluing-reconstruction}
+There is a canonical isomorphism of frames
+\[
+    A
+    \cong
+    \operatorname{Gl}(\theta_a)
+    =
+    \{(n,u)\in\uparrow a\times\downarrow a
+      \mid n\leq a\vee(a\Rightarrow u)\}.
+\]
+The forward map is
+\[
+    \Phi(x)=(a\vee x,\ a\wedge x),
+\]
+and the inverse map is
+\[
+    \Psi(n,u)=n\wedge(a\Rightarrow u).
+\]
+\end{theorem}
+
+\begin{proof}
+First we show that \(\Phi(x)\) lies in the gluing frame.  We need
+\[
+    a\vee x
+    \leq
+    a\vee(a\Rightarrow(a\wedge x)).
+\]
+It is enough to show
+\[
+    x\leq a\Rightarrow(a\wedge x),
+\]
+which is equivalent to
+\[
+    a\wedge x\leq a\wedge x.
+\]
+Thus \(\Phi\) is well defined.
+
+Now compute
+\[
+\begin{aligned}
+    \Psi\Phi(x)
+    &=
+    (a\vee x)\wedge(a\Rightarrow(a\wedge x)).
+\end{aligned}
+\]
+The inequality
+\[
+    x\leq\Psi\Phi(x)
+\]
+follows from the preceding paragraph.  Conversely,
+\[
+\begin{aligned}
+    (a\vee x)\wedge(a\Rightarrow(a\wedge x))
+    &=
+    \bigl(a\wedge(a\Rightarrow(a\wedge x))\bigr)
+    \vee
+    \bigl(x\wedge(a\Rightarrow(a\wedge x))\bigr)\\
+    &\leq
+    (a\wedge x)\vee x\\
+    &=
+    x.
+\end{aligned}
+\]
+Therefore
+\[
+    \Psi\Phi=\id_A.
+\]
+
+Conversely, let
+\[
+    (n,u)\in\operatorname{Gl}(\theta_a).
+\]
+Thus
+\[
+    a\leq n,
+    \qquad
+    u\leq a,
+    \qquad
+    n\leq a\vee(a\Rightarrow u).
+\]
+Then
+\[
+\begin{aligned}
+    a\vee\Psi(n,u)
+    &=
+    a\vee(n\wedge(a\Rightarrow u))\\
+    &=
+    (a\vee n)\wedge(a\vee(a\Rightarrow u))\\
+    &=
+    n\wedge(a\vee(a\Rightarrow u))\\
+    &=
+    n.
+\end{aligned}
+\]
+Also,
+\[
+\begin{aligned}
+    a\wedge\Psi(n,u)
+    &=
+    a\wedge n\wedge(a\Rightarrow u)\\
+    &=
+    a\wedge(a\Rightarrow u)\\
+    &=
+    u,
+\end{aligned}
+\]
+using \(a\leq n\) and \(u\leq a\).  Hence
+\[
+    \Phi\Psi=\id_{\operatorname{Gl}(\theta_a)}.
+\]
+Thus \(\Phi\) and \(\Psi\) are inverse isomorphisms.
+\end{proof}
+
+\section{Interior formula in the idempotent case}
+\label{sec:idempotent-interior-formula}
+
+Let \(X_\nu\) be a sublocale presented by a nucleus
+\[
+    \nu:A\to A.
+\]
+
+\begin{theorem}[Interior formula in the idempotent case]
+\label{thm:idempotent-interior-formula}
+In the idempotent specialization,
+\[
+    \operatorname{int}(X_\nu)
+    =
+    U_{\bigwedge_{x\in A}(\nu(x)\Rightarrow x)}.
+\]
+\end{theorem}
+
+\begin{proof}
+An open sublocale \(U_a\) is contained in \(X_\nu\) precisely when
+\[
+    U_a\leq X_\nu.
+\]
+By order reversal, this is equivalent to
+\[
+    \nu\leq O_a,
+\]
+where
+\[
+    O_a(x)=a\Rightarrow x.
+\]
+Thus, for every \(x\in A\),
+\[
+    \nu(x)\leq a\Rightarrow x.
+\]
+By the Heyting adjunction, this is equivalent to
+\[
+    a\wedge\nu(x)\leq x,
+\]
+or
+\[
+    a\leq\nu(x)\Rightarrow x.
+\]
+Therefore \(U_a\leq X_\nu\) holds precisely when
+\[
+    a\leq
+    \bigwedge_{x\in A}(\nu(x)\Rightarrow x).
+\]
+Since generated open sublocales are ordered by their generating opens in the
+idempotent case, the largest such generated open is
+\[
+    U_{\bigwedge_{x\in A}(\nu(x)\Rightarrow x)}.
+\]
+\end{proof}
+
+\section{Predicate-frame and fuzzy-domain instances}
+\label{sec:predicate-frame-fuzzy-domain-instances-corrected}
+
+The general constructions of this chapter apply to every categorical fuzzy
+frame constructed earlier.  In particular, they apply to fuzzy predicate
+frames, localized fuzzy predicate frames, and fuzzy Scott frames of fuzzy
+domains.
+
+\begin{proposition}[Predicate-frame and Scott-frame instances]
+\label{prop:predicate-frame-scott-frame-instances}
+Let \(\mathcal A\) be any categorical fuzzy frame obtained from a fuzzy
+predicate construction, a localized fuzzy predicate construction, or a fuzzy
+Scott-open construction.  Then \(\mathcal A\) admits:
+
+\begin{enumerate}
+    \item fuzzy sublocales;
+    \item generated true endpoint sublocales;
+    \item generated false endpoint sublocales;
+    \item attachment functors;
+    \item Artin gluing frames;
+    \item canonical endpoint-gluing comparisons;
+    \item interior and closure of fuzzy sublocales.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Each item is defined for arbitrary categorical fuzzy frames.  Since the fuzzy
+predicate and fuzzy Scott constructions produce categorical fuzzy frames, all
+the preceding constructions apply.
+\end{proof}
+
+\begin{remark}[Sublocales are localic, not necessarily spatial]
+\label{rem:sublocales-localic-not-spatial}
+When \(\mathcal A\) is a predicate frame associated to a fuzzy category,
+sublocales of the locale presented by \(\mathcal A\) should not automatically be
+identified with subobjects or subcategories of the original fuzzy category.
+Such an identification requires an additional representation theorem.
+\end{remark}
+
+\section{Crisp separated specialization}
+\label{sec:crisp-separated-open-closed-gluing}
+
+The crisp separated case is obtained by taking
+\[
+    \Lambda=2
+\]
+and restricting to separated fuzzy frames and fuzzy locales.  Categorical fuzzy
+frames become ordinary frames, fuzzy locales become ordinary locales, and fuzzy
+opens become ordinary opens.
+
+For an ordinary frame \(A\) and an open \(a\in A\), the preceding idempotent
+formulas become:
+\[
+    O_a(x)=a\Rightarrow x,
+    \qquad
+    C_a(x)=a\vee x.
+\]
+The frames of the generated open and closed-complement sublocales are
+\[
+    \mathcal O(U_a)\cong\downarrow a,
+    \qquad
+    \mathcal O(Z_a)\cong\uparrow a.
+\]
+The inverse-image frame maps are
+\[
+    j_a^\ast(x)=a\wedge x,
+    \qquad
+    i_a^\ast(x)=a\vee x.
+\]
+The open immersion has adjoint triple
+\[
+    (j_a)_!\dashv j_a^\ast\dashv(j_a)_\ast,
+\]
+where
+\[
+    (j_a)_!(u)=u,
+    \qquad
+    (j_a)_\ast(u)=a\Rightarrow u.
+\]
+The closed-complement immersion has
+\[
+    i_a^\ast\dashv(i_a)_\ast,
+\]
+where \((i_a)_\ast\) is inclusion.
+
+The attachment map is
+\[
+    \theta_a(u)=a\vee(a\Rightarrow u),
+\]
+and the open--closed Artin gluing reconstruction is
+\[
+    A\cong
+    \{(n,u)\in\uparrow a\times\downarrow a
+      \mid
+      n\leq a\vee(a\Rightarrow u)\}.
+\]
+The forward and inverse maps are
+\[
+    x\longmapsto(a\vee x,\ a\wedge x),
+\]
+and
+\[
+    (n,u)\longmapsto n\wedge(a\Rightarrow u).
+\]
+
+Thus the ordinary localic open--closed decomposition and Artin gluing theorem
+are recovered exactly as the crisp separated specialization of the endpoint
+construction.
+
+\section{Summary}
+\label{sec:summary-fuzzy-sublocales-open-closed-gluing}
+
+This chapter developed fuzzy sublocales and endpoint gluing at the level of
+categorical fuzzy frames.
+
+A fuzzy sublocale of \(X\), with
+\[
+    \mathcal O(X)=\mathcal A,
+\]
+is presented by a left-exact reflective quotient
+\[
+    q\dashv r:
+    \mathcal A
+    \rightleftarrows
+    \mathcal B.
+\]
+In the posetal reflection, such quotients are exactly scalar-compatible fuzzy
+nuclei
+\[
+    j:A\to A.
+\]
+
+A fuzzy open
+\[
+    U\hookrightarrow1_{\mathcal A}
+\]
+is classified by
+\[
+    \chi_U^\ast:\Omega_{\mathbb V}\to\mathcal A.
+\]
+The generated true and false endpoint frames are obtained by endpoint base
+change:
+\[
+    \mathcal A_U
+    =
+    \mathcal A\amalg_{\Omega_{\mathbb V}}\Omega_{\mathbb V}^{\top},
+    \qquad
+    \mathcal A_Z
+    =
+    \mathcal A\amalg_{\Omega_{\mathbb V}}\Omega_{\mathbb V}^{\bot}.
+\]
+
+In the posetal scalar-compatible reflection, the true endpoint is presented by
+the generated fuzzy nucleus
+\[
+    J_a^+
+    =
+    \bigwedge
+    \{\,j\mid j(a)=1\,\},
+\]
+while the false endpoint has the explicit formula
+\[
+    J_a^-(x)=a\vee x.
+\]
+The true endpoint is not generally given by the ordinary formula
+\[
+    a\Rightarrow x.
+\]
+That formula is valid only in the idempotent, ordinary, or crisp
+specialization.
+
+The attachment functor is
+\[
+    \Theta_U=i_U^\ast(j_U)_\ast:
+    \mathcal A_U\to\mathcal A_Z.
+\]
+In the posetal reflection it is
+\[
+    \Theta_a(h)=a\vee h
+\]
+for \(h\in A_{J_a^+}\).  Artin gluing is defined for any left-exact enriched
+functor
+\[
+    \Theta:\mathcal H\to\mathcal N
+\]
+by
+\[
+    \operatorname{Gl}(\Theta)
+    =
+    (\id_{\mathcal N}\downarrow\Theta).
+\]
+For every fuzzy open there is a canonical endpoint-gluing comparison
+\[
+    \mathcal A\to\operatorname{Gl}(\Theta_U).
+\]
+This comparison is not an equivalence in general non-idempotent fuzzy bases.
+
+Closure is fully general.  If \(X_\nu\) is presented by a fuzzy nucleus
+\[
+    \nu:A\to A,
+\]
+then
+\[
+    \operatorname{cl}(X_\nu)=Z_{\nu(0)}.
+\]
+Interior is defined abstractly as the largest generated open sublocale below a
+given sublocale.
+
+In the idempotent specialization, the classical formulas are recovered:
+\[
+    J_a^+(x)=a\Rightarrow x,
+    \qquad
+    J_a^-(x)=a\vee x,
+\]
+\[
+    A_{J_a^+}\cong\downarrow a,
+    \qquad
+    A_{J_a^-}\cong\uparrow a,
+\]
+and
+\[
+    \theta_a(u)=a\vee(a\Rightarrow u).
+\]
+The generated open and closed-complement sublocales are complementary, and the
+ordinary open--closed Artin gluing reconstruction holds:
+\[
+    A\cong
+    \{(n,u)\in\uparrow a\times\downarrow a
+      \mid
+      n\leq a\vee(a\Rightarrow u)\}.
+\]
+The inverse map is
+\[
+    (n,u)\longmapsto n\wedge(a\Rightarrow u).
+\]
+
+Thus the crisp localic chapter is recovered as the idempotent reflection of
+the more general endpoint-quotient calculus for categorical fuzzy frames.
